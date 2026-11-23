@@ -1,0 +1,114 @@
+// Extracted from agy 1.5.14, file offset 0x67b06b2, 5470 bytes. Rendering omits custom options.
+syntax = "proto2";
+package logs.proto.wireless.performance.mobile;
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "java/com/google/apps/jspb/jspb.proto";
+import "logs/proto/wireless/performance/mobile/annotations.proto";
+import "logs/proto/wireless/performance/mobile/cui_metadata.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Fixed128 {
+  fixed64 high = 1;
+  fixed64 low = 2;
+}
+message Trace {
+  message Sampling {
+    float process_sampling_probability = 1; // oneof=sampling_type
+    float trace_sampling_probability = 2; // oneof=sampling_type
+  }
+  message ExternalTraceReference {
+    enum ExternalTraceType {
+      EXTERNAL_TRACE_TYPE_UNSPECIFIED = 0;
+      PRIMES = 1;
+      DAPPER = 2;
+    }
+    message EntityIdMapping {
+      uint64 from_entity_id = 1;
+      uint64 to_entity_id = 2;
+    }
+    .logs.proto.wireless.performance.mobile.Trace.ExternalTraceReference.ExternalTraceType type = 1;
+    fixed64 id = 2; // oneof=external_trace_id
+    .logs.proto.wireless.performance.mobile.Fixed128 id_128 = 3; // oneof=external_trace_id
+    repeated .logs.proto.wireless.performance.mobile.Trace.ExternalTraceReference.EntityIdMapping entity_id_mappings = 4;
+    float sampling_probability = 5;
+  }
+  message TracingOverheadMetrics {
+    .google.protobuf.Duration capture_trace_context_avg = 1;
+    .google.protobuf.Duration capture_trace_context_max = 2;
+    int64 capture_trace_context_count = 3;
+    .google.protobuf.Duration install_trace_context_avg = 4;
+    .google.protobuf.Duration install_trace_context_max = 5;
+    int64 install_trace_context_count = 6;
+    .google.protobuf.Duration add_slice_begin_avg = 7;
+    .google.protobuf.Duration add_slice_begin_max = 8;
+    .google.protobuf.Duration add_slice_end_avg = 9;
+    .google.protobuf.Duration add_slice_end_max = 10;
+    .google.protobuf.Duration add_mark_avg = 11;
+    .google.protobuf.Duration add_mark_max = 12;
+  }
+  message TraceFailure {
+    .google.protobuf.Duration timed_out_after = 1;
+  }
+  message GlobalTraceMetadata {
+    repeated .logs.proto.wireless.performance.mobile.CuiMetadata cui_metadata = 1;
+  }
+  fixed64 id = 1;
+  string name = 2;
+  .logs.proto.wireless.performance.mobile.Trace.Sampling sampling = 10;
+  repeated .logs.proto.wireless.performance.mobile.Trace.ExternalTraceReference external_trace_references = 8;
+  .logs.proto.wireless.performance.mobile.Trace.TracingOverheadMetrics tracing_overhead_metrics = 9;
+  .google.protobuf.Timestamp start_time = 4;
+  .google.protobuf.Duration duration = 11;
+  int32 num_dropped_entities = 5;
+  .logs.proto.wireless.performance.mobile.Trace.TraceFailure trace_failure = 6;
+  repeated .logs.proto.wireless.performance.mobile.TraceEdge edges = 7;
+  .logs.proto.wireless.performance.mobile.CallSite root_call_site = 12;
+  repeated string call_site_class_names = 13;
+  repeated string call_site_method_names = 14;
+  .logs.proto.wireless.performance.mobile.Trace.GlobalTraceMetadata trace_metadata = 15;
+}
+message TraceEdge {
+  message TraceEntityDetails {
+    string name = 1;
+    uint64 parent_id = 2;
+    repeated uint64 follows_from_ids = 3;
+    repeated uint64 flow_ids = 4;
+    .logs.proto.wireless.performance.mobile.CallSite call_site = 5;
+  }
+  message SliceBegin {
+    enum ExecutorType {
+      UNKNOWN = 0;
+      MAIN = 1;
+      SERIAL = 2;
+      CONCURRENT = 3;
+    }
+    .logs.proto.wireless.performance.mobile.TraceEdge.TraceEntityDetails entity_details = 1;
+    uint64 thread_id = 2;
+    string thread_name = 5;
+    string executor_name = 6;
+    .logs.proto.wireless.performance.mobile.TraceEdge.SliceBegin.ExecutorType executor_type = 7;
+    uint64 executor_id = 8;
+    .google.protobuf.Duration total_cpu_time = 3;
+    .google.protobuf.Duration user_cpu_time = 4;
+    bool interval = 9;
+  }
+  message SliceEnd {
+    .google.protobuf.Duration total_cpu_time = 3;
+    .google.protobuf.Duration user_cpu_time = 4;
+  }
+  message Mark {
+    .logs.proto.wireless.performance.mobile.TraceEdge.TraceEntityDetails entity_details = 1;
+  }
+  uint64 id = 1;
+  .google.protobuf.Duration trace_start_offset = 2;
+  .logs.proto.wireless.performance.mobile.TraceEdge.SliceBegin slice_begin = 3; // oneof=type
+  .logs.proto.wireless.performance.mobile.TraceEdge.SliceEnd slice_end = 4; // oneof=type
+  .logs.proto.wireless.performance.mobile.TraceEdge.Mark mark = 5; // oneof=type
+}
+message CallSite {
+  string class_name = 1;
+  string method_name = 2;
+  int32 line_number = 3;
+  int32 class_name_index = 4;
+  int32 method_name_index = 5;
+}

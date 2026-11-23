@@ -1,0 +1,6 @@
+// Extracted from agy 1.5.14, file offset 0x6792d62, 5039 bytes. Rendering omits custom options.
+syntax = "proto2";
+package logs.proto.wireless.performance.mobile;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message MetricExtension {
+}

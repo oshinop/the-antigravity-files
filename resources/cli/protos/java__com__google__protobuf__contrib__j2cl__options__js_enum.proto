@@ -1,0 +1,6 @@
+// Extracted from agy 1.5.14, file offset 0x660cb7c, 265 bytes. Rendering omits custom options.
+syntax = "proto2";
+package protobuf.contrib.j2cl.options;
+import "net/proto2/proto/descriptor.proto";
+extend .proto2.EnumOptions { bool generate_js_enum = 13371; }
+extend .proto2.OneofOptions { bool generate_js_case_enum = 13372; }

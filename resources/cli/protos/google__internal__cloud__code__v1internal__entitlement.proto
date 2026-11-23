@@ -1,0 +1,8 @@
+// Extracted from agy 1.5.14, file offset 0x66151da, 321 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.internal.cloud.code.v1internal;
+import "google/api/field_behavior.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Entitlement {
+  string user_tier = 1;
+}

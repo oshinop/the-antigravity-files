@@ -1,0 +1,8 @@
+// Extracted from agy 1.5.14, file offset 0x6613e10, 313 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.rpc.context;
+import "google/protobuf/field_mask.proto";
+message FieldMaskContext {
+  .google.protobuf.FieldMask request_mask = 1;
+  .google.protobuf.FieldMask response_mask = 2;
+}

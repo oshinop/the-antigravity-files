@@ -1,0 +1,13 @@
+// Extracted from agy 1.5.14, file offset 0xf41f970, 683 bytes. Rendering omits custom options.
+syntax = "proto2";
+package perftools.tracing;
+import "google/api/inclusion.proto";
+message TraceContextProto {
+  fixed64 trace_id = 1;
+  fixed64 trace_id_hi = 6;
+  fixed64 span_id = 2;
+  fixed64 parent_span_id = 4; // default='0'
+  fixed32 trace_mask = 3;
+  double inverse_sampling_probability = 5;
+  fixed64 initiator_id = 7; // default='0'
+}

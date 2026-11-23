@@ -1,0 +1,142 @@
+// Extracted from agy 1.5.14, file offset 0x6815db6, 7181 bytes. Rendering omits custom options.
+syntax = "proto2";
+package logs.proto.wireless.performance.mobile;
+import "google/api/inclusion.proto";
+import "logs/proto/wireless/performance/mobile/annotations.proto";
+import "logs/proto/wireless/performance/mobile/extension_metric.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message BatteryUsageMetric {
+  .logs.proto.wireless.performance.mobile.BatteryStatsDiff battery_stats_diff = 1;
+}
+message BatteryStatsDiff {
+  enum SampleInfo {
+    UNKNOWN = 0;
+    FOREGROUND_TO_BACKGROUND = 1;
+    BACKGROUND_TO_FOREGROUND = 2;
+    FOREGROUND_SERVICE_START = 3;
+    FOREGROUND_SERVICE_STOP = 4;
+    CUSTOM_MEASURE_START = 5;
+    CUSTOM_MEASURE_STOP = 6;
+  }
+  .logs.proto.wireless.performance.mobile.BatteryStatsDiff.SampleInfo start_info = 1;
+  fixed64 start_hashed_custom_event_name = 8;
+  string start_custom_event_name = 9;
+  string start_constant_event_name = 10;
+  .logs.proto.wireless.performance.mobile.MetricExtension start_metric_extension = 11;
+  .logs.proto.wireless.performance.mobile.BatteryStatsDiff.SampleInfo end_info = 2;
+  int64 duration_ms = 3;
+  repeated .logs.proto.wireless.performance.mobile.WakelockStats wakelock_stats = 4;
+  repeated .logs.proto.wireless.performance.mobile.SyncStats sync_stats = 5;
+  .logs.proto.wireless.performance.mobile.UidHealthProto uid_health_proto_diff = 6;
+  int64 elaped_realtime_ms = 7;
+  int64 charge_counter_diff_uah = 12;
+}
+message UidHealthProto {
+  int64 realtime_battery_ms = 1;
+  int64 uptime_battery_ms = 2;
+  int64 realtime_screen_off_battery_ms = 3;
+  int64 uptime_screen_off_battery_ms = 4;
+  repeated .logs.proto.wireless.performance.mobile.Timer wakelocks_full = 5;
+  repeated .logs.proto.wireless.performance.mobile.Timer wakelocks_partial = 6;
+  repeated .logs.proto.wireless.performance.mobile.Timer wakelocks_window = 7;
+  repeated .logs.proto.wireless.performance.mobile.Timer wakelocks_draw = 8;
+  repeated .logs.proto.wireless.performance.mobile.Timer syncs = 9;
+  repeated .logs.proto.wireless.performance.mobile.Timer jobs = 10;
+  .logs.proto.wireless.performance.mobile.Timer gps_sensor = 11;
+  repeated .logs.proto.wireless.performance.mobile.Timer sensors = 12;
+  repeated .logs.proto.wireless.performance.mobile.PidHealthProto stats_pids = 13;
+  repeated .logs.proto.wireless.performance.mobile.ProcessHealthProto stats_processes = 14;
+  repeated .logs.proto.wireless.performance.mobile.PackageHealthProto stats_packages = 15;
+  int64 wifi_idle_ms = 16;
+  int64 wifi_rx_ms = 17;
+  int64 wifi_tx_ms = 18;
+  int64 wifi_power_mams = 19;
+  int64 bluetooth_idle_ms = 20;
+  int64 bluetooth_rx_ms = 21;
+  int64 bluetooth_tx_ms = 22;
+  int64 bluetooth_power_mams = 23;
+  int64 mobile_idle_ms = 24;
+  int64 mobile_rx_ms = 25;
+  int64 mobile_tx_ms = 26;
+  int64 mobile_power_mams = 27;
+  int64 wifi_running_ms = 28;
+  int64 wifi_full_lock_ms = 29;
+  .logs.proto.wireless.performance.mobile.Timer wifi_scan = 30;
+  int64 wifi_multicast_ms = 31;
+  .logs.proto.wireless.performance.mobile.Timer audio = 32;
+  .logs.proto.wireless.performance.mobile.Timer video = 33;
+  .logs.proto.wireless.performance.mobile.Timer flashlight = 34;
+  .logs.proto.wireless.performance.mobile.Timer camera = 35;
+  .logs.proto.wireless.performance.mobile.Timer foreground_activity = 36;
+  .logs.proto.wireless.performance.mobile.Timer bluetooth_scan = 37;
+  .logs.proto.wireless.performance.mobile.Timer process_state_top_ms = 38;
+  .logs.proto.wireless.performance.mobile.Timer process_state_foreground_service_ms = 39;
+  .logs.proto.wireless.performance.mobile.Timer process_state_top_sleeping_ms = 40;
+  .logs.proto.wireless.performance.mobile.Timer process_state_foreground_ms = 41;
+  .logs.proto.wireless.performance.mobile.Timer process_state_background_ms = 42;
+  .logs.proto.wireless.performance.mobile.Timer process_state_cached_ms = 43;
+  .logs.proto.wireless.performance.mobile.Timer vibrator = 44;
+  int64 other_user_activity_count = 45;
+  int64 button_user_activity_count = 46;
+  int64 touch_user_activity_count = 47;
+  int64 mobile_rx_bytes = 48;
+  int64 mobile_tx_bytes = 49;
+  int64 wifi_rx_bytes = 50;
+  int64 wifi_tx_bytes = 51;
+  int64 bluetooth_rx_bytes = 52;
+  int64 bluetooth_tx_bytes = 53;
+  int64 mobile_rx_packets = 54;
+  int64 mobile_tx_packets = 55;
+  int64 wifi_rx_packets = 56;
+  int64 wifi_tx_packets = 57;
+  int64 bluetooth_rx_packets = 58;
+  int64 bluetooth_tx_packets = 59;
+  .logs.proto.wireless.performance.mobile.Timer mobile_radio_active = 61;
+  int64 user_cpu_time_ms = 62;
+  int64 system_cpu_time_ms = 63;
+  int64 cpu_power_mams = 64;
+}
+message PidHealthProto {
+}
+message ProcessHealthProto {
+  int64 user_time_ms = 1;
+  int64 system_time_ms = 2;
+  int64 starts_count = 3;
+  int64 crashes_count = 4;
+  int64 anr_count = 5;
+  int64 foreground_ms = 6;
+  .logs.proto.wireless.performance.mobile.HashedString name = 7;
+}
+message PackageHealthProto {
+  repeated .logs.proto.wireless.performance.mobile.ServiceHealthProto stats_services = 1;
+  repeated .logs.proto.wireless.performance.mobile.Counter wakeup_alarms_count = 2;
+  .logs.proto.wireless.performance.mobile.HashedString name = 3;
+}
+message ServiceHealthProto {
+  int32 start_service_count = 1;
+  int32 launch_count = 2;
+  .logs.proto.wireless.performance.mobile.HashedString name = 3;
+}
+message Timer {
+  int32 count = 1;
+  int64 duration_ms = 2;
+  .logs.proto.wireless.performance.mobile.HashedString name = 3;
+}
+message Counter {
+  int32 count = 1;
+  .logs.proto.wireless.performance.mobile.HashedString name = 2;
+}
+message HashedString {
+  fixed64 hash = 1;
+  string unhashed_name = 2;
+}
+message WakelockStats {
+  .logs.proto.wireless.performance.mobile.HashedString name = 1;
+  int32 count = 2;
+  int64 duration_ms = 3;
+}
+message SyncStats {
+  .logs.proto.wireless.performance.mobile.HashedString name = 1;
+  int32 count = 2;
+  int64 duration_ms = 3;
+}

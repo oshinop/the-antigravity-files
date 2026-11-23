@@ -1,0 +1,45 @@
+// Extracted from agy 1.5.14, file offset 0x667dbf9, 1600 bytes. Rendering omits custom options.
+syntax = "editions";
+package devtools.jetski.telemetry.extensions;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message RemoteAgentEvent {
+  enum EventType {
+    EVENT_TYPE_UNSPECIFIED = 0;
+    EVENT_TYPE_START_CASCADE = 1;
+    EVENT_TYPE_SEND_USER_CASCADE_MESSAGE = 2;
+    EVENT_TYPE_CANCEL_CASCADE = 3;
+    EVENT_TYPE_CREATE_PROJECT = 4;
+    EVENT_TYPE_CREATE_WORKSPACE = 5;
+    EVENT_TYPE_UPLOAD_PROJECT_FILE = 6;
+    EVENT_TYPE_CONNECT_PLUGIN_OAUTH = 7;
+    EVENT_TYPE_DISCONNECT_PLUGIN = 8;
+    EVENT_TYPE_CREATE_TRIGGER = 9;
+    EVENT_TYPE_UPDATE_TRIGGER = 10;
+    EVENT_TYPE_DELETE_TRIGGER = 11;
+    EVENT_TYPE_CREATE_TERMINAL = 12;
+    EVENT_TYPE_UPDATE_PROJECT_RESOURCES = 13;
+    EVENT_TYPE_HANDLE_CASCADE_USER_INTERACTION = 14;
+    EVENT_TYPE_TRIGGER_RUN = 15;
+    EVENT_TYPE_UPDATE_PROJECT = 16;
+  }
+  enum Routing {
+    ROUTING_UNSPECIFIED = 0;
+    ROUTING_FIRST_PARTY = 1;
+    ROUTING_THIRD_PARTY = 2;
+    ROUTING_FORCED_THIRD_PARTY = 3;
+  }
+  enum Environment {
+    ENVIRONMENT_UNSPECIFIED = 0;
+    ENVIRONMENT_CAPSULE = 1;
+    ENVIRONMENT_ACE = 2;
+  }
+  .devtools.jetski.telemetry.extensions.RemoteAgentEvent.EventType event_type = 1;
+  string status = 2;
+  int64 duration_ms = 3;
+  string cascade_id = 4;
+  .devtools.jetski.telemetry.extensions.RemoteAgentEvent.Routing routing = 5;
+  .devtools.jetski.telemetry.extensions.RemoteAgentEvent.Environment environment = 6;
+  string client = 7;
+  string plugin_id = 8;
+  repeated string resource_types = 9;
+}

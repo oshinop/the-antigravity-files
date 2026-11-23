@@ -1,0 +1,30 @@
+// Extracted from agy 1.5.14, file offset 0x6671df0, 1457 bytes. Rendering omits custom options.
+syntax = "editions";
+package gaos.parsing;
+import "net/proto2/proto/descriptor.proto";
+enum JsonType {
+  JSON_TYPE_UNSPECIFIED = 0;
+  JSON_TYPE_OBJECT = 1;
+  JSON_TYPE_ARRAY = 2;
+  JSON_TYPE_VALUE = 3;
+}
+message StaticJsonField {
+  string key = 1;
+  string value = 2;
+}
+extend .proto2.OneofOptions { bool is_union = 525000029; }
+extend .proto2.OneofOptions { bool subtype_source = 525000030; }
+extend .proto2.OneofOptions { bool is_required = 525000031; }
+extend .proto2.OneofOptions { string union_name = 525000032; }
+extend .proto2.FieldOptions { string json_discriminator = 525000215; }
+extend .proto2.FieldOptions { string json_discriminator_value = 525000216; }
+extend .proto2.FieldOptions { bool subtype_source_field = 525000217; }
+extend .proto2.FieldOptions { string json_only_discriminator = 525000218; }
+extend .proto2.FieldOptions { bool additional_properties = 525000219; }
+extend .proto2.FieldOptions { repeated string json_discriminator_values = 525000220; }
+extend .proto2.FieldOptions { repeated string add_union_value = 525000221; }
+extend .proto2.FieldOptions { bool flexible_map = 525000222; }
+extend .proto2.FieldOptions { string sub_content_name = 525000227; }
+extend .proto2.EnumValueOptions { string enum_value_name = 535802949; }
+extend .proto2.MessageOptions { .gaos.parsing.StaticJsonField add_static_field = 535801962; }
+extend .proto2.MessageOptions { .gaos.parsing.JsonType message_json_type = 535801963; }

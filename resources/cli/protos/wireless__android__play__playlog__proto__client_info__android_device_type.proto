@@ -1,0 +1,17 @@
+// Extracted from agy 1.5.14, file offset 0x6645d5f, 896 bytes. Rendering omits custom options.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb_generate_object_format.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message AndroidDeviceType {
+  bool is_watch = 1;
+  bool is_automotive = 2;
+  bool is_chrome_os = 3;
+  bool is_android_tv = 4;
+  bool is_bstar = 5;
+  bool is_android_xr = 6;
+  bool is_android_xr_peripheral = 7;
+  bool is_desktop = 8;
+}

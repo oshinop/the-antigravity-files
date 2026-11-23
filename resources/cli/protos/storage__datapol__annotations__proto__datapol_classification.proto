@@ -1,0 +1,10 @@
+// Extracted from agy 1.5.14, file offset 0x66170c4, 341 bytes. Rendering omits custom options.
+syntax = "proto2";
+package datapol.classification;
+import "net/proto2/proto/descriptor.proto";
+message Options {
+  repeated string implies = 1;
+  string description = 2;
+  string default_semantic_context = 3;
+}
+extend .proto2.EnumValueOptions { .datapol.classification.Options options = 268862122; }

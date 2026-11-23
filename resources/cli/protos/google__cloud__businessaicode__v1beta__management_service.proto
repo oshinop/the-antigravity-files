@@ -1,0 +1,186 @@
+// Extracted from agy 1.5.14, file offset 0x68bdd74, 11905 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.cloud.businessaicode.v1beta;
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/api/field_behavior.proto";
+import "google/api/policy.proto";
+import "google/api/resource.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "google/cloud/businessaicode/v1main/content.proto";
+import "google/cloud/businessaicode/v1main/entitlement.proto";
+import "google/protobuf/struct.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message FetchConfigRequest {
+  string parent = 1;
+  .google.cloud.businessaicode.v1main.Entitlement entitlement = 2;
+}
+message FetchConfigResponse {
+  .google.cloud.businessaicode.v1beta.AdminControls admin_controls = 1;
+  repeated string allowed_models = 2;
+  repeated string allowed_third_party_models = 3;
+  repeated .google.cloud.businessaicode.v1beta.Experience available_experiences = 4;
+  .google.cloud.businessaicode.v1beta.AgySurfaceConfig agy_surface_config = 5;
+  .google.cloud.businessaicode.v1beta.ExperimentConfig experiment_config = 6;
+}
+message FetchDefaultConfigRequest {
+}
+message FetchDefaultConfigResponse {
+  repeated .google.cloud.businessaicode.v1beta.Experience available_experiences = 1;
+  .google.cloud.businessaicode.v1beta.AgySurfaceConfig agy_surface_config = 2;
+}
+message ModelExperimentValue {
+  bool bool_value = 1; // oneof=value
+  double float_value = 2; // oneof=value
+  int64 int_value = 3; // oneof=value
+  string string_value = 4; // oneof=value
+}
+message Experience {
+  message ExperienceSurfaceConfig {
+    message Tag {
+      string title = 1;
+      string description = 2;
+    }
+    message ModelExperimentsEntry {
+      string key = 1;
+      .google.cloud.businessaicode.v1beta.ModelExperimentValue value = 2;
+    }
+    string client_model_enum_name = 1;
+    repeated .google.cloud.businessaicode.v1beta.Experience.ExperienceSurfaceConfig.Tag tags = 2;
+    bool disabled = 3;
+    repeated .google.cloud.businessaicode.v1beta.Experience.ExperienceSurfaceConfig.ModelExperimentsEntry model_experiments = 4;
+  }
+  string name = 1;
+  .google.cloud.businessaicode.v1main.Model model = 2;
+  .google.cloud.businessaicode.v1beta.Experience.ExperienceSurfaceConfig surface_config = 3;
+}
+message AgySurfaceConfig {
+  message ExperienceGroup {
+    repeated string experience_names = 1;
+    string default_experience = 2;
+  }
+  .google.cloud.businessaicode.v1beta.AgySurfaceConfig.ExperienceGroup image_generation_experiences = 1;
+  .google.cloud.businessaicode.v1beta.AgySurfaceConfig.ExperienceGroup commit_message_experiences = 3;
+  .google.cloud.businessaicode.v1beta.AgySurfaceConfig.ExperienceGroup web_search_experiences = 4;
+  .google.cloud.businessaicode.v1beta.AgySurfaceConfig.ExperienceGroup agent_experiences = 6;
+  .google.cloud.businessaicode.v1beta.AgySurfaceConfig.ExperienceGroup tiered_flash_lite_experiences = 7;
+  .google.cloud.businessaicode.v1beta.AgySurfaceConfig.ExperienceGroup tiered_flash_experiences = 8;
+  .google.cloud.businessaicode.v1beta.AgySurfaceConfig.ExperienceGroup tiered_pro_experiences = 9;
+}
+message ExperimentConfig {
+  message ExperimentFlag {
+    message Int32List {
+      repeated int32 values = 1;
+    }
+    message Int64List {
+      repeated int64 values = 1;
+    }
+    message StringList {
+      repeated string values = 1;
+    }
+    bool bool_value = 2; // oneof=value
+    double float_value = 3; // oneof=value
+    int64 int_value = 4; // oneof=value
+    string string_value = 5; // oneof=value
+    .google.cloud.businessaicode.v1beta.ExperimentConfig.ExperimentFlag.Int32List int32_list_value = 6; // oneof=value
+    .google.cloud.businessaicode.v1beta.ExperimentConfig.ExperimentFlag.Int64List int64_list_value = 7; // oneof=value
+    .google.cloud.businessaicode.v1beta.ExperimentConfig.ExperimentFlag.StringList string_list_value = 8; // oneof=value
+    string name = 1;
+  }
+  repeated int32 enabled_experiment_ids = 1;
+  repeated .google.cloud.businessaicode.v1beta.ExperimentConfig.ExperimentFlag experiment_flags = 2;
+}
+message AdminControls {
+  message AgentControls {
+    enum FileAccessPolicy {
+      FILE_ACCESS_POLICY_UNSPECIFIED = 0;
+      FILE_ACCESS_POLICY_DENY = 1;
+      FILE_ACCESS_POLICY_ALWAYS_ASK = 2;
+      FILE_ACCESS_POLICY_NOT_ENFORCED = 3;
+    }
+    enum TerminalCommandAutoExecutionPolicy {
+      TERMINAL_COMMAND_AUTO_EXECUTION_POLICY_UNSPECIFIED = 0;
+      TERMINAL_COMMAND_AUTO_EXECUTION_POLICY_REQUIRE_REVIEW = 1;
+      TERMINAL_COMMAND_AUTO_EXECUTION_POLICY_PROCEED_IN_SANDBOX = 2;
+      TERMINAL_COMMAND_AUTO_EXECUTION_POLICY_NOT_ENFORCED = 3;
+    }
+    bool sandbox_mode_enabled = 1;
+    .google.cloud.businessaicode.v1beta.AdminControls.AgentControls.FileAccessPolicy outside_workspace_file_access_policy = 2;
+    .google.cloud.businessaicode.v1beta.AdminControls.AgentControls.TerminalCommandAutoExecutionPolicy terminal_command_auto_execution_policy = 3;
+  }
+  message McpControls {
+    bool mcp_enabled = 1;
+    .google.protobuf.Struct mcp_allowlist = 2;
+  }
+  message LoggingControls {
+    bool metadata_logging_enabled = 1;
+    bool prompt_and_response_logging_enabled = 2;
+  }
+  message FeatureControls {
+    message MultiagentControls {
+      bool boost_command_disabled = 1;
+      bool teamwork_preview_command_disabled = 2;
+    }
+    bool remote_control_enabled = 1;
+    .google.cloud.businessaicode.v1beta.AdminControls.FeatureControls.MultiagentControls multiagent_controls = 2;
+  }
+  message BrowserControls {
+    enum JavascriptExecutionPolicy {
+      JAVASCRIPT_EXECUTION_POLICY_UNSPECIFIED = 0;
+      JAVASCRIPT_EXECUTION_POLICY_DISABLED = 1;
+      JAVASCRIPT_EXECUTION_POLICY_REQUEST_REVIEW = 2;
+      JAVASCRIPT_EXECUTION_POLICY_NOT_ENFORCED = 3;
+    }
+    bool browser_enabled = 1;
+    .google.cloud.businessaicode.v1beta.AdminControls.BrowserControls.JavascriptExecutionPolicy javascript_execution_policy = 2;
+    repeated string actuation_allowed_urls = 3;
+  }
+  message PluginControls {
+    bool plugins_disabled = 1;
+    bool marketplace_disabled = 2;
+  }
+  .google.cloud.businessaicode.v1beta.AdminControls.AgentControls agent_controls = 1;
+  .google.cloud.businessaicode.v1beta.AdminControls.McpControls mcp_controls = 2;
+  .google.cloud.businessaicode.v1beta.AdminControls.LoggingControls logging_controls = 3;
+  .google.cloud.businessaicode.v1beta.AdminControls.FeatureControls feature_controls = 4;
+  .google.cloud.businessaicode.v1beta.AdminControls.BrowserControls browser_controls = 5;
+  .google.cloud.businessaicode.v1beta.AdminControls.PluginControls plugin_controls = 6;
+}
+message FetchLicensesRequest {
+}
+message FetchLicensesResponse {
+  repeated .google.cloud.businessaicode.v1beta.License licenses = 1;
+  repeated string unreachable = 2;
+}
+message SelfAssignLicenseRequest {
+  string parent = 1;
+  string license_location = 2;
+}
+message SelfAssignLicenseResponse {
+  .google.cloud.businessaicode.v1beta.License license = 1;
+}
+message License {
+  string user_tier = 1;
+  string tier_display_name = 2;
+  string project_id = 3;
+  string location = 4;
+  string processing_location = 5;
+}
+message FetchLicenseLocationsRequest {
+  string parent = 1;
+}
+message FetchLicenseLocationsResponse {
+  repeated .google.cloud.businessaicode.v1beta.LicenseLocation license_locations = 1;
+}
+message LicenseLocation {
+  string location = 1;
+  string processing_location = 2;
+}
+service ManagementService {
+  rpc FetchConfig (.google.cloud.businessaicode.v1beta.FetchConfigRequest) returns (.google.cloud.businessaicode.v1beta.FetchConfigResponse);
+  rpc FetchDefaultConfig (.google.cloud.businessaicode.v1beta.FetchDefaultConfigRequest) returns (.google.cloud.businessaicode.v1beta.FetchDefaultConfigResponse);
+  rpc FetchLicenses (.google.cloud.businessaicode.v1beta.FetchLicensesRequest) returns (.google.cloud.businessaicode.v1beta.FetchLicensesResponse);
+  rpc SelfAssignLicense (.google.cloud.businessaicode.v1beta.SelfAssignLicenseRequest) returns (.google.cloud.businessaicode.v1beta.SelfAssignLicenseResponse);
+  rpc FetchLicenseLocations (.google.cloud.businessaicode.v1beta.FetchLicenseLocationsRequest) returns (.google.cloud.businessaicode.v1beta.FetchLicenseLocationsResponse);
+}

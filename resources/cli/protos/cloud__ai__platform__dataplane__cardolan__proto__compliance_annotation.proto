@@ -1,0 +1,10 @@
+// Extracted from agy 1.5.14, file offset 0x662abd8, 531 bytes. Rendering omits custom options.
+syntax = "editions";
+package cloud_aiplatform.dataplane.cardolan;
+import "net/proto2/proto/descriptor.proto";
+enum ComplianceCheckType {
+  COMPLIANCE_CHECK_UNSPECIFIED = 0;
+  COMPLIANCE_CHECK_BLOCK_ITAR_PROJECT = 1;
+  COMPLIANCE_CHECK_BLOCK_IL5_PROJECT = 2;
+}
+extend .proto2.MethodOptions { repeated .cloud_aiplatform.dataplane.cardolan.ComplianceCheckType required_compliance_checks = 525000163; }

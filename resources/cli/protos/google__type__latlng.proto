@@ -1,0 +1,7 @@
+// Extracted from agy 1.5.14, file offset 0x6608a01, 243 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.type;
+message LatLng {
+  double latitude = 1;
+  double longitude = 2;
+}

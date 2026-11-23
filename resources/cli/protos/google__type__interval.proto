@@ -1,0 +1,9 @@
+// Extracted from agy 1.5.14, file offset 0x661ddb3, 399 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.type;
+import "google/protobuf/timestamp.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Interval {
+  .google.protobuf.Timestamp start_time = 1;
+  .google.protobuf.Timestamp end_time = 2;
+}

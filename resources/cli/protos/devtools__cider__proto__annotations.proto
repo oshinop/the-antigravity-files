@@ -1,0 +1,6 @@
+// Extracted from agy 1.5.14, file offset 0x6609e37, 251 bytes. Rendering omits custom options.
+syntax = "editions";
+package cider.annotations;
+import "net/proto2/proto/descriptor.proto";
+extend .proto2.FieldOptions { bool has_source_code = 535801200; }
+extend .proto2.FieldOptions { bool has_sensitive_content = 535801521; }

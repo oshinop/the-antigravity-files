@@ -1,0 +1,11 @@
+// Extracted from agy 1.5.14, file offset 0x662fa43, 591 bytes. Rendering omits custom options.
+syntax = "proto2";
+package com.google.android.gmscore.proto;
+import "gmscore/platform/proto/device_types.proto";
+import "google/api/inclusion.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+message GmsCoreDeviceInfo {
+  .gms.platform.DeviceType device_type = 1;
+  int64 gms_apex_version = 2;
+  .gms.platform.DeviceSubType device_sub_type = 3;
+}

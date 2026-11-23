@@ -1,0 +1,16 @@
+// Extracted from agy 1.5.14, file offset 0x662dac8, 568 bytes. Rendering omits custom options.
+syntax = "proto3";
+package jetbox_summaries_pb;
+import "third_party/jetski/jetski_cortex_pb/jetski_cortex.proto";
+message SummariesState {
+  message SummariesEntry {
+    string key = 1;
+    .exa.jetski_cortex_pb.CascadeTrajectorySummary value = 2;
+  }
+  message FileModTimesEntry {
+    string key = 1;
+    int64 value = 2;
+  }
+  repeated .jetbox_summaries_pb.SummariesState.SummariesEntry summaries = 1;
+  repeated .jetbox_summaries_pb.SummariesState.FileModTimesEntry file_mod_times = 2;
+}

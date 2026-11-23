@@ -1,0 +1,24 @@
+// Extracted from agy 1.5.14, file offset 0x6650bcf, 1120 bytes. Rendering omits custom options.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/internal/identity/signedoutstate/v1/signed_out_state_container.proto";
+import "privacy/context/external/proto/external_privacy_context.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ComplianceData {
+  enum ProductIdOrigin {
+    NOT_SET = 0;
+    CPS_APP_PROCESS_GLOBAL_PROVIDER = 1;
+    NON_CPS_APP_PROCESS_GLOBAL_PROVIDER = 2;
+    LOGGER_OVERRIDE_PROVIDER = 3;
+    LOGGER_DEFERRING_PROVIDER = 4;
+    EVENT_OVERRIDE = 5;
+    EVENT_DEFERRING = 6;
+    LOG_SOURCE_MAPPED = 7;
+    SERVER_INFRASTRUCTURE = 8;
+    LOG_REQUEST_SETTER_WEB = 9;
+    PRIVACY_CONTEXT_RESOLVER = 10;
+  }
+  .privacy.context.external.ExternalPrivacyContext privacy_context = 1;
+  .wireless_android_play_playlog.ComplianceData.ProductIdOrigin product_id_origin = 2; // default='NOT_SET'
+  .google.internal.identity.signedoutstate.v1.SignedOutState signed_out_state = 3;
+}

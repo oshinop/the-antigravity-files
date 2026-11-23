@@ -1,0 +1,10 @@
+// Extracted from agy 1.5.14, file offset 0x661a2da, 333 bytes. Rendering omits custom options.
+syntax = "editions";
+package datapol.mapping;
+enum Sensitivity {
+  DS_UNDEFINED = 0;
+  DS_PERSONALLY_IDENTIFIABLE_INFORMATION = 1;
+  DS_POSSIBLY_IDENTIFYING_ATTRIBUTES = 2;
+  DS_HIGH_ENTROPY_FIELDS = 3;
+  DS_NOT_SENSITIVE = 4;
+}

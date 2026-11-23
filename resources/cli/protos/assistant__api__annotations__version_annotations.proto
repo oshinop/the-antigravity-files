@@ -1,0 +1,34 @@
+// Extracted from agy 1.5.14, file offset 0x666a657, 1352 bytes. Rendering omits custom options.
+syntax = "proto2";
+package assistant.api.annotations;
+import "net/proto2/proto/descriptor.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message VersionRange {
+  int32 start = 1; // default='1'
+  int32 stop = 2;
+}
+message VersionRangeList {
+  repeated .assistant.api.annotations.VersionRange version_range = 1;
+}
+message TypeVersion {
+  string full_name = 1;
+  .proto2.FieldDescriptorProto.Type type = 2;
+  int64 version = 3;
+  repeated string dependency_path_for_debugging = 4;
+}
+message VersionMap {
+  string message_full_name = 1;
+  int64 annotated_max_version = 2;
+  repeated .assistant.api.annotations.TypeVersion dependent_type_version = 3;
+}
+message VersionLog {
+  message Change {
+    int32 version_id = 1;
+    string description = 2;
+  }
+  repeated .assistant.api.annotations.VersionLog.Change change = 1;
+}
+extend .proto2.FieldOptions { repeated .assistant.api.annotations.VersionRange version_range = 134096400; }
+extend .proto2.FieldOptions { .assistant.api.annotations.VersionRangeList version_range_list = 141473177; }
+extend .proto2.MessageOptions { int32 latest_version = 134096400; }
+extend .proto2.MessageOptions { .assistant.api.annotations.VersionLog version_log = 185706300; }

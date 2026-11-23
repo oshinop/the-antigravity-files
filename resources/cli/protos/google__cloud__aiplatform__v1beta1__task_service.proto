@@ -1,0 +1,217 @@
+// Extracted from agy 1.5.14, file offset 0x69979bc, 19587 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.cloud.aiplatform.v1beta1;
+import "cloud/ai/platform/dataplane/cardolan/proto/compliance_annotation.proto";
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/api/field_behavior.proto";
+import "google/api/httpbody.proto";
+import "google/api/policy.proto";
+import "google/api/resource.proto";
+import "google/api/versioning.proto";
+import "google/cloud/aiplatform/common/proto_field_options.proto";
+import "google/cloud/aiplatform/v1beta1/operation.proto";
+import "google/cloud/aiplatform/v1beta1/task.proto";
+import "google/cloud/aiplatform/v1beta1/task_events.proto";
+import "google/longrunning/operations.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+import "learning/genai/api/interactions/proto/steps.proto";
+import "net/proto2/contrib/validator/annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message DeleteTaskOperationMetadata {
+  .google.cloud.aiplatform.v1beta1.GenericOperationMetadata generic_metadata = 1;
+}
+message CancelTaskOperationMetadata {
+  .google.cloud.aiplatform.v1beta1.GenericOperationMetadata generic_metadata = 1;
+}
+message SuspendTaskOperationMetadata {
+  .google.cloud.aiplatform.v1beta1.GenericOperationMetadata generic_metadata = 1;
+}
+message CreateTaskRequest {
+  string parent = 1;
+  .google.cloud.aiplatform.v1beta1.Task task = 2;
+  string unique_creation_token = 3;
+  .google.cloud.aiplatform.v1beta1.UserContext user_context = 4;
+}
+message GetTaskRequest {
+  string name = 1;
+}
+message ListTasksRequest {
+  string parent = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+  string filter = 4;
+  string order_by = 5;
+}
+message ListTasksResponse {
+  repeated .google.cloud.aiplatform.v1beta1.Task tasks = 1;
+  string next_page_token = 2;
+}
+message UpdateTaskRequest {
+  .google.cloud.aiplatform.v1beta1.Task task = 1;
+  .google.protobuf.FieldMask update_mask = 2;
+}
+message SuspendTaskRequest {
+  string name = 1;
+  .google.cloud.aiplatform.v1beta1.Task.StatusDetail status_detail = 2;
+  bool operate_on_self = 3; // oneof=_operate_on_self
+}
+message ResumeTaskRequest {
+  string name = 1;
+  .google.cloud.aiplatform.v1beta1.Budget additional_budget = 2;
+}
+message SteerTaskRequest {
+  message TriggerNow {
+  }
+  .genai.Step input = 2; // oneof=action
+  .google.cloud.aiplatform.v1beta1.SteerTaskRequest.TriggerNow trigger_now = 5; // oneof=action
+  string name = 1;
+  string event_id = 3;
+  .google.cloud.aiplatform.v1beta1.UserContext user_context = 4;
+}
+message SteerTaskResponse {
+  .google.cloud.aiplatform.v1beta1.Task task = 1;
+  string event_id = 2;
+}
+message CancelTaskRequest {
+  string name = 1;
+  bool operate_on_self = 2;
+}
+message DeleteTaskRequest {
+  string name = 1;
+  bool operate_on_self = 2;
+}
+message StreamTaskRequest {
+  string name = 1;
+  int64 next_step_seq_num = 2;
+  bool snapshot = 3;
+  string continuation_token = 4;
+}
+message ListTaskEventsRequest {
+  string task = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+message ListTaskEventsResponse {
+  repeated .google.cloud.aiplatform.v1beta1.TaskServerEvent events = 1;
+  string next_page_token = 2;
+  string assigned_agent_identity = 3;
+  .google.cloud.aiplatform.v1beta1.TaskCompletedEvent task_completed = 4;
+}
+message TaskArtifactFile {
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    FILE = 1;
+    DIRECTORY = 2;
+  }
+  string path = 1;
+  .google.cloud.aiplatform.v1beta1.TaskArtifactFile.Type type = 2;
+  string mime_type = 3;
+  int64 size_bytes = 4;
+  .google.protobuf.Timestamp update_time = 5;
+}
+message ListTaskArtifactsRequest {
+  string task = 1;
+  string path = 2;
+  bool recursive = 3;
+  int32 page_size = 4;
+  string page_token = 5;
+}
+message ListTaskArtifactsResponse {
+  repeated .google.cloud.aiplatform.v1beta1.TaskArtifactFile artifacts = 1;
+  string next_page_token = 2;
+}
+message UploadTaskArtifactRequest {
+  string task = 1;
+  string path = 2;
+  .google.api.HttpBody http_body = 3;
+}
+message DownloadTaskArtifactRequest {
+  string task = 1;
+  string path = 2;
+  .google.cloud.aiplatform.v1beta1.TaskArtifactProcessingConfig processing_config = 3;
+}
+message TaskArtifactProcessingConfig {
+  string output_mime_type = 1;
+}
+message DeleteTaskArtifactRequest {
+  string task = 1;
+  string path = 2;
+  bool allow_missing = 3;
+}
+message DeleteTaskArtifactResponse {
+}
+message FetchEnvironmentIceConfigRequest {
+  string task = 1;
+}
+message FetchEnvironmentIceConfigResponse {
+  repeated .google.cloud.aiplatform.v1beta1.IceServer ice_servers = 1;
+}
+message IceServer {
+  repeated string uris = 1;
+  string username = 2;
+  string credential = 3;
+}
+message IceCandidate {
+  string candidate = 1;
+  string sdp_mid = 2;
+  int32 sdp_m_line_index = 3; // oneof=_sdp_m_line_index
+}
+message SendEnvironmentSdpOfferRequest {
+  string task = 1;
+  string sdp_offer = 2;
+  string offer_type = 3;
+}
+message SendEnvironmentSdpOfferResponse {
+  string connection_id = 1;
+  string sdp_answer = 2;
+  string answer_type = 3;
+  repeated .google.cloud.aiplatform.v1beta1.IceCandidate environment_ice_candidates = 4;
+}
+message SendEnvironmentIceCandidatesRequest {
+  string task = 1;
+  string connection_id = 2;
+  repeated .google.cloud.aiplatform.v1beta1.IceCandidate candidates = 3;
+}
+message SendEnvironmentIceCandidatesResponse {
+}
+message AcquireEnvironmentControlRequest {
+  string task = 1;
+  string connection_id = 2;
+}
+message ReleaseEnvironmentControlRequest {
+  string task = 1;
+  string connection_id = 2;
+}
+message EnvironmentControl {
+  enum Holder {
+    HOLDER_UNSPECIFIED = 0;
+    AGENT = 1;
+    USER = 2;
+  }
+  .google.cloud.aiplatform.v1beta1.EnvironmentControl.Holder holder = 1;
+}
+service TaskService {
+  rpc CreateTaskBidiStream (stream .google.cloud.aiplatform.v1beta1.TaskClientEventBatch) returns (stream .google.cloud.aiplatform.v1beta1.TaskServerEventBatch);
+  rpc StreamTask (.google.cloud.aiplatform.v1beta1.StreamTaskRequest) returns (stream .google.cloud.aiplatform.v1beta1.TaskServerEventBatch);
+  rpc ListTaskEvents (.google.cloud.aiplatform.v1beta1.ListTaskEventsRequest) returns (.google.cloud.aiplatform.v1beta1.ListTaskEventsResponse);
+  rpc CreateTask (.google.cloud.aiplatform.v1beta1.CreateTaskRequest) returns (.google.cloud.aiplatform.v1beta1.Task);
+  rpc GetTask (.google.cloud.aiplatform.v1beta1.GetTaskRequest) returns (.google.cloud.aiplatform.v1beta1.Task);
+  rpc ListTasks (.google.cloud.aiplatform.v1beta1.ListTasksRequest) returns (.google.cloud.aiplatform.v1beta1.ListTasksResponse);
+  rpc UpdateTask (.google.cloud.aiplatform.v1beta1.UpdateTaskRequest) returns (.google.cloud.aiplatform.v1beta1.Task);
+  rpc SuspendTask (.google.cloud.aiplatform.v1beta1.SuspendTaskRequest) returns (.google.longrunning.Operation);
+  rpc ResumeTask (.google.cloud.aiplatform.v1beta1.ResumeTaskRequest) returns (.google.cloud.aiplatform.v1beta1.Task);
+  rpc SteerTask (.google.cloud.aiplatform.v1beta1.SteerTaskRequest) returns (.google.cloud.aiplatform.v1beta1.SteerTaskResponse);
+  rpc CancelTask (.google.cloud.aiplatform.v1beta1.CancelTaskRequest) returns (.google.cloud.aiplatform.v1beta1.Task);
+  rpc DeleteTask (.google.cloud.aiplatform.v1beta1.DeleteTaskRequest) returns (.google.longrunning.Operation);
+  rpc ListTaskArtifacts (.google.cloud.aiplatform.v1beta1.ListTaskArtifactsRequest) returns (.google.cloud.aiplatform.v1beta1.ListTaskArtifactsResponse);
+  rpc UploadTaskArtifact (stream .google.cloud.aiplatform.v1beta1.UploadTaskArtifactRequest) returns (.google.cloud.aiplatform.v1beta1.TaskArtifactFile);
+  rpc DownloadTaskArtifact (.google.cloud.aiplatform.v1beta1.DownloadTaskArtifactRequest) returns (stream .google.api.HttpBody);
+  rpc DeleteTaskArtifact (.google.cloud.aiplatform.v1beta1.DeleteTaskArtifactRequest) returns (.google.cloud.aiplatform.v1beta1.DeleteTaskArtifactResponse);
+  rpc FetchEnvironmentIceConfig (.google.cloud.aiplatform.v1beta1.FetchEnvironmentIceConfigRequest) returns (.google.cloud.aiplatform.v1beta1.FetchEnvironmentIceConfigResponse);
+  rpc SendEnvironmentSdpOffer (.google.cloud.aiplatform.v1beta1.SendEnvironmentSdpOfferRequest) returns (.google.cloud.aiplatform.v1beta1.SendEnvironmentSdpOfferResponse);
+  rpc SendEnvironmentIceCandidates (.google.cloud.aiplatform.v1beta1.SendEnvironmentIceCandidatesRequest) returns (.google.cloud.aiplatform.v1beta1.SendEnvironmentIceCandidatesResponse);
+  rpc AcquireEnvironmentControl (.google.cloud.aiplatform.v1beta1.AcquireEnvironmentControlRequest) returns (.google.cloud.aiplatform.v1beta1.EnvironmentControl);
+  rpc ReleaseEnvironmentControl (.google.cloud.aiplatform.v1beta1.ReleaseEnvironmentControlRequest) returns (.google.cloud.aiplatform.v1beta1.EnvironmentControl);
+}

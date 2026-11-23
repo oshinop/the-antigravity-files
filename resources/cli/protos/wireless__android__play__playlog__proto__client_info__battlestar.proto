@@ -1,0 +1,38 @@
+// Extracted from agy 1.5.14, file offset 0x667aab3, 1560 bytes. Rendering omits custom options.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb_generate_object_format.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message BattlestarClientInfo {
+  enum BattlestarClientType {
+    CLIENT_UNKNOWN = 0;
+    EMULATOR = 1;
+    PHENOTYPE = 2;
+    SERVICE = 3;
+    CLIENT = 4;
+    INSTALLER = 5;
+    HYPERVISOR = 6;
+    INSTALLER_PHENOTYPE = 7;
+  }
+  enum BattlestarMachineTier {
+    TIER_UNKNOWN = 0;
+    UNSUPPORTED = 1;
+    SILVER = 2;
+    GOLD = 3;
+    DIAMOND = 4;
+  }
+  enum CpuManufacturer {
+    MANUFACTURER_UNKNOWN = 0;
+    MANUFACTURER_INTEL = 1;
+    MANUFACTURER_AMD = 2;
+  }
+  string build_version = 1;
+  string build_type = 4;
+  string omaha_channel = 5;
+  .wireless_android_play_playlog.BattlestarClientInfo.BattlestarClientType battlestar_client_type = 2;
+  .wireless_android_play_playlog.BattlestarClientInfo.BattlestarMachineTier battlestar_machine_tier = 6;
+  .wireless_android_play_playlog.BattlestarClientInfo.CpuManufacturer cpu_manufacturer = 8;
+  int64 system_physical_memory_bytes = 10;
+}

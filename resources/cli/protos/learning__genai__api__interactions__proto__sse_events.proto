@@ -1,0 +1,271 @@
+// Extracted from agy 1.5.14, file offset 0x6892903, 10366 bytes. Rendering omits custom options.
+syntax = "editions";
+package genai;
+import "learning/genai/api/interactions/proto/content.proto";
+import "learning/genai/api/interactions/proto/error.proto";
+import "learning/genai/api/interactions/proto/interaction.proto";
+import "learning/genai/api/interactions/proto/steps.proto";
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+message InteractionStatusUpdate {
+  string interaction_id = 1;
+  .genai.Interaction.Status status = 2;
+  bytes continuation_token = 3;
+  .genai.Interaction.Usage usage = 5;
+}
+message AgentStatusUpdate {
+  string interaction_id = 1;
+  .genai.Interaction.Status status = 2;
+}
+message ContentStart {
+  int32 index = 1;
+  .genai.Content content = 4;
+}
+message TextDelta {
+  string text = 1;
+}
+message TextAnnotationDelta {
+  repeated .genai.TextContent.Annotation annotations = 1;
+}
+message ImageDelta {
+  .genai.ImageContent.MimeType mime_type = 1;
+  bytes data = 2; // oneof=data_or_uri
+  string uri = 3; // oneof=data_or_uri
+  .genai.MediaResolution resolution = 5;
+}
+message AudioDelta {
+  .genai.AudioContent.MimeType mime_type = 1;
+  bytes data = 2; // oneof=data_or_uri
+  string uri = 3; // oneof=data_or_uri
+  int32 rate = 4;
+  int32 sample_rate = 6;
+  int32 channels = 5;
+}
+message VideoDelta {
+  .genai.VideoContent.MimeType mime_type = 1;
+  bytes data = 2; // oneof=data_or_uri
+  string uri = 3; // oneof=data_or_uri
+  .genai.MediaResolution resolution = 5;
+}
+message DocumentDelta {
+  .genai.DocumentContent.MimeType mime_type = 1;
+  bytes data = 2; // oneof=data_or_uri
+  string uri = 3; // oneof=data_or_uri
+}
+message ThoughtSummaryDelta {
+  .genai.Content content = 1;
+}
+message RawThoughtDelta {
+  .genai.Content content = 1;
+}
+message ThoughtSignatureDelta {
+  bytes signature = 1;
+}
+message FunctionCallDelta {
+  string name = 1;
+  .genai.Struct arguments = 2;
+}
+message CodeExecutionCallDelta {
+  .genai.CodeExecutionCallContent.CodeExecutionCallArguments arguments = 1;
+}
+message UrlContextCallDelta {
+  .genai.UrlContextCallContent.UrlContextCallArguments arguments = 1;
+}
+message GoogleSearchCallDelta {
+  .genai.GoogleSearchCallContent.GoogleSearchCallArguments arguments = 1;
+}
+message McpServerToolCallDelta {
+  string name = 1;
+  string server_name = 2;
+  .genai.Struct arguments = 3;
+}
+message FileSearchCallDelta {
+}
+message GoogleMapsCallDelta {
+  .genai.GoogleMapsCallContent.GoogleMapsCallArguments arguments = 1;
+}
+message ToolSearchCallDelta {
+  .genai.ToolSearchCallStep.ToolSearchCallStepArguments arguments = 1;
+}
+message ProcessingCallDelta {
+}
+message ProcessingResultDelta {
+}
+message ToolCallDelta {
+  string id = 1;
+  bytes signature = 8;
+  .genai.FunctionCallDelta function_call = 2; // oneof=type
+  .genai.CodeExecutionCallDelta code_execution_call = 3; // oneof=type
+  .genai.UrlContextCallDelta url_context_call = 4; // oneof=type
+  .genai.GoogleSearchCallDelta google_search_call = 5; // oneof=type
+  .genai.McpServerToolCallDelta mcp_server_tool_call = 6; // oneof=type
+  .genai.FileSearchCallDelta file_search_call = 7; // oneof=type
+  .genai.GoogleMapsCallDelta google_maps_call = 9; // oneof=type
+}
+message FunctionResultDelta {
+  string name = 1;
+  bool is_error = 2;
+  .genai.Value result = 7;
+}
+message CodeExecutionResultDelta {
+  string result = 1;
+  bool is_error = 2;
+}
+message UrlContextResultDelta {
+  repeated .genai.UrlContextResultContent.UrlContextResult result = 2;
+  bool is_error = 3;
+}
+message GoogleSearchResultDelta {
+  repeated .genai.GoogleSearchResultContent.GoogleSearchResult result = 2;
+  bool is_error = 3;
+}
+message McpServerToolResultDelta {
+  string name = 1;
+  string server_name = 2;
+  .genai.Value result = 7;
+}
+message FileSearchResultDelta {
+  repeated .genai.FileSearchResultContent.FileSearchResult result = 1;
+}
+message GoogleMapsResultDelta {
+  repeated .genai.GoogleMapsResultContent.GoogleMapsResult result = 1;
+}
+message ToolSearchResultDelta {
+  repeated .genai.Function result = 1;
+}
+message ToolResultDelta {
+  string call_id = 8;
+  bytes signature = 9;
+  .genai.FunctionResultDelta function_result = 2; // oneof=type
+  .genai.CodeExecutionResultDelta code_execution_result = 3; // oneof=type
+  .genai.UrlContextResultDelta url_context_result = 4; // oneof=type
+  .genai.GoogleSearchResultDelta google_search_result = 5; // oneof=type
+  .genai.McpServerToolResultDelta mcp_server_tool_result = 6; // oneof=type
+  .genai.FileSearchResultDelta file_search_result = 7; // oneof=type
+  .genai.GoogleMapsResultDelta google_maps_result = 10; // oneof=type
+}
+message ContentDeltaData {
+  .genai.TextDelta text = 1; // oneof=type
+  .genai.ImageDelta image = 2; // oneof=type
+  .genai.AudioDelta audio = 3; // oneof=type
+  .genai.DocumentDelta document = 4; // oneof=type
+  .genai.VideoDelta video = 5; // oneof=type
+  .genai.ThoughtSummaryDelta thought_summary = 6; // oneof=type
+  .genai.ThoughtSignatureDelta thought_signature = 7; // oneof=type
+  .genai.ToolCallDelta tool_call = 8; // oneof=type
+  .genai.ToolResultDelta tool_result = 9; // oneof=type
+  .genai.TextAnnotationDelta text_annotation = 10; // oneof=type
+}
+message ContentDelta {
+  int32 index = 1;
+  .genai.ContentDeltaData delta = 16;
+}
+message ContentStop {
+  int32 index = 1;
+}
+message InteractionStartEvent {
+  .genai.Interaction interaction = 2;
+}
+message InteractionCompleteEvent {
+  .genai.Interaction interaction = 2;
+}
+message InteractionCreatedSseEvent {
+  .genai.Interaction interaction = 1;
+}
+message InteractionCompletedSseEvent {
+  .genai.Interaction interaction = 1;
+}
+message ErrorEvent {
+  .genai.Error error = 2;
+}
+message StepStart {
+  int32 index = 1;
+  .genai.Step step = 2;
+}
+message StepDelta {
+  int32 index = 1;
+  .genai.StepDeltaData delta = 2;
+}
+message ServerToolCallDelta {
+  bytes signature = 1;
+  .genai.CodeExecutionCallDelta code_execution_call = 2; // oneof=type
+  .genai.UrlContextCallDelta url_context_call = 3; // oneof=type
+  .genai.GoogleSearchCallDelta google_search_call = 4; // oneof=type
+  .genai.McpServerToolCallDelta mcp_server_tool_call = 5; // oneof=type
+  .genai.FileSearchCallDelta file_search_call = 6; // oneof=type
+  .genai.GoogleMapsCallDelta google_maps_call = 7; // oneof=type
+  .genai.ToolSearchCallDelta tool_search_call = 9; // oneof=type
+  .genai.ProcessingCallDelta processing_call = 10; // oneof=type
+}
+message ServerToolResultDelta {
+  bytes signature = 1;
+  .genai.CodeExecutionResultDelta code_execution_result = 2; // oneof=type
+  .genai.UrlContextResultDelta url_context_result = 3; // oneof=type
+  .genai.GoogleSearchResultDelta google_search_result = 4; // oneof=type
+  .genai.McpServerToolResultDelta mcp_server_tool_result = 5; // oneof=type
+  .genai.FileSearchResultDelta file_search_result = 6; // oneof=type
+  .genai.GoogleMapsResultDelta google_maps_result = 7; // oneof=type
+  .genai.ToolSearchResultDelta tool_search_result = 9; // oneof=type
+  .genai.ProcessingResultDelta processing_result = 10; // oneof=type
+}
+message StepDeltaData {
+  .genai.TextDelta text = 1; // oneof=type
+  .genai.ImageDelta image = 2; // oneof=type
+  .genai.AudioDelta audio = 3; // oneof=type
+  .genai.DocumentDelta document = 4; // oneof=type
+  .genai.VideoDelta video = 5; // oneof=type
+  .genai.ThoughtSummaryDelta thought_summary = 6; // oneof=type
+  .genai.RawThoughtDelta raw_thought = 17; // oneof=type
+  .genai.ThoughtSignatureDelta thought_signature = 7; // oneof=type
+  .genai.TextAnnotationDelta text_annotation_delta = 10; // oneof=type
+  .genai.ArgumentsDelta arguments_delta = 11; // oneof=type
+  .genai.ServerToolCallDelta server_tool_call = 12; // oneof=type
+  .genai.ServerToolResultDelta server_tool_result = 13; // oneof=type
+  .genai.FunctionResultDelta function_result = 14; // oneof=type
+  .genai.ToolResultStepDelta tool_result_step_delta = 19; // oneof=type
+}
+message ToolResultStepDelta {
+  .genai.ToolResultStep overwrite = 1; // oneof=delta
+}
+message ArgumentsDelta {
+  string arguments = 2;
+}
+message TranscriptionDelta {
+  enum TranscriptionType {
+    TRANSCRIPTION_TYPE_UNSPECIFIED = 0;
+    FINAL = 1;
+    INTERIM = 2;
+    SPECULATIVE = 3;
+  }
+  string text = 1;
+  .genai.TranscriptionDelta.TranscriptionType transcription_type = 2;
+  .genai.VoiceActivity voice_activity = 3;
+}
+message VoiceActivity {
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    SPEECH_STARTED = 1;
+    SPEECH_ENDED = 2;
+  }
+  .genai.VoiceActivity.Type type = 1;
+}
+message StepStop {
+  int32 index = 1;
+  .genai.Interaction.Usage usage = 2;
+  .genai.Interaction.Usage step_usage = 3;
+}
+message InteractionStreamingEvent {
+  .genai.InteractionStartEvent interaction_start_event = 14; // oneof=event_type
+  .genai.InteractionCompleteEvent interaction_complete_event = 15; // oneof=event_type
+  .genai.InteractionCreatedSseEvent interaction_created_event = 19; // oneof=event_type
+  .genai.InteractionCompletedSseEvent interaction_completed_event = 20; // oneof=event_type
+  .genai.InteractionStatusUpdate interaction_status_update = 4; // oneof=event_type
+  .genai.AgentStatusUpdate agent_status_update = 23; // oneof=event_type
+  .genai.ContentStart content_start = 10; // oneof=event_type
+  .genai.ContentDelta content_delta = 11; // oneof=event_type
+  .genai.ContentStop content_stop = 12; // oneof=event_type
+  .genai.ErrorEvent error_event = 9; // oneof=event_type
+  .genai.StepStart step_start = 16; // oneof=event_type
+  .genai.StepDelta step_delta = 17; // oneof=event_type
+  .genai.StepStop step_stop = 18; // oneof=event_type
+  string event_id = 13;
+}

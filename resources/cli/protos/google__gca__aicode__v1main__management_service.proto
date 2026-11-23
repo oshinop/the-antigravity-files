@@ -1,0 +1,181 @@
+// Extracted from agy 1.5.14, file offset 0x6849237, 8393 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.gca.aicode.v1main;
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/api/versioning.proto";
+import "google/protobuf/field_mask.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message UserSettings {
+  string name = 1;
+  bool data_collection_optin = 2; // oneof=_data_collection_optin
+}
+message GetUserSettingsRequest {
+  string name = 1;
+}
+message UpdateUserSettingsRequest {
+  .google.gca.aicode.v1main.UserSettings user_settings = 1;
+  .google.protobuf.FieldMask update_mask = 2;
+}
+message GetUserInfoRequest {
+  string name = 1;
+}
+message UserInfo {
+  string name = 1;
+  .google.gca.aicode.v1main.UserTier legacy_tier = 2;
+}
+message UserTier {
+  string id = 1;
+}
+message FetchConfigRequest {
+}
+message FetchConfigResponse {
+  message ExperimentConfig {
+    message ExperimentFlag {
+      message Int32List {
+        repeated int32 values = 1;
+      }
+      message Int64List {
+        repeated int64 values = 1;
+      }
+      message StringList {
+        repeated string values = 1;
+      }
+      string name = 1;
+      bool bool_value = 2; // oneof=value
+      double float_value = 3; // oneof=value
+      int64 int_value = 4; // oneof=value
+      string string_value = 5; // oneof=value
+      .google.gca.aicode.v1main.FetchConfigResponse.ExperimentConfig.ExperimentFlag.Int32List int32_list_value = 6; // oneof=value
+      .google.gca.aicode.v1main.FetchConfigResponse.ExperimentConfig.ExperimentFlag.Int64List int64_list_value = 7; // oneof=value
+      .google.gca.aicode.v1main.FetchConfigResponse.ExperimentConfig.ExperimentFlag.StringList string_list_value = 8; // oneof=value
+    }
+    repeated int32 enabled_experiment_ids = 1;
+    repeated .google.gca.aicode.v1main.FetchConfigResponse.ExperimentConfig.ExperimentFlag experiment_flags = 2;
+  }
+  message Model {
+    enum Feature {
+      FEATURE_UNSPECIFIED = 0;
+      IMAGE_INPUT = 1;
+      IMAGE_OUTPUT = 2;
+      JSON_SCHEMA_OUTPUT = 3;
+      BROWSE_AS_A_TOOL = 4;
+      SEARCH_AS_A_TOOL = 5;
+      TOP_P = 6;
+      AUDIO_INPUT = 7;
+      AUDIO_OUTPUT = 8;
+      CODE_EXECUTION = 9;
+      FUNCTION_CALLING = 10;
+      THINKING = 11;
+      THINKING_LEVEL = 12;
+      VIDEO_INPUT = 13;
+      DOCUMENT_INPUT = 14;
+    }
+    enum ModelProvider {
+      MODEL_PROVIDER_UNSPECIFIED = 0;
+      GOOGLE = 1;
+      ANTHROPIC = 2;
+      OTHER = 3;
+      OPENAI = 4;
+    }
+    message GenerationConfig {
+      .google.gca.aicode.v1main.FetchConfigResponse.ThinkingConfig thinking_config = 1; // oneof=_thinking_config
+      int32 max_output_tokens = 2; // oneof=_max_output_tokens
+    }
+    string model_id = 1;
+    string name = 2;
+    string display_name = 3;
+    string base_model_id = 4;
+    string version = 5;
+    string description = 6;
+    int32 input_token_limit = 7; // oneof=_input_token_limit
+    int32 output_token_limit = 8; // oneof=_output_token_limit
+    repeated .google.gca.aicode.v1main.FetchConfigResponse.ThinkingConfig.ThinkingLevel supported_thinking_levels = 9;
+    repeated .google.gca.aicode.v1main.FetchConfigResponse.Model.Feature supported_features = 10;
+    .google.gca.aicode.v1main.FetchConfigResponse.Model.GenerationConfig generation_config = 11; // oneof=_generation_config
+    .google.gca.aicode.v1main.FetchConfigResponse.Model.ModelProvider model_provider = 12;
+    repeated string agy_supported_mime_types = 13;
+  }
+  message ThinkingConfig {
+    enum ThinkingLevel {
+      THINKING_LEVEL_UNSPECIFIED = 0;
+      MINIMAL = 1;
+      LOW = 2;
+      MEDIUM = 3;
+      HIGH = 4;
+      EXTRA_HIGH = 5;
+      XHIGH = 6;
+    }
+    bool include_thoughts = 1; // oneof=_include_thoughts
+    int32 thinking_budget = 2; // oneof=_thinking_budget
+    .google.gca.aicode.v1main.FetchConfigResponse.ThinkingConfig.ThinkingLevel thinking_level = 3; // oneof=_thinking_level
+    int32 min_thinking_budget = 4; // oneof=_min_thinking_budget
+  }
+  message Experience {
+    message ExperienceSurfaceConfig {
+      message Tag {
+        string title = 1;
+        string description = 2;
+      }
+      message ModelExperimentValue {
+        bool bool_value = 1; // oneof=value
+        double float_value = 2; // oneof=value
+        int64 int_value = 3; // oneof=value
+        string string_value = 4; // oneof=value
+      }
+      message ModelExperimentsEntry {
+        string key = 1;
+        .google.gca.aicode.v1main.FetchConfigResponse.Experience.ExperienceSurfaceConfig.ModelExperimentValue value = 2;
+      }
+      string client_model_enum_name = 1;
+      repeated .google.gca.aicode.v1main.FetchConfigResponse.Experience.ExperienceSurfaceConfig.Tag tags = 2;
+      bool disabled = 3;
+      repeated .google.gca.aicode.v1main.FetchConfigResponse.Experience.ExperienceSurfaceConfig.ModelExperimentsEntry model_experiments = 4;
+    }
+    string name = 1;
+    .google.gca.aicode.v1main.FetchConfigResponse.Model model = 2;
+    .google.gca.aicode.v1main.FetchConfigResponse.Experience.ExperienceSurfaceConfig surface_config = 3;
+  }
+  message SurfaceConfig {
+    message ExperienceGroup {
+      repeated string experience_names = 1;
+      string default_experience = 2;
+    }
+    .google.gca.aicode.v1main.FetchConfigResponse.SurfaceConfig.ExperienceGroup image_generation_experiences = 1;
+    .google.gca.aicode.v1main.FetchConfigResponse.SurfaceConfig.ExperienceGroup commit_message_experiences = 2;
+    .google.gca.aicode.v1main.FetchConfigResponse.SurfaceConfig.ExperienceGroup web_search_experiences = 3;
+    .google.gca.aicode.v1main.FetchConfigResponse.SurfaceConfig.ExperienceGroup agent_experiences = 4;
+    .google.gca.aicode.v1main.FetchConfigResponse.SurfaceConfig.ExperienceGroup tiered_flash_lite_experiences = 5;
+    .google.gca.aicode.v1main.FetchConfigResponse.SurfaceConfig.ExperienceGroup tiered_flash_experiences = 6;
+    .google.gca.aicode.v1main.FetchConfigResponse.SurfaceConfig.ExperienceGroup tiered_pro_experiences = 7;
+    .google.gca.aicode.v1main.FetchConfigResponse.SurfaceConfig.ExperienceGroup audio_transcription_experiences = 8;
+  }
+  .google.gca.aicode.v1main.FetchConfigResponse.ExperimentConfig experiment_config = 1;
+  repeated .google.gca.aicode.v1main.FetchConfigResponse.Experience available_experiences = 2;
+  repeated .google.gca.aicode.v1main.FetchConfigResponse.Model available_models = 3;
+  .google.gca.aicode.v1main.FetchConfigResponse.SurfaceConfig agy_surface_config = 4;
+}
+message FetchLicensesRequest {
+}
+message FetchLicensesResponse {
+  repeated .google.gca.aicode.v1main.License licenses = 1;
+}
+message License {
+  string user_tier = 1;
+  string tier_display_name = 2;
+  .google.gca.aicode.v1main.UpgradeSubscription upgrade_subscription = 3;
+}
+message UpgradeSubscription {
+  string text = 1;
+  string url = 2; // oneof=_url
+  string button_text = 3;
+}
+service ManagementService {
+  rpc GetUserSettings (.google.gca.aicode.v1main.GetUserSettingsRequest) returns (.google.gca.aicode.v1main.UserSettings);
+  rpc UpdateUserSettings (.google.gca.aicode.v1main.UpdateUserSettingsRequest) returns (.google.gca.aicode.v1main.UserSettings);
+  rpc GetUserInfo (.google.gca.aicode.v1main.GetUserInfoRequest) returns (.google.gca.aicode.v1main.UserInfo);
+  rpc FetchConfig (.google.gca.aicode.v1main.FetchConfigRequest) returns (.google.gca.aicode.v1main.FetchConfigResponse);
+  rpc FetchLicenses (.google.gca.aicode.v1main.FetchLicensesRequest) returns (.google.gca.aicode.v1main.FetchLicensesResponse);
+}

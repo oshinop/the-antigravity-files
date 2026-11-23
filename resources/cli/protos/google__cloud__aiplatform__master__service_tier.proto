@@ -1,0 +1,10 @@
+// Extracted from agy 1.5.14, file offset 0x66216b4, 437 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.cloud.aiplatform.master;
+import "google/api/inclusion.proto";
+enum ServiceTier {
+  SERVICE_TIER_UNSPECIFIED = 0;
+  SERVICE_TIER_STANDARD = 1;
+  SERVICE_TIER_FLEX = 2;
+  SERVICE_TIER_PRIORITY = 3;
+}

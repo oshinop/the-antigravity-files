@@ -1,0 +1,22 @@
+// Extracted from agy 1.5.14, file offset 0x66452f8, 883 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.cloud.aiplatform.v1beta1;
+import "google/api/field_behavior.proto";
+import "google/api/versioning.proto";
+import "google/protobuf/timestamp.proto";
+import "google/rpc/status.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message GenericOperationMetadata {
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    RUNNING = 1;
+    CANCELLING = 2;
+    DONE = 3;
+  }
+  repeated .google.rpc.Status partial_failures = 1;
+  .google.protobuf.Timestamp create_time = 2;
+  .google.protobuf.Timestamp update_time = 3;
+}
+message DeleteOperationMetadata {
+  .google.cloud.aiplatform.v1beta1.GenericOperationMetadata generic_metadata = 1;
+}

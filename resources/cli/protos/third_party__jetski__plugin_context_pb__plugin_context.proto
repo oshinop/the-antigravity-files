@@ -1,0 +1,82 @@
+// Extracted from agy 1.5.14, file offset 0x66c1bd1, 2518 bytes. Rendering omits custom options.
+syntax = "proto3";
+package exa.plugin_context_pb;
+enum ContractVersion {
+  CONTRACT_VERSION_UNSPECIFIED = 0;
+  CONTRACT_VERSION_CURRENT = 1;
+}
+enum ProbeStatus {
+  PROBE_STATUS_UNSPECIFIED = 0;
+  PROBE_STATUS_OK = 1;
+  PROBE_STATUS_UNAUTHENTICATED = 2;
+  PROBE_STATUS_APPLICATION_VERSION_TOO_LOW = 3;
+  PROBE_STATUS_PLUGIN_VERSION_TOO_LOW = 4;
+  PROBE_STATUS_ERROR = 5;
+}
+enum ContextFailureKind {
+  CONTEXT_FAILURE_KIND_UNSPECIFIED = 0;
+  CONTEXT_FAILURE_KIND_UNAUTHENTICATED = 1;
+  CONTEXT_FAILURE_KIND_RATE_LIMITED = 2;
+  CONTEXT_FAILURE_KIND_UNAVAILABLE = 3;
+}
+message ProbeRequest {
+  int32 min_version = 1;
+  int32 max_version = 2;
+}
+message ProbeResponse {
+  int32 contract_version = 1;
+  .exa.plugin_context_pb.ProbeStatus status = 2;
+  string status_message = 3;
+  string user_help = 4;
+}
+message CandidateItem {
+  string uri = 1;
+  string icon_uri = 2;
+  string label = 3;
+  string description = 4;
+}
+message ContextProviderDefinition {
+  string trigger = 1;
+  string label = 2;
+  string icon_uri = 3;
+  repeated string command = 4;
+  int32 debounce_ms = 5; // oneof=_debounce_ms
+  repeated string options = 6;
+  repeated string uri_patterns = 7;
+  bool persistent = 8;
+}
+message AntigravityPluginExtension {
+  message ContextProvidersEntry {
+    string key = 1;
+    .exa.plugin_context_pb.ContextProviderDefinition value = 2;
+  }
+  repeated .exa.plugin_context_pb.AntigravityPluginExtension.ContextProvidersEntry context_providers = 1;
+}
+message SearchRequest {
+  string query = 1;
+  string page_token = 2;
+}
+message SearchResponse {
+  bool ok = 1;
+  string error_message = 2;
+  repeated .exa.plugin_context_pb.CandidateItem items = 3;
+  int32 cache_ttl_seconds = 4;
+  string next_page_token = 5;
+  .exa.plugin_context_pb.ContextFailureKind failure_kind = 6;
+  string user_help = 7;
+}
+message ResolveUriRequest {
+  string uri = 1;
+}
+message ResolveUriResponse {
+  bool ok = 1;
+  string error_message = 2;
+  .exa.plugin_context_pb.CandidateItem item = 3;
+  .exa.plugin_context_pb.ContextFailureKind failure_kind = 4;
+  string user_help = 5;
+}
+service ContextProviderService {
+  rpc Probe (.exa.plugin_context_pb.ProbeRequest) returns (.exa.plugin_context_pb.ProbeResponse);
+  rpc Search (.exa.plugin_context_pb.SearchRequest) returns (.exa.plugin_context_pb.SearchResponse);
+  rpc ResolveUri (.exa.plugin_context_pb.ResolveUriRequest) returns (.exa.plugin_context_pb.ResolveUriResponse);
+}

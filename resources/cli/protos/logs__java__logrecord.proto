@@ -1,0 +1,82 @@
+// Extracted from agy 1.5.14, file offset 0x66ddd56, 2837 bytes. Rendering omits custom options.
+syntax = "proto2";
+package ;
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb.proto";
+import "logs/eventid/eventid.proto";
+import "net/proto2/bridge/proto/message_set.proto";
+import "net/proto2/go/annotation/go_annotation.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ThrowableBlockProto {
+  message StackTraceElement {
+    string DeclaringClass = 5;
+    string MethodName = 6;
+    string FileName = 7;
+    int32 LineNumber = 8;
+    string ClassLoaderName = 9;
+    string ModuleName = 10;
+    string ModuleVersion = 11;
+  }
+  string OriginalClass = 1;
+  string Message = 2;
+  int64 MessageHash = 3;
+  bool HadMessage = 12;
+  repeated .ThrowableBlockProto.StackTraceElement stacktraceelement = 4;
+}
+message ThrowableProto {
+  enum LANGUAGE {
+    JAVA = 1;
+    CPP = 2;
+    PYTHON = 3;
+    JS = 4;
+    GO = 5;
+    DART = 6;
+    OBJC = 7;
+  }
+  message ThrowableNode {
+    .ThrowableBlockProto ThrowableInfo = 1;
+    int32 Cause = 2;
+    repeated int32 Suppressed = 3;
+  }
+  message ThrowableGraph {
+    repeated .ThrowableProto.ThrowableNode Nodes = 1;
+  }
+  .ThrowableBlockProto Outermost = 1;
+  repeated .ThrowableBlockProto Causes = 2;
+  .ThrowableProto.ThrowableGraph Graph = 4; // oneof=kind
+  .ThrowableProto.LANGUAGE Language = 3; // default='JAVA'
+}
+message CodeModuleProto {
+  int64 BaseAddress = 1;
+  int64 Size = 2;
+  string CodeFile = 3;
+  string CodeIdentifier = 4;
+  string DebugFile = 5;
+  string DebugIdentifier = 6;
+  string Version = 7;
+  int64 shrink_down_delta = 8;
+  bool is_unloaded = 9;
+}
+message IosFrame {
+  string file_name = 1;
+  string function_name = 2;
+  int64 line_number = 3;
+  string binary_name = 4;
+}
+message LogRecordProto {
+  .EventIdMessage EventId = 1;
+  string ThreadName = 2;
+  int32 Level = 3;
+  string SourceClassName = 4;
+  string SourceMethodName = 5;
+  int32 line_number = 13;
+  string file_name = 14;
+  string MessageFormat = 12;
+  string Message = 6;
+  int64 MessageHash = 9;
+  repeated string Parameter = 7;
+  .ThrowableProto Thrown = 8;
+  repeated string IosCallStackSymbols = 10;
+  repeated .CodeModuleProto IosCodeModules = 11;
+  repeated .IosFrame deobfuscated_ios_frames = 15;
+}

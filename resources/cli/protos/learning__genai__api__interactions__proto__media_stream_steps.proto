@@ -1,0 +1,13 @@
+// Extracted from agy 1.5.14, file offset 0x66191a8, 361 bytes. Rendering omits custom options.
+syntax = "editions";
+package genai;
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+message MediaStreamAppend {
+  .genai.AudioStreamAppend audio = 2; // oneof=event_type
+}
+message AudioStreamAppend {
+  bytes data = 1;
+  string stream_id = 2;
+}
+message InputCommitEvent {
+}

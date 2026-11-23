@@ -1,0 +1,22 @@
+// Extracted from agy 1.5.14, file offset 0xf41e98c, 882 bytes. Rendering omits custom options.
+syntax = "editions";
+package perftools.tracing;
+import "net/proto2/bridge/proto/message_set.proto";
+enum TraceSystem {
+  DAPPER = 1;
+  CLOUD_TRACE = 3;
+}
+message ChildSpanLink {
+  fixed64 child_trace_id = 1;
+  fixed64 child_span_id = 2;
+  string name = 3;
+  fixed64 child_trace_id_hi = 4;
+  .perftools.tracing.TraceSystem child_trace_system = 5; // default='DAPPER'
+}
+message ParentSpanLink {
+  fixed64 parent_trace_id = 1;
+  fixed64 parent_span_id = 2;
+  string name = 3;
+  fixed64 parent_trace_id_hi = 4;
+  .perftools.tracing.TraceSystem parent_trace_system = 5; // default='DAPPER'
+}

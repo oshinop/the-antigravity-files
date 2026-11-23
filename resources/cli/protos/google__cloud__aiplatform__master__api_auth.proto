@@ -1,0 +1,15 @@
+// Extracted from agy 1.5.14, file offset 0x664dd3a, 971 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.cloud.aiplatform.master;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/resource.proto";
+import "net/proto2/contrib/validator/annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ApiAuth {
+  message ApiKeyConfig {
+    string api_key_secret_version = 1;
+    string api_key_string = 2;
+  }
+  .google.cloud.aiplatform.master.ApiAuth.ApiKeyConfig api_key_config = 1; // oneof=auth_config
+}

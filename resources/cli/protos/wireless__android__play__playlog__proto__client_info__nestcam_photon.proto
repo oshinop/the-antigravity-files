@@ -1,0 +1,56 @@
+// Extracted from agy 1.5.14, file offset 0x66aabb4, 2165 bytes. Rendering omits custom options.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb_generate_object_format.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message NestcamPhotonClientInfo {
+  enum DeviceType {
+    DEVICE_TYPE_UNKNOWN = 0;
+    DEVICE_TYPE_QV1 = 1;
+    DEVICE_TYPE_SQ = 2;
+    DEVICE_TYPE_RQ = 3;
+    DEVICE_TYPE_EMULATOR = 4;
+    DEVICE_TYPE_C302 = 5;
+    DEVICE_TYPE_VEN = 6;
+    DEVICE_TYPE_NEW = 9;
+    DEVICE_TYPE_QV2 = 10;
+    DEVICE_TYPE_BQ = 11;
+    DEVICE_TYPE_LIN = 12;
+    DEVICE_TYPE_RHO = 13;
+    DEVICE_TYPE_UST = 14;
+    DEVICE_TYPE_PIC = 15;
+    DEVICE_TYPE_COR = 16;
+    DEVICE_TYPE_NQ = 17;
+    DEVICE_TYPE_KRAMER = 18;
+    DEVICE_TYPE_ORTIGIA = 19;
+    DEVICE_TYPE_C302_WIRED2K_CAMERA = 20;
+    DEVICE_TYPE_C302_BATTERY = 21;
+    DEVICE_TYPE_VIV = 22;
+    DEVICE_TYPE_ISC = 23;
+  }
+  enum BuildChannel {
+    BUILD_CHANNEL_UNKNOWN = 0;
+    BUILD_CHANNEL_ENG = 1;
+    BUILD_CHANNEL_BETA = 2;
+    BUILD_CHANNEL_PROD = 3;
+  }
+  enum CloudEnvironment {
+    CLOUD_ENVIRONMENT_UNKNOWN = 0;
+    CLOUD_ENVIRONMENT_NONPROD = 1;
+    CLOUD_ENVIRONMENT_PREPROD = 2;
+    CLOUD_ENVIRONMENT_PROD = 3;
+  }
+  string device_id = 1;
+  .wireless_android_play_playlog.NestcamPhotonClientInfo.DeviceType device_type = 2;
+  string sku = 4;
+  string software_version = 3;
+  string software_version_number_string = 8;
+  .wireless_android_play_playlog.NestcamPhotonClientInfo.BuildChannel system_release_channel = 6;
+  string virtual_release_channel = 7;
+  int64 software_version_number = 5;
+  .wireless_android_play_playlog.NestcamPhotonClientInfo.CloudEnvironment cloud_environment = 9;
+  int32 vendor_id = 10;
+  int32 product_id = 11;
+}

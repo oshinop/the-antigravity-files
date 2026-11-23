@@ -1,0 +1,15 @@
+// Extracted from agy 1.5.14, file offset 0x6628982, 503 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.rpc.context;
+import "google/api/visibility.proto";
+message Match {
+  repeated string entity_tags = 1;
+  bool exists = 2;
+}
+message ConditionRequestContext {
+  .google.rpc.context.Match if_match = 1;
+  .google.rpc.context.Match if_none_match = 2;
+}
+message ConditionResponseContext {
+  string entity_tag = 1;
+}

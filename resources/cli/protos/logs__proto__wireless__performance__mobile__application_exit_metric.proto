@@ -1,0 +1,100 @@
+// Extracted from agy 1.5.14, file offset 0x6743912, 4064 bytes. Rendering omits custom options.
+syntax = "proto2";
+package logs.proto.wireless.performance.mobile;
+import "google/api/inclusion.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "logs/proto/wireless/performance/mobile/annotations.proto";
+import "logs/proto/wireless/performance/mobile/cui_metric.proto";
+import "logs/proto/wireless/performance/mobile/extension_metric.proto";
+import "logs/proto/wireless/performance/mobile/native_crash_info.proto";
+import "logs/proto/wireless/performance/mobile/trace_context.proto";
+import "privacy/pattributes/annotations/proto_field.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ApplicationExitMetric {
+  repeated .logs.proto.wireless.performance.mobile.ApplicationExitInfo application_exit_info = 1;
+  .logs.proto.wireless.performance.mobile.ApplicationExitReasons reportable_reasons = 2;
+  int32 total_exits = 3;
+}
+message ApplicationExitInfo {
+  enum Reason {
+    REASON_UNSET = 0;
+    ANR = 6;
+    CRASH = 4;
+    CRASH_NATIVE = 5;
+    DEPENDENCY_DIED = 12;
+    EXCESSIVE_RESOURCE_USAGE = 9;
+    EXIT_SELF = 1;
+    FREEZER = 99;
+    INITIALIZATION_FAILURE = 7;
+    LOW_MEMORY = 3;
+    PERMISSION_CHANGE = 8;
+    SIGNALED = 2;
+    USER_REQUESTED = 10;
+    USER_STOPPED = 11;
+    OTHER = 13;
+    UNKNOWN = 14;
+    PACKAGE_STATE_CHANGE = 15;
+    PACKAGE_UPDATED = 16;
+    MEMORY_LIMITER = 17;
+  }
+  enum Importance {
+    IMPORTANCE_UNSET = 0;
+    FOREGROUND = 1;
+    FOREGROUND_SERVICE = 2;
+    TOP_SLEEPING = 3;
+    VISIBLE = 4;
+    PERCEPTIBLE = 5;
+    CANT_SAVE_STATE = 6;
+    SERVICE = 7;
+    CACHED = 8;
+    GONE = 9;
+  }
+  message CuiDiagnostic {
+    int32 cui_id = 1;
+    .google.protobuf.Duration duration = 2;
+    .logs.proto.wireless.performance.mobile.CuiMetric.Status status = 3;
+  }
+  string process_name = 1;
+  .logs.proto.wireless.performance.mobile.ApplicationExitInfo.Reason reason = 2;
+  int32 status = 3;
+  .logs.proto.wireless.performance.mobile.ApplicationExitInfo.Importance importance = 4;
+  int64 timestamp_millis = 5;
+  int64 process_start_timestamp_millis = 10;
+  int64 pss_kb = 6;
+  int64 rss_kb = 7;
+  bool low_memory_kill_supported = 8;
+  .logs.proto.wireless.performance.mobile.AnrDiagnostic anr_exit_diagnostic = 9;
+  .logs.proto.wireless.performance.mobile.MetricExtension metric_extension = 11;
+  .logs.proto.wireless.performance.mobile.TraceDiagnostic trace_diagnostic = 12;
+  .logs.proto.wireless.performance.mobile.VersionOverrides version_overrides = 13;
+  .logs.proto.wireless.performance.mobile.NativeCrashInfo native_crash_info = 14;
+  repeated .logs.proto.wireless.performance.mobile.ApplicationExitInfo.CuiDiagnostic cui_diagnostic = 15;
+}
+message AnrDiagnostic {
+  string description = 1;
+  bytes stack_trace = 2; // oneof=maybe_compressed_stack_trace
+  bytes gzip_stack_trace = 5; // oneof=maybe_compressed_stack_trace
+  string sanitized_description = 3;
+  string sanitized_stack_trace = 4;
+  bool is_user_perceptible = 6;
+}
+message TraceDiagnostic {
+  enum CollectionTrigger {
+    COLLECTION_TRIGGER_UNSET = 0;
+    PERIODIC = 1;
+    STALL = 2;
+  }
+  repeated .logs.proto.wireless.performance.mobile.TraceContext associated_trace = 1;
+  .google.protobuf.Timestamp capture_timestamp = 2;
+  .logs.proto.wireless.performance.mobile.TraceDiagnostic.CollectionTrigger collection_trigger = 3;
+}
+message VersionOverrides {
+  string version_name = 1;
+  int32 version_code = 2;
+  int32 gms_core_version_code = 3;
+  int32 sdk_version = 4;
+}
+message ApplicationExitReasons {
+  repeated .logs.proto.wireless.performance.mobile.ApplicationExitInfo.Reason exit_reason = 1;
+}

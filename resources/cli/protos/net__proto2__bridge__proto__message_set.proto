@@ -1,0 +1,5 @@
+// Extracted from agy 1.5.14, file offset 0x65f11ef, 147 bytes. Rendering omits custom options.
+syntax = "proto2";
+package proto2.bridge;
+message MessageSet {
+}

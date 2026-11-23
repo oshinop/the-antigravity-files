@@ -1,0 +1,15 @@
+// Extracted from agy 1.5.14, file offset 0x662cfd3, 558 bytes. Rendering omits custom options.
+syntax = "proto2";
+package ;
+import "java/com/google/apps/jspb/jspb.proto";
+import "net/proto2/bridge/proto/message_set.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message EventIdMessage {
+  int64 time_usec = 1;
+  fixed32 server_ip = 2;
+  fixed32 process_id = 3;
+}
+message ClientEventIdMessage {
+  .EventIdMessage base = 1;
+  int64 client_counter = 2;
+}

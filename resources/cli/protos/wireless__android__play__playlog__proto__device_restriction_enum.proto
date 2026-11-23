@@ -1,0 +1,12 @@
+// Extracted from agy 1.5.14, file offset 0x66283a9, 498 bytes. Rendering omits custom options.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/api/inclusion.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+message DeviceRestriction {
+  enum Id {
+    NO_RESTRICTION = 0;
+    SIDEWINDER_DEVICE = 1;
+    LATCHSKY_DEVICE = 2;
+  }
+}

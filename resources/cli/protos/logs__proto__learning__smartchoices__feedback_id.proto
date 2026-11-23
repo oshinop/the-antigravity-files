@@ -1,0 +1,8 @@
+// Extracted from agy 1.5.14, file offset 0x660d0ab, 268 bytes. Rendering omits custom options.
+syntax = "proto2";
+package smartchoices;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message FeedbackId {
+  uint64 id_low_bits = 1;
+  uint64 id_high_bits = 2;
+}

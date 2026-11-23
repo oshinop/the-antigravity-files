@@ -1,0 +1,24 @@
+// Extracted from agy 1.5.14, file offset 0x663a617, 735 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.api.expr.v1alpha1;
+import "google/api/expr/v1alpha1/value.proto";
+import "google/rpc/status.proto";
+message EvalState {
+  message Result {
+    int64 expr = 1;
+    int64 value = 2;
+  }
+  repeated .google.api.expr.v1alpha1.ExprValue values = 1;
+  repeated .google.api.expr.v1alpha1.EvalState.Result results = 3;
+}
+message ExprValue {
+  .google.api.expr.v1alpha1.Value value = 1; // oneof=kind
+  .google.api.expr.v1alpha1.ErrorSet error = 2; // oneof=kind
+  .google.api.expr.v1alpha1.UnknownSet unknown = 3; // oneof=kind
+}
+message ErrorSet {
+  repeated .google.rpc.Status errors = 1;
+}
+message UnknownSet {
+  repeated int64 exprs = 1;
+}

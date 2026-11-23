@@ -1,0 +1,283 @@
+// Extracted from agy 1.5.14, file offset 0x68c0bf5, 12066 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.cloud.aiplatform.v1beta1;
+import "google/api/field_behavior.proto";
+import "google/api/policy.proto";
+import "google/api/resource.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "google/cloud/aiplatform/v1beta1/accelerator_type.proto";
+import "google/cloud/automl/common/proto_field_options.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/rpc/status.proto";
+import "learning/genai/api/interactions/proto/environment.proto";
+import "net/proto2/contrib/validator/annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Environment {
+  enum EnvironmentState {
+    ENVIRONMENT_STATE_UNSPECIFIED = 0;
+    ACTIVE = 1;
+    SNAPSHOTTED = 2;
+    PROVISIONING = 3;
+    DEPROVISIONING = 4;
+    TERMINATED = 5;
+    DELETED = 6;
+  }
+  enum EnvironmentMode {
+    ENVIRONMENT_MODE_UNSPECIFIED = 0;
+    ON_DEMAND = 1;
+    ALWAYS_ON = 2;
+    SELF_HOSTED = 3;
+  }
+  enum TrustTier {
+    TRUST_TIER_UNSPECIFIED = 0;
+    COMPANION = 1;
+    PLATFORM_ONLY = 2;
+  }
+  .google.cloud.aiplatform.v1beta1.RemoteEnvironment remote = 17; // oneof=environment_type
+  .google.cloud.aiplatform.v1beta1.LocalEnvironment local = 18; // oneof=environment_type
+  string name = 1;
+  string id = 2;
+  .google.cloud.aiplatform.v1beta1.EnvironmentConfig.EnvironmentType type = 3;
+  .google.cloud.aiplatform.v1beta1.Environment.EnvironmentState state = 4;
+  repeated .google.cloud.aiplatform.v1beta1.EnvironmentConfig.DataSource sources = 5;
+  .google.cloud.aiplatform.v1beta1.EnvironmentConfig.NetworkConfig network = 6;
+  .google.protobuf.Timestamp created = 7;
+  .google.protobuf.Timestamp updated = 8;
+  .google.protobuf.Timestamp last_active = 9;
+  string display_name = 10;
+  string environment_template = 11;
+  .google.rpc.Status error = 12;
+  .google.protobuf.Timestamp expire_time = 13;
+  .google.cloud.aiplatform.v1beta1.Environment.EnvironmentMode mode = 14;
+  string placement_location = 15;
+  .google.cloud.aiplatform.v1beta1.Environment.TrustTier trust_tier = 16;
+  string owner = 21;
+  string agent = 25;
+}
+message EnvironmentConfig {
+  enum EnvironmentType {
+    ENVIRONMENT_TYPE_UNSPECIFIED = 0;
+    REMOTE = 1;
+    LOCAL = 2;
+  }
+  enum DataSourceType {
+    DATA_SOURCE_TYPE_UNSPECIFIED = 0;
+    GCS = 1;
+    SKILL_REGISTRY = 2;
+  }
+  message DataSource {
+    .google.cloud.aiplatform.v1beta1.EnvironmentConfig.DataSourceType type = 1;
+    string source = 2;
+    string target = 3;
+  }
+  message NetworkConfig {
+    message AllowlistEntry {
+      string domain = 1;
+    }
+    repeated .google.cloud.aiplatform.v1beta1.EnvironmentConfig.NetworkConfig.AllowlistEntry allowlist = 1;
+  }
+  .google.cloud.aiplatform.v1beta1.EnvironmentConfig.EnvironmentType type = 2;
+  repeated .google.cloud.aiplatform.v1beta1.EnvironmentConfig.DataSource sources = 1;
+  .google.cloud.aiplatform.v1beta1.EnvironmentConfig.NetworkConfig network = 3;
+}
+message RemoteEnvironment {
+  string template_revision = 1; // oneof=source
+  .google.cloud.aiplatform.v1beta1.EnvironmentSpec inline_spec = 2; // oneof=source
+  .google.cloud.aiplatform.v1beta1.EnvironmentSpec overrides = 3;
+  string resolved_template_revision = 4;
+  string provider = 5;
+  repeated .google.cloud.aiplatform.v1beta1.EnvironmentPort ports = 6;
+}
+message LocalEnvironment {
+  message ClientInfo {
+    string app_version = 1;
+    string os = 2;
+    string os_version = 3;
+    string arch = 4;
+  }
+  message ClientLimits {
+    int32 max_browser_leases = 1;
+  }
+  string device_id = 1;
+  repeated .google.cloud.aiplatform.v1beta1.EnvironmentCapability declared_capabilities = 2;
+  .google.cloud.aiplatform.v1beta1.LocalEnvironment.ClientInfo client_info = 3;
+  string workspace_root = 4;
+  repeated string skill_dirs = 5;
+  .google.cloud.aiplatform.v1beta1.LocalEnvironment.ClientLimits limits = 6;
+  .google.protobuf.Timestamp lease_expire_time = 7;
+}
+message EnvironmentCapability {
+  enum Kind {
+    KIND_UNSPECIFIED = 0;
+    FILESYSTEM = 1;
+    EXEC = 2;
+    HTTP = 3;
+    BROWSER = 4;
+    DISPLAY = 5;
+    PORT_ACCESS = 6;
+    CLIENT_RELAY_MOUNT = 7;
+    SUSPEND_RUNTIME_STATE = 8;
+    FORK = 9;
+  }
+  .google.cloud.aiplatform.v1beta1.EnvironmentCapability.Kind kind = 1;
+  string path_prefix = 2;
+}
+message EnvironmentPort {
+  enum Protocol {
+    PROTOCOL_UNSPECIFIED = 0;
+    HTTP = 1;
+    WEBSOCKET = 2;
+    TCP = 3;
+  }
+  enum Access {
+    ACCESS_UNSPECIFIED = 0;
+    NONE = 1;
+    TOKEN = 2;
+  }
+  string name = 1;
+  int32 number = 2;
+  .google.cloud.aiplatform.v1beta1.EnvironmentPort.Protocol protocol = 3;
+  .google.cloud.aiplatform.v1beta1.EnvironmentPort.Access access = 4;
+}
+message EnvironmentSpec {
+  enum StartupClass {
+    STARTUP_CLASS_UNSPECIFIED = 0;
+    INSTANT = 1;
+    FAST = 2;
+    SLOW = 3;
+  }
+  message Runtime {
+    message EnvEntry {
+      string key = 1;
+      .google.cloud.aiplatform.v1beta1.EnvironmentSpec.EnvVar value = 2;
+    }
+    string image_uri = 1; // oneof=base
+    string catalog_base = 2; // oneof=base
+    repeated string entrypoint = 3;
+    repeated .google.cloud.aiplatform.v1beta1.EnvironmentSpec.Runtime.EnvEntry env = 4;
+    string working_dir = 5;
+  }
+  message EnvVar {
+    string plain = 1; // oneof=value
+    string secret_version = 2; // oneof=value
+  }
+  message Resources {
+    string size = 1;
+    string cpu = 2;
+    string memory = 3;
+    int64 disk_size_gb = 4;
+    .google.cloud.aiplatform.v1beta1.AcceleratorType accelerator_type = 5;
+    int32 accelerator_count = 6;
+  }
+  message NetworkPolicy {
+    enum ManagedEgress {
+      MANAGED_EGRESS_UNSPECIFIED = 0;
+      SKYLIFT_TURN = 1;
+    }
+    enum Enforcement {
+      ENFORCEMENT_UNSPECIFIED = 0;
+      LOCAL = 1;
+      AGENT_GATEWAY = 2;
+    }
+    repeated .genai.EnvironmentConfig.EgressRule egress = 1;
+    repeated string egress_cidrs = 2;
+    bool deny_all_egress = 3;
+    string network_attachment = 4;
+    repeated .google.cloud.aiplatform.v1beta1.EnvironmentSpec.NetworkPolicy.ManagedEgress managed_egress = 5;
+    repeated .google.cloud.aiplatform.v1beta1.EnvironmentPort ingress_ports = 6;
+    .google.cloud.aiplatform.v1beta1.EnvironmentSpec.NetworkPolicy.Enforcement enforcement = 7;
+  }
+  message LifecyclePolicy {
+    enum IdleAction {
+      IDLE_ACTION_UNSPECIFIED = 0;
+      NONE = 1;
+      SUSPEND = 2;
+      DELETE = 3;
+    }
+    enum SuspendMode {
+      SUSPEND_MODE_UNSPECIFIED = 0;
+      RUNTIME_STATE = 1;
+      DISK_ONLY = 2;
+      PROVIDER_DEFAULT = 3;
+    }
+    .google.protobuf.Duration max_lifetime = 1;
+    .google.cloud.aiplatform.v1beta1.EnvironmentSpec.LifecyclePolicy.IdleAction idle_action = 2;
+    .google.protobuf.Duration idle_timeout = 3;
+    .google.cloud.aiplatform.v1beta1.EnvironmentSpec.LifecyclePolicy.SuspendMode suspend_mode = 4;
+    bool auto_resume = 5;
+    bool cascade_delete = 6;
+  }
+  message ReadinessProbe {
+    message Check {
+      .google.cloud.aiplatform.v1beta1.EnvironmentSpec.ReadinessProbe.HttpGet http_get = 1; // oneof=check
+      int32 tcp_port = 2; // oneof=check
+      string exec_command = 3; // oneof=check
+    }
+    message HttpGet {
+      int32 port = 1;
+      string path = 2;
+    }
+    repeated .google.cloud.aiplatform.v1beta1.EnvironmentSpec.ReadinessProbe.Check checks = 1;
+    .google.protobuf.Duration timeout = 2;
+  }
+  message Mount {
+    enum Type {
+      TYPE_UNSPECIFIED = 0;
+      GCS = 1;
+      REPOSITORY = 2;
+      INLINE = 3;
+      SKILL_REGISTRY = 4;
+      CLIENT_RELAY = 5;
+    }
+    enum LoadPolicy {
+      LOAD_POLICY_UNSPECIFIED = 0;
+      EAGER = 1;
+      LAZY = 2;
+    }
+    .google.cloud.aiplatform.v1beta1.EnvironmentSpec.Mount.Type type = 1;
+    string source = 2;
+    string target = 3;
+    string content = 4;
+    bool read_only = 5;
+    .google.cloud.aiplatform.v1beta1.EnvironmentSpec.Mount.LoadPolicy load_policy = 6;
+    string local_environment = 7;
+  }
+  message Placement {
+    enum CostTier {
+      COST_TIER_UNSPECIFIED = 0;
+      STANDARD = 1;
+      SPOT = 2;
+    }
+    string provider = 1;
+    .google.cloud.aiplatform.v1beta1.EnvironmentSpec.Placement.CostTier cost_tier = 2;
+  }
+  message IdentityPolicy {
+    enum Mode {
+      MODE_UNSPECIFIED = 0;
+      NONE = 1;
+      AGENT = 2;
+    }
+    enum Delivery {
+      DELIVERY_UNSPECIFIED = 0;
+      EGRESS_PROXY = 1;
+      METADATA_SERVER = 2;
+    }
+    .google.cloud.aiplatform.v1beta1.EnvironmentSpec.IdentityPolicy.Mode mode = 1;
+    .google.cloud.aiplatform.v1beta1.EnvironmentSpec.IdentityPolicy.Delivery delivery = 2;
+    .google.protobuf.Duration token_lifetime = 3;
+    repeated string audiences = 4;
+    bool service_agent_token = 5;
+  }
+  .google.cloud.aiplatform.v1beta1.EnvironmentSpec.Runtime runtime = 1;
+  .google.cloud.aiplatform.v1beta1.EnvironmentSpec.Resources resources = 2;
+  repeated .google.cloud.aiplatform.v1beta1.EnvironmentCapability capabilities = 3;
+  .google.cloud.aiplatform.v1beta1.EnvironmentSpec.NetworkPolicy network = 4;
+  .google.cloud.aiplatform.v1beta1.EnvironmentSpec.LifecyclePolicy lifecycle = 5;
+  .google.cloud.aiplatform.v1beta1.EnvironmentSpec.ReadinessProbe readiness = 6;
+  .google.cloud.aiplatform.v1beta1.EnvironmentSpec.StartupClass startup_class = 7;
+  repeated .google.cloud.aiplatform.v1beta1.EnvironmentSpec.Mount mounts = 8;
+  .google.cloud.aiplatform.v1beta1.EnvironmentSpec.Placement placement = 9;
+  .google.cloud.aiplatform.v1beta1.EnvironmentSpec.IdentityPolicy identity = 11;
+}

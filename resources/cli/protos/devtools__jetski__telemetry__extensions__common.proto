@@ -1,0 +1,14 @@
+// Extracted from agy 1.5.14, file offset 0x6621a1e, 438 bytes. Rendering omits custom options.
+syntax = "editions";
+package devtools.jetski.telemetry.extensions;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ExtraMetadata {
+  string key = 1;
+  string value = 2;
+  int64 int_value = 3;
+}
+message SensitiveExtraMetadata {
+  string key = 1;
+  string value = 2;
+  int64 int_value = 3;
+}

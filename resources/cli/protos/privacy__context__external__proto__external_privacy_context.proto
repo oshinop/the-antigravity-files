@@ -1,0 +1,9 @@
+// Extracted from agy 1.5.14, file offset 0x661da9d, 395 bytes. Rendering omits custom options.
+syntax = "proto2";
+package privacy.context.external;
+import "privacy/context/external/proto/external_prequest_context.proto";
+import "privacy/context/external/proto/external_sot_mappings.proto";
+message ExternalPrivacyContext {
+  .privacy.context.external.ExternalPRequestContext prequest = 2;
+  .privacy.context.external.ExternalSotMappings sot = 3;
+}

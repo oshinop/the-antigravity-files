@@ -1,0 +1,28 @@
+// Extracted from agy 1.5.14, file offset 0x6638f71, 714 bytes. Rendering omits custom options.
+syntax = "editions";
+package genai;
+enum HarmCategory {
+  HARM_CATEGORY_UNSPECIFIED = 0;
+  HARM_CATEGORY_HATE_SPEECH = 1;
+  HARM_CATEGORY_DANGEROUS_CONTENT = 2;
+  HARM_CATEGORY_HARASSMENT = 3;
+  HARM_CATEGORY_SEXUALLY_EXPLICIT = 4;
+  HARM_CATEGORY_JAILBREAK = 10;
+}
+message SafetySetting {
+  enum HarmBlockThreshold {
+    HARM_BLOCK_THRESHOLD_UNSPECIFIED = 0;
+    BLOCK_LOW_AND_ABOVE = 1;
+    BLOCK_MEDIUM_AND_ABOVE = 2;
+    BLOCK_ONLY_HIGH = 3;
+    OFF = 5;
+  }
+  enum HarmBlockMethod {
+    HARM_BLOCK_METHOD_UNSPECIFIED = 0;
+    SEVERITY = 1;
+    PROBABILITY = 2;
+  }
+  .genai.HarmCategory type = 1;
+  .genai.SafetySetting.HarmBlockThreshold threshold = 2;
+  .genai.SafetySetting.HarmBlockMethod method = 4;
+}

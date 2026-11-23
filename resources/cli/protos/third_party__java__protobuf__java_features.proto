@@ -1,0 +1,25 @@
+// Extracted from agy 1.5.14, file offset 0x666549a, 1290 bytes. Rendering omits custom options.
+syntax = "proto2";
+package pb;
+import "net/proto2/proto/descriptor.proto";
+message JavaFeatures {
+  enum Utf8Validation {
+    UTF8_VALIDATION_UNKNOWN = 0;
+    DEFAULT = 1;
+    VERIFY = 2;
+  }
+  message NestInFileClassFeature {
+    enum NestInFileClass {
+      NEST_IN_FILE_CLASS_UNKNOWN = 0;
+      NO = 1;
+      YES = 2;
+      LEGACY = 3;
+    }
+  }
+  bool legacy_closed_enum = 1;
+  .pb.JavaFeatures.Utf8Validation utf8_validation = 2;
+  bool large_enum = 3;
+  bool use_old_outer_classname_default = 4;
+  .pb.JavaFeatures.NestInFileClassFeature.NestInFileClass nest_in_file_class = 5;
+}
+extend .proto2.FeatureSet { .pb.JavaFeatures java = 1001; }

@@ -1,0 +1,30 @@
+// Extracted from agy 1.5.14, file offset 0x663ed33, 790 bytes. Rendering omits custom options.
+syntax = "editions";
+package s2a.proto;
+import "third_party/golang/protobuf/v2/src/google/protobuf/go_features.proto";
+enum Ciphersuite {
+  AES_128_GCM_SHA256 = 0;
+  AES_256_GCM_SHA384 = 1;
+  CHACHA20_POLY1305_SHA256 = 2;
+}
+enum TLSVersion {
+  TLS1_2 = 0;
+  TLS1_3 = 1;
+}
+message L7lbId {
+  uint64 project_number = 1;
+  fixed64 backend_service_incarnation_id = 2;
+}
+message Identity {
+  message AttributesEntry {
+    string key = 1;
+    string value = 2;
+  }
+  string spiffe_id = 1; // oneof=identity_oneof
+  string hostname = 2; // oneof=identity_oneof
+  string uid = 4; // oneof=identity_oneof
+  string username = 5; // oneof=identity_oneof
+  string gcp_id = 6; // oneof=identity_oneof
+  .s2a.proto.L7lbId l7lb_id = 7; // oneof=identity_oneof
+  repeated .s2a.proto.Identity.AttributesEntry attributes = 3;
+}

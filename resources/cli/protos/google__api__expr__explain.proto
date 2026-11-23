@@ -1,0 +1,12 @@
+// Extracted from agy 1.5.14, file offset 0x6619a2d, 368 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.api.expr;
+import "google/api/expr/value.proto";
+message Explain {
+  message ExprStep {
+    int64 id = 1;
+    int32 value_index = 2;
+  }
+  repeated .google.api.expr.Value values = 1;
+  repeated .google.api.expr.Explain.ExprStep expr_steps = 2;
+}

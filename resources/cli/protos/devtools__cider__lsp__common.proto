@@ -1,0 +1,354 @@
+// Extracted from agy 1.5.14, file offset 0x6895181, 10392 bytes. Rendering omits custom options.
+syntax = "editions";
+package editorservices;
+import "devtools/cider/proto/annotations.proto";
+import "google/protobuf/any.proto";
+import "java/com/google/apps/jspb/jspb.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum LocationTag {
+  UNKNOWN_TAG = 0;
+  DECLARATION = 1;
+  DEFINITION = 2;
+  CALL = 3;
+  READ = 4;
+  WRITE = 5;
+  OVERRIDE = 6;
+  SUPER = 7;
+  SUBTYPE = 8;
+  OVERLOAD = 9;
+}
+enum InlayHintKind {
+  UNKNOWN_HINT = 0;
+  HINT_TYPE = 1;
+  HINT_PARAMETER = 2;
+}
+enum TriggerKind {
+  TRIGGER_KIND_UNKNOWN = 0;
+  TRIGGER_KIND_INVOKED = 1;
+  TRIGGER_KIND_CHARACTER = 2;
+  TRIGGER_KIND_FOR_INCOMPLETE_COMPLETIONS = 3;
+  TRIGGER_KIND_CURSOR_MOVE = 4;
+}
+message Position {
+  int32 line = 1;
+  int32 character = 2;
+}
+message Range {
+  .editorservices.Position start = 1;
+  .editorservices.Position end = 2;
+}
+message Location {
+  string uri = 1;
+  .editorservices.Range range = 2;
+  repeated .editorservices.LocationTag tags = 3;
+  string provider = 4;
+  string depot_path = 5;
+}
+message LocationLink {
+  .editorservices.Range origin_selection_range = 1;
+  string target_uri = 2;
+  .editorservices.Range target_range = 3;
+  .editorservices.Range target_selection_range = 4;
+  repeated .editorservices.LocationTag tags = 5;
+  string provider = 6;
+}
+message DiagnosticRelatedInformation {
+  .editorservices.Location location = 1;
+  string message = 2;
+}
+message Diagnostic {
+  enum DiagnosticSeverity {
+    UNKNOWN_SEVERITY = 0;
+    ERROR = 1;
+    WARNING = 2;
+    INFORMATION = 3;
+    HINT = 4;
+  }
+  enum DiagnosticTag {
+    UNKNOWN_TAG = 0;
+    UNNECESSARY = 1;
+    DEPRECATED = 2;
+    TYPO = 1001;
+  }
+  message CodeDescription {
+    string href = 1;
+  }
+  .editorservices.Range range = 1;
+  .editorservices.Diagnostic.DiagnosticSeverity severity = 2;
+  string code = 3;
+  .editorservices.Diagnostic.CodeDescription code_description = 9;
+  string source = 4;
+  string message = 5;
+  repeated .editorservices.Diagnostic.DiagnosticTag tags = 8;
+  repeated .editorservices.DiagnosticRelatedInformation related_information = 7;
+  repeated .editorservices.Fixit fixits = 6;
+}
+message Command {
+  string title = 1;
+  string command = 2;
+  repeated .google.protobuf.Any arguments = 3;
+  repeated bytes json_args = 4;
+}
+message TextEdit {
+  .editorservices.Range range = 1;
+  string new_text = 2;
+  string annotation_id = 3;
+}
+message TextEditList {
+  repeated .editorservices.TextEdit edits = 1;
+}
+message TextDocumentEdit {
+  .editorservices.TextDocumentIdentifier text_document = 1;
+  repeated .editorservices.TextEdit edits = 2;
+}
+message CreateFile {
+  message CreateFileOptions {
+    bool overwrite = 1;
+    bool ignore_if_exists = 2;
+  }
+  string uri = 1;
+  .editorservices.CreateFile.CreateFileOptions options = 2;
+  string annotation_id = 3;
+}
+message RenameFile {
+  message RenameFileOptions {
+    bool overwrite = 1;
+    bool ignore_if_exists = 2;
+  }
+  string old_uri = 1;
+  string new_uri = 2;
+  .editorservices.RenameFile.RenameFileOptions options = 3;
+  string annotation_id = 4;
+}
+message DeleteFile {
+  message DeleteFileOptions {
+    bool recursive = 1;
+    bool ignore_if_not_exists = 2;
+  }
+  string uri = 1;
+  .editorservices.DeleteFile.DeleteFileOptions options = 2;
+  string annotation_id = 3;
+}
+message WorkspaceEdit {
+  message ChangesEntry {
+    string key = 1;
+    .editorservices.TextEditList value = 2;
+  }
+  message DocumentChange {
+    .editorservices.TextDocumentEdit text_document_edit = 1; // oneof=change
+    .editorservices.CreateFile create_file = 2; // oneof=change
+    .editorservices.RenameFile rename_file = 3; // oneof=change
+    .editorservices.DeleteFile delete_file = 4; // oneof=change
+  }
+  message ChangeAnnotationsEntry {
+    string key = 1;
+    .editorservices.ChangeAnnotation value = 2;
+  }
+  repeated .editorservices.WorkspaceEdit.ChangesEntry changes = 1;
+  repeated .editorservices.WorkspaceEdit.DocumentChange document_changes = 3;
+  repeated .editorservices.WorkspaceEdit.ChangeAnnotationsEntry change_annotations = 2;
+  string id = 4;
+  string provider = 5;
+  bool show_preview = 6;
+}
+message ChangeAnnotation {
+  string label = 1;
+  bool needs_confirmation = 2;
+  string description = 3;
+}
+message TextDocumentIdentifier {
+  string uri = 1;
+}
+message TextDocumentPositionParams {
+  .editorservices.TextDocumentIdentifier text_document = 1;
+  .editorservices.Position position = 2;
+}
+message SelectionRange {
+  .editorservices.Range range = 1;
+  .editorservices.SelectionRange parent = 2;
+}
+message HighlightedRange {
+  enum HighlightingKind {
+    UNKNOWN_KIND = 0;
+    KEYWORD = 1;
+    COMMENT = 2;
+    STRING_LITERAL = 3;
+    NUMBER = 4;
+    MATCH = 5;
+  }
+  .editorservices.HighlightedRange.HighlightingKind kind = 1;
+  .editorservices.Range range = 2;
+}
+message DocumentHighlight {
+  enum Kind {
+    UNKNOWN_KIND = 0;
+    TEXT = 1;
+    READ = 2;
+    WRITE = 3;
+  }
+  .editorservices.Range range = 1;
+  .editorservices.DocumentHighlight.Kind kind = 2;
+}
+message InlayHintLabelPart {
+  string value = 1;
+  .editorservices.MarkupContent tooltip = 2;
+  .editorservices.Location location = 3;
+  .editorservices.Command command = 4;
+}
+message InlayHintLabelPartList {
+  repeated .editorservices.InlayHintLabelPart parts = 1;
+}
+message InlayHint {
+  .editorservices.Position position = 1;
+  string text_label = 2; // oneof=label
+  .editorservices.InlayHintLabelPartList label_parts = 3; // oneof=label
+  .editorservices.InlayHintKind kind = 4;
+  .editorservices.TextEditList accept_edits = 5;
+  .editorservices.MarkupContent tooltip = 6;
+  bool padding_left = 7;
+  bool padding_right = 8;
+}
+message TextDocumentSnippet {
+  .editorservices.Position position = 1;
+  string text = 2;
+  repeated .editorservices.HighlightedRange highlighted_ranges = 3;
+  int32 line_count = 4;
+}
+message TextDocumentPreview {
+  .editorservices.TextDocumentIdentifier text_document = 1;
+  repeated .editorservices.TextDocumentSnippet snippets = 2;
+}
+message CompletionOptions {
+  bool resolve_provider = 1;
+  repeated string trigger_characters = 2;
+}
+message SignatureHelpOptions {
+  repeated string trigger_characters = 1;
+}
+message CodeLensOptions {
+  bool resolve_provider = 1;
+}
+message DocumentOnTypeFormattingOptions {
+  string first_trigger_character = 1;
+  repeated string more_trigger_character = 2;
+}
+message ReferenceContext {
+  bool include_declaration = 1;
+  bool include_generated_code = 3;
+}
+message CodeAction {
+  string title = 1;
+  string kind = 2;
+  repeated .editorservices.Diagnostic diagnostics = 3;
+  bool is_preferred = 6;
+  .editorservices.WorkspaceEdit edit = 4;
+  .editorservices.Command command = 5;
+  .editorservices.CodeActionDisabled disabled = 7;
+  bytes data = 8;
+}
+message CodeActionDisabled {
+  string reason = 1;
+}
+message CodeActionContext {
+  enum TriggerKind {
+    UNSPECIFIED = 0;
+    INVOKED = 1;
+    AUTOMATIC = 2;
+  }
+  repeated .editorservices.Diagnostic diagnostics = 1;
+  repeated string only = 2;
+  .editorservices.CodeActionContext.TriggerKind trigger_kind = 3;
+}
+message CodeLens {
+  .editorservices.Range range = 1;
+  .editorservices.Command command = 2;
+  bytes data = 3;
+}
+message FormattingOptions {
+  int32 tab_size = 1;
+  bool insert_spaces = 2;
+  bool trim_trailing_whitespace = 3;
+  bool insert_final_newline = 4;
+  bool trim_final_newlines = 5;
+}
+message Fixit {
+  string title = 1;
+  string kind = 2;
+  .editorservices.TextEditList changes = 3; // oneof=edit
+  .editorservices.WorkspaceEdit workspace_edit = 5; // oneof=edit
+  .editorservices.Command command = 4;
+}
+message MarkupContent {
+  enum MarkupKind {
+    UNKNOWN_KIND = 0;
+    PLAIN_TEXT = 1;
+    MARK_DOWN = 2;
+  }
+  .editorservices.MarkupContent.MarkupKind kind = 1;
+  string value = 2;
+}
+message ServerCapabilities {
+  bool hover_provider = 1;
+  .editorservices.CompletionOptions completion_provider = 2;
+  bool completion_load_test = 16;
+  .editorservices.SignatureHelpOptions signature_help_provider = 3;
+  bool definition_provider = 4;
+  bool references_provider = 5;
+  bool document_highlight_provider = 6;
+  bool document_symbol_provider = 7;
+  bool workspace_symbol_provider = 8;
+  bool code_action_provider = 9;
+  .editorservices.CodeLensOptions code_lens_provider = 10;
+  bool document_formatting_provider = 11;
+  bool document_range_formatting_provider = 12;
+  .editorservices.DocumentOnTypeFormattingOptions document_on_type_formatting_provider = 13;
+  bool rename_provider = 14;
+  bool selection_range_provider = 15;
+  bool sync_diagnostics_provider = 17;
+}
+message SemanticTokens {
+  enum TokenType {
+    UNKNOWN_TOKEN_TYPE = 0;
+    NAMESPACE = 1;
+    TYPE = 2;
+    CLASS = 3;
+    ENUM = 4;
+    INTERFACE = 5;
+    STRUCT = 6;
+    TYPE_PARAMETER = 7;
+    PARAMETER = 8;
+    VARIABLE = 9;
+    PROPERTY = 10;
+    ENUM_MEMBER = 11;
+    EVENT = 12;
+    FUNCTION = 13;
+    METHOD = 14;
+    MACRO = 15;
+    KEYWORD = 16;
+    MODIFIER = 17;
+    COMMENT = 18;
+    STRING = 19;
+    NUMBER = 20;
+    REGEXP = 21;
+    OPERATOR = 22;
+    DEPENDENT = 23;
+    CONCEPT = 24;
+  }
+  enum TokenModifier {
+    UNKNOWN_MODIFIER = 0;
+    DECLARATION_TOKEN = 1;
+    DEFINITION_TOKEN = 2;
+    READONLY_TOKEN = 3;
+    STATIC_TOKEN = 4;
+    DEPRECATED_TOKEN = 5;
+    ABSTRACT_TOKEN = 6;
+    ASYNC_TOKEN = 7;
+    MODIFICATION_TOKEN = 8;
+    DOCUMENTATION_TOKEN = 9;
+    DEFAULT_LIBRARY_TOKEN = 10;
+    USED_AS_MUTABLE_REFERENCE_TOKEN = 11;
+  }
+}
+message ReferencesStats {
+  string index_status = 1;
+}

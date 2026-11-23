@@ -1,0 +1,7 @@
+// Extracted from agy 1.5.14, file offset 0x6607dc5, 239 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.protobuf;
+message Any {
+  string type_url = 1;
+  bytes value = 2;
+}

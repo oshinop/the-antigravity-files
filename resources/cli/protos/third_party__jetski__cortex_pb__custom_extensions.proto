@@ -1,0 +1,5 @@
+// Extracted from agy 1.5.14, file offset 0x65dd59c, 112 bytes. Rendering omits custom options.
+syntax = "editions";
+package exa.cortex_pb;
+message CustomExtensions {
+}

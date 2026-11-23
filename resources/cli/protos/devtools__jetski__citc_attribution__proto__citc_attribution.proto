@@ -1,0 +1,19 @@
+// Extracted from agy 1.5.14, file offset 0x664bb74, 952 bytes. Rendering omits custom options.
+syntax = "editions";
+package google.devtools.jetski.citc_attribution;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ToolNoteAttribution {
+  string product_name = 1;
+  string environment_type = 2;
+  string trajectory_id = 3;
+  string conversation_id = 4;
+  string session_id = 5;
+}
+message StandaloneSnapshotToolNotes {
+  message Note {
+    string application_tag = 1;
+    string unstructured_notes = 2;
+    .google.devtools.jetski.citc_attribution.ToolNoteAttribution tool_note_attribution = 538754;
+  }
+  repeated .google.devtools.jetski.citc_attribution.StandaloneSnapshotToolNotes.Note notes = 1;
+}

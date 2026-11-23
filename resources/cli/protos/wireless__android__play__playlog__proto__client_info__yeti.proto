@@ -1,0 +1,19 @@
+// Extracted from agy 1.5.14, file offset 0x664ec7d, 992 bytes. Rendering omits custom options.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb_generate_object_format.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message YetiClientInfo {
+  string build_label = 1;
+  string deployment_type = 2;
+  string environment = 3;
+  string location = 4;
+  string machine = 5;
+  string gamelet_id = 6;
+  string machine_shape = 7;
+  string metro = 8;
+  string vm_purpose = 9;
+  string release_stage = 10;
+}

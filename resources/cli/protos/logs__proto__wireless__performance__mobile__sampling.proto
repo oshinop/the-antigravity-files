@@ -1,0 +1,28 @@
+// Extracted from agy 1.5.14, file offset 0x6674beb, 1493 bytes. Rendering omits custom options.
+syntax = "proto2";
+package logs.proto.wireless.performance.mobile;
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb_disable_randomization.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "storage/googlesql/public/proto/type_annotation.proto";
+message SamplingParameters {
+  enum SamplingStrategy {
+    UNKNOWN = 0;
+    SAMPLING_STRATEGY_FLOOR = 1;
+    SAMPLING_STRATEGY_ALWAYS_ON = 2;
+    SAMPLING_STRATEGY_PROCESS_LEVEL_PROBABILITY = 3;
+    SAMPLING_STRATEGY_FIXED_EVENT_PROBABILITY = 5;
+    SAMPLING_STRATEGY_DYNAMIC_EVENT_PROBABILITY = 4;
+  }
+  message Rate {
+    uint32 numerator = 1;
+    uint32 denominator_powers_of_ten = 2;
+  }
+  double per_time_interval_sampling_probability = 1;
+  uint32 sample_rate_permille = 2; // oneof=sampling_rate
+  .logs.proto.wireless.performance.mobile.SamplingParameters.Rate sample_rate = 4; // oneof=sampling_rate
+  .logs.proto.wireless.performance.mobile.SamplingParameters.SamplingStrategy sampling_strategy = 3;
+  .logs.proto.wireless.performance.mobile.SamplingParameters.Rate applied_clearcut_server_sampling_rate = 6;
+  repeated fixed64 evaluated_clearcut_sampling_rule_fingerprints = 7;
+  fixed64 applied_clearcut_sampling_rule_fingerprint = 8;
+}

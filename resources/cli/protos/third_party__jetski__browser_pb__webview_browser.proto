@@ -1,0 +1,10 @@
+// Extracted from agy 1.5.14, file offset 0x661ef1b, 410 bytes. Rendering omits custom options.
+syntax = "proto3";
+package exa.browser_pb;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message WebviewBrowser {
+  string url = 1;
+  string blocked_url = 2;
+  string protected_auth_origin = 3;
+  repeated string visited_urls = 4;
+}

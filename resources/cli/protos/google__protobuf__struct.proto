@@ -1,0 +1,24 @@
+// Extracted from agy 1.5.14, file offset 0x663b19b, 742 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.protobuf;
+enum NullValue {
+  NULL_VALUE = 0;
+}
+message Struct {
+  message FieldsEntry {
+    string key = 1;
+    .google.protobuf.Value value = 2;
+  }
+  repeated .google.protobuf.Struct.FieldsEntry fields = 1;
+}
+message Value {
+  .google.protobuf.NullValue null_value = 1; // oneof=kind
+  double number_value = 2; // oneof=kind
+  string string_value = 3; // oneof=kind
+  bool bool_value = 4; // oneof=kind
+  .google.protobuf.Struct struct_value = 5; // oneof=kind
+  .google.protobuf.ListValue list_value = 6; // oneof=kind
+}
+message ListValue {
+  repeated .google.protobuf.Value values = 1;
+}

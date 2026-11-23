@@ -1,0 +1,27 @@
+// Extracted from agy 1.5.14, file offset 0x662f11f, 578 bytes. Rendering omits custom options.
+syntax = "editions";
+package genai;
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+message UserActionInput {
+  enum Action {
+    ACTION_UNSPECIFIED = 0;
+    KEY_DOWN = 1;
+    KEY_UP = 2;
+    KEY_CLICK = 3;
+  }
+  enum Key {
+    KEY_UNSPECIFIED = 0;
+    ARROW_DOWN = 3;
+    ARROW_LEFT = 4;
+    ARROW_RIGHT = 5;
+    ARROW_UP = 6;
+    KEY_A = 44;
+    KEY_D = 47;
+    KEY_E = 48;
+    KEY_S = 62;
+    KEY_W = 66;
+    SPACE = 95;
+  }
+  .genai.UserActionInput.Action action = 5;
+  .genai.UserActionInput.Key key = 6; // oneof=input
+}

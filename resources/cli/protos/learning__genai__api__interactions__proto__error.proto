@@ -1,0 +1,10 @@
+// Extracted from agy 1.5.14, file offset 0x65f9a5e, 180 bytes. Rendering omits custom options.
+syntax = "editions";
+package genai;
+message Error {
+  string code = 4;
+  string message = 2;
+}
+message ErrorWrapper {
+  .genai.Error error = 1;
+}

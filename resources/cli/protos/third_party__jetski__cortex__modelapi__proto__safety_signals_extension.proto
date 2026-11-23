@@ -1,0 +1,6 @@
+// Extracted from agy 1.5.14, file offset 0x661e267, 404 bytes. Rendering omits custom options.
+syntax = "editions";
+package exa.cortex_pb;
+import "google/internal/cloud/code/v1internal/prediction_service.proto";
+import "third_party/jetski/cortex_pb/custom_extensions.proto";
+extend .exa.cortex_pb.CustomExtensions { .google.internal.cloud.code.v1internal.GenerateContentResponse.Metadata.SafetySignals safety_signals = 113; }

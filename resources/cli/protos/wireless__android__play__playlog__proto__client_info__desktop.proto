@@ -1,0 +1,21 @@
+// Extracted from agy 1.5.14, file offset 0x665a8cd, 1159 bytes. Rendering omits custom options.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb_generate_object_format.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message DesktopClientInfo {
+  string client_id = 1;
+  string logging_id = 2;
+  string os = 3;
+  string os_major_version = 4;
+  string os_full_version = 5;
+  string application_build = 6;
+  string country = 7;
+  int64 application_build_cl = 8;
+  int32 clearcut_version = 9;
+  string application_identifier = 10;
+  string battlestar_windows_id = 11;
+  int64 pc_id = 12;
+}

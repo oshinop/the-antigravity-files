@@ -1,0 +1,10 @@
+// Extracted from agy 1.5.14, file offset 0x662299a, 445 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.cloud.businessaicode.v1main;
+import "google/api/field_behavior.proto";
+import "google/api/visibility.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Entitlement {
+  string user_tier = 2;
+  string license_location = 3;
+}

@@ -1,0 +1,27 @@
+// Extracted from agy 1.5.14, file offset 0x6646b66, 908 bytes. Rendering omits custom options.
+syntax = "proto2";
+package validator;
+import "net/proto2/proto/descriptor.proto";
+message Definitions {
+  repeated string feature = 1;
+  repeated .validator.OneOfGroup one_of_group = 2;
+}
+message FieldValidationRule {
+  string is_required = 1; // oneof=field_presence_predicate
+  string present_iff = 5; // oneof=field_presence_predicate
+  repeated string predicate = 2;
+  repeated string element_predicate = 3;
+  string one_of = 4;
+  bool skip_message_validation = 6;
+  bool can_report_all_predicate_violations = 7;
+}
+message OneOfGroup {
+  string name = 1;
+  string is_required = 2;
+}
+message OneOfValidationRule {
+  string is_required = 1;
+}
+extend .proto2.MessageOptions { .validator.Definitions defs = 127878962; }
+extend .proto2.FieldOptions { .validator.FieldValidationRule rule = 127878962; }
+extend .proto2.OneofOptions { .validator.OneOfValidationRule one_of = 127878962; }

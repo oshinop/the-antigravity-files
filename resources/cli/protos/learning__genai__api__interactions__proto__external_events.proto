@@ -1,0 +1,52 @@
+// Extracted from agy 1.5.14, file offset 0x66f950a, 3262 bytes. Rendering omits custom options.
+syntax = "editions";
+package genai;
+import "learning/genai/api/interactions/proto/events.proto";
+import "learning/genai/api/interactions/proto/hooks.proto";
+import "learning/genai/api/interactions/proto/interaction.proto";
+import "learning/genai/api/interactions/proto/media_stream_steps.proto";
+import "learning/genai/api/interactions/proto/sse_events.proto";
+import "learning/genai/api/interactions/proto/state_update.proto";
+import "learning/genai/api/interactions/proto/user_action_input.proto";
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+message ExternalClientEvent {
+  .genai.CreateInteractionEvent create_interaction = 1; // oneof=event_type
+  .genai.ReconnectInteractionEvent reconnect_interaction = 2; // oneof=event_type
+  .genai.CompleteInteractionEvent complete_interaction = 4; // oneof=event_type
+  .genai.CancelInteractionEvent cancel_interaction = 5; // oneof=event_type
+  .genai.DisconnectEvent disconnect = 9; // oneof=event_type
+  .genai.InputEvent input = 11; // oneof=event_type
+  .genai.MediaStreamAppend media_stream_append = 12; // oneof=event_type
+  .genai.InputCommitEvent input_commit = 13; // oneof=event_type
+  .genai.CallHookResponse call_hook_response = 14; // oneof=event_type
+  .genai.UserActionInput user_action = 28; // oneof=event_type
+  .genai.WorldSetupEvent world_setup = 29; // oneof=event_type
+  .genai.FunctionResultEvent function_result = 15; // oneof=event_type
+  .genai.ElicitationResultEvent elicitation_result = 16; // oneof=event_type
+}
+message ExternalClientEventList {
+  repeated .genai.ExternalClientEvent events = 1;
+}
+message ExternalClientEventBatch {
+  .genai.ExternalClientEvent event = 1; // oneof=event_type
+  .genai.ExternalClientEventList event_list = 2; // oneof=event_type
+}
+message ExternalServerEvent {
+  .genai.InteractionCreatedEvent interaction_created = 1; // oneof=event_type
+  .genai.InteractionReconnectedEvent interaction_reconnected = 2; // oneof=event_type
+  .genai.InteractionCompletedEvent interaction_completed = 4; // oneof=event_type
+  .genai.StepStart step_start = 5; // oneof=event_type
+  .genai.StepDelta step_delta = 6; // oneof=event_type
+  .genai.StepStop step_stop = 7; // oneof=event_type
+  .genai.ErrorEvent error = 8; // oneof=event_type
+  .genai.StateUpdate state_update = 9; // oneof=event_type
+  .genai.Interaction.Usage usage_update = 10; // oneof=event_type
+  .genai.FunctionInvocation function_invocation = 11; // oneof=event_type
+  .genai.CallHookRequest call_hook_request = 12; // oneof=event_type
+  .genai.InteractionCancelledEvent interaction_cancelled = 13; // oneof=event_type
+  .genai.Interaction.Usage usage = 50;
+  string sub_interaction_id = 51;
+}
+message InteractionCancelledEvent {
+  .genai.Interaction.Usage usage = 1;
+}

@@ -1,0 +1,23 @@
+// Extracted from agy 1.5.14, file offset 0x664ac9d, 949 bytes. Rendering omits custom options.
+syntax = "editions";
+package gms.platform;
+import "google/api/inclusion.proto";
+import "wireless/android/telemetry/pitot/service/enum_extensions.proto";
+enum DeviceType {
+  DEVICE_TYPE_UNKNOWN = 0;
+  DEVICE_TYPE_PHONE = 1;
+  DEVICE_TYPE_PHONE_GO = 2;
+  DEVICE_TYPE_TV = 3;
+  DEVICE_TYPE_WEARABLE = 4;
+  DEVICE_TYPE_AUTOMOTIVE = 5;
+  DEVICE_TYPE_BATTLESTAR = 6;
+  DEVICE_TYPE_CHROME_OS = 7;
+  DEVICE_TYPE_XR = 8;
+  DEVICE_TYPE_DESKTOP = 9;
+  DEVICE_TYPE_XR_PERIPHERAL = 10;
+}
+enum DeviceSubType {
+  DEVICE_SUB_TYPE_UNKNOWN = 0;
+  DEVICE_SUB_TYPE_BINGO = 1;
+  DEVICE_SUB_TYPE_GOOGLEBOOK = 2;
+}

@@ -4,6 +4,6 @@ Evidence behind [Antigravity: the Good, the Bad, and the Ugly](https://x.com/osh
 
 [`article/`](article/ARTICLE.md) is the article itself.
 
-[`resources/`](resources/README.md) is a library of the material itself: the system prompts and tool declarations `agy` sends, the switches Google's server sends back, prompt assets embedded in the binary, the desktop app's protobuf definitions, diagrams of how its parts work, and the public sources. Each folder has a catalogue.
+[`resources/`](resources/README.md) is the reference library: the system prompts and tool declarations `agy` sends, the switches Google's server sends back, prompt assets embedded in the binary, protocol layouts, captured traffic, the desktop app's protobuf definitions, diagrams of how its parts work, and the public sources. Each folder has a catalogue.
 
-[`analysis/`](analysis/README.md) holds the raw records and findings: a traced session, traffic excerpts, and static analyses of the CLI and the desktop app.
+[`analysis/`](analysis/README.md) draws conclusions from that library: how `agy` is built, what it sends and to whom, its safety reviews and sandbox, its prompts, and what Google's server switches change, each finding linked to its evidence. It also covers the desktop app.

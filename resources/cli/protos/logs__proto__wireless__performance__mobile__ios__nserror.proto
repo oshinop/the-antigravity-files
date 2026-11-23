@@ -1,0 +1,13 @@
+// Extracted from agy 1.5.14, file offset 0x6631b4b, 618 bytes. Rendering omits custom options.
+syntax = "proto2";
+package logs.proto.wireless.performance.mobile.ios;
+import "logs/proto/wireless/performance/mobile/annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message NSError {
+  repeated .logs.proto.wireless.performance.mobile.ios.NSErrorNode underlying_errors = 3;
+}
+message NSErrorNode {
+  string compile_time_literal_error_domain = 1;
+  int64 error_code = 2;
+  repeated int64 underlying_error_indices = 3;
+}

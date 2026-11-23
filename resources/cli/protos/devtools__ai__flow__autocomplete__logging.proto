@@ -1,0 +1,46 @@
+// Extracted from agy 1.5.14, file offset 0x667eec7, 1613 bytes. Rendering omits custom options.
+syntax = "editions";
+package devtools.ai.autocomplete;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum ContextKind {
+  CONTEXT_KIND_UNSPECIFIED = 0;
+  CONTEXT_KIND_FILE = 1;
+  CONTEXT_KIND_USER_TURN = 2;
+  CONTEXT_KIND_MODEL_RESPONSE = 3;
+  CONTEXT_KIND_MODEL_THOUGHT = 4;
+}
+enum Grounds {
+  GROUNDS_UNSPECIFIED = 0;
+  GROUNDS_COPY = 1;
+  GROUNDS_STANDARD = 2;
+  GROUNDS_LIKELY = 3;
+  GROUNDS_GUESS = 4;
+}
+message LogEntry {
+  string id = 1;
+  repeated .devtools.ai.autocomplete.ContextKind used_contexts = 10;
+  uint64 left_context_hash = 7;
+  uint64 right_context_hash = 8;
+  int64 cursor = 9;
+  string model_id = 4;
+  int64 model_latency_micros = 5;
+  double probability = 6;
+  bool cached = 11;
+  int32 suggestion_length = 12;
+  .devtools.ai.autocomplete.SelectionInfo selection = 13;
+}
+message SelectionInfo {
+  string score_model_id = 1;
+  double penalty = 2;
+  double threshold = 3;
+  double utility = 4;
+  .devtools.ai.autocomplete.Grounds grounds = 5;
+  int32 prefix_length = 6;
+  int32 content_words = 7;
+  int32 contained_words = 8;
+  bool copied_prefix = 9;
+  int32 typed_length = 10;
+  bool multiline = 11;
+  bool mid_word = 12;
+  int32 copy_length = 13;
+}

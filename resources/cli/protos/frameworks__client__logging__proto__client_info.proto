@@ -1,0 +1,8 @@
+// Extracted from agy 1.5.14, file offset 0x6624f16, 427 bytes. Rendering omits custom options.
+syntax = "editions";
+package frameworks.client.logging.proto;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ClientInfo {
+  string application_name = 4;
+  string application_version_name = 5;
+}

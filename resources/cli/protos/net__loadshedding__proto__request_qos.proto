@@ -1,0 +1,15 @@
+// Extracted from agy 1.5.14, file offset 0x662c72c, 552 bytes. Rendering omits custom options.
+syntax = "proto2";
+package net.loadshedding;
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "net/proto2/proto/descriptor.proto";
+message RequestQoS {
+  enum Criticality {
+    CRITICAL_PLUS = 3;
+    CRITICAL = 2;
+    SHEDDABLE_PLUS = 1;
+    SHEDDABLE = 0;
+  }
+  .net.loadshedding.RequestQoS.Criticality criticality = 1; // default='CRITICAL'
+}
+extend .proto2.EnumValueOptions { .net.loadshedding.RequestQoS.Criticality mapped_criticality = 102556457; }

@@ -1,0 +1,49 @@
+// Extracted from agy 1.5.14, file offset 0x66ac51b, 2173 bytes. Rendering omits custom options.
+syntax = "proto3";
+package jetski.product.v1;
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "third_party/jetski/product_api_pb/v1/content.proto";
+import "third_party/jetski/product_api_pb/v1/conversation.proto";
+message CreateConversationRequest {
+  string project_id = 1;
+  string environment_id = 2;
+  string title = 3;
+  repeated string tags = 4;
+  string model = 5;
+  repeated .jetski.product.v1.Content prompt = 6;
+}
+message CreateConversationResponse {
+  .jetski.product.v1.Conversation conversation = 1;
+}
+message ListConversationsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  string project_id = 3;
+  string parent_conversation_id = 4; // oneof=_parent_conversation_id
+  repeated string tags = 5;
+  bool include_archived = 6;
+}
+message ListConversationsResponse {
+  repeated .jetski.product.v1.Conversation conversations = 1;
+  string next_page_token = 2;
+}
+message GetConversationRequest {
+  string conversation_id = 1;
+}
+message UpdateConversationRequest {
+  string conversation_id = 1;
+  .jetski.product.v1.ConversationAnnotations annotations = 2;
+}
+message DeleteConversationRequest {
+  string conversation_id = 1;
+}
+message DeleteConversationResponse {
+}
+service ConversationService {
+  rpc CreateConversation (.jetski.product.v1.CreateConversationRequest) returns (.jetski.product.v1.CreateConversationResponse);
+  rpc ListConversations (.jetski.product.v1.ListConversationsRequest) returns (.jetski.product.v1.ListConversationsResponse);
+  rpc GetConversation (.jetski.product.v1.GetConversationRequest) returns (.jetski.product.v1.Conversation);
+  rpc UpdateConversation (.jetski.product.v1.UpdateConversationRequest) returns (.jetski.product.v1.Conversation);
+  rpc DeleteConversation (.jetski.product.v1.DeleteConversationRequest) returns (.jetski.product.v1.DeleteConversationResponse);
+}

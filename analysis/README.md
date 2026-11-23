@@ -1,23 +1,23 @@
 # Analysis
 
-Raw records of what `agy` sent and received, and the findings drawn from the binaries.
+Conclusions about the Antigravity CLI, `agy` 1.5.14, drawn from the [resources](../resources/README.md). Each finding lists its evidence underneath: functions in the 1.5.14 binary, named by their Go package path without the leading `google3/` and `third_party/`; captured traffic; the prompt text Google ships; the server's responses; and Google's own pages.
 
 ## Antigravity CLI
 
-| Document | Contents |
+| Report | What it covers |
 |---|---|
-| [One session, traced](cli/runs/session-1/README.md) | Timeline of a two-prompt session: the helper outliving the turn, review models checking tool calls, telemetry throughout |
-| [Clearcut tool-step record](cli/traffic/clearcut-tool-step.md) | A Clearcut (`play.googleapis.com/log`) record for one tool step. |
-| [Clearcut with telemetry switched off](cli/traffic/clearcut-optout.md) | Clearcut records sent with "Enable Telemetry" switched off. |
-| [Trajectory upload](cli/traffic/trajectory.md) | A `recordTrajectoryAnalytics` upload (216,046 bytes decoded). |
-| [Review-model request](cli/traffic/monitor-request.md) | An escalated review by Gemini 4 Hydrogen Sonar of a single file-listing command. |
-| [Injected context](cli/traffic/injections.md) | How the client wraps text that other models wrote (helper briefs, swarm posts, timer ticks) before it reaches the main agent, plus the `<EPHEMERAL_MESSAGE>` wrapper from the binary.. |
-| [Endpoints contacted in a session](cli/traffic/endpoints.md) | Every HTTP destination contacted in one interactive session, grouped by host and path. |
-| [Static analysis of `agy` 1.5.11](cli/static-analysis-1.5.11.md) | Sign-in, token storage, endpoints, telemetry, sandbox and commands, from the binary |
+| [How `agy` 1.5.14 is built: one binary, a local server, and Google's backends](cli/architecture.md) | How `agy` is put together: the processes, the requests each one makes, what stays on disk |
+| [Sign-in and plans: how `agy` 1.5.14 authenticates and what the account unlocks](cli/sign-in-and-plans.md) | OAuth sign-in, token storage, API-key mode, and what depends on the plan or account |
+| [What leaves the machine: telemetry, trajectory uploads and identifiers](cli/data-collection.md) | What leaves the machine, where it goes, and what changes with telemetry off |
+| [Google's models review the agent's tool calls before they run](cli/safety-reviews.md) | The models that review the agent's work: when they run, what they receive, whose quota they use |
+| [The terminal sandbox covers commands only, and the agent can ask to leave it](cli/sandbox-and-permissions.md) | The terminal sandbox, the ways around it, permission modes and auto mode |
+| [What `agy` sends the model: system prompt, tools, injected messages and compaction](cli/prompts-and-context.md) | How a model request is assembled: system prompt, tools, injected messages, compaction |
+| [Helpers, swarms and timers: how `agy` runs more than one agent](cli/agents-and-swarm.md) | Subagents, the research helper, the swarm and scheduled work |
+| [Google's server sends 635 switches; `agy` reads 202 of them](cli/server-switches.md) | What Google's server can change at start, and which of its switches `agy` actually reads |
 
 ## Antigravity desktop app 2.33.0
 
-Static analysis of the macOS build; the app was not signed in to.
+Static analysis of the macOS build.
 
 | Document | Contents |
 |---|---|

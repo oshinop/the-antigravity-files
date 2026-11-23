@@ -1,0 +1,18 @@
+// Extracted from agy 1.5.14, file offset 0x663923b, 718 bytes. Rendering omits custom options.
+syntax = "proto2";
+package googlesql;
+import "net/proto2/proto/descriptor.proto";
+enum TableType {
+  DEFAULT_TABLE_TYPE = 0;
+  SQL_TABLE = 1;
+  VALUE_TABLE = 2;
+}
+message WireFormatAnnotationEmptyMessage {
+}
+extend .proto2.FieldOptions { string struct_field_name = 69661525; }
+extend .proto2.FieldOptions { bool is_raw_proto = 163760138; }
+extend .proto2.FieldOptions { bool is_hidden_column = 337961191; }
+extend .proto2.FieldOptions { bool is_measure = 535801544; }
+extend .proto2.MessageOptions { bool is_wrapper = 49730018; }
+extend .proto2.MessageOptions { bool is_struct = 49727810; }
+extend .proto2.MessageOptions { .googlesql.TableType table_type = 86830980; }

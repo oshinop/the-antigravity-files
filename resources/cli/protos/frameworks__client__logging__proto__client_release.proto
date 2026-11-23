@@ -1,0 +1,13 @@
+// Extracted from agy 1.5.14, file offset 0x6628b79, 462 bytes. Rendering omits custom options.
+syntax = "editions";
+package frameworks.client.logging.proto;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ClientRelease {
+  enum ClientReleaseType {
+    RELEASE_TYPE_UNSPECIFIED = 0;
+    DEV = 1;
+    DOGFOOD = 2;
+    PROD = 3;
+  }
+  .frameworks.client.logging.proto.ClientRelease.ClientReleaseType release = 6;
+}

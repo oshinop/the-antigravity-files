@@ -1,0 +1,49 @@
+// Extracted from agy 1.5.14, file offset 0x66beb38, 2453 bytes. Rendering omits custom options.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb_generate_object_format.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message WindowsClientInfo {
+  enum DeviceType {
+    UNKNOWN_DEVICE_TYPE = 0;
+    PHONE = 1;
+    TABLET = 2;
+    LAPTOP = 3;
+  }
+  enum UsageType {
+    UNKNOWN_USAGE_TYPE = 0;
+    USAGE_TYPE_PHENOTYPE = 1;
+  }
+  message DriverInfo {
+    string manufacturer = 1;
+    string device_name = 2;
+    string driver_provider_name = 3;
+    string driver_version = 4;
+    string driver_date = 5;
+  }
+  message BluetoothInfo {
+    bool is_extended_advertising_supported = 1;
+    bool is_peripheral_role_supported = 2;
+    bool is_low_energy_supported = 3;
+    bool is_advertisement_offload_supported = 4;
+  }
+  .wireless_android_play_playlog.WindowsClientInfo.DeviceType device_type = 1;
+  string device_manufacturer = 2;
+  string device_model = 3;
+  int64 physical_memory = 4;
+  int32 processor_count = 5;
+  int32 logical_processor_count = 6;
+  string os_name = 7;
+  string os_version = 8;
+  string os_architecture = 9;
+  string os_language_code = 10;
+  string cpu_manufacturer = 11;
+  string cpu_name = 12;
+  repeated .wireless_android_play_playlog.WindowsClientInfo.DriverInfo bluetooth_driver_infos = 13;
+  repeated .wireless_android_play_playlog.WindowsClientInfo.DriverInfo network_driver_infos = 14;
+  bool ble_extd_adv_supported = 15;
+  .wireless_android_play_playlog.WindowsClientInfo.BluetoothInfo bluetooth_info = 16;
+  .wireless_android_play_playlog.WindowsClientInfo.UsageType usage_type = 17;
+}

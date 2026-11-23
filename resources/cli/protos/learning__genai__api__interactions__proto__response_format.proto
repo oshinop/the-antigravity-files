@@ -1,0 +1,107 @@
+// Extracted from agy 1.5.14, file offset 0x6708eea, 3463 bytes. Rendering omits custom options.
+syntax = "editions";
+package genai;
+import "google/protobuf/duration.proto";
+import "learning/genai/api/interactions/proto/content.proto";
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+message AudioResponseFormat {
+  enum MimeType {
+    TYPE_UNSPECIFIED = 0;
+    TYPE_MP3 = 1;
+    TYPE_OGG_OPUS = 2;
+    TYPE_L16 = 3;
+    TYPE_WAV = 4;
+    TYPE_ALAW = 5;
+    TYPE_MULAW = 6;
+  }
+  enum Delivery {
+    DELIVERY_UNSPECIFIED = 0;
+    INLINE = 1;
+    URI = 2;
+  }
+  .genai.AudioResponseFormat.MimeType mime_type = 1;
+  .genai.AudioResponseFormat.Delivery delivery = 2;
+  int32 sample_rate = 3;
+  int32 bit_rate = 4;
+}
+message TextResponseFormat {
+  enum MimeType {
+    TYPE_UNSPECIFIED = 0;
+    TYPE_APPLICATION_JSON = 1;
+    TYPE_TEXT_PLAIN = 2;
+  }
+  .genai.TextResponseFormat.MimeType mime_type = 1;
+  .genai.Struct schema = 2;
+}
+message ImageResponseFormat {
+  enum MimeType {
+    TYPE_UNSPECIFIED = 0;
+    TYPE_JPEG = 1;
+  }
+  enum Delivery {
+    DELIVERY_UNSPECIFIED = 0;
+    INLINE = 1;
+    URI = 2;
+  }
+  enum AspectRatio {
+    ASPECT_RATIO_UNSPECIFIED = 0;
+    ASPECT_RATIO_ONE_BY_ONE = 1;
+    ASPECT_RATIO_TWO_BY_THREE = 2;
+    ASPECT_RATIO_THREE_BY_TWO = 3;
+    ASPECT_RATIO_THREE_BY_FOUR = 4;
+    ASPECT_RATIO_FOUR_BY_THREE = 5;
+    ASPECT_RATIO_FOUR_BY_FIVE = 6;
+    ASPECT_RATIO_FIVE_BY_FOUR = 7;
+    ASPECT_RATIO_NINE_BY_SIXTEEN = 8;
+    ASPECT_RATIO_SIXTEEN_BY_NINE = 9;
+    ASPECT_RATIO_TWENTY_ONE_BY_NINE = 10;
+    ASPECT_RATIO_ONE_BY_EIGHT = 11;
+    ASPECT_RATIO_EIGHT_BY_ONE = 12;
+    ASPECT_RATIO_ONE_BY_FOUR = 13;
+    ASPECT_RATIO_FOUR_BY_ONE = 14;
+  }
+  enum ImageSize {
+    IMAGE_SIZE_UNSPECIFIED = 0;
+    IMAGE_SIZE_FIVE_TWELVE = 1;
+    IMAGE_SIZE_ONE_K = 2;
+    IMAGE_SIZE_TWO_K = 3;
+    IMAGE_SIZE_FOUR_K = 4;
+  }
+  .genai.ImageResponseFormat.MimeType mime_type = 1;
+  .genai.ImageResponseFormat.Delivery delivery = 2;
+  .genai.ImageResponseFormat.AspectRatio aspect_ratio = 3;
+  .genai.ImageResponseFormat.ImageSize image_size = 4;
+}
+message VideoResponseFormat {
+  enum Delivery {
+    DELIVERY_UNSPECIFIED = 0;
+    INLINE = 1;
+    URI = 2;
+  }
+  enum AspectRatio {
+    ASPECT_RATIO_UNSPECIFIED = 0;
+    ASPECT_RATIO_SIXTEEN_BY_NINE = 1;
+    ASPECT_RATIO_NINE_BY_SIXTEEN = 2;
+  }
+  enum Resolution {
+    RESOLUTION_UNSPECIFIED = 0;
+    RESOLUTION_THREE_SIXTY_P = 1;
+    RESOLUTION_SEVEN_TWENTY_P = 2;
+    RESOLUTION_TEN_EIGHTY_P = 3;
+    RESOLUTION_FOUR_K = 4;
+  }
+  .genai.VideoResponseFormat.Delivery delivery = 1;
+  .genai.VideoResponseFormat.AspectRatio aspect_ratio = 3;
+  .google.protobuf.Duration duration = 4;
+  .genai.VideoResponseFormat.Resolution resolution = 5;
+}
+message ResponseFormat {
+  .genai.AudioResponseFormat audio = 1; // oneof=type
+  .genai.TextResponseFormat text = 2; // oneof=type
+  .genai.ImageResponseFormat image = 3; // oneof=type
+  .genai.VideoResponseFormat video = 4; // oneof=type
+  .genai.Struct struct_value = 5; // oneof=type
+}
+message ResponseFormatList {
+  repeated .genai.ResponseFormat response_formats = 1;
+}

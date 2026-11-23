@@ -1,0 +1,6 @@
+// Extracted from agy 1.5.14, file offset 0x6610268, 288 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.protobuf;
+message FieldMask {
+  repeated string paths = 1;
+}

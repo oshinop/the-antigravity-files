@@ -1,0 +1,31 @@
+// Extracted from agy 1.5.14, file offset 0x6642a54, 856 bytes. Rendering omits custom options.
+syntax = "editions";
+package genai.skills;
+message SkillFile {
+  string mime_type = 1;
+  string text = 2; // oneof=content
+  bytes data = 3; // oneof=content
+}
+message Skill {
+  message InlineResources {
+    message ResourcesEntry {
+      string key = 1;
+      .genai.skills.SkillFile value = 2;
+    }
+    repeated .genai.skills.Skill.InlineResources.ResourcesEntry resources = 1;
+  }
+  message MetadataEntry {
+    string key = 1;
+    string value = 2;
+  }
+  string name = 1;
+  string skill_id = 2;
+  string description = 3;
+  string content = 4;
+  repeated string allowed_tools = 5;
+  repeated .genai.skills.Skill.MetadataEntry metadata = 6;
+  .genai.skills.Skill.InlineResources inline_resources = 7; // oneof=resources
+  .genai.skills.SkillFile zipped_resources = 8; // oneof=resources
+  string version = 9;
+  repeated string channels = 10;
+}

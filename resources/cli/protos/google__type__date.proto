@@ -1,0 +1,8 @@
+// Extracted from agy 1.5.14, file offset 0x6607be9, 238 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.type;
+message Date {
+  int32 year = 1;
+  int32 month = 2;
+  int32 day = 3;
+}

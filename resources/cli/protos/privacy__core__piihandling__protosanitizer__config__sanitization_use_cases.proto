@@ -1,0 +1,15 @@
+// Extracted from agy 1.5.14, file offset 0x6641014, 790 bytes. Rendering omits custom options.
+syntax = "editions";
+package privacy.core.piihandling.protosanitizer.config;
+import "storage/datapol/annotations/mapping/sensitivity_levels.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message SanitizationUseCase {
+  string id = 1;
+  string description = 2;
+  .datapol.mapping.Sensitivity baseline_sensitivity = 3;
+  repeated .datapol.SemanticType types_to_retain = 4;
+  repeated .datapol.SemanticType types_to_remove = 5;
+}
+message SanitizationUseCases {
+  repeated .privacy.core.piihandling.protosanitizer.config.SanitizationUseCase use_cases = 1;
+}

@@ -1,0 +1,175 @@
+// Extracted from agy 1.5.14, file offset 0x67cc21a, 6020 bytes. Rendering omits custom options.
+syntax = "editions";
+package beyond;
+import "net/loadshedding/proto/request_qos.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message QuotaCostMetric {
+  enum Metric {
+    UNKNOWN = 0;
+    QUERIES = 1;
+    INPUT_TOKENS = 17;
+    INPUT_TEXT_SC_TOKENS = 2;
+    INPUT_TEXT_LC_TOKENS = 3;
+    INPUT_IMAGE_RES1K_COUNTS = 6;
+    INPUT_AUDIO_SECONDS = 10;
+    INPUT_VIDEO_SECONDS = 11;
+    OUTPUT_TEXT_SC_TOKENS = 4;
+    OUTPUT_TEXT_LC_TOKENS = 5;
+    OUTPUT_IMAGE_RES1K_COUNTS = 7;
+    OUTPUT_IMAGE_RES2K_COUNTS = 8;
+    OUTPUT_IMAGE_RES4K_COUNTS = 9;
+    OUTPUT_AUDIO_SECONDS = 12;
+    OUTPUT_VIDEO_SECONDS720P = 13;
+    OUTPUT_VIDEO_SECONDS1080P = 14;
+    OUTPUT_VIDEO_SECONDS4K = 15;
+    SESSION_COUNT = 16;
+    OUTPUT_TOKENS = 18;
+    GXUS = 19;
+    MICRO_GXU_SECONDS = 20;
+  }
+  .beyond.QuotaCostMetric.Metric metric = 1;
+  float cost = 2;
+}
+message QuotaBucketKey {
+  string team = 1;
+  string name = 2;
+}
+message QuotaMetadata {
+  enum QuotaAdmissionResponse {
+    UNKNOWN = 0;
+    PRIMARY_QUOTA = 1;
+    SOFT_QUOTA = 2;
+    FREE_TIER = 3;
+    DENIED = 4;
+  }
+  enum EnforcementSource {
+    ENFORCEMENT_SOURCE_UNSPECIFIED = 0;
+    QUOTA_SERVER = 1;
+    UTA = 2;
+  }
+  enum BucketResolutionSource {
+    BUCKET_RESOLUTION_SOURCE_UNSPECIFIED = 0;
+    EXPLICIT_EXTENSION = 1;
+    BYOM_DEDICATED = 2;
+    INFERRED_TSID = 3;
+    INFERRED_DIRECT_FIND = 4;
+    INFERRED_MDB_MEMBERSHIP = 5;
+    INFERRED_RECIPE_DEFAULT = 6;
+    FALLBACK_DEFAULT = 7;
+    INELIGIBLE_BYOM_DOWNGRADE = 8;
+  }
+  message QuotaServerMetadata {
+    .beyond.QuotaMetadata.QuotaAdmissionResponse admission_response = 1;
+    .net.loadshedding.RequestQoS.Criticality admit_criticality = 2;
+    .net.loadshedding.RequestQoS.Criticality user_provided_criticality = 3;
+  }
+  message UtaMetadata {
+    message UtaUserKey {
+      string team_name = 1;
+      string bucket_name = 2;
+      string loas_role = 5;
+      string sub_bucket_name_one = 6;
+      string sub_bucket_name_two = 7;
+      string sub_bucket_name_three = 8;
+      string sub_bucket_name_four = 9;
+      string sub_bucket_name_five = 10;
+    }
+    message UtaBeyondTarget {
+      string station_id = 1;
+      string recipe_id = 2;
+    }
+    message FairShareTreeInfo {
+      message Node {
+        int32 level = 1;
+        int32 rank = 2;
+        double weight = 3;
+        double demand = 4;
+        double cascaded_demand = 9;
+        double limit = 5;
+        double configured_limit = 10;
+        double assigned_limit = 11;
+        int32 num_children = 6;
+        string sub_bucket = 7;
+        string criticality_band = 8;
+      }
+      string resource = 1;
+      repeated .beyond.QuotaMetadata.UtaMetadata.FairShareTreeInfo.Node nodes = 2;
+      bool is_assigned_limit_in_band = 3;
+    }
+    string station_id = 3;
+    .beyond.QuotaMetadata.UtaMetadata.UtaUserKey user_key = 4;
+    .beyond.QuotaMetadata.UtaMetadata.UtaBeyondTarget beyond_target = 6;
+    .beyond.QuotaMetadata.QuotaAdmissionResponse admission_response = 1;
+    .net.loadshedding.RequestQoS.Criticality admit_criticality = 2;
+    .net.loadshedding.RequestQoS.Criticality user_provided_criticality = 5;
+    repeated .beyond.QuotaMetadata.UtaMetadata.FairShareTreeInfo fairshare_tree_info = 7;
+    bool uta_enforcement_successful = 8;
+    string throttling_quota_group_id = 9;
+    repeated string downgrading_quota_group_ids = 10;
+  }
+  message QuotaTeamMetadata {
+    string pa_name = 1;
+    string mlsa_product_id = 2;
+    string research_hub_id = 3;
+    string gdm_unit = 4;
+  }
+  message MetadataForReplay {
+    .beyond.QuotaBucketKey tsid_bucket = 1;
+    string recipe_admitted_against = 2;
+  }
+  message Decision {
+    enum AdmissionReason {
+      ADMISSION_REASON_UNSPECIFIED = 0;
+      ADMITTED = 1;
+      DOWNGRADED_PRODUCT_EXHAUSTED = 2;
+      DOWNGRADED_RECIPE_EXHAUSTED = 3;
+      DOWNGRADED_ENDPOINT_EXHAUSTED = 4;
+      UTA_FAIL_OPEN_UNAVAILABLE = 6;
+      BYOM = 7;
+      QUOTA_EXHAUSTED = 8;
+      TOP_LEVEL_BUCKET_NOT_FOUND = 9;
+      TOP_LEVEL_BUCKET_ACL_DENIED = 10;
+      BYOM_BUCKET_MISUSE = 11;
+      SUB_BUCKET_ACL_DENIED = 12;
+      INVALID_HIERARCHY = 13;
+      BAG_INTERNAL_ERROR = 15;
+      UTA_REQUEST_REJECTED = 16;
+      UTA_FAIL_OPEN_UNIMPLEMENTED = 17;
+      UTA_NOT_ENFORCED = 18;
+      QUOTA_PRODUCT_EXHAUSTED = 19;
+      QUOTA_RECIPE_EXHAUSTED = 20;
+      QUOTA_ENDPOINT_EXHAUSTED = 21;
+    }
+    message StageResult {
+      enum Stage {
+        STAGE_UNSPECIFIED = 0;
+        TOP_LEVEL_BUCKET_ACCESS = 1;
+        SUB_BUCKET_ACCESS = 2;
+        PRODUCT_LIMIT = 3;
+        RECIPE_LIMIT = 4;
+        ENDPOINT_LIMIT = 5;
+      }
+      .beyond.QuotaMetadata.Decision.StageResult.Stage stage = 1;
+      .beyond.QuotaMetadata.Decision.AdmissionReason reason = 2;
+      bool dry_run = 3;
+      string reason_detail = 4;
+    }
+    .beyond.QuotaMetadata.Decision.AdmissionReason reason = 1;
+    string reason_detail = 2;
+    string requested_hqb = 3;
+    repeated .beyond.QuotaMetadata.Decision.StageResult stages = 4;
+  }
+  .beyond.QuotaBucketKey quota_bucket_key = 1;
+  .beyond.QuotaMetadata.QuotaTeamMetadata quota_team_metadata = 5;
+  repeated .beyond.QuotaCostMetric quota_cost_metrics = 2;
+  .beyond.QuotaMetadata.QuotaServerMetadata quota_server_metadata = 3;
+  .beyond.QuotaMetadata.UtaMetadata uta_metadata = 4;
+  bool admitted_via_byom_sheddable_quota = 6;
+  string peer_role = 7;
+  .beyond.QuotaMetadata.EnforcementSource enforcement_source = 8;
+  string recipe_admitted_against = 9;
+  .beyond.QuotaMetadata.MetadataForReplay metadata_for_replay = 10;
+  .beyond.QuotaMetadata.BucketResolutionSource bucket_resolution_source = 11;
+  string product_id = 12;
+  .beyond.QuotaMetadata.Decision decision = 13;
+}

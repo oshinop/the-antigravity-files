@@ -1,0 +1,281 @@
+// Extracted from agy 1.5.14, file offset 0x690e965, 14238 bytes. Rendering omits custom options.
+syntax = "proto3";
+package jetbox_state_pb;
+import "third_party/jetski/codeium_common_pb/codeium_common.proto";
+import "third_party/jetski/cortex_pb/cortex.proto";
+import "third_party/jetski/project_pb/project.proto";
+import "third_party/jetski/vcs_pb/vcs.proto";
+enum PostOnboardingStepType {
+  POST_ONBOARDING_STEP_TYPE_UNSPECIFIED = 0;
+  POST_ONBOARDING_STEP_TYPE_MANAGER_WELCOME = 1;
+  POST_ONBOARDING_STEP_TYPE_USAGE_MODE = 2;
+  POST_ONBOARDING_STEP_TYPE_AGENT_CONFIGURATION = 3;
+  POST_ONBOARDING_STEP_TYPE_ADD_WORKSPACE = 4;
+}
+enum AgentEnvironment {
+  AGENT_ENVIRONMENT_UNSPECIFIED = 0;
+  AGENT_ENVIRONMENT_LOCAL = 1;
+  AGENT_ENVIRONMENT_BACKGROUND_WORKTREE = 2;
+  AGENT_ENVIRONMENT_BACKGROUND_CITC_WORKSPACE = 3;
+  AGENT_ENVIRONMENT_BACKGROUND_CITC_WORKSPACE_CLONE = 4;
+}
+enum ThemeMode {
+  THEME_MODE_UNSPECIFIED = 0;
+  THEME_MODE_DARK = 1;
+  THEME_MODE_LIGHT = 2;
+  THEME_MODE_INHERIT = 3;
+}
+enum ConversationWidth {
+  CONVERSATION_WIDTH_UNSPECIFIED = 0;
+  CONVERSATION_WIDTH_DEFAULT = 1;
+  CONVERSATION_WIDTH_NARROW = 2;
+  CONVERSATION_WIDTH_WIDE = 3;
+  CONVERSATION_WIDTH_FILL = 4;
+}
+enum TerminalPlacement {
+  TERMINAL_PLACEMENT_UNSPECIFIED = 0;
+  TERMINAL_PLACEMENT_AUX_PANE = 1;
+  TERMINAL_PLACEMENT_BOTTOM_PANEL = 2;
+}
+enum ArtifactWidth {
+  ARTIFACT_WIDTH_UNSPECIFIED = 0;
+  ARTIFACT_WIDTH_DEFAULT = 1;
+  ARTIFACT_WIDTH_WIDE = 2;
+  ARTIFACT_WIDTH_FILL = 3;
+}
+enum ContrastLevel {
+  CONTRAST_LEVEL_UNSPECIFIED = 0;
+  CONTRAST_LEVEL_DEFAULT = 1;
+  CONTRAST_LEVEL_STRONG = 2;
+}
+enum AgentOnboardingState {
+  AGENT_ONBOARDING_STATE_UNSPECIFIED = 0;
+  AGENT_ONBOARDING_STATE_INCOMPLETE = 1;
+  AGENT_ONBOARDING_STATE_COMPLETED = 2;
+}
+enum ProductSkin {
+  PRODUCT_SKIN_UNSPECIFIED = 0;
+  PRODUCT_SKIN_DEVELOPER = 1;
+  PRODUCT_SKIN_NON_TECHNICAL = 2;
+}
+enum MigrationID {
+  MIGRATION_ID_UNSPECIFIED = 0;
+  MIGRATION_ID_SIDECAR_USER_CONFIG_BYPASS = 1;
+  MIGRATION_ID_POPULATE_PROJECT_UPDATED_AT = 2;
+  MIGRATION_ID_SANITY_CHECK_PROJECT_URIS = 3;
+  MIGRATION_ID_PLUGIN_ENABLEMENT = 4;
+  MIGRATION_ID_BUILTIN_SIDECARS_TO_PLUGINS = 5;
+  MIGRATION_ID_PERMISSION_GRANTS_V2 = 6;
+  MIGRATION_ID_LIN_BUILTIN_TO_MARKETPLACE = 7;
+  MIGRATION_ID_ADOPT_BWG_INSTALLS = 8;
+  MIGRATION_ID_GDRIVE_BUILTIN_PLUGIN = 9;
+  MIGRATION_ID_SPLIT_SCIENCE_PLUGIN = 10;
+  MIGRATION_ID_RESET_MAGIC_WORKSPACE_VCS = 11;
+}
+enum MigrationStatus {
+  MIGRATION_STATUS_UNSPECIFIED = 0;
+  MIGRATION_STATUS_STARTED = 1;
+  MIGRATION_STATUS_COMPLETED = 2;
+  MIGRATION_STATUS_FAILED = 3;
+}
+enum RetroactiveMigrationStatus {
+  RETROACTIVE_MIGRATION_STATUS_UNSPECIFIED = 0;
+  RETROACTIVE_MIGRATION_STATUS_STARTED = 1;
+  RETROACTIVE_MIGRATION_STATUS_COMPLETED_RAN = 2;
+  RETROACTIVE_MIGRATION_STATUS_COMPLETED_UNNECESSARY = 3;
+}
+message PostOnboardingState {
+  repeated .jetbox_state_pb.PostOnboardingStepType completed_steps = 1;
+}
+message UserSettings {
+  message SandboxProxy {
+    message Http {
+      string address = 1; // oneof=_address
+      string cert_file = 2; // oneof=_cert_file
+      string username = 3; // oneof=_username
+      string password = 4; // oneof=_password
+    }
+    .jetbox_state_pb.UserSettings.SandboxProxy.Http http = 1; // oneof=_http
+  }
+  .exa.codeium_common_pb.CascadeCommandsAutoExecution auto_execution_policy = 1;
+  .exa.codeium_common_pb.ArtifactReviewMode artifact_review_mode = 2;
+  bool allow_agent_access_non_workspace_files = 3; // oneof=_allow_agent_access_non_workspace_files
+  repeated string allowed_commands = 4;
+  repeated string denied_commands = 5;
+  .exa.codeium_common_pb.PlanningMode planning_mode = 6;
+  bool secure_mode_enabled = 7; // oneof=_secure_mode_enabled
+  bool allow_cascade_access_gitignore_files = 8; // oneof=_allow_cascade_access_gitignore_files
+  bool enable_terminal_sandbox = 9; // oneof=_enable_terminal_sandbox
+  bool disable_default_customizations = 10; // oneof=_disable_default_customizations
+  .exa.codeium_common_pb.PermissionGrantsConfig global_permission_grants = 11;
+  .jetbox_state_pb.AgentEnvironment agent_environment = 12; // oneof=_agent_environment
+  bool verbose_agent_chat = 13; // oneof=_verbose_agent_chat
+  bool sandbox_allow_network = 14; // oneof=_sandbox_allow_network
+  .exa.codeium_common_pb.AgentSettingPolicy non_workspace_file_access_policy = 17; // oneof=_non_workspace_file_access_policy
+  .exa.codeium_common_pb.AgentSettingPolicy internet_access_policy = 18; // oneof=_internet_access_policy
+  bool allow_agent_access_gitignore_files = 19; // oneof=_allow_agent_access_gitignore_files
+  .jetbox_state_pb.ThemeMode theme_mode = 20;
+  .jetbox_state_pb.CustomThemeSeeds custom_theme_seeds_light = 21;
+  .jetbox_state_pb.CustomThemeSeeds custom_theme_seeds_dark = 22;
+  .exa.codeium_common_pb.BrowserJsExecutionPolicy browser_js_execution_policy = 23;
+  int32 max_cloned_workspaces = 24; // oneof=_max_cloned_workspaces
+  int32 max_clones_per_workspace = 25; // oneof=_max_clones_per_workspace
+  bool disable_eager_cloning = 26; // oneof=_disable_eager_cloning
+  string gcp_region = 27; // oneof=_gcp_region
+  bool remote_control_enabled = 28; // oneof=_remote_control_enabled
+  bool use_ai_credits = 29; // oneof=_use_ai_credits
+  string active_profile = 30; // oneof=_active_profile
+  .jetbox_state_pb.ConversationWidth conversation_width = 31; // oneof=_conversation_width
+  string remote_control_hostname = 33; // oneof=_remote_control_hostname
+  string cli_remote_control_hostname = 42; // oneof=_cli_remote_control_hostname
+  .exa.cortex_pb.MessageDeliveryStrategy queued_message_delivery_strategy = 34; // oneof=_queued_message_delivery_strategy
+  .jetbox_state_pb.GoogleSpecificConfig google_config = 35; // oneof=_google_config
+  bool enable_business_login = 36; // oneof=_enable_business_login
+  bool enable_notifications_for_special_events = 37; // oneof=_enable_notifications_for_special_events
+  bool enable_personal_customizations = 38; // oneof=_enable_personal_customizations
+  string shell_setup_script = 39; // oneof=_shell_setup_script
+  bool enable_sounds_for_special_events = 40; // oneof=_enable_sounds_for_special_events
+  .exa.codeium_common_pb.AgentPermissionPreset permission_preset = 41;
+  bool enable_adc = 43; // oneof=_enable_adc
+  bool permission_grants_v2_migrated = 44; // oneof=_permission_grants_v2_migrated
+  bool sandbox_enabled_at_v2_migration = 45; // oneof=_sandbox_enabled_at_v2_migration
+  string vertex_service_tier = 46; // oneof=_vertex_service_tier
+  .jetbox_state_pb.UserSettings.SandboxProxy sandbox_proxy = 47; // oneof=_sandbox_proxy
+  .jetbox_state_pb.TerminalPlacement terminal_placement = 48; // oneof=_terminal_placement
+  int32 agent_sound_volume = 49; // oneof=_agent_sound_volume
+  string voice_name = 50; // oneof=_voice_name
+  int32 voice_volume = 51; // oneof=_voice_volume
+  string voice_input_device_id = 52; // oneof=_voice_input_device_id
+  .jetbox_state_pb.CustomKeybindingsConfig custom_keybindings = 53;
+  bool verbose_conversation_steps = 54; // oneof=_verbose_conversation_steps
+  double voice_speed = 55; // oneof=_voice_speed
+  bool context_usage_indicator_enabled = 57; // oneof=_context_usage_indicator_enabled
+  .jetbox_state_pb.ArtifactWidth artifact_width = 58; // oneof=_artifact_width
+  .jetbox_state_pb.ContrastLevel contrast = 59; // oneof=_contrast
+  int32 font_size = 60; // oneof=_font_size
+  bool custom_context_menus_enabled = 61; // oneof=_custom_context_menus_enabled
+  bool screen_reader_mode = 62; // oneof=_screen_reader_mode
+  .exa.codeium_common_pb.Model orchestrator_model = 63; // oneof=_orchestrator_model
+  .exa.codeium_common_pb.Model orchestrator_executor_model = 64; // oneof=_orchestrator_executor_model
+  .jetbox_state_pb.DictationLanguagesConfig dictation_languages = 65;
+}
+message CustomKeybinding {
+  bool mod = 1; // oneof=_mod
+  bool ctrl = 2; // oneof=_ctrl
+  bool alt = 3; // oneof=_alt
+  bool shift = 4; // oneof=_shift
+  string key = 5; // oneof=_key
+  string code = 6; // oneof=_code
+}
+message CustomKeybindingList {
+  repeated .jetbox_state_pb.CustomKeybinding bindings = 1;
+}
+message PlatformKeybindingOverrides {
+  message CommandsEntry {
+    string key = 1;
+    .jetbox_state_pb.CustomKeybindingList value = 2;
+  }
+  repeated .jetbox_state_pb.PlatformKeybindingOverrides.CommandsEntry commands = 1;
+}
+message CustomKeybindingsConfig {
+  .jetbox_state_pb.PlatformKeybindingOverrides mac = 1;
+  .jetbox_state_pb.PlatformKeybindingOverrides windows = 2;
+  .jetbox_state_pb.PlatformKeybindingOverrides linux = 3;
+}
+message DictationLanguagesConfig {
+  repeated string language_codes = 1;
+}
+message SidebarWorkspaceInfo {
+  bool is_collapsed = 1; // oneof=_is_collapsed
+  bool is_hidden = 2; // oneof=_is_hidden
+}
+message CustomModelsConfig {
+  message CustomModelsEntry {
+    string key = 1;
+    .exa.codeium_common_pb.ModelInfo value = 2;
+  }
+  repeated .jetbox_state_pb.CustomModelsConfig.CustomModelsEntry custom_models = 1;
+}
+message CustomThemeSeeds {
+  string background = 1; // oneof=_background
+  string primary = 2; // oneof=_primary
+  string foreground_override = 3; // oneof=_foreground_override
+  string primary_foreground_override = 4; // oneof=_primary_foreground_override
+  string code_foreground_override = 5; // oneof=_code_foreground_override
+}
+message CogWorkspaceConfig {
+  string repo_name = 1; // oneof=_repo_name
+  string branch_name = 2; // oneof=_branch_name
+}
+message GoogleSpecificConfig {
+  .exa.vcs_pb.VcsType magic_workspace_vcs = 1; // oneof=_magic_workspace_vcs
+  .jetbox_state_pb.CogWorkspaceConfig magic_workspace_cog_config = 2; // oneof=_magic_workspace_cog_config
+  bool sync_jj_workspace_to_head = 3; // oneof=_sync_jj_workspace_to_head
+}
+message GoogleSpecificSettings {
+  bool google3_project_created = 1;
+  .exa.vcs_pb.VcsType default_magic_workspace_vcs = 2; // oneof=_default_magic_workspace_vcs
+}
+message SeenNuxUids {
+  repeated int32 uids = 1;
+}
+message JetboxAppState {
+  message SidebarWorkspacesEntry {
+    string key = 1;
+    .jetbox_state_pb.SidebarWorkspaceInfo value = 2;
+  }
+  message MigrationsEntry {
+    int32 key = 1;
+    .jetbox_state_pb.MigrationStatus value = 2;
+  }
+  message MigrationFailureCountsEntry {
+    int32 key = 1;
+    int32 value = 2;
+  }
+  .jetbox_state_pb.PostOnboardingState post_onboarding = 1;
+  .jetbox_state_pb.SeenNuxUids seen_nuxs = 2;
+  bool sidebar_workspaces_migrated = 3;
+  .jetbox_state_pb.GoogleSpecificSettings google_settings = 4;
+  .jetbox_state_pb.AgentOnboardingState agent_onboarding_completed = 5;
+  repeated .jetbox_state_pb.JetboxAppState.SidebarWorkspacesEntry sidebar_workspaces = 6;
+  .exa.codeium_common_pb.Model last_selected_agent_model = 10;
+  .jetbox_state_pb.CustomModelsConfig custom_models_config = 11;
+  .jetbox_state_pb.AgentEnvironment agent_environment = 13;
+  bool user_config_migrated = 14; // oneof=_user_config_migrated
+  .jetbox_state_pb.MigrationStatus migrate_convos_into_projects = 16;
+  string installation_uuid = 17; // oneof=_installation_uuid
+  .jetbox_state_pb.MigrationStatus migrate_internal_projects = 18;
+  .jetbox_state_pb.RetroactiveMigrationStatus migrate_retroactive_projects = 19;
+  int64 opted_out_best_of_n_auto_trigger_at = 20; // oneof=_opted_out_best_of_n_auto_trigger_at
+  repeated .jetbox_state_pb.JetboxAppState.MigrationsEntry migrations = 21;
+  repeated .jetbox_state_pb.JetboxAppState.MigrationFailureCountsEntry migration_failure_counts = 22;
+  .jetbox_state_pb.ProductSkin product_skin = 23;
+}
+message State {
+  message SidebarWorkspacesEntry {
+    string key = 1;
+    .jetbox_state_pb.SidebarWorkspaceInfo value = 2;
+  }
+  .jetbox_state_pb.PostOnboardingState post_onboarding = 1;
+  .jetbox_state_pb.UserSettings user_settings = 2;
+  repeated .jetbox_state_pb.State.SidebarWorkspacesEntry sidebar_workspaces = 3;
+  .exa.codeium_common_pb.Model last_selected_agent_model = 4;
+  .jetbox_state_pb.CustomModelsConfig custom_models_config = 5;
+  repeated uint32 seen_nux_uids = 6;
+  .jetbox_state_pb.ThemeMode theme_mode = 7;
+  .jetbox_state_pb.Projects project_store = 10;
+  bool sidebar_workspaces_migrated = 11;
+  .jetbox_state_pb.CustomThemeSeeds custom_theme_seeds_light = 13;
+  .jetbox_state_pb.CustomThemeSeeds custom_theme_seeds_dark = 14;
+  bool google3_project_created = 15;
+  .jetbox_state_pb.AgentOnboardingState agent_onboarding_completed = 16;
+}
+message Projects {
+  repeated .exa.project_pb.Project projects = 1;
+}
+message WorkspaceTrustState {
+  repeated .jetbox_state_pb.TrustedWorkspace trusted_workspaces = 1;
+}
+message TrustedWorkspace {
+  string path = 1;
+}

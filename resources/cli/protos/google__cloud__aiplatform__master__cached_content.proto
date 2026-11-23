@@ -1,0 +1,48 @@
+// Extracted from agy 1.5.14, file offset 0x66d5ac8, 2740 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.cloud.aiplatform.master;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/policy.proto";
+import "google/api/resource.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "google/cloud/aiplatform/common/proto_field_options.proto";
+import "google/cloud/aiplatform/master/content.proto";
+import "google/cloud/aiplatform/master/encryption_spec.proto";
+import "google/cloud/aiplatform/master/tool.proto";
+import "google/cloud/automl/common/proto_field_options.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "net/proto2/contrib/validator/annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message CachedContent {
+  message UsageMetadata {
+    int32 total_token_count = 1;
+    int32 text_count = 2;
+    int32 image_count = 3;
+    int32 video_duration_seconds = 4;
+    int32 audio_duration_seconds = 5;
+  }
+  string name = 1;
+  string display_name = 11;
+  string model = 2;
+  .google.cloud.aiplatform.master.Content system_instruction = 3;
+  repeated .google.cloud.aiplatform.master.Content contents = 4;
+  repeated .google.cloud.aiplatform.master.Tool tools = 5;
+  .google.cloud.aiplatform.master.ToolConfig tool_config = 6;
+  .google.protobuf.Timestamp create_time = 7;
+  .google.protobuf.Timestamp update_time = 8;
+  .google.protobuf.Timestamp expire_time = 9; // oneof=expiration
+  .google.protobuf.Duration ttl = 10; // oneof=expiration
+  .google.cloud.aiplatform.master.CachedContent.UsageMetadata usage_metadata = 12;
+  .google.cloud.aiplatform.master.EncryptionSpec encryption_spec = 13;
+}
+message ContextCacheConfig {
+  message EphemeralRetention {
+  }
+  message DurableRetention {
+  }
+  .google.cloud.aiplatform.master.ContextCacheConfig.EphemeralRetention ephemeral_retention = 1; // oneof=retention_config
+  .google.cloud.aiplatform.master.ContextCacheConfig.DurableRetention durable_retention = 2; // oneof=retention_config
+}

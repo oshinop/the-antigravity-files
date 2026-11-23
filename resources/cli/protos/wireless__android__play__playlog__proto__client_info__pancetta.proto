@@ -1,0 +1,23 @@
+// Extracted from agy 1.5.14, file offset 0x664e105, 978 bytes. Rendering omits custom options.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb_generate_object_format.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message PancettaClientInfo {
+  enum OsType {
+    OS_TYPE_UNKNOWN = 0;
+    OS_TYPE_MAC = 1;
+    OS_TYPE_WINDOWS = 2;
+    OS_TYPE_ANDROID = 3;
+    OS_TYPE_CROS = 4;
+    OS_TYPE_LINUX = 5;
+    OS_TYPE_OPENBSD = 6;
+  }
+  string device_id = 1;
+  .wireless_android_play_playlog.PancettaClientInfo.OsType os = 2;
+  string app_id = 3;
+  string app_version = 4;
+  string mcc_mnc = 5;
+}

@@ -1,0 +1,7 @@
+// Extracted from agy 1.5.14, file offset 0xf4208b4, 123 bytes. Rendering omits custom options.
+syntax = "editions";
+package util;
+message ErrorSpacePayload {
+  int32 code = 1;
+  string space = 2;
+}

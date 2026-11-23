@@ -1,0 +1,80 @@
+// Extracted from agy 1.5.14, file offset 0x66cdc5d, 2665 bytes. Rendering omits custom options.
+syntax = "editions";
+package genai;
+import "learning/genai/api/interactions/proto/thinking.proto";
+import "learning/genai/api/interactions/proto/tools.proto";
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+message ModelInteraction {
+  string model = 1;
+  .genai.GenerationConfig generation_config = 2;
+}
+message GenerationConfig {
+  float temperature = 1;
+  float top_p = 2;
+  int32 seed = 3;
+  repeated string stop_sequences = 6;
+  .genai.ToolChoiceType tool_choice_mode = 14; // oneof=tool_choice
+  .genai.ToolChoiceConfig tool_choice_config = 16; // oneof=tool_choice
+  .genai.ThinkingLevel thinking_level = 10;
+  .genai.ThinkingSummaries thinking_summaries = 11;
+  int32 max_output_tokens = 9;
+  .genai.ImageConfig image_config = 13;
+  .genai.VideoConfig video_config = 25;
+  .genai.TranscriptionConfig transcription_config = 23;
+  .genai.SpeakerConfig structured_speech_config = 27;
+}
+message VerbatimTranscriptionMode {
+  repeated string timestamp_granularities = 1;
+  string diarization_mode = 2;
+}
+message SmartTranscriptionMode {
+  string source_text = 10;
+}
+message TranscriptionMode {
+  .genai.VerbatimTranscriptionMode verbatim = 1; // oneof=type
+  .genai.SmartTranscriptionMode smart = 2; // oneof=type
+}
+message TranscriptionConfig {
+  enum Mode {
+    MODE_UNSPECIFIED = 0;
+    VERBATIM = 1;
+    SMART = 2;
+  }
+  repeated string language_codes = 3;
+  repeated string custom_vocabulary = 5;
+  .genai.TranscriptionConfig.Mode mode_enum = 6; // oneof=mode
+  .genai.TranscriptionMode mode_config = 9; // oneof=mode
+  repeated string timestamp_granularities = 1;
+  string diarization_mode = 2;
+  repeated string adaptation_phrases = 4;
+}
+message SpeakerConfig {
+  enum TextNormalization {
+    TEXT_NORMALIZATION_UNSPECIFIED = 0;
+    AUTO = 1;
+    ENABLED = 2;
+    DISABLED = 3;
+  }
+  repeated .genai.SpeechConfig speakers = 1;
+  .genai.SpeakerConfig.TextNormalization text_normalization = 3;
+}
+message SpeechConfig {
+  string voice = 1;
+  string language = 2;
+  string speaker = 3;
+}
+message ImageConfig {
+  string aspect_ratio = 1;
+  string image_size = 2;
+}
+message VideoConfig {
+  enum Task {
+    TASK_UNSPECIFIED = 0;
+    TEXT_TO_VIDEO = 1;
+    IMAGE_TO_VIDEO = 2;
+    REFERENCE_TO_VIDEO = 3;
+    EDIT = 4;
+    EXTEND = 5;
+  }
+  .genai.VideoConfig.Task task = 1;
+}

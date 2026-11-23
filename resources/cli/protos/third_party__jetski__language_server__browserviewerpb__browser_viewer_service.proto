@@ -1,0 +1,97 @@
+// Extracted from agy 1.5.14, file offset 0x672d3f0, 3876 bytes. Rendering omits custom options.
+syntax = "proto3";
+package exa.browser_viewer_pb;
+import "third_party/jetski/language_server/browserviewerpb/browser_viewer.proto";
+message ListBrowserTabsRequest {
+  string root_conversation_id = 1;
+}
+message ListBrowserTabsResponse {
+  bool has_browser_host = 1;
+  repeated .exa.browser_viewer_payload_pb.BrowserTabInfo tabs = 2;
+}
+message PrepareBrowserViewRequest {
+  string root_conversation_id = 1;
+}
+message PrepareBrowserViewResponse {
+  repeated .exa.browser_viewer_payload_pb.BrowserViewerIceServer ice_servers = 1;
+}
+message OpenBrowserViewRequest {
+  string root_conversation_id = 1;
+  string tab_id = 2;
+  string offer_sdp = 3;
+}
+message OpenBrowserViewResponse {
+  string session_id = 1;
+  string answer_sdp = 2;
+  int64 expires_unix_ms = 3;
+  .exa.browser_viewer_payload_pb.BrowserTabInfo tab = 4;
+  string stream_id = 5;
+}
+message RenewBrowserViewRequest {
+  string session_id = 1;
+}
+message RenewBrowserViewResponse {
+  int64 expires_unix_ms = 1;
+  bool control_active = 2;
+  int64 control_expires_unix_ms = 3;
+}
+message CloseBrowserViewRequest {
+  string session_id = 1;
+}
+message CloseBrowserViewResponse {
+}
+message TakeBrowserControlRequest {
+  string root_conversation_id = 1;
+  string session_id = 2;
+  string tab_id = 3;
+}
+message TakeBrowserControlResponse {
+  string control_token = 1;
+  int64 control_expires_unix_ms = 2;
+  .exa.browser_viewer_payload_pb.BrowserTabInfo tab = 3;
+}
+message ReleaseBrowserControlRequest {
+  string root_conversation_id = 1;
+  string session_id = 2;
+  string tab_id = 3;
+  string control_token = 4;
+}
+message ReleaseBrowserControlResponse {
+}
+message ControlBrowserTabRequest {
+  string root_conversation_id = 1;
+  string tab_id = 2;
+  .exa.browser_viewer_payload_pb.BrowserViewerControlAction action = 3;
+  string url = 4;
+  .exa.browser_viewer_payload_pb.BrowserViewerInputEvent input_event = 5;
+  string session_id = 6;
+  string control_token = 7;
+}
+message ControlBrowserTabResponse {
+  .exa.browser_viewer_payload_pb.BrowserTabInfo tab = 1;
+}
+message ReadBrowserFrameRequest {
+  string root_conversation_id = 1;
+  string tab_id = 2;
+  uint32 max_width_px = 3;
+  uint32 max_height_px = 4;
+  string session_id = 5;
+}
+message ReadBrowserFrameResponse {
+  bytes image_data = 1;
+  string mime_type = 2;
+  uint32 width_px = 3;
+  uint32 height_px = 4;
+  .exa.browser_viewer_payload_pb.BrowserTabInfo tab = 5;
+}
+service BrowserViewerService {
+  rpc ListBrowserTabs (.exa.browser_viewer_pb.ListBrowserTabsRequest) returns (.exa.browser_viewer_pb.ListBrowserTabsResponse);
+  rpc PrepareBrowserView (.exa.browser_viewer_pb.PrepareBrowserViewRequest) returns (.exa.browser_viewer_pb.PrepareBrowserViewResponse);
+  rpc OpenBrowserView (.exa.browser_viewer_pb.OpenBrowserViewRequest) returns (.exa.browser_viewer_pb.OpenBrowserViewResponse);
+  rpc RenewBrowserView (.exa.browser_viewer_pb.RenewBrowserViewRequest) returns (.exa.browser_viewer_pb.RenewBrowserViewResponse);
+  rpc CloseBrowserView (.exa.browser_viewer_pb.CloseBrowserViewRequest) returns (.exa.browser_viewer_pb.CloseBrowserViewResponse);
+  rpc TakeBrowserControl (.exa.browser_viewer_pb.TakeBrowserControlRequest) returns (.exa.browser_viewer_pb.TakeBrowserControlResponse);
+  rpc ReleaseBrowserControl (.exa.browser_viewer_pb.ReleaseBrowserControlRequest) returns (.exa.browser_viewer_pb.ReleaseBrowserControlResponse);
+  rpc ControlBrowserTab (.exa.browser_viewer_pb.ControlBrowserTabRequest) returns (.exa.browser_viewer_pb.ControlBrowserTabResponse);
+  rpc ReadBrowserFrame (.exa.browser_viewer_pb.ReadBrowserFrameRequest) returns (.exa.browser_viewer_pb.ReadBrowserFrameResponse);
+}

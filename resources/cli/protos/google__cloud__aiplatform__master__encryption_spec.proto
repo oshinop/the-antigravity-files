@@ -1,0 +1,11 @@
+// Extracted from agy 1.5.14, file offset 0x6630f5e, 608 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.cloud.aiplatform.master;
+import "cloud/security/kms/boq/keytracking/proto/key_tracking_annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/policy.proto";
+import "google/api/versioning.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message EncryptionSpec {
+  string kms_key_name = 1;
+}

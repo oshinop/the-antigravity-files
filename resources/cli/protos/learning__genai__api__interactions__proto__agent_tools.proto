@@ -1,0 +1,67 @@
+// Extracted from agy 1.5.14, file offset 0x66926da, 1865 bytes. Rendering omits custom options.
+syntax = "editions";
+package genai;
+import "learning/genai/api/interactions/proto/content.proto";
+message AgentToolCallStep {
+  .genai.InvokeSubagentCall invoke_subagent = 1; // oneof=call
+  .genai.SendMessageCall send_message = 2; // oneof=call
+  .genai.ManageSubagentsCall manage_subagents = 3; // oneof=call
+  .genai.DefineSubagentCall define_subagent = 4; // oneof=call
+}
+message AgentToolResultStep {
+  .genai.InvokeSubagentResult invoke_subagent = 1; // oneof=result
+  .genai.SendMessageResult send_message = 2; // oneof=result
+  .genai.ManageSubagentsResult manage_subagents = 3; // oneof=result
+  .genai.DefineSubagentResult define_subagent = 4; // oneof=result
+}
+message InvokeSubagentCall {
+  string type_name = 1;
+  string role = 2;
+  repeated .genai.Content prompt = 3;
+}
+message InvokeSubagentResult {
+  message Subagent {
+    string interaction_id = 1;
+    string type_name = 2;
+    string role = 3;
+  }
+  repeated .genai.InvokeSubagentResult.Subagent subagents = 1;
+}
+message SendMessageCall {
+  string recipient = 1;
+  repeated .genai.Content message = 2;
+}
+message SendMessageResult {
+}
+message ManageSubagentsCall {
+  enum Action {
+    ACTION_UNSPECIFIED = 0;
+    ACTION_LIST = 1;
+    ACTION_KILL = 2;
+    ACTION_KILL_ALL = 3;
+  }
+  .genai.ManageSubagentsCall.Action action = 1;
+  repeated string interaction_ids = 2;
+}
+message ManageSubagentsResult {
+  repeated .genai.ManagedSubagent subagents = 1;
+}
+message ManagedSubagent {
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    STATUS_IN_PROGRESS = 1;
+    STATUS_IDLE = 2;
+    STATUS_REQUIRES_ACTION = 3;
+    STATUS_FAILED = 4;
+    STATUS_CANCELLED = 5;
+  }
+  string interaction_id = 1;
+  .genai.ManagedSubagent.Status status = 2;
+}
+message DefineSubagentCall {
+  string name = 1;
+  string description = 2;
+  string system_prompt = 3;
+}
+message DefineSubagentResult {
+}

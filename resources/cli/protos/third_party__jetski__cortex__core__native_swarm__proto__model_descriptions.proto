@@ -1,0 +1,19 @@
+// Extracted from agy 1.5.14, file offset 0x662cb79, 556 bytes. Rendering omits custom options.
+syntax = "proto3";
+package exa.cortex.native_swarm;
+message ModelDescriptions {
+  message QuotaBucketsEntry {
+    string key = 1;
+    .exa.cortex.native_swarm.QuotaBucketDescription value = 2;
+  }
+  repeated .exa.cortex.native_swarm.ModelDescription models = 1;
+  repeated .exa.cortex.native_swarm.ModelDescriptions.QuotaBucketsEntry quota_buckets = 2;
+}
+message ModelDescription {
+  string name = 1;
+  string quota_bucket = 2;
+  string notes = 3;
+}
+message QuotaBucketDescription {
+  string notes = 1;
+}

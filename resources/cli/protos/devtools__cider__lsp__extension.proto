@@ -1,0 +1,52 @@
+// Extracted from agy 1.5.14, file offset 0x666bb8d, 1371 bytes. Rendering omits custom options.
+syntax = "editions";
+package editorservices;
+import "devtools/cider/lsp/common.proto";
+import "google/protobuf/any.proto";
+import "java/com/google/apps/jspb/jspb.proto";
+message WorldSnapshot {
+  uint64 source_snapshot = 1;
+  uint64 build_snapshot = 2;
+  string shelf_snapshot = 3;
+}
+message Activity {
+  string activity_type = 1;
+  int32 count = 2;
+  int64 walltime_usec = 3;
+  int64 total_duration_usec = 4;
+  int64 total_bytes = 5;
+}
+message Experiments {
+  repeated string experiments = 1;
+}
+message CiderLSPCommand {
+  string citc_workspace_id = 1;
+  string workspace_path = 2;
+  string uri = 3;
+  string command = 4;
+  .google.protobuf.Any arg = 5;
+}
+message LiteralCommandArg {
+  string json = 1;
+}
+message BlazeTarget {
+  enum TestSize {
+    UNKNOWN_TEST_SIZE = 0;
+    SMALL_TEST = 1;
+    MEDIUM_TEST = 2;
+    LARGE_TEST = 3;
+    ENORMOUS_TEST = 4;
+  }
+  string name = 1;
+  string rule_kind = 2;
+  string generator_function = 8;
+  .editorservices.Range range = 3;
+  bool is_runnable = 4;
+  bool is_testable = 5;
+  repeated string sources = 6;
+  repeated string deps = 7;
+  repeated string tags = 9;
+  .editorservices.BlazeTarget.TestSize test_size = 10;
+  bool testonly = 11;
+  repeated string data = 12;
+}

@@ -1,0 +1,41 @@
+// Extracted from agy 1.5.14, file offset 0x6679e8e, 1553 bytes. Rendering omits custom options.
+syntax = "proto2";
+package logs.proto.wireless.performance.mobile;
+import "google/protobuf/duration.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message HeapProfileMetric {
+  enum ProfilingType {
+    PROFILING_TYPE_UNSPECIFIED = 0;
+    JAVA = 1;
+    NATIVE = 2;
+  }
+  enum ProfileStatus {
+    PROFILE_STATUS_UNSPECIFIED = 0;
+    ERROR_FAILED_RATE_LIMIT_SYSTEM = 1;
+    ERROR_FAILED_RATE_LIMIT_PROCESS = 2;
+    ERROR_FAILED_PROFILING_IN_PROGRESS = 3;
+    ERROR_FAILED_EXECUTING = 4;
+    ERROR_FAILED_POST_PROCESSING = 5;
+    ERROR_FAILED_NO_DISK_SPACE = 6;
+    ERROR_FAILED_INVALID_REQUEST = 7;
+    ERROR_UNKNOWN = 8;
+    ERROR_NONE = 9;
+  }
+  enum StopReason {
+    STOP_REASON_UNSPECIFIED = 0;
+    STOP_PROFILING = 1;
+    TIMEOUT = 2;
+  }
+  message MemorySnapshot {
+    int64 anon_rss_kb = 1;
+    int64 swap_kb = 2;
+  }
+  .google.protobuf.Duration duration = 1;
+  bytes heap_profile = 2;
+  .logs.proto.wireless.performance.mobile.HeapProfileMetric.MemorySnapshot memory_snapshot_start = 3;
+  .logs.proto.wireless.performance.mobile.HeapProfileMetric.MemorySnapshot memory_snapshot_stop = 4;
+  int64 total_mem = 5;
+  .logs.proto.wireless.performance.mobile.HeapProfileMetric.ProfilingType profiling_type = 6;
+  .logs.proto.wireless.performance.mobile.HeapProfileMetric.ProfileStatus profile_status = 7;
+  .logs.proto.wireless.performance.mobile.HeapProfileMetric.StopReason stop_reason = 8;
+}

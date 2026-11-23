@@ -1,0 +1,10 @@
+// Extracted from agy 1.5.14, file offset 0x662e823, 573 bytes. Rendering omits custom options.
+syntax = "editions";
+package frameworks.client.logging.proto;
+import "frameworks/client/logging/proto/client_info.proto";
+import "frameworks/client/logging/proto/client_release.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ClientEventMetadata {
+  .frameworks.client.logging.proto.ClientInfo client_info = 2;
+  .frameworks.client.logging.proto.ClientRelease release_type = 6;
+}

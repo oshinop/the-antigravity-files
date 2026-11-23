@@ -1,0 +1,20 @@
+// Extracted from agy 1.5.14, file offset 0x663a8f6, 736 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "net/proto2/proto/descriptor.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Auditing {
+  message LabelsEntry {
+    string key = 1;
+    string value = 2;
+  }
+  repeated .google.api.AuditingRule rules = 1;
+  repeated .google.api.Auditing.LabelsEntry labels = 2;
+}
+message AuditingRule {
+  string selector = 1;
+  string directive = 2;
+}
+extend .proto2.FieldOptions { .google.api.AuditingRule field_auditing = 112199341; }
+extend .proto2.MethodOptions { .google.api.AuditingRule method_auditing = 112199341; }

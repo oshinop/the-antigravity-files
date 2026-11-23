@@ -1,0 +1,15 @@
+// Extracted from agy 1.5.14, file offset 0x663c91e, 715 bytes. Rendering omits custom options.
+syntax = "editions";
+package devtools.jetski.telemetry.extensions;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "third_party/jetski/cortex_pb/cortex.proto";
+message CortexGeneratorMetadata {
+  string trajectory_id = 1;
+  string cascade_id = 2;
+  .exa.cortex_pb.CortexStepGeneratorMetadata generator_metadata = 3;
+  uint32 metadata_index = 4;
+  int32 last_common_index = 5;
+  bool is_full = 6;
+  string execution_id = 11;
+  string plan_model = 12;
+}

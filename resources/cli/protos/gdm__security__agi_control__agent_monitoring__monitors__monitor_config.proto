@@ -1,0 +1,402 @@
+// Extracted from agy 1.5.14, file offset 0x69e20da, 21037 bytes. Rendering omits custom options.
+syntax = "editions";
+package gdm.security.agi_control.agent_monitoring.monitors;
+import "learning/genai/beyond/server/quota/proto/quota.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum ExecutionPhase {
+  EXECUTION_PHASE_UNSPECIFIED = 0;
+  EXECUTION_PHASE_PRE_TOOL = 1;
+  EXECUTION_PHASE_POST_TOOL = 2;
+  EXECUTION_PHASE_POST_INVOCATION = 3;
+}
+enum ModelTier {
+  MODEL_TIER_UNSPECIFIED = 0;
+  MODEL_TIER_FLASH_LITE = 1;
+  MODEL_TIER_FLASH = 2;
+  MODEL_TIER_PRO = 3;
+}
+enum TrajectoryCompaction {
+  TRAJECTORY_COMPACTION_UNSPECIFIED = 0;
+  TRAJECTORY_COMPACTION_HEAD_TAIL = 1;
+  TRAJECTORY_COMPACTION_INITIAL_USER_AND_LATEST_STEP = 2;
+  TRAJECTORY_COMPACTION_USER_ANCHORED_HEAD_TAIL = 3;
+  TRAJECTORY_COMPACTION_BACKWARD_WALK = 4;
+  TRAJECTORY_COMPACTION_ROLLING_CHECKPOINT = 5;
+  TRAJECTORY_COMPACTION_LATEST_STEP_ONLY = 6;
+}
+message RollingCheckpointConfig {
+  float retain_fraction = 1;
+  float checkpoint_fraction = 2;
+}
+message FlaggedStepInclusionConfig {
+  float min_severity = 1;
+  int32 max_included_steps = 2;
+  repeated string source_monitor_names = 3;
+  int32 max_step_bytes = 4;
+}
+message MonitorConfig {
+  enum Mode {
+    MODE_UNSPECIFIED = 0;
+    BLOCK = 1;
+    LOG = 2;
+    SOFT_BLOCK_INJECT = 3;
+    ASK = 4;
+    FORCE_ASK = 5;
+  }
+  string name = 1;
+  bool enabled = 2;
+  repeated int32 enable_if = 31;
+  .gdm.security.agi_control.agent_monitoring.monitors.MonitorConfig.Mode mode = 3;
+  int32 timeout_seconds = 4;
+  string version = 5;
+  repeated string owners = 8;
+  string description = 9;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.ExecutionPhase execution_phases = 10;
+  int32 max_output_chars = 16;
+  .gdm.security.agi_control.agent_monitoring.monitors.LlmMonitorConfig llm_config = 6; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.ToolSafetyConfig tool_safety_config = 11; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.EmbeddingMonitorConfig embedding_config = 12; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.AapMonitorConfig aap_config = 17; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.AgcisMonitorConfig agcis_config = 19; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.AgcisReasoningMonitorConfig agcis_reasoning_config = 20; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.PolicyGuardianMonitorConfig policy_guardian_config = 24; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.AcsvMonitorConfig acsv_config = 25; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.LogprobMonitorConfig logprob_config = 27; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.IntrospectionVerdictsMonitorConfig introspection_verdicts_config = 28; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.EmbeddingVerdictsMonitorConfig embedding_verdicts_config = 29; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.AgentTrustEngineMonitorConfig agent_trust_engine_config = 32; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.TrifectaEmbedMonitorConfig trifecta_embed_config = 33; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.AresNgMonitorConfig aresng_config = 34; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.GuardianAgentMonitorConfig guardian_agent_config = 36; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.TruncatedToolCallMonitorConfig truncated_tool_call_config = 37; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.SybillVerdictsMonitorConfig sybill_verdicts_config = 38; // oneof=type_config
+  .gdm.security.agi_control.agent_monitoring.monitors.DependencyConfig dependency_config = 7;
+  string injected_message = 13;
+  .gdm.security.agi_control.agent_monitoring.monitors.ExperimentAssignment experiment = 15;
+  bool experimental_only = 18;
+  bool pss_experimental_only = 21;
+  repeated string user_groups = 22;
+  repeated string tags = 23;
+  repeated string skip_tags = 30;
+  repeated string excluded_user_groups = 26;
+  .gdm.security.agi_control.agent_monitoring.monitors.FailClosedBudget fail_closed_budget = 35;
+}
+message MonitorsConfig {
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.MonitorConfig monitors = 1;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.ExperimentConfig experiments = 2;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.UserGroup user_groups = 3;
+  repeated string active_tags = 4;
+}
+message ModelBackendConfig {
+  string backend_id = 1;
+  string model_name_override = 2;
+  string target = 3;
+}
+message LlmMonitorConfig {
+  enum StepsToConsider {
+    ONLY_PENDING_TOOL_CALL = 0;
+    ALL_STEPS = 1;
+  }
+  enum ThinkingLevel {
+    THINKING_LEVEL_UNSPECIFIED = 0;
+    LOW = 1;
+    MEDIUM = 2;
+    HIGH = 3;
+    MINIMAL = 4;
+    EXTRA_HIGH = 5;
+  }
+  message TemplateVarsEntry {
+    string key = 1;
+    string value = 2;
+  }
+  string prompt = 1;
+  .gdm.security.agi_control.agent_monitoring.monitors.ModelBackendConfig backend = 9;
+  int32 max_trajectory_tokens = 4;
+  int32 num_monitor_samples = 5;
+  .gdm.security.agi_control.agent_monitoring.monitors.LlmMonitorConfig.StepsToConsider steps_to_consider = 6;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.LlmMonitorConfig.TemplateVarsEntry template_vars = 7;
+  .beyond.QuotaBucketKey quota_bucket_key = 10;
+  float severity_threshold = 11;
+  .gdm.security.agi_control.agent_monitoring.monitors.ModelTier model_tier = 12;
+  .gdm.security.agi_control.agent_monitoring.monitors.LlmMonitorConfig.ThinkingLevel thinking_level = 13;
+  string api_key = 14;
+  int32 max_prompt_tokens = 15;
+  .gdm.security.agi_control.agent_monitoring.monitors.TrajectoryCompaction trajectory_compaction = 19;
+  .gdm.security.agi_control.agent_monitoring.monitors.RollingCheckpointConfig rolling_checkpoint = 20;
+  string quota_sub_buckets = 21;
+  .gdm.security.agi_control.agent_monitoring.monitors.FlaggedStepInclusionConfig flagged_step_inclusion = 22;
+  bool truncation_risk_fragments = 25;
+  string traffic_stream_selfid = 23;
+  float temperature = 24;
+}
+message AcsvMonitorConfig {
+  string prompt = 1;
+  .gdm.security.agi_control.agent_monitoring.monitors.ModelBackendConfig backend = 2;
+  int32 max_trajectory_tokens = 3;
+  int32 max_prompt_tokens = 4;
+  .gdm.security.agi_control.agent_monitoring.monitors.LlmMonitorConfig.StepsToConsider steps_to_consider = 5;
+  .beyond.QuotaBucketKey quota_bucket_key = 6;
+  float severity_threshold = 7;
+  .gdm.security.agi_control.agent_monitoring.monitors.LlmMonitorConfig.ThinkingLevel thinking_level = 8;
+  .gdm.security.agi_control.agent_monitoring.monitors.ModelTier model_tier = 12;
+  string api_key = 9;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.AcsvTaxonomyScope acsv_taxonomy_scope = 10;
+  .gdm.security.agi_control.agent_monitoring.monitors.AcsvScoringConfig acsv_scoring_config = 11;
+  .gdm.security.agi_control.agent_monitoring.monitors.TrajectoryCompaction trajectory_compaction = 13;
+  string quota_sub_buckets = 14;
+  float temperature = 15;
+}
+message AcsvTaxonomyScope {
+  string path = 1;
+  double base_severity = 2;
+  bool critical = 3;
+}
+message AcsvScoringConfig {
+  double blast_local = 1;
+  double blast_team = 2;
+  double blast_enterprise = 3;
+  double blast_external = 4;
+  double rev_reversible = 5;
+  double rev_irreversible = 6;
+  double exec_attempted = 7;
+  double exec_successful = 8;
+}
+message LogprobOption {
+  string token = 1;
+  string description = 2;
+  double weight = 3;
+}
+message LogprobMonitorConfig {
+  string prompt = 1;
+  .gdm.security.agi_control.agent_monitoring.monitors.ModelBackendConfig backend = 2;
+  .gdm.security.agi_control.agent_monitoring.monitors.ModelTier model_tier = 3;
+  int32 max_trajectory_tokens = 4;
+  int32 max_prompt_tokens = 5;
+  .gdm.security.agi_control.agent_monitoring.monitors.LlmMonitorConfig.StepsToConsider steps_to_consider = 6;
+  .beyond.QuotaBucketKey quota_bucket_key = 7;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.LogprobOption options = 8;
+  bool permutation_debias = 9;
+  double platt_scale_a = 10;
+  double platt_intercept_b = 11;
+  float severity_threshold = 12;
+  .gdm.security.agi_control.agent_monitoring.monitors.TrajectoryCompaction trajectory_compaction = 13;
+  string api_key = 14;
+  int32 max_output_tokens = 15;
+  string quota_sub_buckets = 16;
+}
+message ToolSafetyConfig {
+  enum DefaultPolicy {
+    DENY_BY_DEFAULT = 0;
+    ALLOW_BY_DEFAULT = 1;
+  }
+  message AllowedSubcommandsEntry {
+    string key = 1;
+    .gdm.security.agi_control.agent_monitoring.monitors.SubcommandAllowlist value = 2;
+  }
+  message AllowedToolActionsEntry {
+    string key = 1;
+    .gdm.security.agi_control.agent_monitoring.monitors.ActionAllowlist value = 2;
+  }
+  .gdm.security.agi_control.agent_monitoring.monitors.ToolSafetyConfig.DefaultPolicy default_policy = 7;
+  repeated string allowed_tools = 1;
+  repeated string allowed_commands = 3;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.ToolSafetyConfig.AllowedSubcommandsEntry allowed_subcommands = 4;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.ToolSafetyConfig.AllowedToolActionsEntry allowed_tool_actions = 6;
+  repeated string allowed_tool_prefixes = 10;
+  repeated string denied_tools = 8;
+  repeated string denied_command_patterns = 9;
+  repeated string denied_tool_prefixes = 12;
+  repeated string denied_gcloud_account_domains = 13;
+}
+message SubcommandAllowlist {
+  message SubcommandRulesEntry {
+    string key = 1;
+    .gdm.security.agi_control.agent_monitoring.monitors.SubcommandRule value = 2;
+  }
+  repeated string subcommands = 1;
+  .gdm.security.agi_control.agent_monitoring.monitors.FlagAllowlist flags = 2;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.SubcommandAllowlist.SubcommandRulesEntry subcommand_rules = 3;
+}
+message FlagAllowlist {
+  repeated string exact = 1;
+  repeated string prefixes = 2;
+}
+message SubcommandRule {
+  .gdm.security.agi_control.agent_monitoring.monitors.FlagAllowlist flags = 1;
+  repeated string allowed_first_args = 2;
+}
+message ActionAllowlist {
+  repeated string actions = 1;
+}
+message EmbeddingMonitorConfig {
+  .gdm.security.agi_control.agent_monitoring.monitors.ModelBackendConfig embedding_backend = 1;
+  .gdm.security.agi_control.agent_monitoring.monitors.ModelBackendConfig prompt_tower_backend = 2;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.EmbeddingClassConfig classes = 3;
+  .beyond.QuotaBucketKey quota_bucket_key = 4;
+  string api_key = 5;
+  int32 max_trajectory_tokens = 6;
+  .gdm.security.agi_control.agent_monitoring.monitors.TrajectoryCompaction trajectory_compaction = 7;
+  .gdm.security.agi_control.agent_monitoring.monitors.LlmMonitorConfig.StepsToConsider steps_to_consider = 8;
+  string quota_sub_buckets = 9;
+}
+message EmbeddingClassConfig {
+  string class_name = 1;
+  string query = 2;
+  float threshold = 3;
+}
+message AapMonitorConfig {
+}
+message AgcisMonitorConfig {
+  string agcis_policy = 1;
+  string agcis_rules_textproto = 2;
+}
+message AgcisReasoningMonitorConfig {
+  string agcis_policy = 1;
+}
+message PolicyGuardianMonitorConfig {
+  .gdm.security.agi_control.agent_monitoring.monitors.ModelTier model_tier = 1;
+  int32 max_tool_rounds = 2;
+  bool fail_open_on_error = 3;
+  repeated string vetted_tools = 4;
+  .gdm.security.agi_control.agent_monitoring.monitors.ModelBackendConfig backend = 7;
+  string deployment = 8;
+  .beyond.QuotaBucketKey quota_bucket_key = 9;
+  string quota_sub_buckets = 10;
+  bool enable_irreversible_vetting = 11;
+  bool enable_reversibility_adjudication = 12;
+  bool fail_closed_on_timeout = 13;
+}
+message GuardianAgentMonitorConfig {
+  string sup_address = 1;
+  string signal_request_name = 2;
+  repeated string enabled_policies = 3;
+  repeated string disabled_policies = 4;
+  float severity_threshold = 5;
+  float confirm_severity = 6;
+}
+message IntrospectionVerdictsMonitorConfig {
+  repeated string classifier_names = 1;
+}
+message TruncatedToolCallMonitorConfig {
+  repeated string tool_names = 1;
+}
+message EmbeddingVerdictsMonitorConfig {
+  repeated string classifier_names = 1;
+}
+message AgentTrustEngineMonitorConfig {
+  string backend_target = 1;
+  float trust_score_threshold = 2;
+  int32 max_sessions = 3;
+}
+message TrifectaEmbedPolicy {
+  string id = 1;
+  string text = 2;
+  float threshold = 3;
+}
+message TrifectaEmbedMonitorConfig {
+  enum HistoryMode {
+    HISTORY_MODE_UNSPECIFIED = 0;
+    DELTA_STEPS = 1;
+    FULL_TEXT = 2;
+  }
+  string scorer_address = 1;
+  int32 rpc_deadline_ms = 2;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.TrifectaEmbedPolicy policies = 3;
+  .gdm.security.agi_control.agent_monitoring.monitors.TrifectaEmbedMonitorConfig.HistoryMode history_mode = 4;
+  bool fail_closed = 5;
+  int32 max_history_chars = 6;
+  int32 max_history_steps = 7;
+  int32 session_ttl_seconds = 8;
+  string expected_model_version = 9;
+}
+message AresNgMonitorConfig {
+  string product_id = 1;
+  string backend_target = 2;
+  string service_name = 3;
+}
+message SybillVerdictsMonitorConfig {
+}
+message DependencyConfig {
+  enum Operator {
+    OPERATOR_UNSPECIFIED = 0;
+    OR = 1;
+    AND = 2;
+  }
+  message Parent {
+    string parent_monitor_name = 1;
+    float confidence_threshold = 2;
+    float severity_threshold = 3;
+  }
+  string parent_monitor_name = 1;
+  float confidence_threshold = 2;
+  float severity_threshold = 3;
+  bool skip_on_parent_failure = 4;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.DependencyConfig.Parent parents = 5;
+  .gdm.security.agi_control.agent_monitoring.monitors.DependencyConfig.Operator operator = 6;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.DependencyConfig conditions = 7;
+}
+message FailClosedBudget {
+  string scope_root_monitor_name = 1;
+  int32 max_unverified_steps = 2;
+  .gdm.security.agi_control.agent_monitoring.monitors.MonitorConfig.Mode on_exhausted = 3;
+}
+message ExperimentConfig {
+  message Group {
+    string name = 1;
+    float weight = 2;
+  }
+  string name = 1;
+  float traffic_fraction = 2;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.ExperimentConfig.Group groups = 3;
+}
+message ExperimentAssignment {
+  string experiment_name = 1;
+  string experiment_group = 2;
+}
+message UserGroup {
+  string name = 1;
+  repeated string users = 2;
+  repeated string mdb_groups = 3;
+  string description = 4;
+}
+message SurfaceMonitorBinding {
+  string monitor_name = 1;
+  bool enabled = 2;
+  repeated string enable_if = 21;
+  .gdm.security.agi_control.agent_monitoring.monitors.MonitorConfig.Mode mode = 3;
+  int32 timeout_seconds = 4;
+  bool experimental_only = 5;
+  bool pss_experimental_only = 6;
+  .gdm.security.agi_control.agent_monitoring.monitors.ExperimentAssignment experiment = 7;
+  repeated string tags = 8;
+  repeated string user_groups = 9;
+  repeated string excluded_user_groups = 17;
+  repeated string skip_tags = 18;
+  .gdm.security.agi_control.agent_monitoring.monitors.DependencyConfig dependency_config = 10;
+  string injected_message = 11;
+  float severity_threshold = 12;
+  .gdm.security.agi_control.agent_monitoring.monitors.ModelBackendConfig backend_override = 13;
+  string monitor_name_override = 14;
+  string description = 15;
+  .gdm.security.agi_control.agent_monitoring.monitors.LlmMonitorConfig.ThinkingLevel thinking_level = 16;
+  string quota_sub_buckets = 19;
+  .beyond.QuotaBucketKey quota_bucket_key = 20;
+  string policy_guardian_deployment = 22;
+  repeated string policy_guardian_vetted_tools = 25;
+  string aresng_product_id = 26;
+  string aresng_backend_target = 31;
+  .gdm.security.agi_control.agent_monitoring.monitors.TrajectoryCompaction trajectory_compaction = 23;
+  .gdm.security.agi_control.agent_monitoring.monitors.FlaggedStepInclusionConfig flagged_step_inclusion = 24;
+  .gdm.security.agi_control.agent_monitoring.monitors.FailClosedBudget fail_closed_budget = 27;
+  string traffic_stream_selfid = 28;
+  float temperature = 29;
+  bool truncation_risk_fragments = 30;
+  string agcis_policy = 32;
+}
+message SurfaceProfile {
+  string surface_name = 1;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.SurfaceMonitorBinding monitors = 2;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.ExperimentConfig experiments = 3;
+  repeated .gdm.security.agi_control.agent_monitoring.monitors.UserGroup user_groups = 4;
+  repeated string active_tags = 5;
+}

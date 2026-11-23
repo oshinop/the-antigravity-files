@@ -1,0 +1,7 @@
+// Extracted from agy 1.5.14, file offset 0x6615968, 325 bytes. Rendering omits custom options.
+syntax = "proto2";
+package pattributes;
+import "privacy/pattributes/containers/proto_field/proto_field_upload_justification.proto";
+message ProtoFieldAttributes {
+  .pattributes.ProtoFieldUploadJustification upload_justification = 161;
+}

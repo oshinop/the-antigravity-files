@@ -1,0 +1,10 @@
+// Extracted from agy 1.5.14, file offset 0x66318e5, 614 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.internal.identity.signedoutstate.v1;
+import "google/internal/identity/signedoutstate/v1/mobile_signed_out_consent.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message SignedOutState {
+  string zwieback_token = 1;
+  .google.internal.identity.signedoutstate.v1.MobileSignedOutConsent mobile_signed_out_consent = 2;
+  bytes rollout_bucket = 3;
+}

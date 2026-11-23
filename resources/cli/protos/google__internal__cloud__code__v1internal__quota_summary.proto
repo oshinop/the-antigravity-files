@@ -1,0 +1,45 @@
+// Extracted from agy 1.5.14, file offset 0x6693ccd, 1893 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.internal.cloud.code.v1internal;
+import "google/api/field_behavior.proto";
+import "google/api/policy.proto";
+import "google/protobuf/timestamp.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum ModelAvailabilityState {
+  MODEL_AVAILABILITY_STATE_UNSPECIFIED = 0;
+  MODEL_AVAILABILITY_STATE_OPERATIONAL = 1;
+  MODEL_AVAILABILITY_STATE_HIGH_TRAFFIC = 2;
+  MODEL_AVAILABILITY_STATE_CONGESTED = 3;
+}
+message RetrieveUserQuotaSummaryRequest {
+  string project = 1;
+}
+message QuotaSummaryBucket {
+  string bucket_id = 1;
+  string display_name = 2;
+  string description = 7;
+  string window = 3;
+  float remaining_fraction = 4; // oneof=remaining
+  int64 remaining_amount = 5; // oneof=remaining
+  bool disabled = 8;
+  .google.protobuf.Timestamp reset_time = 6;
+}
+message QuotaSummaryGroup {
+  string display_name = 2;
+  string description = 3;
+  repeated .google.internal.cloud.code.v1internal.QuotaSummaryBucket buckets = 1;
+}
+message QuotaSummaryModelAvailability {
+  .google.internal.cloud.code.v1internal.ModelAvailabilityState state = 1;
+  string explanation = 2;
+}
+message RetrieveUserQuotaSummaryResponse {
+  message ModelAvailabilitiesEntry {
+    string key = 1;
+    .google.internal.cloud.code.v1internal.QuotaSummaryModelAvailability value = 2;
+  }
+  repeated .google.internal.cloud.code.v1internal.QuotaSummaryBucket buckets = 1;
+  repeated .google.internal.cloud.code.v1internal.QuotaSummaryGroup groups = 2;
+  string description = 3;
+  repeated .google.internal.cloud.code.v1internal.RetrieveUserQuotaSummaryResponse.ModelAvailabilitiesEntry model_availabilities = 4;
+}

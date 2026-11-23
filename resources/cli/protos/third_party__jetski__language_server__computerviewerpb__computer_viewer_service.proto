@@ -1,0 +1,50 @@
+// Extracted from agy 1.5.14, file offset 0x6681b4e, 1655 bytes. Rendering omits custom options.
+syntax = "proto3";
+package exa.computer_viewer_pb;
+import "third_party/jetski/cortex/ext/plugins/computer/computerpb/computer_viewer.proto";
+message ListDesktopsRequest {
+}
+message ListDesktopsResponse {
+  repeated .exa.computer_viewer_pb.Desktop desktops = 1;
+}
+message Desktop {
+  string desktop_id = 1;
+  string label = 2;
+  uint32 max_sessions = 3;
+}
+message OpenViewRequest {
+  string desktop_id = 1;
+  string root_conversation_id = 2;
+  string offer_sdp = 3;
+  .exa.computer_payload_pb.ComputerViewerDevice device = 4;
+}
+message OpenViewResponse {
+  string session_id = 1;
+  string answer_sdp = 2;
+  repeated .exa.computer_payload_pb.ComputerViewerStream streams = 3;
+  int64 expires_unix_ms = 4;
+}
+message RenewViewRequest {
+  string session_id = 1;
+}
+message RenewViewResponse {
+  int64 expires_unix_ms = 1;
+}
+message CloseViewRequest {
+  string session_id = 1;
+}
+message CloseViewResponse {
+}
+message WatchViewRequest {
+  string session_id = 1;
+}
+message WatchViewResponse {
+  string closed_reason = 1;
+}
+service ComputerViewerService {
+  rpc ListDesktops (.exa.computer_viewer_pb.ListDesktopsRequest) returns (.exa.computer_viewer_pb.ListDesktopsResponse);
+  rpc OpenView (.exa.computer_viewer_pb.OpenViewRequest) returns (.exa.computer_viewer_pb.OpenViewResponse);
+  rpc RenewView (.exa.computer_viewer_pb.RenewViewRequest) returns (.exa.computer_viewer_pb.RenewViewResponse);
+  rpc CloseView (.exa.computer_viewer_pb.CloseViewRequest) returns (.exa.computer_viewer_pb.CloseViewResponse);
+  rpc WatchView (.exa.computer_viewer_pb.WatchViewRequest) returns (stream .exa.computer_viewer_pb.WatchViewResponse);
+}

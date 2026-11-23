@@ -1,0 +1,17 @@
+// Extracted from agy 1.5.14, file offset 0x662fc92, 599 bytes. Rendering omits custom options.
+syntax = "editions";
+package genai;
+import "learning/genai/api/interactions/proto/content.proto";
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+message UserInputContent {
+  .genai.TextContent text = 10; // oneof=type
+  .genai.ImageContent image = 11; // oneof=type
+  .genai.AudioContent audio = 12; // oneof=type
+  .genai.DocumentContent document = 13; // oneof=type
+  .genai.VideoContent video = 14; // oneof=type
+  .genai.SlashCommand slash_command = 15; // oneof=type
+}
+message SlashCommand {
+  string name = 1;
+  string instructions = 2;
+}

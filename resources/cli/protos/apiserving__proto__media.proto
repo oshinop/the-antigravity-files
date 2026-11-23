@@ -1,0 +1,41 @@
+// Extracted from agy 1.5.14, file offset 0x667fb61, 1622 bytes. Rendering omits custom options.
+syntax = "proto2";
+package apiserving;
+import "blobstore2/public/request_class.proto";
+import "gdata/rosy/proto/data.proto";
+import "google/api/inclusion.proto";
+import "net/base/qos.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message MediaRequestInfo {
+  enum NotificationType {
+    START = 1;
+    PROGRESS = 2;
+    END = 3;
+    RESPONSE_SENT = 4;
+    ERROR = 5;
+  }
+  string request_id = 1;
+  .apiserving.MediaRequestInfo.NotificationType notification_type = 2;
+  int64 current_bytes = 3;
+  int64 total_bytes = 4;
+  bool total_bytes_is_estimated = 5;
+  string custom_data = 6;
+  string diff_object_version = 7;
+  int32 final_status = 8;
+  bytes request_received_params_serving_info = 9;
+  bytes physical_headers = 10;
+}
+message MediaResponseInfo {
+  string dynamic_dropzone = 1;
+  string custom_data = 2;
+  bytes dynamic_drop_target = 3;
+  bytes data_storage_transform = 4;
+  .net_base.qos.TrafficClass traffic_class_field = 5;
+  .gdata.Media media_for_diff = 6;
+  bool verify_hash_from_header = 7;
+  .blobstore2.RequestClass request_class = 8;
+  bytes scotty_customer_log = 9;
+  int64 scotty_agent_user_id = 10;
+  int32 original_object_blob_mint_index = 11;
+  int32 destination_blob_mint_index = 12;
+}

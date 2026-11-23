@@ -1,0 +1,41 @@
+// Extracted from agy 1.5.14, file offset 0x66701d1, 1425 bytes. Rendering omits custom options.
+syntax = "editions";
+package devrel.primes.protos;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum AnonymizationMethod {
+  ANONYMIZATION_METHOD_UNKNOWN = 0;
+  K_ANON = 1;
+}
+enum AnonymizedMessageSource {
+  ANONYMIZED_MESSAGE_SOURCE_UNKNOWN = 0;
+  UNHANDLED_EXCEPTION_IOS = 1;
+  UNHANDLED_EXCEPTION_ANDROID = 2;
+  ABORT_MESSAGE_IOS = 3;
+  ABORT_MESSAGE_ANDROID = 4;
+  THREAD_NAME_IOS = 5;
+  THREAD_NAME_ANDROID = 6;
+}
+enum PseudonymizationStrategy {
+  PSEUDONYMIZATION_STRATEGY_UNKNOWN = 0;
+  PSEUDONYMIZATION_STRATEGY_SHA_1_FIRST_BYTE = 1;
+}
+message AnonymizedMessage {
+  .devrel.primes.protos.AnonymizedMessageSource source = 1;
+  string message = 2;
+}
+message AnonymizableMessage {
+  .devrel.primes.protos.AnonymizationMethod method = 1;
+  .devrel.primes.protos.AnonymizedMessageSource source = 2;
+  string message = 3;
+}
+message PseudonymousIdentifier {
+  .devrel.primes.protos.PseudonymizationStrategy strategy = 1;
+  bytes identifier = 2;
+}
+message AnonymizedMessageRequest {
+  repeated .devrel.primes.protos.AnonymizableMessage anonymizable_messages = 1;
+  .devrel.primes.protos.PseudonymousIdentifier pseudonymous_identifier = 2;
+}
+message AnonymizedMessageConfig {
+  repeated .devrel.primes.protos.AnonymizedMessage anonymized_messages = 1;
+}

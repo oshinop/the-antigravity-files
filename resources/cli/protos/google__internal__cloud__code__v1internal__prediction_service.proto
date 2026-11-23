@@ -1,0 +1,118 @@
+// Extracted from agy 1.5.14, file offset 0x67eab31, 6541 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.internal.cloud.code.v1internal;
+import "google/internal/cloud/code/v1internal/model_configs.proto";
+import "apps/framework/data/service_annotations.proto";
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/policy.proto";
+import "google/cloud/aiplatform/master/prediction_service.proto";
+import "google/internal/cloud/code/v1internal/credits.proto";
+import "google/internal/cloud/code/v1internal/quota_summary.proto";
+import "google/internal/cloud/code/v1internal/remote_context.proto";
+import "google/protobuf/timestamp.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message GenerateContentRequest {
+  string project = 1;
+  string request_id = 2;
+  .google.cloud.aiplatform.master.GenerateContentRequest request = 3;
+  string model = 4;
+  string user_prompt_id = 5;
+  string user_agent = 6;
+  string request_type = 7;
+  repeated .google.internal.cloud.code.v1internal.Credits.CreditType enabled_credit_types = 8;
+}
+message GenerateContentResponse {
+  message Metadata {
+    message SafetySignals {
+      message IntrospectionVerdicts {
+        enum Verdict {
+          VERDICT_UNSPECIFIED = 0;
+          NON_VIOLATIVE = 1;
+          VIOLATIVE = 2;
+        }
+        message Result {
+          string name = 1;
+          string label = 2;
+          .google.internal.cloud.code.v1internal.GenerateContentResponse.Metadata.SafetySignals.IntrospectionVerdicts.Verdict verdict = 3;
+        }
+        repeated .google.internal.cloud.code.v1internal.GenerateContentResponse.Metadata.SafetySignals.IntrospectionVerdicts.Result results = 1;
+      }
+      message EmbeddingVerdicts {
+        enum Verdict {
+          VERDICT_UNSPECIFIED = 0;
+          NON_VIOLATIVE = 1;
+          VIOLATIVE = 2;
+        }
+        message CorpusResult {
+          string name = 1;
+          string corpus = 2;
+          .google.internal.cloud.code.v1internal.GenerateContentResponse.Metadata.SafetySignals.EmbeddingVerdicts.Verdict verdict = 3;
+        }
+        repeated .google.internal.cloud.code.v1internal.GenerateContentResponse.Metadata.SafetySignals.EmbeddingVerdicts.CorpusResult results = 1;
+      }
+      message SybillVerdicts {
+        enum Verdict {
+          VERDICT_UNSPECIFIED = 0;
+          NON_VIOLATIVE = 1;
+          VIOLATIVE = 2;
+        }
+        .google.internal.cloud.code.v1internal.GenerateContentResponse.Metadata.SafetySignals.SybillVerdicts.Verdict verdict = 1;
+      }
+      message IntrospectionScores {
+        message HeadScore {
+          string label = 1;
+          float score = 2;
+        }
+        message ClassifierResult {
+          string name = 1;
+          repeated .google.internal.cloud.code.v1internal.GenerateContentResponse.Metadata.SafetySignals.IntrospectionScores.HeadScore head_scores = 2;
+        }
+        repeated .google.internal.cloud.code.v1internal.GenerateContentResponse.Metadata.SafetySignals.IntrospectionScores.ClassifierResult results = 1;
+      }
+      .google.internal.cloud.code.v1internal.GenerateContentResponse.Metadata.SafetySignals.IntrospectionVerdicts introspection_verdicts = 1;
+      .google.internal.cloud.code.v1internal.GenerateContentResponse.Metadata.SafetySignals.EmbeddingVerdicts embedding_verdicts = 2;
+      .google.internal.cloud.code.v1internal.GenerateContentResponse.Metadata.SafetySignals.SybillVerdicts sybill_verdicts = 3;
+      .google.internal.cloud.code.v1internal.GenerateContentResponse.Metadata.SafetySignals.IntrospectionScores introspection_scores = 4;
+    }
+    .google.internal.cloud.code.v1internal.RemoteContext remote_context = 1;
+    .google.internal.cloud.code.v1internal.GenerateContentResponse.Metadata.SafetySignals safety_signals = 2;
+  }
+  .google.cloud.aiplatform.master.GenerateContentResponse response = 1;
+  string trace_id = 2;
+  repeated .google.internal.cloud.code.v1internal.Credits consumed_credits = 3;
+  repeated .google.internal.cloud.code.v1internal.Credits remaining_credits = 4;
+  .google.internal.cloud.code.v1internal.GenerateContentResponse.Metadata metadata = 5;
+}
+message CountTokensRequest {
+  .google.cloud.aiplatform.master.CountTokensRequest request = 1;
+}
+message CountTokensResponse {
+  int32 total_tokens = 1;
+}
+message RetrieveUserQuotaRequest {
+  string project = 1;
+}
+message RetrieveUserQuotaResponse {
+  enum TokenType {
+    TOKEN_TYPE_UNSPECIFIED = 0;
+    REQUESTS = 1;
+    WTUS = 2;
+  }
+  message BucketInfo {
+    int64 remaining_amount = 1; // oneof=remaining
+    float remaining_fraction = 5; // oneof=remaining
+    .google.protobuf.Timestamp reset_time = 2;
+    .google.internal.cloud.code.v1internal.RetrieveUserQuotaResponse.TokenType token_type = 3;
+    string model_id = 4;
+  }
+  repeated .google.internal.cloud.code.v1internal.RetrieveUserQuotaResponse.BucketInfo buckets = 1;
+}
+service PredictionService {
+  rpc GenerateContent (.google.internal.cloud.code.v1internal.GenerateContentRequest) returns (.google.internal.cloud.code.v1internal.GenerateContentResponse);
+  rpc StreamGenerateContent (.google.internal.cloud.code.v1internal.GenerateContentRequest) returns (stream .google.internal.cloud.code.v1internal.GenerateContentResponse);
+  rpc CountTokens (.google.internal.cloud.code.v1internal.CountTokensRequest) returns (.google.internal.cloud.code.v1internal.CountTokensResponse);
+  rpc RetrieveUserQuota (.google.internal.cloud.code.v1internal.RetrieveUserQuotaRequest) returns (.google.internal.cloud.code.v1internal.RetrieveUserQuotaResponse);
+  rpc FetchAvailableModels (.google.internal.cloud.code.v1internal.FetchAvailableModelsRequest) returns (.google.internal.cloud.code.v1internal.FetchAvailableModelsResponse);
+  rpc RetrieveUserQuotaSummary (.google.internal.cloud.code.v1internal.RetrieveUserQuotaSummaryRequest) returns (.google.internal.cloud.code.v1internal.RetrieveUserQuotaSummaryResponse);
+}

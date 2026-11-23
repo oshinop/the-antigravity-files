@@ -1,0 +1,36 @@
+// Extracted from agy 1.5.14, file offset 0x66523d0, 1043 bytes. Rendering omits custom options.
+syntax = "editions";
+package genai;
+import "google/protobuf/timestamp.proto";
+enum StopReason {
+  STOP_REASON_UNSPECIFIED = 0;
+  STOP_REASON_MAX_MODEL_CALLS_EXCEEDED = 1;
+  STOP_REASON_MAX_TOOL_CALLS_EXCEEDED = 2;
+  STOP_REASON_MAX_INPUT_TOKENS_EXCEEDED = 3;
+  STOP_REASON_MAX_OUTPUT_TOKENS_EXCEEDED = 4;
+  STOP_REASON_MAX_TOTAL_TOKENS_EXCEEDED = 5;
+  STOP_REASON_QUOTA_EXHAUSTED = 6;
+}
+message StateUpdate {
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    STATE_RUNNING = 1;
+    STATE_WAITING_FOR_TASKS = 2;
+    STATE_FULLY_IDLE = 3;
+    STATE_CANCELLED = 4;
+    STATE_WAITING_FOR_SUBAGENTS = 5;
+  }
+  string parent_interaction_id = 7;
+  .genai.StateUpdate.State state = 3;
+  string error = 4;
+  .genai.StopReason reason = 5;
+  .genai.ExecutionStatus execution_status = 6;
+}
+message ExecutionStatus {
+  .genai.ModelRetryStatus model_retry = 1; // oneof=status
+}
+message ModelRetryStatus {
+  int32 attempt = 1;
+  int32 max_attempts = 2;
+  .google.protobuf.Timestamp retry_at = 3;
+}

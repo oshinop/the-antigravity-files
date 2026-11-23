@@ -1,0 +1,8 @@
+// Extracted from agy 1.5.14, file offset 0xf42b848, 316 bytes. Rendering omits custom options.
+syntax = "editions";
+package pb.enumvalue;
+import "net/proto2/proto/descriptor.proto";
+message JsonEnumValueOptions {
+  string string = 1;
+}
+extend .proto2.EnumValueOptions { .pb.enumvalue.JsonEnumValueOptions json = 998; }

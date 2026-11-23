@@ -1,0 +1,64 @@
+// Extracted from agy 1.5.14, file offset 0x66d10b7, 2694 bytes. Rendering omits custom options.
+syntax = "editions";
+package logs.proto.wireless.performance.mobile.android;
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "logs/proto/wireless/performance/mobile/annotations.proto";
+import "logs/proto/wireless/performance/mobile/cui_metadata.proto";
+import "logs/proto/wireless/performance/mobile/extension_metric.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message TraceRecord {
+  enum ClockType {
+    UNKNOWN = 0;
+    REALTIME = 1;
+    UPTIME = 2;
+  }
+  fixed64 id = 1;
+  repeated .logs.proto.wireless.performance.mobile.android.Span spans = 3;
+  .google.protobuf.Timestamp start_time = 4;
+  .google.protobuf.Duration start_elapsed_time = 5;
+  .logs.proto.wireless.performance.mobile.android.CollectionError error = 6;
+  .logs.proto.wireless.performance.mobile.android.TraceRecord.ClockType clock_type = 7;
+  bool is_partial_trace = 8;
+  repeated string class_names = 10;
+  repeated string method_names = 11;
+  float trace_sampling_rate = 12;
+  repeated .logs.proto.wireless.performance.mobile.CuiMetadata cui_metadata = 13;
+}
+message Span {
+  enum Kind {
+    INVALID = 0;
+    REGION = 1;
+    INTERVAL = 2;
+    MARKER = 3;
+  }
+  string name = 1;
+  int32 id = 2;
+  int32 parent_id = 3;
+  .google.protobuf.Duration relative_start_time = 4;
+  .google.protobuf.Duration duration = 5;
+  .google.protobuf.Duration cpu_time = 6;
+  bool ui_thread = 7;
+  .logs.proto.wireless.performance.mobile.android.Span.Kind kind = 8;
+  bool is_synchronous_child = 9;
+  bool is_dominant_span = 10;
+  .logs.proto.wireless.performance.mobile.MetricExtension metric_extension = 11;
+  int64 backend_trace_id = 12;
+  int64 backend_span_id = 13;
+  int32 class_name_index = 14;
+  int32 method_name_index = 15;
+  int32 line_number = 16;
+  repeated uint64 flow_ids = 17;
+  float backend_trace_sampling_probability = 18;
+}
+message CollectionError {
+  message TooManySpans {
+    int32 num_dropped_spans = 1;
+  }
+  message TimedOut {
+    .google.protobuf.Duration timed_out_after = 1;
+    int32 num_unfinished_spans = 2;
+  }
+  .logs.proto.wireless.performance.mobile.android.CollectionError.TooManySpans too_many_spans = 1;
+  .logs.proto.wireless.performance.mobile.android.CollectionError.TimedOut timed_out = 2;
+}

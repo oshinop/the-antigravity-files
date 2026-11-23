@@ -1,0 +1,7 @@
+// Extracted from agy 1.5.14, file offset 0x66198be, 326 bytes. Rendering omits custom options.
+syntax = "editions";
+package frameworks.client.logging.proto;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ClientEventTrace {
+  repeated string span_name = 1;
+}

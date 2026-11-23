@@ -1,0 +1,10 @@
+// Extracted from agy 1.5.14, file offset 0x662409c, 459 bytes. Rendering omits custom options.
+syntax = "editions";
+package genai;
+import "learning/genai/api/interactions/proto/events.proto";
+import "learning/genai/api/interactions/proto/interaction.proto";
+service InteractionService {
+  rpc CreateInteractionBidiStream (stream .genai.ClientEventBatch) returns (stream .genai.ServerEventBatch);
+  rpc CreateInteractionStream (.genai.CreateInteractionEvent) returns (stream .genai.ServerEventBatch);
+  rpc CreateInteraction (.genai.CreateInteractionEvent) returns (.genai.Interaction);
+}

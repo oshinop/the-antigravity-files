@@ -1,0 +1,127 @@
+// Extracted from agy 1.5.14, file offset 0x673ab06, 3996 bytes. Rendering omits custom options.
+syntax = "proto3";
+package exa.browser_viewer_payload_pb;
+enum BrowserViewerControlAction {
+  BROWSER_VIEWER_CONTROL_ACTION_UNSPECIFIED = 0;
+  BROWSER_VIEWER_CONTROL_ACTION_STOP = 1;
+  BROWSER_VIEWER_CONTROL_ACTION_NAVIGATE = 2;
+  BROWSER_VIEWER_CONTROL_ACTION_BACK = 3;
+  BROWSER_VIEWER_CONTROL_ACTION_FORWARD = 4;
+  BROWSER_VIEWER_CONTROL_ACTION_RELOAD = 5;
+  BROWSER_VIEWER_CONTROL_ACTION_INPUT_EVENT = 6;
+}
+message BrowserViewerHello {
+  uint32 max_sessions = 1;
+  repeated string video_codecs = 2;
+  string host_label = 3;
+  bool supports_webrtc = 4;
+  bool supports_frame_read = 5;
+}
+message BrowserViewerIceServer {
+  repeated string urls = 1;
+  string username = 2;
+  string credential = 3;
+  int64 credential_expires_unix_ms = 4;
+}
+message BrowserTabInfo {
+  string tab_id = 1;
+  string root_conversation_id = 2;
+  string url = 3;
+  string title = 4;
+  bool active = 5;
+  bool loading = 6;
+  bool agent_owned = 7;
+  uint32 width_px = 8;
+  uint32 height_px = 9;
+}
+message BrowserViewerInputEvent {
+  enum Kind {
+    KIND_UNSPECIFIED = 0;
+    KIND_POINTER_DOWN = 1;
+    KIND_POINTER_UP = 2;
+    KIND_POINTER_MOVE = 3;
+    KIND_WHEEL = 4;
+    KIND_KEY_DOWN = 5;
+    KIND_KEY_UP = 6;
+    KIND_PASTE = 7;
+  }
+  enum MouseButton {
+    MOUSE_BUTTON_UNSPECIFIED = 0;
+    MOUSE_BUTTON_NONE = 1;
+    MOUSE_BUTTON_LEFT = 2;
+    MOUSE_BUTTON_MIDDLE = 3;
+    MOUSE_BUTTON_RIGHT = 4;
+    MOUSE_BUTTON_BACK = 5;
+    MOUSE_BUTTON_FORWARD = 6;
+  }
+  .exa.browser_viewer_payload_pb.BrowserViewerInputEvent.Kind kind = 1;
+  double x = 2;
+  double y = 3;
+  .exa.browser_viewer_payload_pb.BrowserViewerInputEvent.MouseButton button = 4;
+  int32 buttons = 5;
+  int32 click_count = 6;
+  int32 modifiers = 7;
+  double delta_x = 8;
+  double delta_y = 9;
+  string key = 10;
+  string code = 11;
+  int32 key_code = 12;
+  bool repeat = 13;
+  string text = 14;
+}
+message BrowserViewerRequest {
+  message Offer {
+    string sdp = 1;
+    string tab_id = 2;
+    int64 expires_unix_ms = 3;
+    repeated .exa.browser_viewer_payload_pb.BrowserViewerIceServer ice_servers = 4;
+  }
+  message Renew {
+    int64 expires_unix_ms = 1;
+  }
+  message Close {
+    string reason = 1;
+  }
+  message ListTabs {
+  }
+  message Control {
+    string tab_id = 1;
+    .exa.browser_viewer_payload_pb.BrowserViewerControlAction action = 2;
+    string url = 3;
+    .exa.browser_viewer_payload_pb.BrowserViewerInputEvent input_event = 4;
+    string control_token = 5;
+  }
+  message ReadFrame {
+    string tab_id = 1;
+    uint32 max_width_px = 2;
+    uint32 max_height_px = 3;
+  }
+  message TakeControl {
+    string tab_id = 1;
+    int64 expires_unix_ms = 2;
+  }
+  message ReleaseControl {
+    string tab_id = 1;
+    string control_token = 2;
+  }
+  string session_id = 1;
+  .exa.browser_viewer_payload_pb.BrowserViewerRequest.Offer offer = 2; // oneof=op
+  .exa.browser_viewer_payload_pb.BrowserViewerRequest.Renew renew = 3; // oneof=op
+  .exa.browser_viewer_payload_pb.BrowserViewerRequest.Close close = 4; // oneof=op
+  .exa.browser_viewer_payload_pb.BrowserViewerRequest.ListTabs list_tabs = 5; // oneof=op
+  .exa.browser_viewer_payload_pb.BrowserViewerRequest.Control control = 6; // oneof=op
+  .exa.browser_viewer_payload_pb.BrowserViewerRequest.ReadFrame read_frame = 7; // oneof=op
+  .exa.browser_viewer_payload_pb.BrowserViewerRequest.TakeControl take_control = 8; // oneof=op
+  .exa.browser_viewer_payload_pb.BrowserViewerRequest.ReleaseControl release_control = 9; // oneof=op
+}
+message BrowserViewerResult {
+  string error_code = 1;
+  string error = 2;
+  string answer_sdp = 3;
+  string stream_id = 4;
+  repeated .exa.browser_viewer_payload_pb.BrowserTabInfo tabs = 5;
+  .exa.browser_viewer_payload_pb.BrowserTabInfo tab = 6;
+  string control_token = 7;
+  int64 control_expires_unix_ms = 8;
+  bool control_active = 9;
+}

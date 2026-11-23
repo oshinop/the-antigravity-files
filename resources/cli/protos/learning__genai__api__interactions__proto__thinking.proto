@@ -1,0 +1,16 @@
+// Extracted from agy 1.5.14, file offset 0x6619b9d, 369 bytes. Rendering omits custom options.
+syntax = "editions";
+package genai;
+enum ThinkingLevel {
+  THINKING_LEVEL_UNSPECIFIED = 0;
+  THINKING_LEVEL_MINIMAL = 3;
+  THINKING_LEVEL_LOW = 1;
+  THINKING_LEVEL_MEDIUM = 4;
+  THINKING_LEVEL_HIGH = 2;
+  THINKING_LEVEL_XHIGH = 5;
+}
+enum ThinkingSummaries {
+  THINKING_SUMMARIES_UNSPECIFIED = 0;
+  THINKING_SUMMARIES_AUTO = 1;
+  THINKING_SUMMARIES_NONE = 2;
+}
