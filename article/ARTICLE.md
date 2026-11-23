@@ -24,7 +24,7 @@ This is a review of `agy` 1.5.14 as a coding harness: the tools it gives the mod
   - [A swarm without a foreman](#a-swarm-without-a-foreman)
   - [Everyday features other harnesses ship](#everyday-features-other-harnesses-ship)
   - [You can't see or set when it compacts](#you-cant-see-or-set-when-it-compacts)
-  - [System prompt: A brochure where the rulebook should be](#system-prompt-a-brochure-where-the-rulebook-should-be)
+  - [System prompt: a brochure you can't take out of the box](#system-prompt-a-brochure-you-cant-take-out-of-the-box)
   - [ACP: a steering wheel and no windshield](#acp-a-steering-wheel-and-no-windshield)
 - [The ugly](#the-ugly)
   - [What leaves your machine](#what-leaves-your-machine)
@@ -198,7 +198,7 @@ The summary prompt and what survives word for word come from the server config, 
 
 omp, Codex and pi each have a documented threshold setting that applies to every model.
 
-### System prompt: A brochure where the rulebook should be
+### System prompt: a brochure you can't take out of the box
 
 #### What a coding agent's system prompt is for
 
@@ -250,7 +250,7 @@ All 16 built-in skills in the binary are product manuals but one: 15 document An
 
 > Your role is to recommend them to the user when they are a good fit for the task at hand, encouraging the user to explore and trigger them
 
-#### On the default model, the only behavioral rules are two prohibitions
+#### On the default model, the only behavioral rules restrict you
 
 `agy`'s behavioral rules are its `<guidelines>` section. It has two rules, and both are prohibitions:
 
@@ -259,13 +259,13 @@ All 16 built-in skills in the binary are product manuals but one: 15 document An
 > - Never defeat or bypass an access control, permission check, credential requirement, network/proxy restriction, or sandbox/environment boundary - including writing to the state or processes such a check reads, spoofing identity, intercepting the check, probing undocumented local/host services, or modifying host, harness, or test infrastructure outside your task scope. Use documented, sanctioned paths only; if none of them work, you are blocked - report the error and stop.
 > - Never solve, click through, wait out, compute, or bypass a CAPTCHA, "verify you are human" or anti-bot challenge, or proof-of-work gate (e.g., reCAPTCHA, hCaptcha, Cloudflare Turnstile, Altcha) using any tool - including browser actions, terminal commands, scripts, HTTP clients (such as curl, python, or headless browsers), or alternate/cached URLs. When a target resource is gated by one, or if asked to solve or bypass one, stop and report the block to the user (or let the user complete it directly in a visible UI when appropriate).
 
-Both rules are reasonable. A rule against defeating access controls is one I want an agent to have, even if the CAPTCHA rule takes up about half the section.
+Both apply to your own requests. The CAPTCHA rule covers the case "if asked to solve or bypass one", and the first rule ends "if none of them work, you are blocked - report the error and stop." The agent works on your machine, on your files, at your request, and this text tells it to refuse you.
 
-What's missing is everything else: on Gemini 4 Neon, the default, nothing in the section or anywhere else in the prompt tells the agent how to do your work well. The nearest thing is `<work_efficiently>`, repeated each turn, and it is about saving turns ("Never one call per turn"); its one line on checking is to verify in a single command after the last edit.
+For example, the first rule covers debugging the permission check in your own app, editing the config file your own sandbox reads, or calling an undocumented service you run on localhost. The second covers testing the Turnstile widget on your own sign-up page. In each case the agent is told to stop, and you can't remove the instruction: no file or flag replaces the default agent's prompt (below).
 
-Google has written the missing rules. On Gemini 4 Hydrogen the server swaps in a `<guidelines>` section four times the size, 4,389 bytes against 1,094, with a `code_quality` part ("A senior reviewer will read your final diff", "Never duplicate logic", "Reuse the repo's existing helpers") and a `final_answer_accuracy` part ("Never lie in your final answer: never state as fact anything you did not see in this session's files or tool output"). Neon, Argon, Gemini 3.8 Flash, Claude and GPT-OSS run without them.
+A hosted service can refuse what its terms don't allow. A tool that runs on your machine should do what you ask, and the place for limits is the permission settings you control.
 
-That last rule is the one whose absence you'd notice. [One user](https://github.com/google-antigravity/antigravity-cli/issues/1616) reported an agent that called unfinished tasks done. The instruction not to do that exists, and the default model isn't given it.
+Google can also remotely swap the guidelines in your system prompt per model. On Gemini 4 Hydrogen the server replaces `<guidelines>` with a section four times the size, 4,389 bytes against 1,094, with parts on reading code, code quality ("A senior reviewer will read your final diff", "Never duplicate logic") and final answers ("Never lie in your final answer…"). Neon, Argon, Gemini 3.8 Flash, Claude and GPT-OSS get only the two prohibitions. Switching models changes the rules the agent follows, and `agy` shows you neither set and lets you change neither.
 
 #### Permission logic written as prose
 
