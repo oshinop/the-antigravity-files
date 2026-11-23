@@ -9,7 +9,7 @@ Then, in November 2026, Gemini 4 Carbon, Hydrogen and Neon landed one after anot
 This is a review of `agy` 1.5.14 as a coding harness: the tools it gives the model, the instructions it sends, what you can configure, and what it sends to Google.
 
 > [!NOTE]
-> The findings come from traffic I captured, the binary itself and Google's own docs, and the public sources are linked. The opinions are mine and I haven't tried to balance them. Google is a trillion-dollar company with no shortage of people glazing it, so I'm not going to be one more.
+> The findings come from traffic I captured, the binary itself and Google's own docs, and the public sources are linked. The captures and the analysis behind them are at [https://github.com/oshinop/the-antigravity-files](https://github.com/oshinop/the-antigravity-files). The opinions are mine and I haven't tried to balance them. Google is a trillion-dollar company with no shortage of people glazing it, so I'm not going to be one more.
 
 ## Contents
 
