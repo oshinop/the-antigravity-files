@@ -66,6 +66,7 @@
 <text x="891.7" y="905.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="500" fill="#202124" text-anchor="start">rule</text>
 <text x="891.7" y="929.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">1.0 KB</text>
 <rect x="1029.6" y="848.5" width="120.4" height="105.5" rx="6" fill="#e8eaed"/>
-<text x="1043.6" y="881.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="500" fill="#202124" text-anchor="start">Task tool</text>
-<text x="1043.6" y="905.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">0.8 KB</text>
+<text x="1043.6" y="881.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="500" fill="#202124" text-anchor="start">Running</text>
+<text x="1043.6" y="905.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="500" fill="#202124" text-anchor="start">tasks</text>
+<text x="1043.6" y="929.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">0.8 KB</text>
 </svg>

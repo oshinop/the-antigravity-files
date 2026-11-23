@@ -126,7 +126,7 @@
 <text x="737.0" y="895.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">OpenTelemetry</text>
 <rect x="872.0" y="827.0" width="62.0" height="32.0" rx="16.0" fill="#f1f3f4"/>
 <text x="903.0" y="849.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#5f6368" text-anchor="middle">n/a</text>
-<text x="903.0" y="884.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">sends only an</text>
+<text x="903.0" y="884.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">only telemetry:</text>
 <text x="903.0" y="907.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">install ping</text>
 <rect x="1035.9" y="838.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
 <text x="1069.0" y="861.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
