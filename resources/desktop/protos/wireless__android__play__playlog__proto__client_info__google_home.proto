@@ -1,0 +1,42 @@
+// Extracted file offset 0x36bf0b5, 2235 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "assistant/api/core_types/device_type.proto";
+import "assistant/api/core_types/surface.proto";
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb_generate_object_format.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "nest/platform/mesh/platform/proto/platform_information_no_lite_runtime.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message GoogleHomeClientInfo {
+  enum BackendType {
+    BACKEND_TYPE_UNKNOWN = 0;
+    BACKEND_TYPE_PRODUCTION = 1;
+    BACKEND_TYPE_ENG = 2;
+    BACKEND_TYPE_TEAMFOOD = 3;
+    BACKEND_TYPE_DOGFOOD = 4;
+  }
+  string device_id = 9;
+  string device_model = 1;
+  string app_version = 2;
+  string acp_version = 16;
+  string opal_version = 18;
+  string fuchsia_version = 22;
+  string virtual_release_channel = 17;
+  string manufacturer = 3;
+  string product_name = 4;
+  string factory_country = 5;
+  string build_type = 6;
+  string system_build = 7;
+  .wireless_android_play_playlog.GoogleHomeClientInfo.BackendType backend_type = 8;
+  string locale = 11;
+  bool on_device_assistant_enabled = 12;
+  .assistant.api.core_types.SurfaceType.Type surface_type = 13;
+  .smart_home_mesh.platform.OsType os_type = 14;
+  bool opted_in_metrics_logging = 15;
+  .assistant.api.core_types.Surface.Type ontological_surface_type = 19;
+  string device_product_name = 20;
+  .smart_home_mesh.platform.OsType os_type_replicated = 21;
+  int32 matter_vid = 23;
+  int32 matter_pid = 24;
+}

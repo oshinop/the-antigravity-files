@@ -1,0 +1,22 @@
+The user can customize your behavior through **customizations**, which consist of **Skills** and **Rules**. This section explains how customizations are discovered and created.
+
+## Customization Roots
+Customizations are automatically discovered and loaded from the following customization roots:
+1. **Global Customizations Root**:
+   - Path: "%s"
+
+## Customization Elements
+Within any of the customization roots above, you can define:
+1. **Skills** (Directories):
+   - Location: "skills/<skill_name>/" (relative to the customization root).
+   - Purpose: Cheatsheets for specific workflows, loaded on-demand.
+   - Contents: Must contain a "SKILL.md" file (instructions with YAML frontmatter).
+2. **Rules** (Markdown Files):
+   - Location: "rules/" (relative to the customization root) or standalone "GEMINI.md"/"AGENTS.md" files.
+   - Purpose: Style guidelines, behavioral constraints, and general instructions.
+3. **Plugins** (Directories):
+   - Location: "plugins/<plugin_name>/" (relative to the customization root).
+   - Purpose: Namespaced bundles of skills, agents, and MCP configs.
+4. **MCP Servers** (`mcp_config.json`) and **Hooks** (`hooks.json`).
+
+For detailed instructions on how to structure, format, and create these customizations, use the `%s` skill.

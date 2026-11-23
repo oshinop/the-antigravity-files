@@ -1,0 +1,41 @@
+// Extracted file offset 0x36c6e0b, 2369 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/migration.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message RequestTokensChunk {
+  message TextTokens {
+    repeated int32 token_ids = 1;
+  }
+  message ImageTokens {
+    repeated int32 token_ids = 1;
+  }
+  message AudioTokens {
+    repeated int32 token_ids = 1;
+  }
+  .google.ai.generativelanguage.v1main.RequestTokensChunk.TextTokens text = 1; // oneof=modality
+  .google.ai.generativelanguage.v1main.RequestTokensChunk.ImageTokens image = 2; // oneof=modality
+  .google.ai.generativelanguage.v1main.RequestTokensChunk.AudioTokens audio = 3; // oneof=modality
+}
+message ResponseTokensChunk {
+  message TextTokens {
+    repeated int32 token_ids = 1;
+  }
+  message ImageTokens {
+    repeated int32 token_ids = 1;
+  }
+  message AudioTokens {
+    repeated int32 token_ids = 1;
+  }
+  .google.ai.generativelanguage.v1main.ResponseTokensChunk.TextTokens text = 1; // oneof=modality
+  .google.ai.generativelanguage.v1main.ResponseTokensChunk.ImageTokens image = 2; // oneof=modality
+  .google.ai.generativelanguage.v1main.ResponseTokensChunk.AudioTokens audio = 3; // oneof=modality
+}
+message PartnerDebugMetadata {
+  repeated .google.ai.generativelanguage.v1main.RequestTokensChunk request_token_chunks = 1;
+  repeated .google.ai.generativelanguage.v1main.ResponseTokensChunk response_token_chunks = 2;
+}

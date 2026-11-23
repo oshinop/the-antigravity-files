@@ -1,0 +1,71 @@
+// Extracted file offset 0x36dcc01, 2719 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package antigravity.localharness;
+import "google/api/visibility.proto";
+import "google/protobuf/duration.proto";
+message CitcEnvironment {
+  string workspace_id = 1;
+  int64 snapshot_version = 2;
+  bool read_only = 3;
+}
+message LocalEnvironment {
+  .antigravity.localharness.CitcEnvironment citc = 1;
+}
+message OnDemandConfig {
+  .google.protobuf.Duration lifetime = 1;
+  .antigravity.localharness.ReuseExisting reuse_existing = 3;
+  .antigravity.localharness.HumanIdentity human = 4; // oneof=identity
+  .antigravity.localharness.AgentIdentity agent = 5; // oneof=identity
+  string tag = 6;
+  string setup_script_path = 7;
+}
+message HumanIdentity {
+}
+message AgentIdentity {
+  string role_account = 1;
+}
+message ReuseExisting {
+  enum FallbackPolicy {
+    FALLBACK_POLICY_UNSPECIFIED = 0;
+    FALLBACK_POLICY_SPAWN = 1;
+    FALLBACK_POLICY_FAIL = 2;
+  }
+  .google.protobuf.Duration min_remaining_lifetime = 1;
+  .antigravity.localharness.ReuseExisting.FallbackPolicy fallback = 2;
+}
+message CapsuleEnvironment {
+  string capsule_id = 1; // oneof=acquisition_mode
+  .antigravity.localharness.OnDemandConfig on_demand = 4; // oneof=acquisition_mode
+  string atoll_address = 2;
+  .antigravity.localharness.CitcEnvironment citc = 3;
+  bool persistent_shell = 5;
+}
+message XboxEnvironment {
+  string bns = 1;
+  string image_id = 2;
+  string session_id = 3;
+  string base_snapshot_id = 4;
+}
+message G3BoxEnvironment {
+  string bns = 1;
+  string image_id = 2;
+  string session_id = 3;
+  string base_snapshot_id = 4;
+  .antigravity.localharness.CitcEnvironment citc = 5;
+  int32 proxy_port = 6;
+}
+message VmaasEnvironment {
+  string sandbox_name = 1;
+  string execution_service_address = 2;
+  string port = 3;
+  .google.protobuf.Duration rpc_timeout = 4;
+  string gemini_dir = 5;
+  string app_data_dir = 6;
+}
+message InternalEnvironmentConfig {
+  .antigravity.localharness.CapsuleEnvironment capsule = 1; // oneof=environment_type
+  .antigravity.localharness.XboxEnvironment xbox = 2; // oneof=environment_type
+  .antigravity.localharness.LocalEnvironment local = 3; // oneof=environment_type
+  .antigravity.localharness.G3BoxEnvironment g3box = 4; // oneof=environment_type
+  .antigravity.localharness.VmaasEnvironment vmaas = 5; // oneof=environment_type
+}

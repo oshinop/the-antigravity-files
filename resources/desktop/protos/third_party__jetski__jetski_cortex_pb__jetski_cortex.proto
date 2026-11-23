@@ -1,0 +1,399 @@
+// Extracted file offset 0x3874b8c, 17972 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package exa.jetski_cortex_pb;
+import "google/internal/cloud/code/v1internal/credits.proto";
+import "google/protobuf/timestamp.proto";
+import "third_party/gemini_coder/proto/trajectory.proto";
+import "third_party/jetski/codeium_common_pb/codeium_common.proto";
+import "third_party/jetski/cortex_pb/cortex.proto";
+enum HookType {
+  HOOK_TYPE_UNSPECIFIED = 0;
+  HOOK_TYPE_PRE_INVOCATION = 1;
+  HOOK_TYPE_POST_INVOCATION = 2;
+  HOOK_TYPE_STOP = 3;
+  HOOK_TYPE_PRE_TOOL_USE = 4;
+  HOOK_TYPE_POST_TOOL_USE = 5;
+}
+enum ClientTrajectoryVerbosity {
+  CLIENT_TRAJECTORY_VERBOSITY_UNSPECIFIED = 0;
+  CLIENT_TRAJECTORY_VERBOSITY_DEBUG = 1;
+  CLIENT_TRAJECTORY_VERBOSITY_PROD_UI = 2;
+  CLIENT_TRAJECTORY_VERBOSITY_FULL = 3;
+}
+message BackgroundTask {
+  .exa.cortex_pb.TaskSnapshot task_snapshot = 1;
+  .gemini_coder.Step step = 2;
+}
+message CascadeState {
+  message StepHooksEntry {
+    int32 key = 1;
+    .exa.jetski_cortex_pb.HookStatus value = 2;
+  }
+  string cascade_id = 1;
+  .exa.cortex_pb.CascadeRunStatus status = 3;
+  .exa.cortex_pb.CascadeRunStatus executable_status = 7;
+  .exa.cortex_pb.CascadeRunStatus executor_loop_status = 8;
+  .exa.cortex_pb.ExecutorMetadata executor_metadata = 4;
+  repeated .exa.cortex_pb.ArtifactSnapshot artifact_snapshots = 6;
+  repeated .exa.cortex_pb.TrajectoryFileDiff trajectory_file_diffs = 9;
+  repeated .exa.jetski_cortex_pb.BackgroundTask background_tasks = 13;
+  bool fully_idle = 14;
+  .exa.jetski_cortex_pb.CreditUsageSummary credit_usage_summary = 12;
+  .exa.jetski_cortex_pb.ContextWindowUsage context_window_usage = 20;
+  repeated .exa.cortex_pb.AgentMessage pending_agent_messages = 15;
+  repeated .exa.cortex_pb.AccumulatedSection accumulated_sections = 16;
+  .exa.jetski_cortex_pb.HookStatus active_hook = 17;
+  repeated .exa.jetski_cortex_pb.CascadeState.StepHooksEntry step_hooks = 18;
+  .exa.jetski_cortex_pb.ExecutionStatus execution_status = 19;
+  .gemini_coder.Trajectory trajectory = 2;
+}
+message AgentStateUpdate {
+  message SubtrajectoryUpdatesEntry {
+    string key = 1;
+    .exa.jetski_cortex_pb.TrajectoryUpdate value = 2;
+  }
+  message StepHooksEntry {
+    int32 key = 1;
+    .exa.jetski_cortex_pb.HookStatus value = 2;
+  }
+  string conversation_id = 1;
+  string trajectory_id = 2;
+  .exa.cortex_pb.CascadeRunStatus status = 3;
+  .exa.cortex_pb.CascadeRunStatus executable_status = 4;
+  .exa.cortex_pb.CascadeRunStatus executor_loop_status = 5;
+  .exa.cortex_pb.ExecutorMetadata executor_metadata = 6;
+  .exa.jetski_cortex_pb.TrajectoryUpdate main_trajectory_update = 7;
+  repeated .exa.jetski_cortex_pb.AgentStateUpdate.SubtrajectoryUpdatesEntry subtrajectory_updates = 8;
+  .exa.jetski_cortex_pb.ArtifactSnapshotsUpdate artifact_snapshots_update = 10;
+  .exa.jetski_cortex_pb.TrajectoryFileDiffsUpdate trajectory_file_diffs_update = 11;
+  .exa.jetski_cortex_pb.BackgroundTasksUpdate background_tasks_update = 17;
+  .exa.jetski_cortex_pb.CreditUsageSummary credit_usage_summary = 15;
+  .exa.jetski_cortex_pb.ConversationCostSummary cost_summary = 16;
+  bool fully_idle = 18;
+  .exa.jetski_cortex_pb.CompactionInfo compaction_info = 19;
+  .exa.jetski_cortex_pb.PendingAgentMessagesUpdate pending_agent_messages_update = 20;
+  repeated string bookmarks = 21;
+  .exa.jetski_cortex_pb.AccumulatedSectionsUpdate accumulated_sections_update = 22;
+  .exa.jetski_cortex_pb.HookStatus active_hook = 23;
+  repeated .exa.jetski_cortex_pb.AgentStateUpdate.StepHooksEntry step_hooks = 24;
+  .exa.jetski_cortex_pb.ExecutionStatus execution_status = 25;
+  bool open_elsewhere = 26;
+  .exa.jetski_cortex_pb.TurnsUpdate turns_update = 27;
+  .exa.jetski_cortex_pb.ContextWindowUsage context_window_usage = 28;
+}
+message AccumulatedSectionsUpdate {
+  repeated .exa.cortex_pb.AccumulatedSection accumulated_sections = 1;
+}
+message CompactionInfo {
+  repeated int32 compacted_at_step_indices = 1;
+}
+message HookStatus {
+  .exa.jetski_cortex_pb.HookType hook_type = 1;
+  string hook_name = 2;
+  .google.protobuf.Timestamp started_at = 3;
+}
+message ExecutionStatus {
+  string initialization = 1; // oneof=status
+  .exa.jetski_cortex_pb.ModelRequestStatus model_request = 2; // oneof=status
+}
+message ModelRequestStatus {
+  int32 attempt = 1;
+  int32 max_attempts = 2;
+  .google.protobuf.Timestamp retry_at = 3;
+}
+message ModelPricingInfo {
+  float input_price_per_million_tokens = 1;
+  float output_price_per_million_tokens = 2;
+  float cache_read_price_per_million_tokens = 3;
+  string model_name = 4;
+  bool is_estimated = 5;
+}
+message CostCategory {
+  int64 tokens = 1;
+  float estimated_cost_usd = 2;
+}
+message CostDisplaySection {
+  message ToolBreakdownEntry {
+    string key = 1;
+    .exa.jetski_cortex_pb.CostCategory value = 2;
+  }
+  .exa.jetski_cortex_pb.CostCategory input = 1;
+  .exa.jetski_cortex_pb.CostCategory cache_read = 2;
+  .exa.jetski_cortex_pb.CostCategory output = 3;
+  .exa.jetski_cortex_pb.CostCategory thinking = 4;
+  .exa.jetski_cortex_pb.CostCategory response = 5;
+  int32 generation_count = 8;
+  float estimated_cost_usd = 9;
+  .exa.jetski_cortex_pb.ModelPricingInfo pricing = 10;
+  .exa.jetski_cortex_pb.CostCategory tools = 6;
+  repeated .exa.jetski_cortex_pb.CostDisplaySection.ToolBreakdownEntry tool_breakdown = 7;
+}
+message TurnCostSummary {
+  .exa.jetski_cortex_pb.CostDisplaySection turn = 1;
+  .exa.jetski_cortex_pb.CostDisplaySection subagent = 2;
+  .exa.jetski_cortex_pb.CostDisplaySection cumulative_total = 3;
+}
+message ConversationCostSummary {
+  message TurnCostsEntry {
+    string key = 1;
+    .exa.jetski_cortex_pb.TurnCostSummary value = 2;
+  }
+  message SubagentCostsEntry {
+    string key = 1;
+    .exa.jetski_cortex_pb.CostDisplaySection value = 2;
+  }
+  repeated .exa.jetski_cortex_pb.ConversationCostSummary.TurnCostsEntry turn_costs = 1;
+  .exa.jetski_cortex_pb.TurnCostSummary total = 2;
+  repeated .exa.jetski_cortex_pb.ConversationCostSummary.SubagentCostsEntry subagent_costs = 4;
+  .exa.jetski_cortex_pb.ModelPricingInfo pricing = 3;
+}
+message CostAccumulatorState {
+  message ExecutionCost {
+    string execution_id = 1;
+    .exa.jetski_cortex_pb.CostDisplaySection cost = 2;
+  }
+  repeated .exa.jetski_cortex_pb.CostAccumulatorState.ExecutionCost executions = 1;
+  .exa.jetski_cortex_pb.CostDisplaySection rolled_up = 2;
+}
+message TrajectoryUpdate {
+  .exa.jetski_cortex_pb.StepsUpdate steps_update = 1;
+  .exa.jetski_cortex_pb.GeneratorMetadatasUpdate generator_metadatas_update = 2;
+  .exa.jetski_cortex_pb.ExecutorMetadatasUpdate executor_metadatas_update = 3;
+  .exa.cortex_pb.CortexTrajectoryType trajectory_type = 4; // oneof=_trajectory_type
+  .exa.cortex_pb.CortexTrajectoryMetadata metadata = 5;
+  .exa.cortex_pb.CascadeRunStatus status = 6;
+  .exa.cortex_pb.CortexErrorDetails last_step_error = 7;
+  .exa.cortex_pb.CortexStepType last_step_type = 8;
+  repeated .exa.jetski_cortex_pb.CortexTrajectoryStepWithIndex waiting_steps = 9;
+  bool fully_idle = 10; // oneof=_fully_idle
+  bool killed = 11;
+  repeated .exa.cortex_pb.CortexTrajectoryReference parent_references = 12;
+  .exa.jetski_cortex_pb.BattleModeInfosUpdate battle_mode_infos_update = 13;
+}
+message StepsUpdate {
+  repeated uint32 indices = 1;
+  repeated .gemini_coder.Step steps = 2;
+  uint32 total_length = 3;
+  .exa.jetski_cortex_pb.Slice page_bounds = 4;
+}
+message TurnsUpdate {
+  repeated .exa.jetski_cortex_pb.TurnHeader turns = 4;
+  uint32 total_length = 2;
+}
+message TurnHeader {
+  uint32 index = 1;
+  uint32 start_step_index = 2;
+  .google.protobuf.Timestamp start_time = 3;
+}
+message TurnSummary {
+  uint32 start_step_index = 1;
+  .gemini_coder.Step first_step = 2;
+  string response_preview = 3;
+}
+message GeneratorMetadatasUpdate {
+  repeated uint32 indices = 1;
+  repeated .exa.cortex_pb.CortexStepGeneratorMetadata generator_metadatas = 2;
+  uint32 total_length = 3;
+  .exa.jetski_cortex_pb.Slice page_bounds = 4;
+}
+message ExecutorMetadatasUpdate {
+  repeated uint32 indices = 1;
+  repeated .exa.cortex_pb.ExecutorMetadata executor_metadatas = 2;
+  uint32 total_length = 3;
+  .exa.jetski_cortex_pb.Slice page_bounds = 4;
+}
+message BattleModeInfosUpdate {
+  repeated uint32 indices = 1;
+  repeated .exa.cortex_pb.BattleModeInfo battle_mode_infos = 2;
+  uint32 total_length = 3;
+}
+message ArtifactSnapshotsUpdate {
+  repeated uint32 indices = 1;
+  repeated .exa.cortex_pb.ArtifactSnapshot artifact_snapshots = 2;
+  uint32 total_length = 3;
+}
+message TrajectoryFileDiffsUpdate {
+  repeated uint32 indices = 1;
+  repeated .exa.cortex_pb.TrajectoryFileDiff trajectory_file_diffs = 2;
+  uint32 total_length = 3;
+}
+message BackgroundTasksUpdate {
+  repeated uint32 indices = 1;
+  repeated .exa.jetski_cortex_pb.BackgroundTask background_tasks = 2;
+  uint32 total_length = 3;
+}
+message PendingAgentMessagesUpdate {
+  repeated uint32 indices = 1;
+  repeated .exa.cortex_pb.AgentMessage pending_agent_messages = 2;
+  uint32 total_length = 3;
+}
+message ConsumedCredits {
+  repeated .google.internal.cloud.code.v1internal.Credits credits = 1;
+  uint32 first_step_index = 2;
+  uint32 last_step_index = 3;
+}
+message ContextWindowUsage {
+  uint32 generator_metadata_index = 1;
+  uint32 last_step_index = 2;
+  int32 estimated_tokens_used = 3;
+  int32 max_context_tokens = 4;
+  repeated .exa.cortex_pb.TopLevelTokenGroup token_groups = 5;
+  bool estimated_after_compaction = 6;
+}
+message CreditUsageSummary {
+  repeated .exa.jetski_cortex_pb.ConsumedCredits consumed_credits = 1;
+}
+message ImplicitTrajectory {
+  .gemini_coder.Trajectory trajectory = 1;
+  .exa.cortex_pb.TrajectoryScope trajectory_scope = 5;
+}
+message BaseTrajectoryIdentifier {
+  string cascade_id = 1; // oneof=identifier
+  .gemini_coder.Trajectory trajectory = 4; // oneof=identifier
+  .exa.jetski_cortex_pb.ForkFromIdentifier fork_from = 5; // oneof=identifier
+  string implicit_trajectory_file_uri = 2; // oneof=identifier
+  bool last_active_doc = 3; // oneof=identifier
+}
+message ForkFromIdentifier {
+  string cascade_id = 1;
+  int32 step_index = 2;
+  .exa.cortex_pb.CortexTrajectoryReferenceType reference_type = 3;
+}
+message CortexTrajectoryStepWithIndex {
+  .gemini_coder.Step step = 1;
+  uint32 step_index = 2;
+}
+message ConversationAnnotations {
+  message SideQuestionTitlesEntry {
+    string key = 1;
+    string value = 2;
+  }
+  string title = 1; // oneof=_title
+  repeated string tags = 3;
+  bool archived = 4; // oneof=_archived
+  .google.protobuf.Timestamp archival_status_timestamp = 5;
+  bool starred = 6; // oneof=_starred
+  .google.protobuf.Timestamp last_user_view_time = 7;
+  bool marked_as_unread = 8; // oneof=_marked_as_unread
+  string group_id = 9; // oneof=_group_id
+  int32 group_index = 10; // oneof=_group_index
+  string group_description = 11; // oneof=_group_description
+  bool pinned = 12; // oneof=_pinned
+  repeated int64 cls = 13;
+  string active_profile = 14; // oneof=_active_profile
+  string conversation_group_id = 15; // oneof=_conversation_group_id
+  .exa.cortex_pb.SensitivityLevel sensitivity_level = 16; // oneof=_sensitivity_level
+  repeated string side_question_cascade_ids = 17;
+  repeated .exa.jetski_cortex_pb.ConversationAnnotations.SideQuestionTitlesEntry side_question_titles = 18;
+  .exa.codeium_common_pb.AgentPermissionPreset permission_preset = 19; // oneof=_permission_preset
+  .exa.jetski_cortex_pb.CoordinatorSettings coordinator = 20;
+}
+message CoordinatorSettings {
+  string icon = 1;
+  string color = 2;
+  string goal = 3;
+  repeated .exa.jetski_cortex_pb.CoordinatorResource resources = 4;
+}
+message CoordinatorResource {
+  string type = 1;
+  string resource_id = 2;
+}
+message VoiceChats {
+  repeated .exa.jetski_cortex_pb.VoiceChat chats = 1;
+}
+message VoiceChat {
+  .google.protobuf.Timestamp started_at = 1;
+  .google.protobuf.Timestamp stopped_at = 2;
+  repeated .exa.jetski_cortex_pb.VoiceChatLine lines = 3;
+  string summary = 4;
+  repeated string summary_points = 5;
+  bool summary_pending = 6;
+}
+message VoiceChatLine {
+  enum Role {
+    ROLE_UNSPECIFIED = 0;
+    ROLE_USER = 1;
+    ROLE_VOICE = 2;
+    ROLE_HANDOFF = 3;
+  }
+  .exa.jetski_cortex_pb.VoiceChatLine.Role role = 1;
+  string text = 2;
+  .google.protobuf.Timestamp time = 3;
+  int32 spoken_chars = 4; // oneof=_spoken_chars
+}
+message ConversationChapters {
+  repeated .exa.jetski_cortex_pb.ConversationChapter chapters = 1;
+}
+message ConversationChapter {
+  int32 start_step_index = 1;
+  int32 end_step_index_exclusive = 2;
+  string title = 3;
+  .google.protobuf.Timestamp generated_at = 4;
+}
+message CascadeTrajectorySummary {
+  string summary = 1;
+  uint32 step_count = 2;
+  .google.protobuf.Timestamp last_modified_time = 3;
+  string trajectory_id = 4;
+  .exa.cortex_pb.CascadeRunStatus status = 5;
+  .google.protobuf.Timestamp created_time = 7;
+  repeated .exa.jetski_cortex_pb.CortexTrajectoryStepWithIndex waiting_steps = 8;
+  repeated .exa.cortex_pb.CortexWorkspaceMetadata workspaces = 9;
+  .google.protobuf.Timestamp last_user_input_time = 10;
+  uint32 last_user_input_step_index = 16; // oneof=_last_user_input_step_index
+  .exa.jetski_cortex_pb.CortexTrajectoryStepWithIndex latest_notify_user_step = 12;
+  .exa.jetski_cortex_pb.CortexTrajectoryStepWithIndex latest_task_boundary_step = 14;
+  .exa.jetski_cortex_pb.ConversationAnnotations annotations = 15;
+  .exa.cortex_pb.CortexTrajectoryMetadata trajectory_metadata = 17;
+  bool has_active_children = 18;
+  .exa.cortex_pb.BattleModeInfo battle_mode_info = 19;
+  .exa.cortex_pb.CortexTrajectorySource source = 20;
+  bool not_fully_idle = 21;
+  .exa.cortex_pb.CortexTrajectoryType trajectory_type = 22;
+  bool killed = 23; // oneof=_killed
+  string fork_parent_conversation_id = 24;
+  bool interrupted = 25;
+  bool has_activity = 26;
+  bool cloud = 27;
+  .exa.cortex_pb.ExecutorTerminationReason latest_executor_termination_reason = 28;
+  uint32 background_task_count = 29;
+  bool has_running_subagents = 30;
+  repeated string code_review_ids = 31;
+}
+message CascadeTrajectorySummaries {
+  message SummariesEntry {
+    string key = 1;
+    .exa.jetski_cortex_pb.CascadeTrajectorySummary value = 2;
+  }
+  repeated .exa.jetski_cortex_pb.CascadeTrajectorySummaries.SummariesEntry summaries = 1;
+}
+message CortexStepUpdate {
+  uint32 step_index = 1;
+  .gemini_coder.Step step = 2; // oneof=update
+}
+message Slice {
+  int32 start_index = 1;
+  int32 end_index_exclusive = 2; // oneof=_end_index_exclusive
+}
+message StreamAgentStateUpdatesRequest {
+  string conversation_id = 1;
+  string subscriber_id = 2;
+  .exa.jetski_cortex_pb.Slice initial_steps_page_bounds = 3;
+  .exa.jetski_cortex_pb.ClientTrajectoryVerbosity trajectory_verbosity = 4;
+  .exa.jetski_cortex_pb.Slice initial_generator_metadatas_page_bounds = 5;
+  .exa.jetski_cortex_pb.Slice initial_executor_metadatas_page_bounds = 6;
+  bool disable_rehydration = 7;
+  bool enable_latency_telemetry = 8;
+}
+message StreamAgentStateUpdatesResponse {
+  .exa.jetski_cortex_pb.AgentStateUpdate update = 1;
+}
+message AgentStatePageUpdateRequest {
+  string conversation_id = 1;
+  string subscriber_id = 2;
+  .exa.jetski_cortex_pb.Slice step_page_bounds = 3;
+  .exa.jetski_cortex_pb.Slice generator_metadatas_page_bounds = 4;
+  .exa.jetski_cortex_pb.Slice executor_metadatas_page_bounds = 5;
+}
+message AgentStatePageUpdateResponse {
+}

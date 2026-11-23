@@ -1,0 +1,16 @@
+// Extracted file offset 0x365a327, 786 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package devtools.jetski.telemetry.extensions;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "third_party/gemini_coder/proto/trajectory.proto";
+import "third_party/jetski/cortex_pb/cortex.proto";
+message CortexTrajectoryStep {
+  .gemini_coder.Step step = 1;
+  .exa.cortex_pb.CortexTrajectoryReference reference = 2;
+  string trajectory_id = 3;
+  string execution_id = 4;
+  int32 metadata_index = 5;
+  string error = 6;
+  repeated .exa.cortex_pb.CortexTrajectoryReference parent_references = 7;
+  string root_conversation_id = 8;
+}

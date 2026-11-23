@@ -1,0 +1,16 @@
+// Extracted file offset 0x36606d8, 922 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package agency;
+import "google/api/inclusion.proto";
+import "third_party/jetski_prod/actor/proto/actor_resources.proto";
+import "third_party/jetski_prod/actor/proto/custom_extensions.proto";
+message ActorConfig {
+  string actor_config_name = 3;
+  string actor_type = 1;
+  .agency.ActorResources resources = 4;
+  .agency.CustomExtensions actor_config = 5;
+  string version = 2;
+}
+message ActorConfigs {
+  repeated .agency.ActorConfig configs = 1;
+}

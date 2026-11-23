@@ -1,0 +1,194 @@
+// Extracted file offset 0x3905c51, 24053 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+import "privacy/data_governance/attributes/proto/privacy_documentation.proto";
+message Search {
+  message DataSpecs {
+    enum SearchDataSource {
+      DATA_SOURCE_UNSPECIFIED = 0;
+      DATA_SOURCE_OTHER = 1;
+      MULTIDAY_METRIC = 2;
+      SEARCH_GROWTH_SESSION = 3;
+      SEARCH_SESSION = 4;
+      MULTIDAY_METRIC_NAPA = 5;
+      SEARCH_QSESSIONS = 6;
+      SEARCH_SENSITIVE_QSESSIONS = 7;
+      SEARCH_GWS = 8;
+      SEARCH_PROCESSED_ASSISTANT = 9;
+    }
+    enum ProductSource {
+      PRODUCT_SOURCE_UNSPECIFIED = 0;
+      PRODUCT_SOURCE_OTHER = 1;
+      WEB_SEARCH = 2;
+      IMAGE_SEARCH = 3;
+      SHOPPING_SEARCH = 4;
+      MAPS_SEARCH = 5;
+      ASSISTANT_SEARCH = 6;
+      VEIL_SEARCH = 7;
+      SEARCH_AGENT = 8;
+    }
+    enum UsagePurpose {
+      USAGE_PURPOSE_UNSPECIFIED = 0;
+      USAGE_PURPOSE_OTHER = 1;
+      PRODUCTION_INPUT = 2;
+      EXPERIMENT_ANALYSIS = 3;
+      DEBUGGING = 4;
+      MANUAL_TESTING = 5;
+      AUTOMATED_TESTING = 6;
+      COMPLIANCE = 7;
+      QUALITY_METRICS_MONITORING = 8;
+      JOB_PERFORMANCE_IMPROVEMENT = 9;
+      JOB_TEMPORARY_STORAGE = 10;
+      STRATEGIC_ANALYSIS = 11;
+    }
+    enum TransformationCategory {
+      TRANSFORMATION_CATEGORY_UNSPECIFIED = 0;
+      TRANSFORMATION_CATEGORY_OTHER = 1;
+      RAW = 2;
+      SAMPLED = 3;
+      PSEUDONYMIZED = 4;
+      DEIDENTIFIED = 5;
+      AGGREGATED = 6;
+      K_ANONYMIZED = 7;
+      DIFFERENTIALLY_PRIVATE = 8;
+      NO_USER_DATA = 9;
+    }
+    enum IdentifierType {
+      IDENTIFIER_UNSPECIFIED = 0;
+      IDENTIFIER_OTHER = 1;
+      GAIA_ID = 2;
+      ZWIEBACK_ID = 3;
+    }
+    enum AssistantRequestAcceptanceStatus {
+      ASSISTANT_REQUEST_ACCEPTANCE_UNSPECIFIED = 0;
+      ASSISTANT_REQUEST_ACCEPTANCE_AWAITING = 1;
+      ASSISTANT_REQUEST_ACCEPTANCE_ACCEPTED = 2;
+      ASSISTANT_REQUEST_ACCEPTANCE_REJECTED = 3;
+      ASSISTANT_REQUEST_ACCEPTANCE_CANCELLED = 4;
+      ASSISTANT_REQUEST_ACCEPTANCE_EXPLICIT_UNDEFINED = 5;
+      ASSISTANT_REQUEST_ACCEPTANCE_REJECTED_UNINTENDED_FOLLOW_ON = 6;
+    }
+    enum AssistantSpeculativeWritesStatus {
+      SPECULATIVE_UNSPECIFIED = 0;
+      SPECULATIVE_FILTERED = 1;
+      SPECULATIVE_ALLOWED = 2;
+      SPECULATIVE_TEMPORARILY_ALLOWED = 3;
+    }
+    enum SearchModelTrainingCompliance {
+      SEARCH_SMPC_UNSPECIFIED = 0;
+      SEARCH_SMPC_COMPLIANT = 1;
+      SEARCH_SMPC_NON_COMPLIANT = 2;
+    }
+    enum SearchModelTrainingDireCompliance {
+      SEARCH_SMPC_DIRE_UNSPECIFIED = 0;
+      SEARCH_SMPC_DIRE_COMPLIANT = 1;
+      SEARCH_SMPC_DIRE_NON_COMPLIANT = 2;
+    }
+    enum GoogleCommonCorpusFilterSet {
+      GCC_COMPLIANT_FILTER_SET_UNSPECIFIED = 0;
+      GCC_COMPLIANT_FILTER_SET_ONE = 1;
+    }
+    enum SearchQueryAllowlistCompliance {
+      SEARCH_QUERY_ALLOWLIST_UNSPECIFIED = 0;
+      SEARCH_QUERY_ALLOWLIST_COMPLIANT = 1;
+      SEARCH_QUERY_ALLOWLIST_NON_COMPLIANT = 2;
+    }
+    enum SearchQueryAnonymizationCompliance {
+      SEARCH_QUERY_ANONYMIZATION_UNSPECIFIED = 0;
+      SEARCH_QUERY_ANONYMIZATION_COMPLIANT = 1;
+      SEARCH_QUERY_ANONYMIZATION_NON_COMPLIANT = 2;
+    }
+    enum SearchKGRestrictedTrainingCompliance {
+      SEARCH_KG_RESTRICTED_TRAINING_UNSPECIFIED = 0;
+      SEARCH_KG_RESTRICTED_TRAINING_COMPLIANT = 1;
+      SEARCH_KG_RESTRICTED_TRAINING_NON_COMPLIANT = 2;
+    }
+    message DataCategory {
+      .privacy.data_governance.attributes.classification.Category.HasCategory user_query = 1;
+      .privacy.data_governance.attributes.classification.Category.HasCategory user_clicks = 2;
+      .privacy.data_governance.attributes.classification.Category.HasCategory user_impressions = 3;
+      .privacy.data_governance.attributes.classification.Category.HasCategory user_third_party_interactions = 4;
+      .privacy.data_governance.attributes.classification.Category.HasCategory user_interests = 5;
+      .privacy.data_governance.attributes.classification.Category.HasCategory user_generated_content = 6;
+      .privacy.data_governance.attributes.classification.Category.HasCategory user_google_workspace_content = 7;
+      .privacy.data_governance.attributes.classification.Category.HasCategory user_contacts = 8;
+      .privacy.data_governance.attributes.classification.Category.HasCategory user_interacted_url = 9;
+      .privacy.data_governance.attributes.classification.Category.HasCategory quality_abuse_signals = 10;
+      .privacy.data_governance.attributes.classification.Category.HasCategory semantic_nlu_signals = 11;
+      .privacy.data_governance.attributes.classification.Category.HasCategory contractual_content = 12;
+      .privacy.data_governance.attributes.classification.Category.HasCategory structured_world_facts = 13;
+      .privacy.data_governance.attributes.classification.Category.HasCategory eom_data = 14;
+      .privacy.data_governance.attributes.classification.Category.HasCategory ai_model_prompts = 15;
+      .privacy.data_governance.attributes.classification.Category.HasCategory search_core_service_data = 16;
+    }
+    message PolicyMetadata {
+      enum WorkspaceDataEligibility {
+        WORKSPACE_DATA_ELIGIBILITY_UNSPECIFIED = 0;
+        WORKSPACE_OWNED_DATASTORE = 1;
+        WORKSPACE_APPROVED_DATA_HANDLING = 2;
+      }
+      .privacy.data_governance.attributes.Search.DataSpecs.SearchModelTrainingCompliance smpc_compliance = 1;
+      .privacy.data_governance.attributes.Search.DataSpecs.SearchModelTrainingDireCompliance smpc_dire_compliance = 2;
+      .privacy.data_governance.attributes.Search.DataSpecs.GoogleCommonCorpusFilterSet gcc_filter_set = 3;
+      .privacy.data_governance.attributes.Search.DataSpecs.SearchQueryAllowlistCompliance search_query_allowlist_compliance = 4;
+      .privacy.data_governance.attributes.Search.DataSpecs.SearchQueryAnonymizationCompliance search_query_anonymization_compliance = 5;
+      .privacy.data_governance.attributes.Search.DataSpecs.SearchKGRestrictedTrainingCompliance search_kg_restricted_training_compliance = 6;
+      repeated .privacy.data_governance.attributes.Search.DataSpecs.PolicyMetadata.WorkspaceDataEligibility workspace_data_eligibility = 7;
+    }
+    repeated .privacy.data_governance.attributes.Search.DataSpecs.SearchDataSource data_sources = 1;
+    repeated .privacy.data_governance.attributes.Search.DataSpecs.ProductSource product_sources = 2;
+    repeated .privacy.data_governance.attributes.Search.DataSpecs.UsagePurpose usage_purposes = 3;
+    repeated .privacy.data_governance.attributes.Search.DataSpecs.IdentifierType identifier_types = 4;
+    repeated .privacy.data_governance.attributes.Search.DataSpecs.TransformationCategory transformation_categories = 5;
+    .privacy.data_governance.attributes.Search.DataSpecs.DataCategory data_category = 6;
+    repeated .privacy.data_governance.attributes.Search.DataSpecs.AssistantRequestAcceptanceStatus assistant_request_accept_status = 7;
+    .privacy.data_governance.attributes.Search.DataSpecs.AssistantSpeculativeWritesStatus assistant_speculative_writes_status = 9;
+    .privacy.data_governance.attributes.classification.Category.HasCategory has_final_intent_health_fitness = 8;
+    .privacy.data_governance.attributes.Search.DataSpecs.PolicyMetadata policy_metadata = 10;
+  }
+  message Storage {
+    enum UseControlMethod {
+      USE_CONTROL_METHOD_UNSPECIFIED = 0;
+      USE_CONTROL_METHOD_READ_TIME_FILTERING = 1;
+      USE_CONTROL_METHOD_WRITE_TIME_REJECTION = 2;
+    }
+    enum CriticalDatasetMitigation {
+      NOT_CRITICAL = 0;
+      CRITICAL = 1;
+    }
+    enum AllowedForContextualization {
+      ALLOWED_FOR_CONTEXTUALIZATION_UNSPECIFIED = 0;
+      ALLOWED_FOR_CONTEXTUALIZATION_SEARCH = 1;
+      ALLOWED_FOR_CONTEXTUALIZATION_ADS = 2;
+    }
+    message PrivacyModeControlPolicy {
+      enum PolicyAction {
+        POLICY_ACTION_UNSPECIFIED = 0;
+        POLICY_ACTION_EXPLICIT_PRIVACY_INTENT_DISALLOWED = 1;
+        POLICY_ACTION_EXPLICIT_PRIVACY_INTENT_ALLOWED = 2;
+      }
+      .privacy.data_governance.attributes.Search.Storage.PrivacyModeControlPolicy.PolicyAction action = 1; // oneof=_action
+      .privacy.data_governance.attributes.PrivacyDocumentation documentation = 2; // oneof=_documentation
+    }
+    message DarkLaunchInfraMutationPolicy {
+      enum MutationPermissibility {
+        MUTATION_UNSPECIFIED = 0;
+        MUTATION_PROHIBITED = 1;
+        MUTATION_ALLOWED = 2;
+      }
+      .privacy.data_governance.attributes.Search.Storage.DarkLaunchInfraMutationPolicy.MutationPermissibility mutation_permissibility = 1;
+    }
+    repeated .privacy.data_governance.attributes.Search.Storage.UseControlMethod use_control_methods = 1;
+    .privacy.data_governance.attributes.Search.Storage.CriticalDatasetMitigation search_critical_dataset_mitigation = 2;
+    repeated .privacy.data_governance.attributes.Search.Storage.PrivacyModeControlPolicy privacy_mode_control_policies = 3;
+    bool xpa_storage_allowed_for_product_features = 4;
+    repeated .privacy.data_governance.attributes.Search.Storage.AllowedForContextualization allowed_for_contextualization = 5;
+    bool is_used_for_llm_context = 6;
+    .privacy.data_governance.attributes.Search.Storage.DarkLaunchInfraMutationPolicy dark_launch_infra_mutation_policy = 7;
+    bool is_allowed_search_app_store_child_data = 8;
+  }
+  .privacy.data_governance.attributes.Search.DataSpecs data = 1;
+  .privacy.data_governance.attributes.Search.Storage storage = 2;
+}

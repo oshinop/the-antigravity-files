@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 582" width="1200" height="582">
+<rect width="1200" height="582" fill="#ffffff"/>
+<text x="48.0" y="76.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="#202124" text-anchor="start">agy replaces its prompt only through a custom agent file</text>
+<text x="48.0" y="112.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#5f6368" text-anchor="start">How each coding agent lets you supply your own system prompt</text>
+<text x="48.0" y="200.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#1a73e8" text-anchor="start">agy</text>
+<circle cx="248.0" cy="192.0" r="18" fill="#f9ab00"/>
+<line x1="241.0" y1="192.0" x2="255.0" y2="192.0" stroke="#ffffff" stroke-width="3.5999999999999996" stroke-linecap="round"/>
+<rect x="292.0" y="174.0" width="108.0" height="36.0" rx="6" fill="#f1f3f4"/>
+<text x="304.0" y="199.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="20" font-weight="400" fill="#202124" text-anchor="start">--agent</text>
+<text x="420.0" y="199.0" text-anchor="start"><tspan font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#5f6368">custom agent file</tspan><tspan dx="8" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#b06000">· no SYSTEM.md for the default agent</tspan></text>
+<line x1="48.0" y1="230.0" x2="1152.0" y2="230.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="276.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#202124" text-anchor="start">omp</text>
+<circle cx="248.0" cy="268.0" r="18" fill="#188038"/>
+<path d="M240.0,268.5 L245.5,274.0 L256.5,262.0" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="292.0" y="250.0" width="132.0" height="36.0" rx="6" fill="#f1f3f4"/>
+<text x="304.0" y="275.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="20" font-weight="400" fill="#202124" text-anchor="start">SYSTEM.md</text>
+<rect x="436.0" y="250.0" width="204.0" height="36.0" rx="6" fill="#f1f3f4"/>
+<text x="448.0" y="275.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="20" font-weight="400" fill="#202124" text-anchor="start">--system-prompt</text>
+<text x="660.0" y="275.0" text-anchor="start"><tspan font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#5f6368">file or flag</tspan></text>
+<line x1="48.0" y1="306.0" x2="1152.0" y2="306.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="352.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#202124" text-anchor="start">Codex</text>
+<circle cx="248.0" cy="344.0" r="18" fill="#188038"/>
+<path d="M240.0,344.5 L245.5,350.0 L256.5,338.0" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="292.0" y="326.0" width="300.0" height="36.0" rx="6" fill="#f1f3f4"/>
+<text x="304.0" y="351.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="20" font-weight="400" fill="#202124" text-anchor="start">model_instructions_file</text>
+<text x="612.0" y="351.0" text-anchor="start"><tspan font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#5f6368">config key</tspan></text>
+<line x1="48.0" y1="382.0" x2="1152.0" y2="382.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="428.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#202124" text-anchor="start">pi</text>
+<circle cx="248.0" cy="420.0" r="18" fill="#188038"/>
+<path d="M240.0,420.5 L245.5,426.0 L256.5,414.0" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="292.0" y="402.0" width="132.0" height="36.0" rx="6" fill="#f1f3f4"/>
+<text x="304.0" y="427.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="20" font-weight="400" fill="#202124" text-anchor="start">SYSTEM.md</text>
+<rect x="436.0" y="402.0" width="216.0" height="36.0" rx="6" fill="#f1f3f4"/>
+<text x="448.0" y="427.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="20" font-weight="400" fill="#202124" text-anchor="start">APPEND_SYSTEM.md</text>
+<text x="672.0" y="427.0" text-anchor="start"><tspan font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#5f6368">replace or append</tspan></text>
+<line x1="48.0" y1="458.0" x2="1152.0" y2="458.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="504.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#202124" text-anchor="start">Gemini CLI</text>
+<circle cx="248.0" cy="496.0" r="18" fill="#188038"/>
+<path d="M240.0,496.5 L245.5,502.0 L256.5,490.0" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="292.0" y="478.0" width="216.0" height="36.0" rx="6" fill="#f1f3f4"/>
+<text x="304.0" y="503.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="20" font-weight="400" fill="#202124" text-anchor="start">GEMINI_SYSTEM_MD</text>
+<text x="528.0" y="503.0" text-anchor="start"><tspan font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#5f6368">environment variable</tspan></text>
+</svg>

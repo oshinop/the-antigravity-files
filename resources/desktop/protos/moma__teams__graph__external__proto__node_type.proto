@@ -1,0 +1,12 @@
+// Extracted file offset 0x36327e5, 404 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package moma.teams.graph.external;
+import "net/proto2/proto/descriptor.proto";
+enum TeamGraphNodeType {
+  TYPE_UNKNOWN = 0;
+  TYPE_TEAM = 1;
+  TYPE_PRODUCT = 2;
+  TYPE_SYSTEM = 3;
+  TYPE_COLLECTION = 4;
+  TYPE_ASSET_GROUP = 5;
+}

@@ -1,0 +1,193 @@
+// Extracted file offset 0x37ea9ec, 12110 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/migration.proto";
+import "learning/genai/api/genai_versioning.proto";
+import "learning/genai/api/interactions/proto/agents.proto";
+import "learning/genai/api/interactions/proto/content.proto";
+import "learning/genai/api/interactions/proto/environment.proto";
+import "learning/genai/api/interactions/proto/error.proto";
+import "learning/genai/api/interactions/proto/models.proto";
+import "learning/genai/api/interactions/proto/response_format.proto";
+import "learning/genai/api/interactions/proto/safety_settings.proto";
+import "learning/genai/api/interactions/proto/steps.proto";
+import "learning/genai/api/interactions/proto/tool_type.proto";
+import "learning/genai/api/interactions/proto/tools.proto";
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+import "learning/genai/api/webhooks/proto/webhook_messages.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum ResponseModality {
+  RESPONSE_MODALITY_UNSPECIFIED = 0;
+  TEXT = 1;
+  IMAGE = 2;
+  AUDIO = 3;
+  VIDEO = 4;
+  DOCUMENT = 5;
+}
+enum ServiceTier {
+  SERVICE_TIER_UNSPECIFIED = 0;
+  SERVICE_TIER_FLEX = 1;
+  SERVICE_TIER_STANDARD = 2;
+  SERVICE_TIER_PRIORITY = 3;
+  SERVICE_TIER_DEFERRED = 4;
+}
+message Interaction {
+  enum Status {
+    UNSPECIFIED = 0;
+    IN_PROGRESS = 2;
+    REQUIRES_ACTION = 5;
+    COMPLETED = 3;
+    FAILED = 4;
+    CANCELLED = 10;
+    INCOMPLETE = 11;
+    BUDGET_EXCEEDED = 12;
+    QUEUED = 13;
+    IDLE = 14;
+    SUSPENDED = 16;
+    REQUIRES_CONTINUATION = 17;
+  }
+  message Usage {
+    message ModalityTokens {
+      .genai.ResponseModality modality = 1;
+      int32 tokens = 2;
+    }
+    message ModelInvocationTokenCounts {
+      repeated .genai.Interaction.Usage.ModalityTokens prompt_tokens_details = 1;
+      repeated .genai.Interaction.Usage.ModalityTokens cache_tokens_details = 2;
+      repeated .genai.Interaction.Usage.ModalityTokens candidates_tokens_details = 3;
+      repeated .genai.Interaction.Usage.ModalityTokens thoughts_tokens_details = 4;
+    }
+    message GroundingToolCount {
+      enum Type {
+        TYPE_UNSPECIFIED = 0;
+        GOOGLE_SEARCH = 1;
+        GOOGLE_MAPS = 2;
+        RETRIEVAL = 3;
+        GOOGLE_SEARCH_IMAGE = 4;
+      }
+      .genai.Interaction.Usage.GroundingToolCount.Type type = 1;
+      int32 count = 2;
+      int32 search_query_count = 3;
+    }
+    message BillableUsage {
+      int32 total_input_tokens = 1;
+      int32 total_cached_tokens = 2;
+      int32 total_output_tokens = 3;
+      int32 total_thought_tokens = 4;
+      int32 total_tokens = 5;
+    }
+    message CompactionUsageMetadata {
+      int32 input_token_count = 1;
+      int32 output_token_count = 2;
+      int64 precompaction_token_count = 3;
+      int64 postcompaction_token_count = 4;
+      int32 precompaction_step_count = 5;
+    }
+    message ToolCallUsage {
+      .genai.ToolType tool_type = 1;
+      string name = 2;
+      int32 tool_call_count = 3;
+      int32 server_executed_count = 4;
+    }
+    int32 total_input_tokens = 7;
+    int32 initial_input_tokens = 24;
+    repeated .genai.Interaction.Usage.ModalityTokens input_tokens_by_modality = 8;
+    int32 total_cached_tokens = 9;
+    repeated .genai.Interaction.Usage.ModalityTokens cached_tokens_by_modality = 10;
+    int32 total_output_tokens = 11;
+    repeated .genai.Interaction.Usage.ModalityTokens output_tokens_by_modality = 12;
+    int32 total_tool_use_tokens = 13;
+    repeated .genai.Interaction.Usage.ModalityTokens tool_use_tokens_by_modality = 14;
+    int32 total_thought_tokens = 16;
+    int32 total_tokens = 6;
+    repeated .genai.Interaction.Usage.GroundingToolCount grounding_tool_count = 17;
+    repeated .genai.Interaction.Usage.ModelInvocationTokenCounts model_invocation_token_counts = 19;
+    repeated .genai.Interaction.Usage.ModelInvocationTokenCounts non_grounding_model_invocation_token_counts = 20;
+    int32 raw_prompt_token = 18;
+    .genai.Interaction.Usage.BillableUsage billable_usage = 21;
+    int32 total_model_invocations = 23;
+    .genai.Interaction.Usage.CompactionUsageMetadata compaction_usage_metadata = 25;
+    repeated .genai.Interaction.Usage.ToolCallUsage tool_call_usage = 26;
+  }
+  message LogprobsResult {
+    message Candidate {
+      string token = 1;
+      int32 token_id = 2;
+      float log_probability = 3;
+    }
+    message TopCandidates {
+      repeated .genai.Interaction.LogprobsResult.Candidate candidates = 1;
+    }
+    repeated .genai.Interaction.LogprobsResult.TopCandidates top_candidates = 1;
+    repeated .genai.Interaction.LogprobsResult.Candidate chosen_candidates = 2;
+    double avg_logprobs = 3;
+  }
+  message LabelsEntry {
+    string key = 1;
+    string value = 2;
+  }
+  string id = 2;
+  .genai.Interaction.Status status = 3;
+  string created = 43;
+  string updated = 44;
+  string role = 38;
+  repeated .genai.Content outputs = 7;
+  string system_instruction = 9;
+  repeated .genai.Content developer_instructions = 65;
+  repeated .genai.Tool tools = 10;
+  .genai.ContentList content_list = 11; // oneof=input
+  string string_content = 12; // oneof=input
+  .genai.TurnList turn_list = 37; // oneof=input
+  .genai.StepList step_list = 53; // oneof=input
+  .genai.Content content = 40; // oneof=input
+  .genai.Interaction.Usage usage = 16;
+  repeated .genai.ResponseModality response_modalities = 29;
+  .genai.Value response_format = 33; // oneof=response_format_config
+  .genai.ResponseFormatList response_format_list = 56; // oneof=response_format_config
+  .genai.ResponseFormat response_format_singleton = 57; // oneof=response_format_config
+  string response_mime_type = 35;
+  string previous_interaction_id = 34;
+  string parent_interaction_id = 77;
+  .genai.StatusDetail status_detail = 68;
+  .genai.ModelInteraction model_interaction = 41; // oneof=request_type
+  .genai.AgentInteraction agent_interaction = 42; // oneof=request_type
+  bytes event_id = 45;
+  string env_id = 55; // oneof=environment
+  .genai.EnvironmentConfig remote_environment = 54; // oneof=environment
+  .genai.LocalEnvironmentConfig local_environment = 52; // oneof=environment
+  .genai.SelfHostedEnvironmentConfig self_hosted_environment = 69; // oneof=environment
+  string environment_id = 47;
+  .genai.ServiceTier service_tier = 48;
+  .genai.Interaction.LogprobsResult logprobs_result = 49;
+  .genai.WebhookConfig webhook_config = 50;
+  repeated .genai.Step steps = 51;
+  repeated .genai.SafetySetting safety_settings = 58;
+  repeated .genai.Interaction.LabelsEntry labels = 59;
+  string trigger_id = 60;
+  repeated .genai.Error errors = 62;
+  bytes continuation_token = 66;
+  bool continuation_required = 67;
+  string last_event_id = 76;
+}
+message InteractionMetadata {
+  string id = 1;
+  .genai.Interaction.Status status = 2;
+  string created = 3;
+  string updated = 4;
+}
+message StatusDetail {
+  enum StatusReason {
+    STATUS_REASON_UNSPECIFIED = 0;
+    QUOTA_EXHAUSTED = 1;
+    SPEND_CAP_REACHED = 2;
+    LICENSE_REQUIRED = 3;
+    ADMIN_SUSPENDED = 4;
+    PARENT_SUSPENDED = 5;
+    DEFERRED = 6;
+    CREDENTIALS_EXPIRED = 7;
+  }
+  .genai.StatusDetail.StatusReason reason = 1;
+  string detail = 2;
+}

@@ -1,0 +1,6 @@
+Searches the Agent Marketplace catalog for plugins and skills by keyword, returning matches in relevance order with their id, name, kind, description, and install status. Use when the user asks to browse, find, or install plugins or skills, or proactively whenever the task involves a product, service, or workflow that no installed tool, MCP server, or skill covers — check here before improvising a workaround or saying you cannot do it.
+
+Guidelines:
+- Suggest 1 strong match (at most 2 if substantially different, or up to 3 when browsing) with a one-sentence reason and <plugin-card catalog-id="<id>"></plugin-card> on its own line. Tell the user they can add it from the card; never install it yourself.
+- If the entry is needed for the core task or would replace a fragile workaround, suggest it upfront and stop so the user can add it from the card and let you continue with it or ask you to use a workaround instead. If you can already complete the task cleanly with existing tools, do that first and put the suggestion at the end of your reply.
+- Never emit a <plugin-card> for installed entries — tell the user it is already installed (and to enable it if disabled). The one exception: when a tool error asks you to show a <plugin-card> so the user can sign in to a plugin.

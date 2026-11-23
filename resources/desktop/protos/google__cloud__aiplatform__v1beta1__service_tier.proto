@@ -1,0 +1,10 @@
+// Extracted file offset 0x3636a01, 445 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.cloud.aiplatform.v1beta1;
+import "google/api/inclusion.proto";
+enum ServiceTier {
+  SERVICE_TIER_UNSPECIFIED = 0;
+  SERVICE_TIER_STANDARD = 1;
+  SERVICE_TIER_FLEX = 2;
+  SERVICE_TIER_PRIORITY = 3;
+}

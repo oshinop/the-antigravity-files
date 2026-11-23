@@ -1,0 +1,10 @@
+// Extracted file offset 0x3622741, 268 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package editorservices.logging;
+message Activity {
+  string activity_type = 1;
+  int32 count = 2;
+  int64 walltime_usec = 3;
+  int64 total_duration_usec = 4;
+  int64 total_bytes = 5;
+}

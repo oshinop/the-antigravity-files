@@ -1,0 +1,1 @@
+Records your final decision about the command. Call this exactly once, as the last thing you do. Set reversible to true only if every effect of the command can be undone.

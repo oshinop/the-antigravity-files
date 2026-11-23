@@ -1,0 +1,34 @@
+// Extracted file offset 0x36b3956, 2061 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.cloud.aiplatform.master;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/versioning.proto";
+import "google/protobuf/duration.proto";
+import "net/proto2/contrib/validator/annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message DocumentMediaMetadata {
+  enum ContentLayer {
+    CONTENT_LAYER_UNSPECIFIED = 0;
+    PAGE_IMAGE = 1;
+    PAGE_TEXT = 2;
+  }
+  int32 start_page = 1; // oneof=_start_page
+  int32 end_page = 2; // oneof=_end_page
+  repeated .google.cloud.aiplatform.master.DocumentMediaMetadata.ContentLayer content_layers = 3;
+}
+message SpreadsheetMetadata {
+  enum ContentLayer {
+    CONTENT_LAYER_UNSPECIFIED = 0;
+    DATA = 1;
+    FORMULAS = 2;
+    VISUAL = 3;
+  }
+  string visible_cells = 1; // oneof=_visible_cells
+  int32 sheet_index = 2; // oneof=_sheet_index
+  repeated .google.cloud.aiplatform.master.SpreadsheetMetadata.ContentLayer content_layers = 3;
+}
+message AudioMetadata {
+  .google.protobuf.Duration start_offset = 1;
+  .google.protobuf.Duration end_offset = 2;
+}

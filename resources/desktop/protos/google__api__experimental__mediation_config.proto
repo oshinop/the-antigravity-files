@@ -1,0 +1,20 @@
+// Extracted file offset 0x3656d65, 790 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+message MediationConfig {
+  repeated .google.api.MediationRule rules = 1;
+  int32 mediation_server_startup_delay = 2;
+}
+message MediationRule {
+  string selector = 1;
+  .google.api.MediationMethodConfig request = 2;
+  .google.api.MediationMethodConfig response = 3;
+}
+message MediationMethodConfig {
+  bool enabled = 1;
+  string message_type_url = 4;
+  repeated string requested_contexts = 2;
+  repeated string provided_contexts = 3;
+}

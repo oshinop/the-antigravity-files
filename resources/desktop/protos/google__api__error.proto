@@ -1,0 +1,14 @@
+// Extracted file offset 0x364274d, 564 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/policy.proto";
+import "net/proto2/proto/descriptor.proto";
+message CustomError {
+  repeated .google.api.CustomErrorRule rules = 1;
+  repeated string types = 2;
+}
+message CustomErrorRule {
+  string selector = 1;
+  bool is_error_type = 3;
+}

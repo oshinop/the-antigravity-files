@@ -1,0 +1,8 @@
+Use this tool to create new files. The file and any parent directories will be created for you if they do not already exist.
+		Follow these instructions:
+		1. By default this tool will error if TargetFile already exists. To overwrite an existing file, set Overwrite to true. To append to an existing file (or create it if it does not exist), set Append to true.
+
+Use this tool to create new files. The file and any parent directories will be created for you if they do not already exist.
+		Follow these instructions:
+		1. By default this tool will error if TargetFile already exists. To overwrite an existing file, set Overwrite to true. To append to an existing file (or create it if it does not exist), set Append to true.
+		2. When creating an artifact, always provide ArtifactMetadata. When creating non-artifact files, do not provide it.

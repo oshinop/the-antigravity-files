@@ -1,0 +1,142 @@
+[
+ {
+  "functionDeclarations": [
+   {
+    "name": "read_file",
+    "description": "Read the contents of a text, image, pdf, video, or audio file. Each read returns at most 800 lines or 46080 bytes.",
+    "parameters": {
+     "type": "OBJECT",
+     "properties": {
+      "ByteOffset": {
+       "type": "INTEGER",
+       "description": "Byte offset into the line range. Use to continue reading when content is truncated by the byte limit."
+      },
+      "EndLine": {
+       "type": "INTEGER",
+       "description": "End line to read (inclusive). Omit to read until the end of the file, within the per-read limits."
+      },
+      "Path": {
+       "type": "STRING",
+       "description": "Path of the file to read (absolute, ~/..., or relative to the command's working directory)."
+      },
+      "StartLine": {
+       "type": "INTEGER",
+       "description": "Start line to read (inclusive). Omit to read from the beginning of the file."
+      }
+     },
+     "required": [
+      "Path"
+     ]
+    }
+   },
+   {
+    "name": "run_command",
+    "description": "Execute a command in the workspace. Operating System: [os]. Shell: [shell]. Each command runs in a new session (working directory changes and environment variables do not persist across calls).",
+    "parameters": {
+     "type": "OBJECT",
+     "properties": {
+      "CommandLine": {
+       "type": "STRING",
+       "description": "The exact command line string to execute."
+      },
+      "toolSummary": {
+       "type": "STRING",
+       "description": "Brief 2-5 word noun phrase describing the command task. Capitalize like a sentence. Some examples: 'Git status check', 'Unit test execution', 'Package build', 'Dev server startup'."
+      }
+     },
+     "required": [
+      "CommandLine",
+      "toolSummary"
+     ]
+    }
+   },
+   {
+    "name": "list_directory",
+    "description": "Lists directory entries and inspects files or executables (existence, text/script vs binary type, size, modification time, and symlink targets) in memory without spawning a shell. Resolves relative paths against the command's working directory and bare command names against ~/.local/bin and PATH. Prefer this over running ls, stat, file, which, type, readlink, or find.",
+    "parameters": {
+     "type": "OBJECT",
+     "properties": {
+      "max_depth": {
+       "type": "INTEGER",
+       "description": "Directory traversal depth from 1 to 3 (default 1). Use 2 or 3 instead of running find."
+      },
+      "paths": {
+       "type": "ARRAY",
+       "description": "One or more directory paths, file paths, or bare command names to inspect (absolute, ~/..., relative to the command's working directory, or executable names on PATH / ~/.local/bin). Pass multiple items in a single call.",
+       "items": {
+        "type": "STRING"
+       }
+      }
+     },
+     "required": [
+      "paths"
+     ]
+    }
+   },
+   {
+    "name": "search_files",
+    "description": "Searches files or directories in memory for lines matching a case-insensitive regular expression without spawning a shell, automatically skipping .git, node_modules, and virtualenvs. Prefer this over running grep or rg.",
+    "parameters": {
+     "type": "OBJECT",
+     "properties": {
+      "paths": {
+       "type": "ARRAY",
+       "description": "One or more file or directory paths to search (absolute, ~/..., or relative to the command's working directory).",
+       "items": {
+        "type": "STRING"
+       }
+      },
+      "pattern": {
+       "type": "STRING",
+       "description": "Case-insensitive regular expression (RE2 syntax) to search for across the specified files or directories."
+      }
+     },
+     "required": [
+      "pattern",
+      "paths"
+     ]
+    }
+   },
+   {
+    "name": "search_transcript",
+    "description": "Searches the coding agent's session transcript in memory without spawning a shell. Matches case-insensitive literal substrings across prior agent tool calls and tool outputs (ignoring user prompts and model thinking), returning each matching turn's tool call paired with its output and the launch step of any referenced background task. Prefer this over running grep or sed on transcript.jsonl.",
+    "parameters": {
+     "type": "OBJECT",
+     "properties": {
+      "queries": {
+       "type": "ARRAY",
+       "description": "One or more case-insensitive literal substrings to search for in the coding agent's session transcript (such as a target path, filename, port, or job ID). Pass all related terms together in one call.",
+       "items": {
+        "type": "STRING"
+       }
+      }
+     },
+     "required": [
+      "queries"
+     ]
+    }
+   },
+   {
+    "name": "submit_verdict",
+    "description": "Records your final decision about the command. Call this exactly once, as the last thing you do. Set reversible to true only if every effect of the command can be undone.",
+    "parameters": {
+     "type": "OBJECT",
+     "properties": {
+      "reason": {
+       "type": "STRING",
+       "description": "One sentence naming the specific effect that decided the verdict."
+      },
+      "reversible": {
+       "type": "BOOLEAN",
+       "description": "True if the user can get back to their prior state after this command runs. False if any effect of it cannot be undone."
+      }
+     },
+     "required": [
+      "reversible",
+      "reason"
+     ]
+    }
+   }
+  ]
+ }
+]

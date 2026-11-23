@@ -1,0 +1,29 @@
+// Extracted file offset 0x3689ca9, 1406 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/policy.proto";
+import "google/api/visibility.proto";
+message Monitoring {
+  message MonitoringDestination {
+    enum AggregationType {
+      AGGREGATION_TYPE_UNSPECIFIED = 0;
+      FULL_AGGREGATION = 1;
+      NO_AGGREGATION = 2;
+      QUOTA_AGGREGATION = 3;
+      ALIAS_AGGREGATION = 4;
+    }
+    message QueryOptimization {
+      repeated string aggregated_labels = 1;
+      string flags = 2;
+    }
+    string monitored_resource = 1;
+    repeated string metrics = 2;
+    .google.api.Monitoring.MonitoringDestination.AggregationType aggregation_type = 4;
+    repeated .google.api.Monitoring.MonitoringDestination.QueryOptimization query_optimizations = 5;
+    string precomputation_flags = 6;
+  }
+  repeated .google.api.Monitoring.MonitoringDestination producer_destinations = 1;
+  repeated .google.api.Monitoring.MonitoringDestination consumer_destinations = 2;
+  string monitoring_service_name = 7;
+}

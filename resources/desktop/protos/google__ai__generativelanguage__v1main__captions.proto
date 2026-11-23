@@ -1,0 +1,16 @@
+// Extracted file offset 0x364d0aa, 688 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/api/visibility.proto";
+import "google/protobuf/duration.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Caption {
+  .google.protobuf.Duration start_offset = 1;
+  .google.protobuf.Duration end_offset = 2;
+  string text = 3;
+  float text_confidence = 4;
+  string speaker_label = 5;
+}
+message Captions {
+  repeated .google.ai.generativelanguage.v1main.Caption captions = 1;
+}

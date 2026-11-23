@@ -1,0 +1,1 @@
+Post a message to the swarm message board, where every agent can read it. Messages are tagged with your agent id.

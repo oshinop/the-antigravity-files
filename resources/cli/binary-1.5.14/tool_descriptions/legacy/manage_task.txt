@@ -1,0 +1,9 @@
+Manage background tasks. Use this tool to list running tasks or interact with tasks that were sent to the background.
+
+Actions:
+- 'list': List all currently running background tasks
+- 'kill': Cancel the task's execution
+- 'status': Check the task's current status and log file location
+- 'send_input': Send input to a running task
+
+When mentioning tasks to the user, avoid using full task IDs and start timestamps; keep them human-readable.

@@ -1,0 +1,18 @@
+// Extracted file offset 0x36891bf, 1392 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message TrustedCoreAccess {
+  message Rpc {
+    enum TcaStatus {
+      TCA_STATUS_UNDEFINED = 0;
+      NOT_ANNOTATION_COMPATIBLE = 1;
+      NO_ACCESS_IN_SCOPE = 2;
+      PRIVILEGED_ACCESS_IN_SCOPE = 3;
+      ALTERNATE_AUDITING_OR_COMPLIANCE_ESTABLISHED = 4;
+    }
+    .privacy.data_governance.attributes.TrustedCoreAccess.Rpc.TcaStatus tca_status = 1; // oneof=_tca_status
+  }
+  .privacy.data_governance.attributes.TrustedCoreAccess.Rpc rpc = 1; // oneof=_rpc
+}

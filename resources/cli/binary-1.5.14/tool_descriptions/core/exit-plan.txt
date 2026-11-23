@@ -1,0 +1,1 @@
+Turn plan mode off and hand the plan to the execution model. This turn ends and the next one runs on a faster, cheaper model in this same conversation, which sees everything so far, including the plan given here. Call it once the plan is complete.

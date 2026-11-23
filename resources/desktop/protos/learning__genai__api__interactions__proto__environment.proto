@@ -1,0 +1,129 @@
+// Extracted file offset 0x3773b00, 6271 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/struct.proto";
+import "learning/genai/api/genai_versioning.proto";
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message EnvironmentConfig {
+  enum BrowserNetworkMode {
+    BROWSER_NETWORK_MODE_UNSPECIFIED = 0;
+    BROWSER_NETWORK_MODE_INHERIT = 1;
+    BROWSER_NETWORK_MODE_DISABLED = 2;
+  }
+  enum NetworkMode {
+    NETWORK_MODE_UNSPECIFIED = 0;
+    DISABLED = 1;
+  }
+  enum EnvironmentMode {
+    ENVIRONMENT_MODE_UNSPECIFIED = 0;
+    ON_DEMAND = 1;
+    ALWAYS_ON = 2;
+    SELF_HOSTED = 3;
+  }
+  message Source {
+    enum Type {
+      TYPE_UNSPECIFIED = 0;
+      GCS = 2;
+      INLINE = 3;
+      REPOSITORY = 4;
+      SKILL_REGISTRY = 5;
+    }
+    .genai.EnvironmentConfig.Source.Type type = 1;
+    string source = 2;
+    string target = 3;
+    string content = 4;
+    string encoding = 5;
+  }
+  message EgressRule {
+    message TransformEntry {
+      string key = 1;
+      string value = 2;
+    }
+    string domain = 1;
+    repeated .genai.EnvironmentConfig.EgressRule.TransformEntry transform = 2;
+    string credential = 3;
+    .genai.EnvironmentConfig.NetworkMode mode = 4;
+  }
+  message EnvVar {
+    string value = 1;
+    string credential = 2;
+  }
+  message EnvEntry {
+    string key = 1;
+    .genai.EnvironmentConfig.EnvVar value = 2;
+  }
+  message BrowserNetworkConfig {
+    repeated .genai.EnvironmentConfig.EgressRule allowlist = 1;
+  }
+  message EnvironmentNetworkEgressAllowlist {
+    repeated .genai.EnvironmentConfig.EgressRule allowlist = 1;
+    .genai.EnvironmentConfig.BrowserNetworkConfig browser_allowlist = 2; // oneof=browser
+    .genai.EnvironmentConfig.BrowserNetworkMode browser_mode = 3; // oneof=browser
+  }
+  message MemoryMount {
+    enum Mode {
+      MODE_UNSPECIFIED = 0;
+      READ_ONLY = 1;
+      READ_WRITE = 2;
+    }
+    string memory_store = 1;
+    .genai.EnvironmentConfig.MemoryMount.Mode mode = 2;
+    string description = 3;
+    string dir_name = 4;
+  }
+  message CapsuleConfig {
+    string identity = 1;
+  }
+  repeated .genai.EnvironmentConfig.Source sources = 1;
+  .genai.EnvironmentConfig.EnvironmentNetworkEgressAllowlist network_allowlist = 2; // oneof=network
+  .genai.EnvironmentConfig.NetworkMode network_mode = 3; // oneof=network
+  string environment_id = 4;
+  repeated .genai.EnvironmentConfig.EnvEntry env = 5;
+  .genai.EnvironmentConfig.EnvironmentMode mode = 6;
+  .google.protobuf.Struct custom_config = 9;
+  repeated .genai.EnvironmentConfig.MemoryMount memory_mounts = 7;
+  .genai.EnvironmentConfig.CapsuleConfig capsule_config = 8;
+}
+message Environment {
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    ACTIVE = 1;
+    EXPIRED = 2;
+  }
+  message StorageQuota {
+    enum Tier {
+      TIER_UNSPECIFIED = 0;
+      FREE = 1;
+      PAID = 2;
+    }
+    .genai.Environment.StorageQuota.Tier tier = 1;
+    int64 project_used_bytes = 2;
+    int64 project_limit_bytes = 3;
+  }
+  string id = 1;
+  repeated .genai.EnvironmentConfig.Source sources = 2;
+  string created = 3;
+  string updated = 4;
+  string last_accessed = 5;
+  .genai.Environment.Status status = 6;
+  .genai.EnvironmentConfig.EnvironmentNetworkEgressAllowlist network_allowlist = 7; // oneof=network
+  .genai.EnvironmentConfig.NetworkMode network_mode = 8; // oneof=network
+  int64 file_count = 9;
+  int64 size_bytes = 10;
+  .genai.EnvironmentConfig.EnvironmentMode mode = 11;
+  .google.protobuf.Struct custom_config = 15;
+  .genai.Environment.StorageQuota storage = 12;
+  string environment_key = 13;
+  repeated .genai.EnvironmentConfig.MemoryMount memory_mounts = 14;
+}
+message LocalEnvironmentConfig {
+  string workspace_directory = 1;
+  repeated string skill_dirs = 2;
+}
+message SelfHostedEnvironmentConfig {
+  .google.protobuf.Struct custom_config = 1;
+}

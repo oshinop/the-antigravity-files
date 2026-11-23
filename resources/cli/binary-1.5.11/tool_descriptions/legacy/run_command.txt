@@ -1,0 +1,18 @@
+If the step doesn't return the command output, it means that the command was sent to the background as a task. You will receive messages with the command's output as it runs. To interact with a running command, use the %s tool. Use `send_input` to send stdin, `kill` to terminate the command, and `status` to check current status. IMPORTANT: Do NOT poll or loop on `status` to wait for completion. The system will automatically notify you with a message when the command finishes. Simply proceed with other work or stop calling tools after launching a command.
+
+Set to true to run this command in a persistent terminal that preserves environment and shell variables between invocations. Returns a TerminalID that can be specified in future run_command calls to share the environment. Note: persistent terminals share variables but are separate bash -c invocations; shell state like working directory, aliases, and functions are not shared.
+
+Optional ID of a persistent terminal to reuse. Specify a TerminalID returned from a previous persistent run_command to share its variables. Can only be used when RunPersistent is true. Leave this empty with RunPersistent set to true to create a new persistent terminal.
+
+Set to true to run the command outside of the sandbox environment.
+
+Optional. If the command runs for longer than this duration (in seconds) after the wait time (WaitMsBeforeAsync), the system will notify you that it is still running. Use this instead of setting a manual timer for checking status of commands. Highly recommended if the command is expected to terminate at all. Do not set this for daemon commands, which are expected to run indefinitely.
+
+Set to true for long-running support processes that are meant to keep running in the background indefinitely and are not expected to finish on their own (e.g., dev servers, file watchers, tunnels). Leave false (the default) for normal commands that are expected to terminate.
+
+PROPOSE a command to run on behalf of the user. Operating System: %s. Shell: %s.
+**NEVER PROPOSE A cd COMMAND**.
+If you have this tool, note that you DO have the ability to run commands directly on the USER's system.
+Make sure to specify CommandLine exactly as it should be run in the shell.
+%s
+Commands will be run with PAGER=cat. You may want to limit the length of output for commands that usually rely on paging and may contain very long output (e.g. git log, use git log -n <N>).%s

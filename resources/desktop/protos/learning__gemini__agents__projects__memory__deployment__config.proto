@@ -1,0 +1,38 @@
+// Extracted file offset 0x367f1a9, 1265 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package jetski_memory;
+import "google/protobuf/duration.proto";
+import "learning/gemini/agents/projects/memory/fuse/proto/config.proto";
+enum ReleaseTrack {
+  RELEASE_TRACK_UNSPECIFIED = 0;
+  RELEASE_TRACK_STABLE = 1;
+  RELEASE_TRACK_TESTING = 2;
+  RELEASE_TRACK_UNSTABLE = 3;
+}
+message GroupSet {
+  repeated string groups = 1;
+  bool all = 2;
+}
+message DreamingConfig {
+  bool disable = 1;
+  .jetski_memory.GroupSet write = 5;
+  .jetski_memory.GroupSet read = 6;
+  string profile = 7;
+  .google.protobuf.Duration lookback = 8;
+  string instructions = 9;
+  bool archive_conversations = 10;
+  string schedule = 11;
+}
+message AmbientInjectionConfig {
+  bool disable = 1;
+  string retrieval_query = 3;
+}
+message MemoryConfig {
+  .jetski_memory.AmbientInjectionConfig ambient_memory = 1;
+  .jetski_memory.DreamingConfig dreaming = 4;
+  .jetski_memory.FuseConfig fuse = 3;
+  bool disable_skills = 5;
+  string profile = 6;
+  .jetski_memory.ReleaseTrack release_track = 7;
+  repeated string force_experiments = 8;
+}

@@ -1,0 +1,46 @@
+// Extracted file offset 0x3798d65, 7186 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message Photos {
+  message Data {
+    enum MediaType {
+      MEDIA_TYPE_UNSET = 0;
+      MEDIA_TYPE_CONTENT = 1;
+      MEDIA_TYPE_ATTRIBUTES = 2;
+      MEDIA_TYPE_DERIVED_ATTRIBUTES = 3;
+      MEDIA_TYPE_NONE = 4;
+    }
+    message DataContents {
+      message FaceRelatedContents {
+        .privacy.data_governance.attributes.classification.Category.HasCategory face_related = 1;
+        .privacy.data_governance.attributes.classification.Category.HasCategory face_landmark = 2;
+        .privacy.data_governance.attributes.classification.Category.HasCategory face_template = 3;
+        .privacy.data_governance.attributes.classification.Category.HasCategory further_derived_fields = 4;
+      }
+      message LocationRelatedContents {
+        .privacy.data_governance.attributes.classification.Category.HasCategory media_location = 1;
+        .privacy.data_governance.attributes.classification.Category.GeoLocation.Coarse media_location_coarse = 2;
+      }
+      .privacy.data_governance.attributes.classification.Category.HasCategory derived_resource_data = 1;
+      .privacy.data_governance.attributes.Photos.Data.DataContents.FaceRelatedContents face_contents = 2;
+      .privacy.data_governance.attributes.Photos.Data.DataContents.LocationRelatedContents location_contents = 3;
+      .privacy.data_governance.attributes.classification.Category.HasCategory sharing_or_ownership_state = 4;
+    }
+    message Benchmarks {
+      enum Donated {
+        UNDEFINED = 0;
+        DONATED_YES = 1;
+        DONATED_NO = 2;
+        DONATED_MIXED = 3;
+      }
+      .privacy.data_governance.attributes.classification.Category.HasCategory benchmarks = 1;
+      .privacy.data_governance.attributes.Photos.Data.Benchmarks.Donated donated = 2;
+    }
+    .privacy.data_governance.attributes.Photos.Data.MediaType media_type = 1;
+    repeated .privacy.data_governance.attributes.Photos.Data.MediaType media_types = 3;
+    .privacy.data_governance.attributes.Photos.Data.DataContents data_contents = 2;
+    .privacy.data_governance.attributes.Photos.Data.Benchmarks benchmarks = 4;
+  }
+}

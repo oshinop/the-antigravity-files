@@ -1,0 +1,109 @@
+// Extracted file offset 0x3753805, 5246 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package security.context;
+import "google/api/auditing.proto";
+import "google/api/inclusion.proto";
+import "google/api/policy.proto";
+import "google/iam/v1/policy.proto";
+import "privacy/data_governance/attributes/proto/annotations.proto";
+import "security/context/proto/policy/application_permission_policy.proto";
+import "security/context/proto/policy/authentication_policy.proto";
+import "security/context/proto/policy/axt_level.proto";
+import "security/context/proto/policy/creds_assertion.proto";
+import "security/context/proto/policy/cross_product_sharing.proto";
+import "security/context/proto/policy/endpoint_policy.proto";
+import "security/context/proto/policy/http_extraction.proto";
+import "security/context/proto/policy/policy_processing.proto";
+import "security/context/proto/policy/rpc_security_policy_admin.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message RpcSecurityPolicyMapping {
+  message AdminMetadata {
+    repeated string admin_metadata_reader = 1;
+  }
+  repeated .rpcsp.PolicyRewriteName enable_rewrites = 14;
+  repeated .rpcsp.PolicyRewriteName disable_rewrites = 15;
+  repeated .rpcsp.PolicyCheckName enable_checks = 16;
+  repeated .rpcsp.PolicyCheckName disable_checks = 17;
+  repeated string rpc_method = 1;
+  repeated string action = 5;
+  repeated string http_path = 7;
+  repeated string label = 8;
+  .security.context.AuthenticationPolicy authentication_policy = 2;
+  .security.context.AuthorizationMode authorization_mode = 3;
+  string permission_to_check = 4;
+  repeated .security.context.AuthorizationMethod authorization_method = 6;
+  .privacy.data_governance.attributes.Annotations data_governance_annotations = 9;
+  .security.context.AdminPolicy admin = 10;
+  repeated .security.context.CredsAssertion creds_assertion = 11;
+  .security.context.EsfConfig esf_config = 12;
+  .security.context.CrossProductSharing cross_product_sharing = 18;
+  .security.context.CrossProductSharing cross_product_sharing_dry_run = 19;
+  .security.context.ExcludeAgentsV1 exclude_agents = 20;
+  .security.context.RpcSecurityPolicyMapping.AdminMetadata admin_metadata = 21;
+}
+message AuthorizationMethod {
+  message LocalIam {
+  }
+  message CloudIam {
+  }
+  message Zanzibar {
+  }
+  message Delegated {
+  }
+  message Custom {
+  }
+  message CcfeAuthorizationAlreadyDone {
+  }
+  .security.context.AuthorizationMethod.LocalIam local_iam = 1; // oneof=method
+  .security.context.AuthorizationMethod.CloudIam cloud_iam = 2; // oneof=method
+  .security.context.AuthorizationMethod.Zanzibar zanzibar = 5; // oneof=method
+  .security.context.AuthorizationMethod.Delegated delegated = 4; // oneof=method
+  .security.context.AuthorizationMethod.Custom custom = 3; // oneof=method
+  .security.context.AuthorizationMethod.CcfeAuthorizationAlreadyDone ccfe_authorization_already_done = 6; // oneof=method
+}
+message AuditingConfig {
+  .google.api.Auditing auditing = 1;
+  .security.context.HttpExtractionRules http = 2;
+}
+message PolicyRequirement {
+  .rpcsp.AXTLadder.Level axt_level = 1;
+}
+message RpcSecurityPolicy {
+  repeated .security.context.RpcSecurityPolicyMapping mapping = 2;
+  repeated .google.api.MethodPolicy method_policies = 7;
+  .google.iam.v1.Policy system_authorization_policy = 3;
+  .security.context.AuditingConfig audit = 5;
+  .security.context.PolicyRequirement policy_requirement = 9;
+  bool trust_esf_authentication = 4; // default='false'
+  repeated .security.context.RpcService rpc_services = 14;
+  repeated .security.context.EndpointPolicy endpoint_policies = 6;
+  repeated .security.context.ApplicationPermissionPolicy application_permission_policies = 15;
+  repeated .rpcsp.PolicyRewriteName enable_rewrites = 10;
+  repeated .rpcsp.PolicyRewriteName disable_rewrites = 11;
+  repeated .rpcsp.PolicyCheckName enable_checks = 12;
+  repeated .rpcsp.PolicyCheckName disable_checks = 13;
+  bool enable_label_enforcement = 8;
+  bool legacy_allow_label_mappings_without_label_enforcement = 101;
+}
+message RpcService {
+  string name = 1;
+  string renamed_as = 2;
+}
+message EsfConfig {
+  repeated string trusted_esf_roles = 1;
+  repeated string trusted_esf_groups = 4;
+  bool allow_untrusted_requests = 2; // default='false'
+  bool enable_peer_delegation = 3; // default='false'
+}
+message CrossProductSharing {
+  message EnableConsentCheck {
+    repeated string exclude_peers = 1;
+  }
+  .security.context.CrossProductSharing.EnableConsentCheck enable_consent_check = 1; // oneof=check_type
+  .cross_product_sharing.EnableGcpOriginCheck enable_gcp_origin_check = 4; // oneof=check_type
+  .cross_product_sharing.DenyP18eHealthDataCheck deny_p18e_health_data = 5; // oneof=check_type
+  int32 override_product_id = 2;
+}
+message ExcludeAgentsV1 {
+  repeated string exempt_prod_groups = 1;
+}

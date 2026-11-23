@@ -1,0 +1,6 @@
+Launch a subagent. It runs in the background with its own prompt and sends you a message when it completes or needs guidance; there is no need to poll.
+
+Guidelines:
+* The subagent is identified by the conversationId returned; message it with the send_message tool.
+* Multiple subagents may share a type name; each still gets a unique conversationId.
+* If a task continues an existing subagent's work, message that subagent instead of launching a new one.

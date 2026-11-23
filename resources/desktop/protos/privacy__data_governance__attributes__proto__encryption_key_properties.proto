@@ -1,0 +1,12 @@
+// Extracted file offset 0x3660340, 920 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message EncryptionKeyProperties {
+  message ProtectedData {
+    repeated .privacy.data_governance.attributes.classification.Source source = 1;
+    .privacy.data_governance.attributes.classification.SemanticContext semantic_context = 2;
+  }
+  .privacy.data_governance.attributes.EncryptionKeyProperties.ProtectedData protected_data = 1;
+}

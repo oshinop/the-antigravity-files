@@ -1,0 +1,11 @@
+// Extracted file offset 0x3730151, 4438 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package blobstore2;
+import "google/api/inclusion.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+enum RequestClass {
+  UNKNOWN_REQUEST_CLASS = 0;
+  LATENCY_SENSITIVE = 1;
+  PRODUCTION_BATCH = 2;
+  BEST_EFFORT = 3;
+}

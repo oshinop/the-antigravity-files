@@ -1,0 +1,11 @@
+// Extracted file offset 0x3657ce8, 802 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message FaceAuthentication {
+  message Data {
+    .privacy.data_governance.attributes.classification.Category.HasCategory face_data = 1;
+    .privacy.data_governance.attributes.classification.Category.HasCategory face_derived_data = 2;
+  }
+}

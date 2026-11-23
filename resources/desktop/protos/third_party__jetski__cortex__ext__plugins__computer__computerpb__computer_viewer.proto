@@ -1,0 +1,49 @@
+// Extracted file offset 0x368e536, 1467 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package exa.computer_payload_pb;
+message ComputerViewerHello {
+  uint32 max_sessions = 1;
+  repeated string video_codecs = 2;
+  string desktop_label = 3;
+}
+message ComputerViewerRequest {
+  string session_id = 1;
+  .exa.computer_payload_pb.ComputerViewerOffer offer = 2; // oneof=op
+  .exa.computer_payload_pb.ComputerViewerClose close = 3; // oneof=op
+  .exa.computer_payload_pb.ComputerViewerRenew renew = 4; // oneof=op
+}
+message ComputerViewerOffer {
+  string sdp = 1;
+  string root_conversation_id = 2;
+  int64 expires_unix_ms = 3;
+  repeated .exa.computer_payload_pb.ComputerIceServer ice_servers = 4;
+  .exa.computer_payload_pb.ComputerViewerDevice device = 5;
+}
+message ComputerIceServer {
+  repeated string urls = 1;
+  string username = 2;
+  string credential = 3;
+}
+message ComputerViewerDevice {
+  string public_key_spki = 1;
+  string label = 2;
+  string nonce = 3;
+  string signature = 4;
+}
+message ComputerViewerRenew {
+  int64 expires_unix_ms = 1;
+}
+message ComputerViewerClose {
+  string reason = 1;
+}
+message ComputerViewerResult {
+  string answer_sdp = 1;
+  repeated .exa.computer_payload_pb.ComputerViewerStream streams = 2;
+  string error_code = 3;
+  string error = 4;
+}
+message ComputerViewerStream {
+  string stream_id = 1;
+  string bundle_id = 2;
+  uint32 window_id = 3;
+}

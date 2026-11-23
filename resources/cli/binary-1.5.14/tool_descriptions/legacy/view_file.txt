@@ -1,0 +1,18 @@
+View the contents of a file from the local filesystem. This tool supports text files and following binary files: %s.
+
+
+Text file usage:
+- The lines of the file are 1-indexed
+- You can view at most %[1]d lines at a time
+- Specify StartLine and EndLine to view the lines of the file using slice notation:
+  - Omit both to view the entire file, or the first %[1]d lines of the file, whichever is smaller.
+  - Specify StartLine only to view the remaining lines of the file, or the next %[1]d lines, whichever is smaller
+  - Specify EndLine only to view the remaining preceding lines of the file, or the previous %[1]d lines, whichever is smaller
+  - Specify both to view a precise line range. This range must be smaller than %[1]d lines or only the first %[1]d lines of the range will be shown.
+
+
+- Content is limited to %d bytes per view. If content is truncated, use the ContentOffset parameter to view the remaining content
+
+
+Binary file usage:
+- Do not provide StartLine or EndLine arguments, this tool always returns the entire file

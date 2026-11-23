@@ -1,0 +1,193 @@
+// Extracted file offset 0x38e4182, 21817 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/ads.proto";
+import "privacy/data_governance/attributes/proto/annotations_version.proto";
+import "privacy/data_governance/attributes/proto/apps.proto";
+import "privacy/data_governance/attributes/proto/assurant.proto";
+import "privacy/data_governance/attributes/proto/audio.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+import "privacy/data_governance/attributes/proto/cloud.proto";
+import "privacy/data_governance/attributes/proto/cloud_admin_access.proto";
+import "privacy/data_governance/attributes/proto/common.proto";
+import "privacy/data_governance/attributes/proto/consent_for_sensitive_data.proto";
+import "privacy/data_governance/attributes/proto/consumer_trust.proto";
+import "privacy/data_governance/attributes/proto/data_residency_handling.proto";
+import "privacy/data_governance/attributes/proto/datapol.proto";
+import "privacy/data_governance/attributes/proto/digital_markets_act.proto";
+import "privacy/data_governance/attributes/proto/encryption_key_properties.proto";
+import "privacy/data_governance/attributes/proto/essential_only_mode.proto";
+import "privacy/data_governance/attributes/proto/experimental.proto";
+import "privacy/data_governance/attributes/proto/face_authentication.proto";
+import "privacy/data_governance/attributes/proto/faroe.proto";
+import "privacy/data_governance/attributes/proto/finance.proto";
+import "privacy/data_governance/attributes/proto/geo.proto";
+import "privacy/data_governance/attributes/proto/geo_location.proto";
+import "privacy/data_governance/attributes/proto/health.proto";
+import "privacy/data_governance/attributes/proto/identifiers.proto";
+import "privacy/data_governance/attributes/proto/kansas.proto";
+import "privacy/data_governance/attributes/proto/malout_access.proto";
+import "privacy/data_governance/attributes/proto/medical.proto";
+import "privacy/data_governance/attributes/proto/ml.proto";
+import "privacy/data_governance/attributes/proto/payments.proto";
+import "privacy/data_governance/attributes/proto/photos.proto";
+import "privacy/data_governance/attributes/proto/pii_and_content_sanitization.proto";
+import "privacy/data_governance/attributes/proto/primary_for_portability.proto";
+import "privacy/data_governance/attributes/proto/privacy_documentation.proto";
+import "privacy/data_governance/attributes/proto/processing_type.proto";
+import "privacy/data_governance/attributes/proto/product_association.proto";
+import "privacy/data_governance/attributes/proto/production_impact.proto";
+import "privacy/data_governance/attributes/proto/production_infrastructure.proto";
+import "privacy/data_governance/attributes/proto/ptoken.proto";
+import "privacy/data_governance/attributes/proto/purpose.proto";
+import "privacy/data_governance/attributes/proto/purpose_limitation.proto";
+import "privacy/data_governance/attributes/proto/residency.proto";
+import "privacy/data_governance/attributes/proto/retention.proto";
+import "privacy/data_governance/attributes/proto/search.proto";
+import "privacy/data_governance/attributes/proto/targeted_policy_sampling.proto";
+import "privacy/data_governance/attributes/proto/third_party.proto";
+import "privacy/data_governance/attributes/proto/trusted_core_access.proto";
+import "privacy/data_governance/attributes/proto/youtube.proto";
+import "privacy/pattributes/public/proto/rollout_config_attributes.proto";
+import "privacy/pattributes/public/proto/semantic_purpose.proto";
+import "privacy/pattributes/public/proto/wipeout/wipeout_service.proto";
+message Annotations {
+  enum ServiceType {
+    UNKNOWN = 0;
+    SERVER = 1;
+    PASSTHROUGH = 2;
+    LOAD_BALANCER = 3;
+  }
+  message Data {
+    message Custom {
+      .privacy.data_governance.attributes.Ads.Data ads = 1;
+      .privacy.data_governance.attributes.Apps.Data apps = 2;
+      repeated .privacy.data_governance.attributes.Residency.Data residency = 3;
+      .privacy.data_governance.attributes.Search.DataSpecs search = 4;
+      .privacy.data_governance.attributes.Medical.Data medical = 5;
+      .privacy.data_governance.attributes.Assurant.Data assurant = 6;
+      .privacy.data_governance.attributes.Photos.Data photos = 7;
+      .privacy.data_governance.attributes.Payments.Data payments = 8;
+      .privacy.data_governance.attributes.Audio.Data audio = 9;
+      .privacy.data_governance.attributes.EncryptionKeyProperties encryption_key_properties = 10;
+      .privacy.data_governance.attributes.EssentialOnlyMode.Data essential_only_mode = 11;
+      .privacy.data_governance.attributes.MlModel.Data ml_model = 12;
+      .privacy.data_governance.attributes.Geo.Data geo = 13;
+      .privacy.data_governance.attributes.FaceAuthentication.Data face_authentication = 14;
+      .privacy.data_governance.attributes.DigitalMarketsAct.Data digital_markets_act = 15;
+      .privacy.data_governance.attributes.Youtube.Data youtube = 16;
+      .privacy.data_governance.attributes.Faroe.Data faroe = 17;
+      .privacy.data_governance.attributes.Finance.Data finance = 18;
+      .privacy.data_governance.attributes.ThirdParty.Data third_party = 19;
+      .privacy.data_governance.attributes.PToken.Data ptoken = 20;
+      .privacy.data_governance.attributes.Cloud.Data cloud = 21;
+      .privacy.data_governance.attributes.PiiAndContentSanitization pii_and_content_sanitization = 22;
+      .privacy.data_governance.attributes.CloudAdminAccess cloud_admin_access = 23;
+      .privacy.data_governance.attributes.ConsentForSensitiveData.Data consent_for_sensitive_data = 24;
+      .privacy.data_governance.attributes.ML.Data ml = 25;
+      .privacy.data_governance.attributes.Experimental.Data experimental = 101;
+    }
+    repeated .privacy.data_governance.attributes.classification.Source source = 1;
+    .privacy.data_governance.attributes.classification.SemanticContext semantic_context = 2;
+    .privacy.data_governance.attributes.classification.Confidentiality confidentiality = 3;
+    repeated .privacy.data_governance.attributes.AllowedLocations allowed_locations = 4;
+    repeated .privacy.data_governance.attributes.classification.Identifiers identifiers = 6;
+    .privacy.data_governance.attributes.classification.Identifiability identifiability = 7;
+    uint64 anonymization_bug_id = 8;
+    repeated .privacy.data_governance.attributes.classification.DatasetTag dataset_tags = 9;
+    .privacy.data_governance.attributes.classification.Pseudonymization pseudonymization = 10;
+    .privacy.data_governance.attributes.DataProductAssociation product_association = 11;
+    repeated .privacy.data_governance.attributes.ProcessingPurpose.Purpose limited_purposes = 12;
+    repeated .privacy.data_governance.attributes.DatapolAnnotations datapol = 13;
+    .privacy.data_governance.attributes.IntendedDataResidencyLocations intended_data_residency_locations = 14;
+    .privacy.data_governance.attributes.DataProductAssociationRestriction product_association_restriction = 15;
+    .privacy.data_governance.attributes.DualObservationProductAssociation dual_observation_product_association = 16;
+    repeated .privacy.data_governance.attributes.classification.Identifiers identifiers_redacted = 17;
+    .privacy.data_governance.attributes.PurposeLimitation purpose_limitation = 25;
+    .privacy.data_governance.attributes.Annotations.Data.Custom custom = 101;
+    .privacy.data_governance.attributes.classification.Category category = 5;
+  }
+  message Storage {
+    message Retention {
+      int64 plan_id = 1;
+      repeated string wipeout_processor = 2;
+      .privacy.data_governance.attributes.ExemptReason exempt_reason = 3;
+      .pattributes.wipeout.WipeoutService wipeout_service = 4;
+    }
+    message Custom {
+      .privacy.data_governance.attributes.Ads.Storage ads = 1;
+      .privacy.data_governance.attributes.Residency.Storage residency = 2;
+      .privacy.data_governance.attributes.Search.Storage search = 3;
+      .privacy.data_governance.attributes.PToken.Storage ptoken = 4;
+      .privacy.data_governance.attributes.ConsumerTrust.Storage consumer_trust = 5;
+      .privacy.data_governance.attributes.Kansas.Storage kansas = 6;
+      repeated .privacy.data_governance.attributes.TargetedPolicySamplingCriteria targeted_policy_sampling_criteria = 7;
+      .privacy.data_governance.attributes.Health.Storage health = 8;
+    }
+    .privacy.data_governance.attributes.Annotations.Storage.Retention retention = 2;
+    .privacy.data_governance.attributes.EncryptionProperties encryption = 3;
+    .privacy.data_governance.attributes.PrimaryForPortability primary_for_portability = 4;
+    .privacy.data_governance.attributes.StorageProductAssociation product_association = 5;
+    .privacy.data_governance.attributes.FineGrainedProductAssociation fine_grained_product_association = 6;
+    bool used_for_personalization = 7; // oneof=_used_for_personalization
+    repeated .pgraph.attributes.ScopedRolloutConfig rollout_config = 8;
+    .pgraph.attributes.EntityRolloutConfig entity_rollout_config = 9;
+    .privacy.data_governance.attributes.Annotations.Storage.Custom custom = 101;
+  }
+  message Rpc {
+    message Custom {
+      .privacy.data_governance.attributes.TrustedCoreAccess.Rpc trusted_core_access = 1;
+      .privacy.data_governance.attributes.MalOutAccess.Rpc malout_access = 2;
+    }
+    .privacy.data_governance.attributes.Annotations.Data writes = 2;
+    .privacy.data_governance.attributes.Annotations.Data returns = 3;
+    .privacy.data_governance.attributes.Annotations.Data reads = 4;
+    .privacy.data_governance.attributes.Annotations.ServiceType service_type = 5;
+    .privacy.data_governance.attributes.PrimaryForPortability primary_for_portability = 6;
+    .privacy.data_governance.attributes.Annotations.Rpc.Custom custom = 101;
+  }
+  message Process {
+    message GeoLocation {
+      .privacy.data_governance.attributes.classification.GeoLocation.Process.LocationType location_type = 1;
+      .privacy.data_governance.attributes.classification.GeoLocation.Process.CoarseningTransformation coarsening_transformation = 2;
+    }
+    message Custom {
+      .privacy.data_governance.attributes.Residency.Process residency = 1;
+      .privacy.data_governance.attributes.Ads.Process ads = 2;
+      .privacy.data_governance.attributes.EssentialOnlyMode.Process essential_only_mode = 3;
+      .privacy.data_governance.attributes.Audio.Process audio = 4;
+      .privacy.data_governance.attributes.DigitalMarketsAct.Process digital_markets_act = 5;
+      .privacy.data_governance.attributes.PToken.Process ptoken = 6;
+      .privacy.data_governance.attributes.ML.Process ml = 7;
+      .privacy.data_governance.attributes.Cloud.Process cloud = 8;
+      .privacy.data_governance.attributes.ConsentForSensitiveData.Process consent_for_sensitive_data = 9;
+      .privacy.data_governance.attributes.Apps.Process apps = 10;
+      .privacy.data_governance.attributes.Health.Process health = 11;
+    }
+    .privacy.data_governance.attributes.Annotations.Process.GeoLocation geo_location = 8;
+    repeated .privacy.data_governance.attributes.ProcessingPurpose processing_purpose = 9;
+    .privacy.data_governance.attributes.Annotations.ServiceType service_type = 10;
+    .privacy.data_governance.attributes.ProcessProductAssociation product_association = 11;
+    repeated .privacy.data_governance.attributes.ProcessingType processing_type = 12;
+    .pattributes.SemanticPurpose semantic_purpose = 13; // oneof=_semantic_purpose
+    repeated .pattributes.SemanticPurpose deferred_semantic_purposes = 14;
+    bool enable_write_observations_computation = 15; // oneof=_enable_write_observations_computation
+    bool is_limited_manual_access = 16; // oneof=_is_limited_manual_access
+    bool is_ads_associated = 17; // oneof=_is_ads_associated
+    bool legacy_purpose_declarations_allowed = 18; // oneof=_legacy_purpose_declarations_allowed
+    .privacy.data_governance.attributes.Annotations.Process.Custom custom = 101;
+  }
+  message Custom {
+    .privacy.data_governance.attributes.ProductionImpact production_impact = 1;
+    .privacy.data_governance.attributes.ProductionInfrastructure production_infrastructure = 2;
+  }
+  .privacy.data_governance.attributes.Annotations.Data data = 1;
+  .privacy.data_governance.attributes.AnnotationsVersion version = 6;
+  .privacy.data_governance.attributes.Annotations.Storage storage = 2; // oneof=family_specific_annotations
+  .privacy.data_governance.attributes.Annotations.Rpc rpc = 3; // oneof=family_specific_annotations
+  .privacy.data_governance.attributes.Annotations.Process process = 4; // oneof=family_specific_annotations
+  fixed64 annotation_id = 5;
+  .privacy.data_governance.attributes.PrivacyDocumentation privacy_documentation = 7;
+  .privacy.data_governance.attributes.Annotations.Custom custom = 101;
+}

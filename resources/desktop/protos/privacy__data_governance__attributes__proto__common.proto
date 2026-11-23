@@ -1,0 +1,25 @@
+// Extracted file offset 0x3683823, 1309 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message Location {
+  string cluster = 1;
+  string iso3166_region = 2;
+  string cloud_region = 4;
+  string cloud_zone = 5;
+}
+message EncryptionProperties {
+  enum EncryptionStatus {
+    ENCRYPTION_STATUS_UNSPECIFIED = 0;
+    NOT_ENCRYPTED = 1;
+    PARTIALLY_ENCRYPTED = 2;
+    ENCRYPTED = 3;
+  }
+  enum CryptographicKeyStatus {
+    CRYPTOGRAPHIC_KEY_STATUS_UNSPECIFIED = 0;
+    CRYPTOGRAPHIC_KEY_STATUS_INACCESSIBLE_TO_GOOGLERS = 1;
+  }
+  .privacy.data_governance.attributes.EncryptionProperties.EncryptionStatus status = 1;
+  repeated .privacy.data_governance.attributes.EncryptionProperties.CryptographicKeyStatus cryptographic_key_status = 2;
+}

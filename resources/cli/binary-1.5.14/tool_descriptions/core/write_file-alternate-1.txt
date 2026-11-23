@@ -1,0 +1,1 @@
+ When creating an artifact, always provide ArtifactMetadata. When creating non-artifact files, do not provide it.

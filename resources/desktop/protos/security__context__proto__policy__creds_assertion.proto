@@ -1,0 +1,38 @@
+// Extracted file offset 0x36acbb3, 1951 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package security.context;
+import "google/api/inclusion.proto";
+import "security/context/proto/policy/dataaccessscope_assertion.proto";
+import "security/context/proto/policy/usage_restriction.proto";
+message CredsAssertion {
+  string name = 1;
+  .security.context.DeviceTrustLevelAssertion device_trust_level = 2; // oneof=assertion
+  .security.context.OauthScopeAssertion oauth_scope = 3; // oneof=assertion
+  .security.context.OsidDomainAssertion osid_domain = 4; // oneof=assertion
+  .security.context.WorkspaceCldrTrustBoundaryAssertion workspace_cldr_trust_boundary = 5; // oneof=assertion
+  .security.context.DataAccessScopeAssertion data_access_scope = 6; // oneof=assertion
+}
+message DeviceTrustLevelAssertion {
+  enum TrustLevel {
+    INDETERMINATE = 0;
+    UNTRUSTED_DEVICE = 2;
+    REMEDIATION_TRUSTED_DEVICE = 5;
+    MINIMALLY_TRUSTED_DEVICE = 10;
+    MOSTLY_TRUSTED_DEVICE = 20;
+    FULLY_TRUSTED_DEVICE = 30;
+    HIT_TRUSTED_DEVICE = 35;
+    RIX_TRUSTED_DEVICE = 40;
+    RMG_TRUSTED_DEVICE = 50;
+  }
+  .security.context.DeviceTrustLevelAssertion.TrustLevel minimum = 1;
+  bool loas_origin_trusted = 2;
+}
+message OauthScopeAssertion {
+  repeated int32 allow_scope = 1;
+  bool allow_non_oauth = 2;
+}
+message OsidDomainAssertion {
+  repeated string allow_domain = 1;
+}
+message WorkspaceCldrTrustBoundaryAssertion {
+}

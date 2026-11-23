@@ -1,0 +1,15 @@
+// Extracted file offset 0x3705f99, 3482 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package thinmint;
+import "google/api/inclusion.proto";
+import "third_party/boundary_proxy/proto_compare/annotation.proto";
+message ThinMint {
+  message DarklaunchSignature {
+    bytes signature_only = 1;
+    bytes carabiner = 2;
+  }
+  repeated bytes signature_and_message = 1;
+  bytes one_hop_message = 2;
+  bytes chained_verification_key = 3;
+  repeated bytes darklaunch_signatures = 4;
+}

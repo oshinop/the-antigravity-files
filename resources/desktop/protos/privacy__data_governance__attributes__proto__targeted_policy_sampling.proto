@@ -1,0 +1,13 @@
+// Extracted file offset 0x36924f6, 1502 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "net/proto2/bridge/proto/message_set.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message TargetedPolicySamplingCriteria {
+  int32 sampling_denominator = 1;
+  int32 policy = 2;
+  int32 verdict_reason_id = 3;
+  string target_end_date = 4;
+  bool allow_sampling_object_level_necessary = 5; // default='false'
+}

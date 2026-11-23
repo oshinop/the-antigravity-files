@@ -1,0 +1,27 @@
+// Extracted file offset 0x366b5b7, 1036 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "net/proto2/proto/descriptor.proto";
+message Analytics {
+  message AnalyticsDestination {
+    string monitored_resource = 1;
+    repeated string metrics = 2;
+  }
+  repeated .google.api.Analytics.AnalyticsDestination producer_destinations = 1;
+  repeated .google.api.AnalyticsRule rules = 2;
+}
+message AnalyticsRule {
+  string selector = 1;
+  .google.api.AnalyticsSamplingConfiguration sampling_configuration = 2;
+  .google.api.BusinessIntelligenceConfig business_intelligence = 3;
+  bool append_trace_id = 4;
+}
+message AnalyticsSamplingConfiguration {
+  bool enable_sampling = 1;
+  double sampling_ratio = 2;
+}
+message BusinessIntelligenceConfig {
+  bool active_developer_method = 1;
+}

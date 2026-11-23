@@ -1,0 +1,2 @@
+For reference, here are some diagnostics from my code:
+%s

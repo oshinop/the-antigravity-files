@@ -1,0 +1,30 @@
+// Extracted file offset 0x3673c48, 1125 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package deepmind_goodall_proto_evergreen;
+import "google/api/inclusion.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/field_mask.proto";
+message GdmLabsConfig {
+  enum LogMode {
+    LOG_MODE_UNSPECIFIED = 0;
+    LOG_MODE_INCOGNITO = 1;
+    LOG_MODE_DOGFOOD = 2;
+  }
+  .deepmind_goodall_proto_evergreen.GdmLabsConfig.LogMode default_log_mode = 1;
+  repeated .google.protobuf.Any default_generate_configs = 2;
+  .google.protobuf.FieldMask supported_config_fields = 3;
+  bool private_inference_enabled = 6;
+  .deepmind_goodall_proto_evergreen.SupportInfo support_info = 7;
+  repeated string tags = 9;
+}
+message Link {
+  string text = 1;
+  string url = 2;
+}
+message SupportInfo {
+  .deepmind_goodall_proto_evergreen.Link owner = 1;
+  .deepmind_goodall_proto_evergreen.Link chat_room_link = 2;
+}
+message ChunkRedactionMetadata {
+  string redacted_reason = 1;
+}

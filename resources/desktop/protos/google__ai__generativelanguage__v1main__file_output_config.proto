@@ -1,0 +1,19 @@
+// Extracted file offset 0x36788ec, 1180 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message FileOutputConfig {
+  message Blobstore {
+    string root_directory = 1;
+  }
+  message Inline {
+  }
+  message Stored {
+    .google.ai.generativelanguage.v1main.FileOutputConfig.Blobstore blobstore = 1; // oneof=storage
+  }
+  .google.ai.generativelanguage.v1main.FileOutputConfig.Inline inline = 1; // oneof=config
+  .google.ai.generativelanguage.v1main.FileOutputConfig.Stored stored = 2; // oneof=config
+}

@@ -1,0 +1,143 @@
+// Extracted file offset 0x37a3d77, 7944 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/ai/generativelanguage/v1main/citation_rendering_info_metadata.proto";
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/duration.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Segment {
+  int32 part_index = 1;
+  int32 start_index = 2;
+  int32 end_index = 3;
+  string text = 4;
+}
+message GroundingSupport {
+  enum GroundingSupportOrigin {
+    GROUNDING_SUPPORT_ORIGIN_UNSPECIFIED = 0;
+    MODEL_ANNOTATED = 1;
+    POST_HOC_ANNOTATED = 2;
+  }
+  .google.ai.generativelanguage.v1main.Segment segment = 1; // oneof=_segment
+  repeated int32 grounding_chunk_indices = 2;
+  repeated float confidence_scores = 3;
+  repeated int32 rendered_parts = 6;
+  repeated string unresolved_reference_ids = 4;
+  .google.ai.generativelanguage.v1main.GroundingSupport.GroundingSupportOrigin origin = 5; // oneof=_origin
+  float ci_score = 7; // oneof=_ci_score
+}
+message GroundingFileReference {
+  message BoundingBox {
+    float left = 1;
+    float top = 2;
+    float bottom = 3;
+    float right = 4;
+    int32 page_number = 5;
+  }
+  message BoundingBoxAnchor {
+    repeated .google.ai.generativelanguage.v1main.GroundingFileReference.BoundingBox bounding_boxes = 1;
+  }
+  message TimeSnippetAnchor {
+    .google.protobuf.Duration start_offset = 1;
+    .google.protobuf.Duration end_offset = 2;
+  }
+  message FileAnchor {
+    message CommentThreadAnchor {
+      string comment_thread_id = 1;
+    }
+    string anchor_id = 1;
+    string text_snippet = 2;
+    .google.ai.generativelanguage.v1main.GroundingFileReference.BoundingBoxAnchor bounding_box_anchor = 3; // oneof=anchor_type
+    .google.ai.generativelanguage.v1main.GroundingFileReference.TimeSnippetAnchor time_snippet_anchor = 4; // oneof=anchor_type
+    string custom_key = 5; // oneof=anchor_type
+    .google.ai.generativelanguage.v1main.GroundingFileReference.FileAnchor.CommentThreadAnchor comment_thread_anchor = 6; // oneof=anchor_type
+    string url = 7; // oneof=anchor_type
+  }
+  string file_uri = 1;
+  .google.ai.generativelanguage.v1main.GroundingFileReference.FileAnchor file_anchor = 2;
+}
+message GroundingChunk {
+  enum GroundingChunkOrigin {
+    GROUNDING_CHUNK_ORIGIN_UNSPECIFIED = 0;
+    REQUEST_PROVIDED = 1;
+    SERVER_EXECUTED = 2;
+    POST_HOC_GENERATED = 3;
+  }
+  message Web {
+    string uri = 1; // oneof=_uri
+    string title = 2; // oneof=_title
+    .google.ai.generativelanguage.v1main.GroundingChunk.GoogleSearchMapping search_result_mapping = 3; // oneof=_search_result_mapping
+    string snippet = 4;
+    string domain = 5;
+    string site_name = 6;
+  }
+  message GoogleSearchMapping {
+    int32 function_response_index = 3;
+    int32 query_index = 1;
+    int32 result_index = 2;
+  }
+  message Image {
+    string source_uri = 1;
+    string image_uri = 2;
+    string title = 3;
+    string domain = 4;
+    string query = 5;
+  }
+  message GenericReference {
+    string id = 1;
+    string uri = 2;
+    string title = 3;
+    string text_snippet = 4;
+  }
+  message RetrievedContext {
+    string uri = 1; // oneof=_uri
+    string title = 2; // oneof=_title
+    string text = 3; // oneof=_text
+    string file_search_store = 4; // oneof=_file_search_store
+    repeated .google.ai.generativelanguage.v1main.GroundingChunk.CustomMetadata custom_metadata = 5;
+    int32 page_number = 6; // oneof=_page_number
+    string media_id = 7; // oneof=_media_id
+  }
+  message StringList {
+    repeated string values = 1;
+  }
+  message CustomMetadata {
+    string key = 1;
+    string string_value = 2; // oneof=value
+    .google.ai.generativelanguage.v1main.GroundingChunk.StringList string_list_value = 3; // oneof=value
+    float numeric_value = 4; // oneof=value
+  }
+  message Maps {
+    message PlaceAnswerSources {
+      message ReviewSnippet {
+        string review_id = 1; // oneof=_review_id
+        string google_maps_uri = 2; // oneof=_google_maps_uri
+        string title = 3; // oneof=_title
+      }
+      repeated .google.ai.generativelanguage.v1main.GroundingChunk.Maps.PlaceAnswerSources.ReviewSnippet review_snippets = 1;
+    }
+    message Route {
+      int32 distance_meters = 1; // oneof=_distance_meters
+      .google.protobuf.Duration duration = 2; // oneof=_duration
+      string encoded_polyline = 3; // oneof=_encoded_polyline
+    }
+    string uri = 1; // oneof=_uri
+    string title = 2; // oneof=_title
+    string text = 3; // oneof=_text
+    string place_id = 4; // oneof=_place_id
+    .google.ai.generativelanguage.v1main.GroundingChunk.Maps.PlaceAnswerSources place_answer_sources = 5; // oneof=_place_answer_sources
+    .google.ai.generativelanguage.v1main.GroundingChunk.Maps.Route route = 6; // oneof=_route
+  }
+  .google.ai.generativelanguage.v1main.GroundingChunk.Web web = 1; // oneof=chunk_type
+  .google.ai.generativelanguage.v1main.GroundingChunk.Image image = 8; // oneof=chunk_type
+  .google.ai.generativelanguage.v1main.GroundingChunk.RetrievedContext retrieved_context = 2; // oneof=chunk_type
+  .google.ai.generativelanguage.v1main.GroundingChunk.Maps maps = 3; // oneof=chunk_type
+  .google.ai.generativelanguage.v1main.GroundingFileReference grounding_file_reference = 4; // oneof=chunk_type
+  .google.ai.generativelanguage.v1main.GroundingChunk.GenericReference generic_reference = 9; // oneof=chunk_type
+  .google.ai.generativelanguage.v1main.GroundingChunk.GroundingChunkOrigin origin = 5; // oneof=_origin
+  string reference_id = 6; // oneof=_reference_id
+  string part_id = 7; // oneof=_part_id
+  .google.ai.generativelanguage.v1main.CitationRenderingInfoMetadata citation_rendering_info_metadata = 10;
+}

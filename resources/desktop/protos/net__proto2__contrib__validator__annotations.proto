@@ -1,0 +1,24 @@
+// Extracted file offset 0x365edcf, 908 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package validator;
+import "net/proto2/proto/descriptor.proto";
+message Definitions {
+  repeated string feature = 1;
+  repeated .validator.OneOfGroup one_of_group = 2;
+}
+message FieldValidationRule {
+  string is_required = 1; // oneof=field_presence_predicate
+  string present_iff = 5; // oneof=field_presence_predicate
+  repeated string predicate = 2;
+  repeated string element_predicate = 3;
+  string one_of = 4;
+  bool skip_message_validation = 6;
+  bool can_report_all_predicate_violations = 7;
+}
+message OneOfGroup {
+  string name = 1;
+  string is_required = 2;
+}
+message OneOfValidationRule {
+  string is_required = 1;
+}

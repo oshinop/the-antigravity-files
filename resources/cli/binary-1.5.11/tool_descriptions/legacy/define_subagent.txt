@@ -1,0 +1,8 @@
+Defines a new type of subagent that can be invoked via invoke_subagent.
+
+	Guidelines:
+	* Use this tool if you need a specialized subagent for a task and none of the existing subagents are suitable.
+	* Once the subagent is defined, it can be invoked repeatedly using invoke_subagent without calling this tool again.
+	* The subagent will be defined with the specified name, description, system prompt, and tool groups.
+	* By default, all subagents have read tools to research the codebase, and tools to communicate with other agents.
+	

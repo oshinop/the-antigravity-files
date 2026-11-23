@@ -1,0 +1,11 @@
+// Extracted file offset 0x3647662, 631 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package devtools.jetski.telemetry.extensions;
+import "devtools/jetski/telemetry/extensions/common.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ObservabilityData {
+  string type = 1;
+  repeated .devtools.jetski.telemetry.extensions.ExtraMetadata non_sensitive_data = 2;
+  repeated .devtools.jetski.telemetry.extensions.ExtraMetadata sensitive_data = 3;
+  repeated .devtools.jetski.telemetry.extensions.SensitiveExtraMetadata sensitive_user_data = 4;
+}

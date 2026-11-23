@@ -1,0 +1,58 @@
+// Extracted file offset 0x36c5298, 2336 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum HarmCategory {
+  HARM_CATEGORY_UNSPECIFIED = 0;
+  HARM_CATEGORY_DEROGATORY = 1;
+  HARM_CATEGORY_TOXICITY = 2;
+  HARM_CATEGORY_VIOLENCE = 3;
+  HARM_CATEGORY_SEXUAL = 4;
+  HARM_CATEGORY_MEDICAL = 5;
+  HARM_CATEGORY_DANGEROUS = 6;
+  HARM_CATEGORY_HARASSMENT = 7;
+  HARM_CATEGORY_HATE_SPEECH = 8;
+  HARM_CATEGORY_SEXUALLY_EXPLICIT = 9;
+  HARM_CATEGORY_DANGEROUS_CONTENT = 10;
+  HARM_CATEGORY_CIVIC_INTEGRITY = 11;
+  HARM_CATEGORY_JAILBREAK = 12;
+}
+message ContentFilter {
+  enum BlockedReason {
+    BLOCKED_REASON_UNSPECIFIED = 0;
+    SAFETY = 1;
+    OTHER = 2;
+  }
+  .google.ai.generativelanguage.v1main.ContentFilter.BlockedReason reason = 1;
+  string message = 2; // oneof=_message
+}
+message SafetyFeedback {
+  .google.ai.generativelanguage.v1main.SafetyRating rating = 1;
+  .google.ai.generativelanguage.v1main.SafetySetting setting = 2;
+}
+message SafetyRating {
+  enum HarmProbability {
+    HARM_PROBABILITY_UNSPECIFIED = 0;
+    NEGLIGIBLE = 1;
+    LOW = 2;
+    MEDIUM = 3;
+    HIGH = 4;
+  }
+  .google.ai.generativelanguage.v1main.HarmCategory category = 3;
+  .google.ai.generativelanguage.v1main.SafetyRating.HarmProbability probability = 4;
+  bool blocked = 5;
+}
+message SafetySetting {
+  enum HarmBlockThreshold {
+    HARM_BLOCK_THRESHOLD_UNSPECIFIED = 0;
+    BLOCK_LOW_AND_ABOVE = 1;
+    BLOCK_MEDIUM_AND_ABOVE = 2;
+    BLOCK_ONLY_HIGH = 3;
+    BLOCK_NONE = 4;
+    OFF = 5;
+  }
+  .google.ai.generativelanguage.v1main.HarmCategory category = 3;
+  .google.ai.generativelanguage.v1main.SafetySetting.HarmBlockThreshold threshold = 4;
+}

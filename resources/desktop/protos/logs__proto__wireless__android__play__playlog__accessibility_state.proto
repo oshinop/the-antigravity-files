@@ -1,0 +1,19 @@
+// Extracted file offset 0x367b309, 1214 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/api/inclusion.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message AccessibilityState {
+  enum OnOff {
+    UNKNOWN = 0;
+    ON = 1;
+    OFF = 2;
+  }
+  .wireless_android_play_playlog.AccessibilityState.OnOff talkback_enabled = 1;
+  .wireless_android_play_playlog.AccessibilityState.OnOff brailleback_enabled = 2;
+  .wireless_android_play_playlog.AccessibilityState.OnOff switchaccess_enabled = 3;
+  .wireless_android_play_playlog.AccessibilityState.OnOff justspeak_enabled = 4;
+  .wireless_android_play_playlog.AccessibilityState.OnOff large_text_enabled = 5;
+  .wireless_android_play_playlog.AccessibilityState.OnOff magnification_enabled = 6;
+  .wireless_android_play_playlog.AccessibilityState.OnOff high_contrast_text_enabled = 7;
+}

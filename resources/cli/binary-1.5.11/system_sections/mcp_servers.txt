@@ -1,0 +1,13 @@
+Each MCP server has a directory `%s` containing tool schemas (`<toolName>.json`) and optionally an `instructions.md` file with best practices.
+
+Eagerly loaded tools are registered as native tools under the name `%s`. Call eager tools directly.
+
+For lazily-loaded tools, read the corresponding schema file to understand the arguments and usage, then call the tool using the `%s` tool.
+
+# <serverName>
+
+Eager:
+
+Lazy:
+
+# %s

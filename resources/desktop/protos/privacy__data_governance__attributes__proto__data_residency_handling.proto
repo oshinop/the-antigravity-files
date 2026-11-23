@@ -1,0 +1,8 @@
+// Extracted file offset 0x363d773, 513 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/data_residency_location_restriction.proto";
+message IntendedDataResidencyLocations {
+  repeated .privacy.data_governance.attributes.DataResidencyLocationRestriction location_restrictions = 1;
+}

@@ -1,0 +1,192 @@
+// Extracted file offset 0x379a977, 7376 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "net/proto2/proto/descriptor.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum DefaultGroups {
+  DEFAULT_GROUPS_UNSPECIFIED = 0;
+  DEFAULT_GROUPS_PER_PACKAGE = 1;
+  DEFAULT_GROUPS_PER_INTERFACE = 2;
+}
+enum ScreenGenerate {
+  SCREEN_GENERATE_UNSPECIFIED = 0;
+  GENERATE_FROM_PROTOS = 1;
+  GENERATE_FROM_PARENTS = 2;
+  GENERATE_LOCKED = 4;
+}
+enum BundleType {
+  BUNDLE_TYPE_UNSPECIFIED = 0;
+  BUNDLE_TYPE_FULL = 1;
+  BUNDLE_TYPE_GROUPING_ONLY = 2;
+}
+enum ScreenContentType {
+  SCREEN_CONTENT_TYPE_UNSPECIFIED = 0;
+  DIFFERENCE = 1;
+  COMPLETE = 2;
+}
+enum DefaultApiVersionBehavior {
+  DEFAULT_API_VERSION_BEHAVIOR_UNSPECIFIED = 0;
+  HIDE_API_VERSION_IF_DEFAULT = 1;
+  ALWAYS_SHOW_API_VERSION = 2;
+  ONLY_ALLOW_DEFAULT_API_VERSION = 3;
+}
+message ApiVersioning {
+  enum DarkLaunchMode {
+    DARK_LAUNCH_MODE_UNSPECIFIED = 0;
+    NONE = 1;
+    LOGS = 2;
+  }
+  bool enabled = 4; // oneof=_enabled
+  .google.api.ApiVersioningControls controls = 7;
+  repeated .google.api.ApiVersionsRule rules = 1;
+  repeated .google.api.ApiVersion api_versions = 2;
+  repeated .google.api.Bundle bundles = 3;
+  .google.api.ApiVersioning.DarkLaunchMode dark_launch_mode = 5;
+  .google.api.ApiVersioningOptions api_versioning_options = 6;
+  repeated .google.api.ApiVersioningChannel channels = 8;
+  repeated .google.api.BehaviorsRule behaviors = 9;
+}
+message BehaviorsRule {
+  string name = 1;
+  string selector = 2;
+  string restriction = 3;
+}
+message ApiVersioningChannel {
+  string name = 1;
+  .google.api.Screen screen = 2;
+}
+message ApiVersioningOptions {
+  bool retain_key_when_null_value_map = 1;
+  repeated .google.api.ApiVersionClientOverrideRule client_overrides = 2;
+}
+message ApiVersionClientOverrideRule {
+  int64 client_project_number = 1;
+  repeated string ignored_versions = 2;
+}
+message ApiVersioningControls {
+  repeated .google.api.ApiVersionOverride overrides = 1;
+  .google.api.DefaultGroups default_groups = 2;
+  repeated .google.api.ApiVersionConstraint default_constraints = 3;
+  repeated string proto_packages = 4;
+}
+message ApiVersionOverride {
+  repeated .google.api.ApiVersionOverrideMatch matches = 1;
+  repeated .google.api.ApiVersionParent parents = 2;
+  bool no_parents = 3;
+  repeated .google.api.ApiVersionConstraint constraints = 4;
+  bool no_constraints = 5;
+  bool default_api_version = 6; // oneof=_default_api_version
+  .google.api.ScreenGenerate screen_generate = 7; // oneof=_screen_generate
+}
+message ApiVersionOverrideMatch {
+  string api = 1;
+  string api_version = 2;
+}
+message ApiVersionsRule {
+  string selector = 1;
+  string restriction = 2;
+}
+message ApiVersion {
+  string api = 1;
+  string api_version = 2;
+  repeated .google.api.ApiVersionParent parents = 3;
+  repeated .google.api.ApiVersionConstraint constraints = 4;
+  .google.api.Screen screen = 5;
+  repeated .google.api.ApiVersionNote notes = 6;
+  .google.api.Screen effective_screen = 7;
+  bool default_api_version = 8;
+  .google.api.ApiVersionControls controls = 9;
+  repeated string behaviors = 10;
+}
+message ApiVersionControls {
+  .google.api.ScreenGenerate screen_generate = 1;
+  .google.api.ScreenContentType screen_content_type = 2;
+}
+message ApiVersionRef {
+  string api = 1;
+  string api_version = 2;
+}
+message ApiVersionParent {
+  string api_version = 1;
+}
+message ApiVersionConstraint {
+  .google.api.ApiVersionAllOfConstraint all_true = 1; // oneof=constraint
+  .google.api.ApiVersionAnyOfConstraint any_true = 2; // oneof=constraint
+  string visibility = 3; // oneof=constraint
+  string capability = 4; // oneof=constraint
+  int64 client_project_number = 5; // oneof=constraint
+}
+message ApiVersionAllOfConstraint {
+  repeated .google.api.ApiVersionConstraint constraints = 1;
+}
+message ApiVersionAnyOfConstraint {
+  repeated .google.api.ApiVersionConstraint constraints = 1;
+}
+message ApiVersionNote {
+  string description = 1; // oneof=note
+  string fix = 2; // oneof=note
+  string new_feature = 3; // oneof=note
+  string breaking = 4; // oneof=note
+  string link = 5;
+}
+message Screen {
+  .google.api.ScreenContentType content_type = 1;
+  repeated .google.api.ScreenPackage packages = 2;
+}
+message ScreenPackage {
+  string name = 1;
+  bool removed = 2;
+  repeated .google.api.ScreenService services = 3;
+  repeated .google.api.ScreenMessage messages = 4;
+  repeated .google.api.ScreenEnum enums = 5;
+}
+message ScreenService {
+  string name = 1;
+  bool removed = 2;
+  repeated .google.api.ScreenMethod methods = 3;
+}
+message ScreenMethod {
+  string name = 1;
+  bool removed = 2;
+}
+message ScreenMessage {
+  string name = 1;
+  bool removed = 2;
+  repeated .google.api.ScreenField fields = 3;
+  repeated .google.api.ScreenMessage messages = 4;
+  repeated .google.api.ScreenEnum enums = 5;
+}
+message ScreenField {
+  string name = 1;
+  int32 number = 2;
+  bool removed = 3;
+  repeated .google.api.ScreenFieldReference references = 4;
+}
+message ScreenFieldReference {
+  string name = 1;
+  bool removed = 2;
+}
+message ScreenEnum {
+  string name = 1;
+  bool removed = 2;
+  repeated .google.api.ScreenEnumValue values = 3;
+}
+message ScreenEnumValue {
+  string name = 1;
+  int32 number = 2;
+  bool removed = 3;
+}
+message Bundle {
+  string name = 1;
+  repeated .google.api.BundleInclude includes = 2;
+  repeated .google.api.ApiVersionRef apis = 3;
+  .google.api.BundleType type = 4;
+  repeated .google.api.ApiVersionRef effective_apis = 5;
+  string service_version = 6;
+  .google.api.DefaultApiVersionBehavior default_api_version_behavior = 7;
+}
+message BundleInclude {
+  string bundle = 1;
+}

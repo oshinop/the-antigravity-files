@@ -1,0 +1,17 @@
+// Extracted file offset 0x3648cd6, 649 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/policy.proto";
+message SystemParameters {
+  repeated .google.api.SystemParameterRule rules = 1;
+}
+message SystemParameterRule {
+  string selector = 1;
+  repeated .google.api.SystemParameter parameters = 2;
+}
+message SystemParameter {
+  string name = 1;
+  string http_header = 2;
+  string url_query_parameter = 3;
+}

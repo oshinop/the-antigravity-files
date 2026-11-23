@@ -1,0 +1,1 @@
+Check the `%s` skill in the skills section (including its relevant guide) and inspect existing workspace rules/skills to follow their exact schema, frontmatter, directory conventions, and size/budget limits.

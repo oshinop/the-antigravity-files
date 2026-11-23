@@ -1,0 +1,91 @@
+// Extracted file offset 0x3704499, 3444 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/launch_stage.proto";
+import "google/api/visibility.proto";
+message Iam {
+  message IamServiceConfigInternal {
+    string role_group = 1;
+  }
+  .google.api.LaunchStage launch_stage = 7;
+  repeated .google.api.IamResourceDescriptor resources = 1;
+  string environment = 2;
+  repeated .google.api.IamRole roles = 3;
+  string reader = 4;
+  string writer = 5;
+  .google.api.Iam.IamServiceConfigInternal internal = 6;
+}
+message IamResourceDescriptor {
+  enum MemberTypeRestriction {
+    MEMBER_TYPE_RESTRICTION_UNSPECIFIED = 0;
+    ALLOW_ALL_USERS = 1;
+    ALLOW_ALL_AUTHENTICATED_USERS = 2;
+    ALLOW_ONLY_SPECIFIC_MEMBERS = 3;
+  }
+  message IamResourceDescriptorInternal {
+    string name_for_resource = 1;
+    bool single_parent_override = 2;
+    bool disable_convert_project_id_or_number = 3;
+  }
+  string type = 1;
+  repeated .google.api.IamResourceNameMapping resource_name_mappings = 2;
+  repeated .google.api.IamPermission permissions = 3;
+  .google.api.IamResourceDescriptor.IamResourceDescriptorInternal internal = 4;
+  .google.api.IamResourceDescriptor.MemberTypeRestriction member_type_restriction = 5;
+  .google.api.LaunchStage launch_stage = 6;
+}
+message IamResourceNameMapping {
+  string resource_name_pattern = 1;
+  string policy_name_extractor = 2;
+  string policy_location_extractor = 3;
+}
+message IamPermission {
+  enum BasicRole {
+    BASIC_ROLE_UNSPECIFIED = 0;
+    READER = 1;
+    WRITER = 2;
+    ADMIN = 3;
+  }
+  enum PermissionType {
+    PERMISSION_TYPE_UNSPECIFIED = 0;
+    META_DATA_READ = 1;
+    META_DATA_WRITE = 2;
+    DATA_READ = 3;
+    DATA_WRITE = 4;
+  }
+  enum PermissionScope {
+    PERMISSION_SCOPE_UNSPECIFIED = 0;
+    USER_SCOPE = 1;
+    ADMIN_SCOPE = 2;
+  }
+  message IamPermissionInternal {
+    enum CustomRoleSupportLevel {
+      CUSTOM_ROLE_SUPPORT_LEVEL_UNSPECIFIED = 0;
+      NOT_SUPPORTED = 1;
+      SUPPORTED = 2;
+    }
+    .google.api.IamPermission.IamPermissionInternal.CustomRoleSupportLevel custom_role_support_level_override = 1;
+    string cal_onboarding_ticket = 2;
+    bool used_for_rpc_security_policy = 3;
+  }
+  string name = 1;
+  string display_name = 2;
+  string description = 3;
+  .google.api.IamPermission.BasicRole basic_role = 8;
+  .google.api.IamPermission.PermissionType type = 4;
+  .google.api.IamPermission.PermissionScope scope = 5;
+  .google.api.LaunchStage launch_stage = 6;
+  bool parent_only = 7;
+  .google.api.IamPermission.IamPermissionInternal internal = 9;
+  string index = 10;
+}
+message IamRole {
+  string name = 1;
+  string display_name = 2;
+  string description = 3;
+  .google.api.LaunchStage launch_stage = 4;
+  repeated string permissions = 5;
+  repeated string roles = 6;
+  bool is_standard_service_role = 7;
+}

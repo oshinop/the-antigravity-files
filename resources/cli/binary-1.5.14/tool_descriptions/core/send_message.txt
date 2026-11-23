@@ -1,0 +1,1 @@
+Send a message to another agent, such as a subagent or a peer, or pass Recipient='@children' to broadcast to all active direct subagents. Not a channel to the user.

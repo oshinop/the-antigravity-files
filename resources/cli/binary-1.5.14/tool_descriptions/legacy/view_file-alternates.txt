@@ -1,0 +1,4 @@
+View the contents of a file from the local filesystem. This tool supports text files.
+
+
+- Files larger than %d MB cannot be viewed.

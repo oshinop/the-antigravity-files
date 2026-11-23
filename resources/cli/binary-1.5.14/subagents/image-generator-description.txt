@@ -1,0 +1,1 @@
+Generates or edits images from a brief and replies with the saved file paths.

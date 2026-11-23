@@ -1,0 +1,6 @@
+// Extracted file offset 0x362517c, 288 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.protobuf;
+message FieldMask {
+  repeated string paths = 1;
+}

@@ -1,0 +1,10 @@
+// Extracted file offset 0x3631ce3, 399 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package sherlog;
+import "net/proto2/proto/descriptor.proto";
+message SanitizationOptions {
+  enum Action {
+    UNSPECIFIED_ACTION = 0;
+    FORCE_REMOVE = 1;
+  }
+}

@@ -1,0 +1,22 @@
+// Extracted file offset 0x365832e, 805 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.iam.v1;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message PamBindingId {
+  message AttachmentProject {
+    int64 project = 1;
+  }
+  message AttachmentFolder {
+    int64 folder = 1;
+  }
+  message AttachmentOrganization {
+    int64 organization = 1;
+  }
+  .google.iam.v1.PamBindingId.AttachmentProject project = 1; // oneof=container
+  .google.iam.v1.PamBindingId.AttachmentFolder folder = 2; // oneof=container
+  .google.iam.v1.PamBindingId.AttachmentOrganization organization = 3; // oneof=container
+  string grant_uuid = 4;
+}

@@ -1,0 +1,8 @@
+// Extracted file offset 0x36254dc, 369 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package logs.proto.cloud_iam;
+import "google/api/inclusion.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message AgentMetadata {
+  string agent_name = 2;
+}

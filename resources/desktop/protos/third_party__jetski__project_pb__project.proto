@@ -1,0 +1,122 @@
+// Extracted file offset 0x372384e, 4141 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package exa.project_pb;
+import "google/protobuf/timestamp.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "third_party/jetski/codeium_common_pb/codeium_common.proto";
+enum FolderType {
+  FOLDER_TYPE_UNSPECIFIED = 0;
+  FOLDER_TYPE_NORMAL_FOLDER = 1;
+  FOLDER_TYPE_GIT_FOLDER = 2;
+  FOLDER_TYPE_GOOGLE3_FOLDER = 3;
+  FOLDER_TYPE_NON_EXISTENT = 4;
+}
+enum BackendType {
+  BACKEND_TYPE_UNSPECIFIED = 0;
+  BACKEND_TYPE_LOCAL = 1;
+  BACKEND_TYPE_REMOTE_AICODE = 2;
+  BACKEND_TYPE_REMOTE_ENTERPRISE = 3;
+}
+message Resource {
+  string folder_uri = 1; // oneof=type
+  .exa.project_pb.Google3 google3 = 2; // oneof=type
+  .exa.project_pb.GitFolder git_folder = 3; // oneof=type
+  .exa.project_pb.RemoteResource remote_resource = 4; // oneof=type
+}
+message Google3 {
+  enum ForkType {
+    FORK_TYPE_UNSPECIFIED = 0;
+    FORK_TYPE_PIPER = 1;
+    FORK_TYPE_JJ = 2;
+    FORK_TYPE_FIG = 3;
+  }
+  .exa.project_pb.Google3.ForkType fork_type = 1;
+}
+message GitFolder {
+  string folder_uri = 1;
+  string default_branch = 2;
+  bool allow_write = 3;
+}
+message RemoteResource {
+  string type = 1;
+  string resource_id = 2;
+  string display_name = 3;
+  string icon_url = 4;
+  string url = 5;
+  bool is_private = 6; // oneof=_is_private
+  string default_branch = 7;
+}
+message ConversationIds {
+  repeated string ids = 1;
+}
+message ProjectConversation {
+  string conversation_id = 1;
+  string environment_id = 2;
+}
+message ProjectConversations {
+  repeated .exa.project_pb.ProjectConversation conversations = 1;
+}
+message Resources {
+  repeated .exa.project_pb.Resource resources = 1;
+}
+message Environment {
+  string id = 1;
+  string name = 2;
+  .exa.project_pb.Resources resources = 3;
+}
+message Environments {
+  repeated .exa.project_pb.Environment environments = 1;
+}
+message PermissionGrants {
+  .exa.codeium_common_pb.PermissionGrantsConfig permission_grants = 2;
+  bool v2_migrated = 3;
+}
+message SecurityPluginSettings {
+  message Cli {
+    bool enabled = 1;
+  }
+  message Vetted {
+    bool enabled = 1;
+  }
+  .exa.project_pb.SecurityPluginSettings.Cli cli = 1;
+  .exa.project_pb.SecurityPluginSettings.Vetted vetted = 2;
+}
+message ProjectSettings {
+  message SecurityPluginsEntry {
+    string key = 1;
+    .exa.project_pb.SecurityPluginSettings value = 2;
+  }
+  .exa.codeium_common_pb.AgentSettingPolicy file_access_policy = 1;
+  .exa.codeium_common_pb.AgentSettingPolicy internet_policy = 2;
+  bool sandbox_mode = 3; // oneof=_sandbox_mode
+  .exa.codeium_common_pb.CascadeCommandsAutoExecution auto_execution_policy = 4;
+  .exa.codeium_common_pb.ArtifactReviewMode artifact_review_mode = 5;
+  bool enable_permissioned_github = 6;
+  string shell_setup_script = 7; // oneof=_shell_setup_script
+  .exa.codeium_common_pb.AgentPermissionPreset permission_preset = 8;
+  repeated .exa.project_pb.ProjectSettings.SecurityPluginsEntry security_plugins = 9;
+}
+message Project {
+  string id = 1;
+  string name = 2;
+  .exa.project_pb.ProjectConversations project_conversations = 8;
+  .exa.project_pb.Resources project_resources = 6;
+  .exa.project_pb.Environments environments = 7;
+  .exa.project_pb.PermissionGrants permission_grants = 9;
+  .exa.project_pb.ProjectSettings settings = 10;
+  .google.protobuf.Timestamp updated_at = 11;
+  bool is_workspace_only = 12; // oneof=_is_workspace_only
+  bool archived = 13; // oneof=_archived
+  .exa.project_pb.BackendType backend_type = 14;
+  .exa.project_pb.CoordinatorConfig coordinator = 15;
+  .exa.project_pb.SidecarProjectConfig sidecar = 16;
+}
+message SidecarProjectConfig {
+  string sidecar_id = 1;
+}
+message CoordinatorConfig {
+  string goal = 1;
+  string icon = 2;
+  string color = 3;
+  string instructions = 4;
+}

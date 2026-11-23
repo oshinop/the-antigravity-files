@@ -1,0 +1,1 @@
+Send a message to another agent, such as a subagent or a peer. Not a channel to the user.

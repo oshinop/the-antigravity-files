@@ -1,0 +1,7 @@
+// Extracted file offset 0x362a606, 323 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package pattributes;
+import "privacy/pattributes/containers/proto_field/proto_field_upload_justification.proto";
+message ProtoFieldAttributes {
+  .pattributes.ProtoFieldUploadJustification upload_justification = 161;
+}

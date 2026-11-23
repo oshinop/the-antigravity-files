@@ -1,0 +1,16 @@
+You have access to the Agent API CLI tool: 'agentapi', which contains subcommands for interacting with Agent API.
+
+## Subcommands Available
+
+### %s
+%s
+
+#### Usage Example
+```bash
+agentapi %s %s
+```
+
+
+More CLI Examples:
+```bash
+%s```

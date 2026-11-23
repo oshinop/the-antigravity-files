@@ -1,0 +1,49 @@
+// Extracted file offset 0x36ac420, 1939 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package devtools.jetski.telemetry.extensions;
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum SignalProvenance {
+  SIGNAL_PROVENANCE_UNSPECIFIED = 0;
+  SIGNAL_PROVENANCE_STARFLEET = 1;
+  SIGNAL_PROVENANCE_JETSKI = 2;
+  SIGNAL_PROVENANCE_OFFLINE = 3;
+  SIGNAL_PROVENANCE_BACKGROUND_EVAL = 4;
+  SIGNAL_PROVENANCE_REMY_AUTO_EVAL = 5;
+  SIGNAL_PROVENANCE_REMY = 6;
+}
+enum SignalOutcome {
+  SIGNAL_OUTCOME_UNSPECIFIED = 0;
+  SIGNAL_OUTCOME_NOT_TRIGGERED = 1;
+  SIGNAL_OUTCOME_TRIGGERED = 2;
+  SIGNAL_OUTCOME_ERRORED = 3;
+  SIGNAL_OUTCOME_NOT_APPLICABLE = 4;
+  SIGNAL_OUTCOME_SKIPPED_PARENT_CLEARED = 5;
+  SIGNAL_OUTCOME_SKIPPED_PARENT_ERRORED = 6;
+  SIGNAL_OUTCOME_SKIPPED_PARENT_SKIPPED = 7;
+  SIGNAL_OUTCOME_SKIPPED_PARENT_MISSING = 8;
+  SIGNAL_OUTCOME_SKIPPED_TAGS_NOT_MATCHED = 9;
+  SIGNAL_OUTCOME_SKIPPED_SKIP_TAG_MATCHED = 10;
+  SIGNAL_OUTCOME_SKIPPED_NOT_IN_USER_GROUPS = 11;
+  SIGNAL_OUTCOME_SKIPPED_EXCLUDED_USER_GROUP = 12;
+  SIGNAL_OUTCOME_SKIPPED_NOT_IN_EXPERIMENT = 13;
+  SIGNAL_OUTCOME_SKIPPED_OTHER_EXPERIMENT_GROUP = 14;
+}
+message MonitorSignal {
+  string source = 1;
+  string conversation_id = 2;
+  int32 step_index = 3;
+  .google.protobuf.Timestamp timestamp = 5;
+  bool triggered = 6;
+  string reason = 8;
+  .google.protobuf.Struct metrics = 9;
+  string trajectory_id = 10;
+  string tool_call_name = 12;
+  string tool_call_args_json = 13;
+  double severity = 14;
+  double duration_ms = 19;
+  .devtools.jetski.telemetry.extensions.SignalProvenance provenance = 20;
+  string execution_id = 21;
+  .devtools.jetski.telemetry.extensions.SignalOutcome outcome = 22;
+}

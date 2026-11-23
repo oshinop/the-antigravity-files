@@ -1,0 +1,270 @@
+// Extracted file offset 0x37fff1f, 13187 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package devtools_jetski_boq_api_proto;
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "third_party/gemini_coder/proto/trajectory.proto";
+import "third_party/jetski/codeium_common_pb/codeium_common.proto";
+enum InstanceStatus {
+  INSTANCE_STATUS_UNSPECIFIED = 0;
+  INSTANCE_STATUS_CONNECTED = 1;
+  INSTANCE_STATUS_DISCONNECTED = 2;
+  INSTANCE_STATUS_IDLE = 3;
+}
+message RecordTrajectoryAnalyticsRequest {
+  .gemini_coder.Trajectory trajectory = 1;
+  int32 start_step_index = 2;
+  int32 start_generator_metadata_index = 3;
+  .exa.codeium_common_pb.Metadata metadata = 4;
+  repeated int32 mendel_experiment_ids = 5;
+}
+message RecordTrajectoryAnalyticsResponse {
+}
+message InstanceMetadata {
+  string name = 1;
+  string version = 2;
+  bool supports_chunking = 3;
+}
+message ConnectInstanceRequest {
+  .devtools_jetski_boq_api_proto.InstanceMetadata metadata = 1;
+  bytes payload = 2;
+  string instance_id = 3;
+}
+message ConnectInstanceResponse {
+  string instance_uuid = 1;
+  bytes payload = 2;
+}
+message ConnectInstanceRequestV2 {
+  .devtools_jetski_boq_api_proto.InstanceMetadata metadata = 1;
+  string instance_id = 3;
+  .devtools_jetski_boq_api_proto.ProxyResponseV2 proxy_response = 4;
+  bool supports_payload_text = 5;
+}
+message ConnectInstanceResponseV2 {
+  string instance_uuid = 1;
+  .devtools_jetski_boq_api_proto.ProxyRequestV2 proxy_request = 3;
+}
+message ProxyRequestV2 {
+  message HeadersEntry {
+    string key = 1;
+    string value = 2;
+  }
+  int64 request_id = 1;
+  string rpc_path = 2;
+  repeated .devtools_jetski_boq_api_proto.ProxyRequestV2.HeadersEntry headers = 4;
+  bytes payload = 3; // oneof=body
+  string payload_text = 5; // oneof=body
+  bool is_final = 6;
+}
+message ProxyResponseV2 {
+  message HeadersEntry {
+    string key = 1;
+    string value = 2;
+  }
+  int64 request_id = 1;
+  int32 status_code = 3;
+  repeated .devtools_jetski_boq_api_proto.ProxyResponseV2.HeadersEntry headers = 4;
+  bool is_final = 5;
+  bytes payload = 2; // oneof=body
+  string payload_text = 6; // oneof=body
+}
+message ListInstancesRequest {
+  string project = 1;
+}
+message NotifyEvent {
+  string id = 1;
+  string title = 2;
+  string body = 3;
+  string cascade_id = 4;
+  string workspace_uri = 5;
+  string type = 6;
+}
+message NotifyUserRequest {
+  enum DeliveryChannel {
+    DELIVERY_CHANNEL_UNSPECIFIED = 0;
+    FCM_WEB_PUSH = 1;
+    CHIME = 2;
+  }
+  enum Surface {
+    SURFACE_UNSPECIFIED = 0;
+    SURFACE_JETSKI = 1;
+    SURFACE_ANTIGRAVITY = 2;
+  }
+  .devtools_jetski_boq_api_proto.NotifyEvent event = 1;
+  string instance_id = 2;
+  .devtools_jetski_boq_api_proto.NotifyUserRequest.DeliveryChannel delivery_channel = 3;
+  .devtools_jetski_boq_api_proto.NotifyUserRequest.Surface surface = 4;
+}
+message NotifyUserResponse {
+}
+message ListInstancesResponse {
+  message InstanceDetails {
+    string uuid = 1;
+    .devtools_jetski_boq_api_proto.InstanceMetadata metadata = 2;
+    .devtools_jetski_boq_api_proto.InstanceStatus status = 3;
+    .google.protobuf.Timestamp status_last_updated_at = 4;
+  }
+  repeated .devtools_jetski_boq_api_proto.ListInstancesResponse.InstanceDetails instances = 1;
+  int32 max_connected_instances = 2;
+}
+message UpdateInstanceRequest {
+  string instance_id = 1;
+  .devtools_jetski_boq_api_proto.InstanceMetadata metadata = 2;
+  .google.protobuf.FieldMask update_mask = 3;
+}
+message UpdateInstanceResponse {
+}
+message DeleteInstanceRequest {
+  string instance_id = 1;
+}
+message DeleteInstanceResponse {
+}
+message ProxyCommandRequest {
+  message HeadersEntry {
+    string key = 1;
+    string value = 2;
+  }
+  string target_instance_uuid = 1;
+  string rpc_path = 2;
+  bytes payload = 3;
+  repeated .devtools_jetski_boq_api_proto.ProxyCommandRequest.HeadersEntry headers = 4;
+}
+message ProxyCommandResponse {
+  message HeadersEntry {
+    string key = 1;
+    string value = 2;
+  }
+  bytes payload = 1;
+  repeated .devtools_jetski_boq_api_proto.ProxyCommandResponse.HeadersEntry headers = 2;
+}
+message EvictInstanceRequest {
+  string target_instance_uuid = 1;
+  .google.protobuf.Timestamp successor_connect_time = 2;
+}
+message EvictInstanceResponse {
+}
+message RegisterWebPushRequest {
+  string subscription_id = 1;
+  string fcm_token = 6;
+  string user_agent = 5;
+}
+message RegisterWebPushResponse {
+}
+message RecordClientEventRequest {
+  enum EventType {
+    EVENT_TYPE_UNSPECIFIED = 0;
+    EVENT_TYPE_LOAD_SUCCESS = 1;
+    EVENT_TYPE_BLANK_SCREEN_TIMEOUT = 2;
+    EVENT_TYPE_TRANSPORT_HANDSHAKE_FAILED = 3;
+    EVENT_TYPE_WEBRTC_ATTEMPT = 4;
+    EVENT_TYPE_WEBRTC_CONNECTED = 5;
+    EVENT_TYPE_WEBRTC_FALLBACK = 6;
+    EVENT_TYPE_WEBRTC_DISCONNECTED = 7;
+    EVENT_TYPE_WEBRTC_HEARTBEAT = 8;
+  }
+  enum ConnectionType {
+    CONNECTION_TYPE_UNSPECIFIED = 0;
+    CONNECTION_TYPE_DIRECT = 1;
+    CONNECTION_TYPE_RELAY = 2;
+    CONNECTION_TYPE_UNKNOWN = 3;
+  }
+  .devtools_jetski_boq_api_proto.RecordClientEventRequest.EventType event_type = 1;
+  string instance_uuid = 2;
+  string error_details = 3;
+  int64 duration_ms = 4;
+  int64 command_count = 5;
+  .devtools_jetski_boq_api_proto.RecordClientEventRequest.ConnectionType webrtc_connection_type = 6;
+  int64 webrtc_command_error_count = 7;
+  int32 webrtc_attempt_index = 8;
+}
+message RecordClientEventResponse {
+}
+message InitiateMeshSessionRequest {
+  string target_instance_id = 1;
+  string client_instance_id = 2;
+  string web_crypto_pub_key = 3;
+}
+message InitiateMeshSessionResponse {
+  string session_id = 1;
+  repeated string stun_servers = 2;
+  repeated string turn_servers = 3;
+  int64 signaling_timeout_ms = 4;
+}
+message SendSignalingMessageRequest {
+  string session_id = 1;
+  string payload = 2;
+  string message_id = 3;
+  string sender_id = 4;
+  string recipient_id = 5;
+  string payload_type = 6;
+}
+message SendSignalingMessageResponse {
+}
+message PollSignalingMessagesRequest {
+  string session_id = 1; // oneof=poll_target
+  string instance_id = 3; // oneof=poll_target
+  .google.protobuf.Timestamp after_timestamp = 2;
+  bool include_authorized_keys = 4;
+}
+message SignalingMessageDetails {
+  string session_id = 1;
+  string payload = 2;
+  .google.protobuf.Timestamp created_at = 3;
+}
+message AuthorizedKeyBundle {
+  repeated string web_crypto_pub_keys = 1;
+  bool delivered = 2;
+}
+message PollSignalingMessagesResponse {
+  repeated .devtools_jetski_boq_api_proto.SignalingMessageDetails messages = 1;
+  .devtools_jetski_boq_api_proto.AuthorizedKeyBundle authorized_key_bundle = 2;
+}
+message AuthorizedDevice {
+  string client_instance_id = 1;
+  string target_instance_id = 2;
+  .google.protobuf.Timestamp created_at = 3;
+  .google.protobuf.Timestamp last_used_at = 4;
+}
+message ListAuthorizedDevicesRequest {
+  string target_instance_id = 1;
+}
+message ListAuthorizedDevicesResponse {
+  repeated .devtools_jetski_boq_api_proto.AuthorizedDevice devices = 1;
+}
+message RevokeAuthorizedDeviceRequest {
+  enum Scope {
+    SCOPE_UNSPECIFIED = 0;
+    SCOPE_THIS_INSTANCE = 1;
+    SCOPE_ALL_INSTANCES = 2;
+  }
+  string target_instance_id = 1;
+  string client_instance_id = 2;
+  .devtools_jetski_boq_api_proto.RevokeAuthorizedDeviceRequest.Scope scope = 3;
+  string reason = 4;
+}
+message RevokeAuthorizedDeviceResponse {
+}
+service ApiService {
+  rpc RecordClientEvent (.devtools_jetski_boq_api_proto.RecordClientEventRequest) returns (.devtools_jetski_boq_api_proto.RecordClientEventResponse);
+  rpc RecordTrajectoryAnalytics (.devtools_jetski_boq_api_proto.RecordTrajectoryAnalyticsRequest) returns (.devtools_jetski_boq_api_proto.RecordTrajectoryAnalyticsResponse);
+  rpc RegisterWebPush (.devtools_jetski_boq_api_proto.RegisterWebPushRequest) returns (.devtools_jetski_boq_api_proto.RegisterWebPushResponse);
+  rpc NotifyUser (.devtools_jetski_boq_api_proto.NotifyUserRequest) returns (.devtools_jetski_boq_api_proto.NotifyUserResponse);
+  rpc ConnectInstance (stream .devtools_jetski_boq_api_proto.ConnectInstanceRequest) returns (stream .devtools_jetski_boq_api_proto.ConnectInstanceResponse);
+  rpc ConnectInstanceV2 (stream .devtools_jetski_boq_api_proto.ConnectInstanceRequestV2) returns (stream .devtools_jetski_boq_api_proto.ConnectInstanceResponseV2);
+  rpc ListInstances (.devtools_jetski_boq_api_proto.ListInstancesRequest) returns (.devtools_jetski_boq_api_proto.ListInstancesResponse);
+  rpc UpdateInstance (.devtools_jetski_boq_api_proto.UpdateInstanceRequest) returns (.devtools_jetski_boq_api_proto.UpdateInstanceResponse);
+  rpc DeleteInstance (.devtools_jetski_boq_api_proto.DeleteInstanceRequest) returns (.devtools_jetski_boq_api_proto.DeleteInstanceResponse);
+  rpc ProxyCommand (.devtools_jetski_boq_api_proto.ProxyCommandRequest) returns (.devtools_jetski_boq_api_proto.ProxyCommandResponse);
+  rpc StreamProxyCommand (.devtools_jetski_boq_api_proto.ProxyCommandRequest) returns (stream .devtools_jetski_boq_api_proto.ProxyCommandResponse);
+  rpc ForwardProxyCommand (.devtools_jetski_boq_api_proto.ProxyCommandRequest) returns (.devtools_jetski_boq_api_proto.ProxyCommandResponse);
+  rpc ForwardStreamProxyCommand (.devtools_jetski_boq_api_proto.ProxyCommandRequest) returns (stream .devtools_jetski_boq_api_proto.ProxyCommandResponse);
+  rpc EvictInstance (.devtools_jetski_boq_api_proto.EvictInstanceRequest) returns (.devtools_jetski_boq_api_proto.EvictInstanceResponse);
+  rpc InitiateMeshSession (.devtools_jetski_boq_api_proto.InitiateMeshSessionRequest) returns (.devtools_jetski_boq_api_proto.InitiateMeshSessionResponse);
+  rpc SendSignalingMessage (.devtools_jetski_boq_api_proto.SendSignalingMessageRequest) returns (.devtools_jetski_boq_api_proto.SendSignalingMessageResponse);
+  rpc PollSignalingMessages (.devtools_jetski_boq_api_proto.PollSignalingMessagesRequest) returns (.devtools_jetski_boq_api_proto.PollSignalingMessagesResponse);
+  rpc ListAuthorizedDevices (.devtools_jetski_boq_api_proto.ListAuthorizedDevicesRequest) returns (.devtools_jetski_boq_api_proto.ListAuthorizedDevicesResponse);
+  rpc RevokeAuthorizedDevice (.devtools_jetski_boq_api_proto.RevokeAuthorizedDeviceRequest) returns (.devtools_jetski_boq_api_proto.RevokeAuthorizedDeviceResponse);
+}

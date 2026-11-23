@@ -1,0 +1,52 @@
+// Extracted file offset 0x36ba3d0, 2140 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/policy.proto";
+import "google/api/visibility.proto";
+message Usage {
+  enum ServiceAccess {
+    RESTRICTED = 0;
+    PUBLIC = 1;
+    ORG_RESTRICTED = 2;
+    ORG_PUBLIC = 3;
+  }
+  enum ResourceBasedSharing {
+    RESOURCE_BASED_SHARING_UNSPECIFIED = 0;
+    BY_POLICY = 1;
+    ALWAYS = 2;
+  }
+  .google.api.Usage.ServiceAccess service_access = 4;
+  repeated string requirements = 1;
+  repeated string depends_on_services = 2;
+  repeated string activation_hooks = 3;
+  repeated string deactivation_hooks = 5;
+  repeated .google.api.UsageRule rules = 6;
+  string producer_notification_channel = 7;
+  .google.api.ServiceIdentity service_identity = 8;
+  .google.api.Usage.ResourceBasedSharing sharing = 9;
+  repeated .google.api.Group groups = 10;
+}
+message UsageRule {
+  string selector = 1;
+  bool allow_unregistered_calls = 2;
+  bool skip_service_control = 3;
+  bool skip_service_control_for_stubby = 4;
+  string default_api_key = 6;
+  bool skip_streaming_api_metrics = 7;
+}
+message ServiceIdentity {
+  string service_account_parent = 1;
+  string display_name = 2;
+  string description = 3;
+}
+message Group {
+  string name = 1;
+  string display_name = 2;
+  string description = 3;
+  repeated .google.api.MemberInfo members = 4;
+}
+message MemberInfo {
+  string name = 1;
+  string reason = 2;
+}

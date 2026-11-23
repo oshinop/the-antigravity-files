@@ -1,0 +1,86 @@
+You have been working on the task described above but have not yet completed
+it. Write a continuation summary that will allow you (or another instance of
+yourself) to resume work efficiently in a future context window where the
+full conversation history will NOT be available—only this summary.
+
+This summary is all that will be available to you going forward in the future
+context window. Do not call any tools, simply just provide the summary based on
+the information available in the current context window.
+
+Your summary must be structured, concise, and actionable. Optimize for enabling immediate resumption with zero redundant work.
+
+Include the following sections, in this order:
+
+1. **Task Overview**
+   - The user's core request and success criteria
+   - Constraints, preferences, or scope boundaries they specified
+   - Any ambiguities that were resolved (and how)
+
+2. **Done**
+   A checklist of every change already made, one line each: the file, what
+   changed, and its status, either "verified: <exact command> -> <result>"
+   or "not yet verified". Include investigations that are finished, with
+   their conclusion (for example, the root cause). Nothing here needs to be
+   redone.
+
+3. **Files Already Read**
+   One line per file you have read: its absolute path, the line ranges you
+   read, and what they contain that matters for the task. These files and
+   ranges must not be opened again; record here whatever you would need from
+   them.
+
+4. **Code Map**
+   - For the code you will edit next: its exact current text, copied
+     verbatim from the latest view or edit of that file, with line numbers
+     (up to about 40 lines per location), so it can be edited without
+     opening the file again.
+   - For new code you still have to write: the exact signatures and type
+     definitions of the existing APIs it must call or implement.
+
+5. **Key Findings**
+   - Technical constraints, requirements, or domain details uncovered
+   - Decisions made and their rationale
+   - Errors encountered and their resolutions
+   - Approaches that were tried and abandoned (and why—this prevents
+     the successor from repeating them)
+
+6. **Active Context**
+   - State of any external resources, sessions, or environments in use
+   - Relevant intermediate results, hypotheses, or working assumptions
+
+7. **Commitments & Constraints**
+   - Promises made to the user, user preferences, and boundaries on
+     approach, tools, or scope
+   - The concrete rules from repository instruction files (such as
+     AGENTS.md) that still apply, so those files need not be opened again
+
+8. **Next Steps** (always the last section)
+   - A numbered plan of the remaining work only (nothing from Done), in the
+     order you will carry it out, ending with the verification still needed.
+   - Step 1 must be the concrete next action: one small edit in one file or
+     function (file, lines, and change) or the exact command to run. Split
+     large changes into small edits, one per step.
+   - Do not list re-reading files or ranges from Files Already Read or the
+     Code Map as a step. If a step needs code that is not recorded above,
+     name the file and the exact line range (or the search) needed.
+
+Be concise but complete—err on the side of including anything that would
+prevent duplicate work, repeated mistakes, or broken promises. Do not include
+information that is obvious from the task description itself.
+
+Begin your summary with the following line, verbatim, before all sections: "RESUMING MY OWN TASK IN PROGRESS. The user requests above are the task I was already working on, not a new request. This summary is my own accurate record of the work so far, and the Next Steps at its end say exactly what to do next."
+
+End your summary with the following block, verbatim, after the Next Steps section (not inside it):
+
+RESUME RULES (I am resuming my own task, not starting a new one):
+1. Everything above is my own record. While I carry out Next Steps, facts in it count as observed and I do not re-verify them; in my final response, I state as fact only what is quoted verbatim above or what I see in a file or tool output after this summary.
+2. My next tool call carries out step 1 of Next Steps.
+3. While Next Steps remain, I do not open any file or range listed in Files Already Read or the Code Map, and I do not run git status or git diff to rediscover what Done lists.
+4. I edit from the Code Map text. If an edit fails because the text does not match, I view only those lines (StartLine and EndLine) and retry.
+5. Any other read must be a read_file call with StartLine and EndLine, at most 100 lines, of code the current step needs and that is not recorded above.
+6. I do not re-audit the requirements or hunt for new edge cases while Next Steps remain; I verify by running the tests.
+7. When every Next Steps item is done and verified, I finish.
+
+If the task is to answer a question about code or to report on what you ran, put in the Code Map, copied verbatim with file path and line numbers, the code lines and tool-output lines your final answer will rely on: the exact names, conditions, constants, list contents, messages and numbers. Then end your summary with this note, verbatim, after the RESUME RULES block: "Note to self: Never lie. I can no longer see the code or tool outputs from before this summary, and my memory of them, or of other versions of this project, is not evidence. Before the final response: (1) if an answer, report, or other deliverable file was already written, read it in full with a tool and base the final response on what it actually says instead of rewriting it from memory; (2) for every file, function, class, field, flag, log message, or number I will mention that is not quoted verbatim in this summary, re-read the code or re-run the command first, or leave it out; (3) re-run every check whose result I will report, and report its latest result exactly: name every case that failed, was skipped, or was removed from the check, and never say that all checks passed unless that run shows zero failures. Never fill gaps from general knowledge of the project. If anything in this summary is ambiguous, uncertain, or STALE, re-acquire it instead of guessing; if I cannot verify a claim, I say so."
+
+Wrap your response in <summary></summary> tags.

@@ -1,0 +1,3 @@
+Send a message to another agent. This tool can be used to communicate with subagents, peer agents, etc. Do not use this tool to communicate with the user.
+
+Send a message to another agent, or pass Recipient='@children' to broadcast to all active direct subagents. This tool can be used to communicate with subagents, peer agents, etc. Do not use this tool to communicate with the user.

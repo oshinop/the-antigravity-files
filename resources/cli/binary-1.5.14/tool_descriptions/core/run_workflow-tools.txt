@@ -1,0 +1,1 @@
+ Scripts can call these tools with call_tool: %s.

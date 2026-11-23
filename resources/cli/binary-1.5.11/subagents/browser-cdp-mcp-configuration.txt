@@ -1,0 +1,3 @@
+
+Troubleshooting: If the agent repeatedly fails to connect, manually configure the following MCP entry in the user's mcp_config.json file, then restart the browser agent:
+  "chrome_devtools": %s

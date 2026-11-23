@@ -1,0 +1,32 @@
+// Extracted file offset 0x369fdd4, 1701 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "learning/genai/api/genai_versioning.proto";
+import "learning/genai/api/interactions/proto/content.proto";
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message UserInputContent {
+  .genai.TextContent text = 10; // oneof=type
+  .genai.ImageContent image = 11; // oneof=type
+  .genai.AudioContent audio = 12; // oneof=type
+  .genai.DocumentContent document = 13; // oneof=type
+  .genai.VideoContent video = 14; // oneof=type
+  .genai.SlashCommand slash_command = 15; // oneof=type
+}
+message SlashCommand {
+  string name = 1;
+}
+message LiveUserInputStep {
+  .genai.UserInputContent content = 1;
+}
+message LiveFunctionResultStep {
+  string call_id = 1;
+  string name = 2;
+  bool is_error = 3;
+  bytes signature = 4;
+  .genai.Struct struct_result = 10; // oneof=result
+  .genai.ContentList content_list = 11; // oneof=result
+  string string_result = 12; // oneof=result
+}

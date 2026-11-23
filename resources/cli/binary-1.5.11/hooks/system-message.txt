@@ -1,0 +1,2 @@
+The following system message was injected by a %s hook:
+%s

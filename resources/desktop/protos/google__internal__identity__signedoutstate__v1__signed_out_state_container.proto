@@ -1,0 +1,10 @@
+// Extracted file offset 0x3646560, 614 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.internal.identity.signedoutstate.v1;
+import "google/internal/identity/signedoutstate/v1/mobile_signed_out_consent.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message SignedOutState {
+  string zwieback_token = 1;
+  .google.internal.identity.signedoutstate.v1.MobileSignedOutConsent mobile_signed_out_consent = 2;
+  bytes rollout_bucket = 3;
+}

@@ -1,0 +1,30 @@
+// Extracted file offset 0x367de1f, 1235 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.internal.cloud.code.v1internal;
+import "google/api/field_behavior.proto";
+import "google/api/policy.proto";
+import "google/protobuf/timestamp.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message RetrieveUserQuotaSummaryRequest {
+  string project = 1;
+}
+message QuotaSummaryBucket {
+  string bucket_id = 1;
+  string display_name = 2;
+  string description = 7;
+  string window = 3;
+  float remaining_fraction = 4; // oneof=remaining
+  int64 remaining_amount = 5; // oneof=remaining
+  bool disabled = 8;
+  .google.protobuf.Timestamp reset_time = 6;
+}
+message QuotaSummaryGroup {
+  string display_name = 2;
+  string description = 3;
+  repeated .google.internal.cloud.code.v1internal.QuotaSummaryBucket buckets = 1;
+}
+message RetrieveUserQuotaSummaryResponse {
+  repeated .google.internal.cloud.code.v1internal.QuotaSummaryBucket buckets = 1;
+  repeated .google.internal.cloud.code.v1internal.QuotaSummaryGroup groups = 2;
+  string description = 3;
+}

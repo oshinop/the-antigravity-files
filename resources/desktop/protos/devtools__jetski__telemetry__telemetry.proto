@@ -1,0 +1,68 @@
+// Extracted file offset 0x3754c83, 5183 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package devtools.jetski.telemetry;
+import "devtools/jetski/telemetry/extensions/analytics_event_metadata.proto";
+import "devtools/jetski/telemetry/extensions/battle_mode_metadata.proto";
+import "devtools/jetski/telemetry/extensions/command_usage_metadata.proto";
+import "devtools/jetski/telemetry/extensions/completions_metadata.proto";
+import "devtools/jetski/telemetry/extensions/cortex_execution_metadata.proto";
+import "devtools/jetski/telemetry/extensions/cortex_generator_metadata.proto";
+import "devtools/jetski/telemetry/extensions/cortex_metrics.proto";
+import "devtools/jetski/telemetry/extensions/cortex_trajectory.proto";
+import "devtools/jetski/telemetry/extensions/cortex_trajectory_step.proto";
+import "devtools/jetski/telemetry/extensions/error_trace_metadata.proto";
+import "devtools/jetski/telemetry/extensions/feedback_metadata.proto";
+import "devtools/jetski/telemetry/extensions/hook_execution.proto";
+import "devtools/jetski/telemetry/extensions/input_completion.proto";
+import "devtools/jetski/telemetry/extensions/monitor_signal.proto";
+import "devtools/jetski/telemetry/extensions/observability_data.proto";
+import "devtools/jetski/telemetry/extensions/read_url_content.proto";
+import "devtools/jetski/telemetry/extensions/remote_agent_event.proto";
+import "devtools/jetski/telemetry/extensions/remote_agent_vm_event.proto";
+import "devtools/jetski/telemetry/extensions/remote_control_event.proto";
+import "devtools/jetski/telemetry/extensions/rpc_metadata.proto";
+import "devtools/jetski/telemetry/extensions/state_initialization_data.proto";
+import "devtools/jetski/telemetry/extensions/trajectory_segment_analytics_metadata.proto";
+import "devtools/jetski/telemetry/extensions/trajectory_segment_events_metadata.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "third_party/jetski/codeium_common_pb/codeium_common.proto";
+message JetskiTelemetryExtension {
+  string ide_name = 16;
+  string ide_version = 17;
+  string outer_app_version = 31;
+  string os = 18;
+  string arch = 19;
+  string user_tier_id = 22;
+  repeated string user_tags = 23;
+  bool is_redacted = 24;
+  string region_code = 25;
+  string product_name = 27;
+  string host_identifier = 34;
+  repeated string enabled_labs_features = 35;
+  .exa.codeium_common_pb.ExperimentConfig experiment_config = 36;
+  .devtools.jetski.telemetry.extensions.CortexExecutionMetadata cortex_execution_metadata = 2; // oneof=payload
+  .devtools.jetski.telemetry.extensions.CortexGeneratorMetadata cortex_generator_metadata = 3; // oneof=payload
+  .devtools.jetski.telemetry.extensions.CommandUsageMetadata command_usage_metadata = 4; // oneof=payload
+  .devtools.jetski.telemetry.extensions.CompletionsMetadata completions_metadata = 5; // oneof=payload
+  .devtools.jetski.telemetry.extensions.AnalyticsEventMetadata analytics_event_metadata = 6; // oneof=payload
+  .devtools.jetski.telemetry.extensions.FeedbackMetadata feedback_metadata = 7; // oneof=payload
+  .devtools.jetski.telemetry.proto.ReadUrlContentMetadata read_url_content_metadata = 8; // oneof=payload
+  .devtools.jetski.telemetry.extensions.TrajectorySegmentAnalyticsMetadata trajectory_segment_analytics_metadata = 9; // oneof=payload
+  .devtools.jetski.telemetry.extensions.TrajectorySegmentEventsMetadata trajectory_segment_events_metadata = 10; // oneof=payload
+  .devtools.jetski.telemetry.extensions.CortexTrajectory cortex_trajectory = 11; // oneof=payload
+  .devtools.jetski.telemetry.extensions.CortexTrajectoryStep cortex_trajectory_step = 12; // oneof=payload
+  .devtools.jetski.telemetry.extensions.StateInitializationData state_initialization_data = 13; // oneof=payload
+  .devtools.jetski.telemetry.extensions.CortexMetrics cortex_metrics = 14; // oneof=payload
+  .devtools.jetski.telemetry.extensions.ErrorTraceMetadata error_trace_metadata = 15; // oneof=payload
+  .devtools.jetski.telemetry.extensions.ObservabilityData observability_data = 26; // oneof=payload
+  .devtools.jetski.telemetry.extensions.BattleModeMetadata battle_mode_metadata = 28; // oneof=payload
+  .devtools.jetski.telemetry.extensions.RpcMetadata rpc_metadata = 29; // oneof=payload
+  .devtools.jetski.telemetry.extensions.MonitorSignal monitor_signal = 30; // oneof=payload
+  .devtools.jetski.telemetry.extensions.InputCompletion input_completion = 32; // oneof=payload
+  .devtools.jetski.telemetry.extensions.InputCompletionFeedback input_completion_feedback = 33; // oneof=payload
+  .devtools.jetski.telemetry.extensions.RemoteControlEvent remote_control_event = 37; // oneof=payload
+  .devtools.jetski.telemetry.extensions.HookExecution hook_execution = 38; // oneof=payload
+  .devtools.jetski.telemetry.extensions.RemoteAgentEvent remote_agent_event = 39; // oneof=payload
+  .devtools.jetski.telemetry.extensions.RemoteAgentVmEvent remote_agent_vm_event = 40; // oneof=payload
+  uint64 hashed_gaia_id = 20;
+}

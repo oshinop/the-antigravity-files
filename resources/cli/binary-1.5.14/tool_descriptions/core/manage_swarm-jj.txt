@@ -1,0 +1,1 @@
+A JJ share starts on the parent of your working-copy change, so brief it to `jj new <change>` to stack on yours. 

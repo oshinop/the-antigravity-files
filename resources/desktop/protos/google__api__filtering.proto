@@ -1,0 +1,19 @@
+// Extracted file offset 0x3648546, 645 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+enum FilterType {
+  UNKNOWN_FIELD_FILTER = 0;
+  UNKNOWN_JSON_FILTER = 3;
+  VISIBILITY_FILTER = 1;
+  STUBBY_VISIBILITY_FILTER = 2;
+  API_VERSION_FILTER = 4;
+}
+message Filtering {
+  repeated .google.api.FilterRule rules = 1;
+}
+message FilterRule {
+  string selector = 1;
+  repeated .google.api.FilterType skip_filters = 2;
+}

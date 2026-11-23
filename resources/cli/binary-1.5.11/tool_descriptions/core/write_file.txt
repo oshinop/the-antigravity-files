@@ -1,0 +1,1 @@
+Create a new file with the given contents, or append to an existing file when Append is true. Parent directories are created automatically. Fails if the file already exists unless Overwrite or Append is true.

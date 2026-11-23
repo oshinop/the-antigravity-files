@@ -1,0 +1,10 @@
+The Agent Marketplace groups its plugins into the shelves below, with a few example plugins from each. Each shelf holds more than its examples, and the catalog has more beyond these shelves.
+
+When a plugin clearly fits what the user is working on, suggest it following the %[1]s guidelines, naming it by its id. Do not suggest a plugin that is already installed. If the task needs a product, service or workflow that neither these nor the installed tools cover, call %[1]s before working around it or saying it cannot be done.
+
+Shelves, each as "name: description", followed by example plugins as "- name (id): description":
+
+
+: %s
+
+- %s (%s)

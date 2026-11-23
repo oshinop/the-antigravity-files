@@ -1,0 +1,23 @@
+// Extracted file offset 0x365dfcd, 893 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package learning.gemini.memory;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum StorageBackendType {
+  STORAGE_BACKEND_TYPE_UNSPECIFIED = 0;
+  STORAGE_BACKEND_TYPE_INLINE_SPANNER = 1;
+  STORAGE_BACKEND_TYPE_MEMORY_SERVICE = 2;
+}
+message GroupBackendConfig {
+  message MemoryServiceConfig {
+    string application_id = 1;
+  }
+  .learning.gemini.memory.GroupBackendConfig.MemoryServiceConfig memory_service = 1; // oneof=config
+}
+message StorageRef {
+  message MemoryServiceRef {
+    string application_id = 2;
+    int64 fact_version = 3;
+  }
+  .learning.gemini.memory.StorageBackendType backend_type = 1;
+  .learning.gemini.memory.StorageRef.MemoryServiceRef memory_service = 3; // oneof=backend_metadata
+}

@@ -1,0 +1,52 @@
+// Extracted file offset 0x37258c1, 4185 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+import "privacy/data_governance/attributes/proto/common.proto";
+message AllowedLocations {
+  .privacy.data_governance.attributes.classification.Source source = 1;
+  .privacy.data_governance.attributes.classification.SemanticContext semantic_context = 2;
+  repeated .privacy.data_governance.attributes.Location locations = 3;
+}
+message Residency {
+  enum Lifecycle {
+    STATE_UNDEFINED = 0;
+    DATA_AT_REST = 1;
+    DATA_IN_TRANSIT = 2;
+    DATA_IN_USE = 3;
+  }
+  enum ContentSubclassification {
+    CLASSIFICATION_UNDEFINED = 0;
+    CUSTOMER_CORE_CONTENT = 1;
+    SERVICE_CONFIG = 2;
+    CUSTOMER_DEFINED_ATTRIBUTES = 3;
+    GOOGLE_OPERATIONAL_DATA = 4;
+    CUSTOMER_METADATA = 5;
+  }
+  message ResidencyPolicy {
+    message ResidencyData {
+      .privacy.data_governance.attributes.classification.Source source = 1;
+      .privacy.data_governance.attributes.classification.SemanticContext semantic_context = 2;
+      .privacy.data_governance.attributes.Residency.ContentSubclassification content_subclassification = 3;
+      .privacy.data_governance.attributes.Residency.Lifecycle lifecycle_state = 4;
+    }
+    .privacy.data_governance.attributes.Residency.ResidencyPolicy.ResidencyData dr_data = 1;
+    repeated .privacy.data_governance.attributes.Location intended_data_location = 2;
+  }
+  message Data {
+    .privacy.data_governance.attributes.Residency.ContentSubclassification content_subclassification = 1;
+    .privacy.data_governance.attributes.Residency.Lifecycle lifecycle_state = 2;
+    repeated string intended_data_locations = 4;
+    .privacy.data_governance.attributes.classification.SemanticContext semantic_context = 5;
+  }
+  message Storage {
+    repeated .privacy.data_governance.attributes.Residency.ResidencyPolicy data_locations_that_can_be_stored = 1;
+  }
+  message Process {
+    repeated .privacy.data_governance.attributes.Residency.ResidencyPolicy data_locations_that_can_be_processed = 1;
+  }
+  .privacy.data_governance.attributes.Residency.Data data = 1;
+  .privacy.data_governance.attributes.Residency.Storage storage = 2;
+  .privacy.data_governance.attributes.Residency.Process process = 3;
+}

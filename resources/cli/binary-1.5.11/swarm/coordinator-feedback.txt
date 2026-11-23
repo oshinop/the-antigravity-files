@@ -1,0 +1,1 @@
+ When you reply to the user, end with open_board, exactly as given, on its own line, so they can open the live board.

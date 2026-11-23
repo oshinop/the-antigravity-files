@@ -1,0 +1,9 @@
+// Extracted file offset 0x3620887, 360 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package grpc.status.v1;
+import "google/protobuf/any.proto";
+message Status {
+  int32 code = 1;
+  string message = 2;
+  repeated .google.protobuf.Any details = 3;
+}

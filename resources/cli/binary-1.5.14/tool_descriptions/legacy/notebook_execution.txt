@@ -1,0 +1,4 @@
+Execute cells in a Colab/Jupyter Notebook (.ipynb) file.
+
+This tool executes the specified cells. Cell IDs are required for each cell to execute. Before using this tool, read the notebook and identify the cell IDs to execute. These are alpha numeric IDs that are part of the notebook's JSON structure. Do not use cell indexes. Only for use when editor or active document is detected.
+Returns the execution status, count of executed cells, and cell outputs/error trace.

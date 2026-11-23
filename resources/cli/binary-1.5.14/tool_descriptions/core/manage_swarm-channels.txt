@@ -1,0 +1,1 @@
+ `channel` splits the board into channels, one per work area: `op:"create"` makes one, `add` with `channels` puts the new workers in it, `op:"subscribe"`/`"unsubscribe"` moves a member, `op:"archive"` closes a finished one, and `op:"list"` lists them. Everyone is always in main; a member also sees its own channels' posts and any post that names it.

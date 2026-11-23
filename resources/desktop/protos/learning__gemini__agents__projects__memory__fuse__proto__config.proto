@@ -1,0 +1,81 @@
+// Extracted file offset 0x3713473, 3733 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package jetski_memory;
+import "devtools/library_club/cltool/zhu/proto_arg_spec.proto";
+import "google/protobuf/duration.proto";
+import "learning/gemini/agents/projects/memory/backend/clients.proto";
+message FakeLatency {
+  double mean_ms = 1; // default='50'
+  double stddev_ms = 2; // default='10'
+}
+message FakeMemoryBackendConfig {
+  int32 port = 1; // default='0'
+  .jetski_memory.FakeLatency read_latency = 2;
+  .jetski_memory.FakeLatency write_latency = 3;
+  .jetski_memory.FakeLatency list_latency = 4;
+  int32 num_initial_memories = 8; // default='100'
+  int64 size_mean_bytes = 9; // default='4096'
+  int64 size_stddev_bytes = 10; // default='1024'
+  int64 random_seed = 11;
+}
+message SmithBackendConfig {
+  string target = 1;
+  string memory_group = 2;
+}
+message DumboBackendConfig {
+  string target = 1;
+  string resource_name = 2;
+  .jetski_memory.IpcProxyConfig ipc_proxy = 3;
+  bool read_only = 4;
+}
+message SkillsBackendConfig {
+  string target = 1;
+}
+message VmsBackendConfig {
+  string volume_id = 1;
+  string server_address = 2;
+  string environment = 3;
+  bool read_only = 4;
+  .jetski_memory.DumboBackendConfig dumbo = 5;
+}
+message IpcProxyConfig {
+  int32 fd_req = 1; // default='4'
+  int32 fd_resp = 2; // default='3'
+  int32 timeout_ms = 3; // default='5000'
+  string sock = 4;
+}
+message MemoryMountConfig {
+  .jetski_memory.SmithBackendConfig smith = 1; // oneof=backend_config
+  .jetski_memory.DumboBackendConfig dumbo = 2; // oneof=backend_config
+  .jetski_memory.FakeMemoryBackendConfig fake = 3; // oneof=backend_config
+  .jetski_memory.SkillsBackendConfig skills = 5; // oneof=backend_config
+  .jetski_memory.VmsBackendConfig vms = 11; // oneof=backend_config
+  bool eager_cache_warming = 4; // default='true'
+  .google.protobuf.Duration poll_changes_period = 6;
+  string description = 9;
+  bool async_flush = 10;
+}
+message FuseConfig {
+  message MountsEntry {
+    string key = 1;
+    .jetski_memory.MemoryMountConfig value = 2;
+  }
+  string config = 1; // default='~/.gemini/config/memory.txtpb'
+  .learning.gemini.memory.ClientId client_id = 31; // default='CLIENT_ID_JETSKI'
+  string smith_backend_target = 2; // oneof=backend_config
+  string dumbo_backend_target = 26; // oneof=backend_config
+  .jetski_memory.FakeMemoryBackendConfig fake_backend = 21; // oneof=backend_config
+  string root_dir = 12; // default='~/memory'
+  repeated string memory_groups = 20;
+  repeated .jetski_memory.FuseConfig.MountsEntry mounts = 27;
+  string daemon_socket_file = 23;
+  int32 daemon_port = 28;
+  string log_dir = 15;
+  int32 num_threads = 6; // default='4'
+  bool async_flush = 14; // default='true'
+  .google.protobuf.Duration debounce_window = 18;
+  .google.protobuf.Duration poll_changes_period = 19;
+  int64 cache_max_mb = 9; // default='512'
+  int64 sql_max_ram_mb = 30; // default='8192'
+  bool disable_skills = 29;
+}

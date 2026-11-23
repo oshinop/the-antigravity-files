@@ -1,0 +1,130 @@
+// Extracted file offset 0x37312a7, 4475 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "learning/genai/api/genai_versioning.proto";
+import "learning/genai/api/interactions/proto/agents.proto";
+import "learning/genai/api/interactions/proto/content.proto";
+import "learning/genai/api/interactions/proto/state_update.proto";
+import "learning/genai/api/interactions/proto/steps.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message CallHookRequest {
+  string request_id = 1;
+  string name = 2;
+  .genai.AntigravityAgentConfig.LifecycleHook type = 7;
+  .genai.PreTurnArgs pre_turn_args = 3; // oneof=args
+  .genai.PostTurnArgs post_turn_args = 4; // oneof=args
+  .genai.PreToolArgs pre_tool_args = 5; // oneof=args
+  .genai.PostToolArgs post_tool_args = 6; // oneof=args
+  .genai.OnToolErrorArgs on_tool_error_args = 8; // oneof=args
+  .genai.OnCompactionArgs on_compaction_args = 9; // oneof=args
+  .genai.StopArgs stop_args = 10; // oneof=args
+}
+message CallHookResponse {
+  string request_id = 1;
+  .genai.PreTurnResult pre_turn_result = 2; // oneof=result
+  .genai.PreToolResult pre_tool_result = 3; // oneof=result
+  .genai.EmptyResult empty_result = 4; // oneof=result
+  string error_message = 5; // oneof=result
+  .genai.OnToolErrorResult on_tool_error_result = 6; // oneof=result
+  .genai.StopResult stop_result = 7; // oneof=result
+}
+message PreTurnArgs {
+  .genai.UserInputStep user_input = 1;
+}
+message PostTurnArgs {
+  string response_text = 1;
+}
+message PreToolArgs {
+  string tool_name = 1;
+  string arguments_json = 2;
+  string server_name = 3;
+  string call_id = 4;
+}
+message PostToolArgs {
+  string tool_name = 1;
+  string result = 2;
+  string server_name = 3;
+  string call_id = 4;
+}
+message OnToolErrorArgs {
+  string tool_name = 1;
+  string error_message = 2;
+  string server_name = 3;
+  string call_id = 4;
+}
+message EmptyResult {
+}
+message OnToolErrorResult {
+  string custom_error_message = 1;
+}
+message PreToolResult {
+  enum Decision {
+    DECISION_UNSPECIFIED = 0;
+    ALLOW = 1;
+    DENY = 2;
+  }
+  .genai.PreToolResult.Decision decision = 1;
+  string reason = 2;
+  .genai.Struct modified_args = 4;
+}
+message PreTurnResult {
+  enum Decision {
+    DECISION_UNSPECIFIED = 0;
+    ALLOW = 1;
+    DENY = 2;
+  }
+  .genai.PreTurnResult.Decision decision = 1;
+  string reason = 2;
+}
+message OnCompactionArgs {
+  string interaction_id = 1;
+  uint32 step_index = 2;
+  string summary = 3;
+}
+message StopArgs {
+  string response_text = 1;
+  string interaction_id = 2;
+  int32 continuation_count = 3;
+  .genai.StopReason stop_reason = 4;
+  string error_message = 5;
+}
+message StopResult {
+  enum Decision {
+    DECISION_UNSPECIFIED = 0;
+    ALLOW_STOP = 1;
+    CONTINUE = 2;
+  }
+  .genai.StopResult.Decision decision = 1;
+  string reason = 2;
+}
+message HookRequest {
+  string request_id = 1;
+  string hook_name = 2;
+  .genai.PreInvocationHookArgs pre_invocation = 10; // oneof=args
+  .genai.PostInvocationHookArgs post_invocation = 11; // oneof=args
+  .genai.StopHookArgs stop = 12; // oneof=args
+}
+message HookResponse {
+  string request_id = 1;
+  .genai.HookError error = 2; // oneof=result
+  .genai.PreInvocationHookResult pre_invocation = 10; // oneof=result
+  .genai.PostInvocationHookResult post_invocation = 11; // oneof=result
+  .genai.StopHookResult stop = 12; // oneof=result
+}
+message HookError {
+  string message = 1;
+}
+message PreInvocationHookArgs {
+}
+message PreInvocationHookResult {
+}
+message PostInvocationHookArgs {
+}
+message PostInvocationHookResult {
+}
+message StopHookArgs {
+}
+message StopHookResult {
+}

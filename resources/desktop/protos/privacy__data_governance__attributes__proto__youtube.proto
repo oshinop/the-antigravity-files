@@ -1,0 +1,23 @@
+// Extracted file offset 0x36cf363, 2555 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+enum YoutubeDataClassificationBitsetEnum {
+  YOUTUBE_DATA_CLASSIFICATION_WATCH_OR_SEARCH_HISTORY = 0;
+}
+message Youtube {
+  message Data {
+    message DataCategory {
+      .privacy.data_governance.attributes.classification.Category.HasCategory creator_data = 1;
+      .privacy.data_governance.attributes.classification.Category.HasCategory revenue = 2;
+      .privacy.data_governance.attributes.classification.Category.HasCategory partner_revenue = 3;
+      .privacy.data_governance.attributes.classification.Category.HasCategory viewer_data = 4;
+      .privacy.data_governance.attributes.classification.Category.HasCategory platform_stats = 5;
+      .privacy.data_governance.attributes.classification.Category.HasCategory global_revenue = 6;
+      .privacy.data_governance.attributes.classification.Category.HasCategory regional_revenue = 7;
+      .privacy.data_governance.attributes.classification.Category.HasCategory watch_or_search_history_data = 8;
+    }
+    .privacy.data_governance.attributes.Youtube.Data.DataCategory data_category = 1;
+  }
+}

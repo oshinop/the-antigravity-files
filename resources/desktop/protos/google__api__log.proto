@@ -1,0 +1,12 @@
+// Extracted file offset 0x3650e05, 739 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/label.proto";
+import "google/api/policy.proto";
+message LogDescriptor {
+  string name = 1;
+  repeated .google.api.LabelDescriptor labels = 2;
+  string description = 3;
+  string display_name = 4;
+}

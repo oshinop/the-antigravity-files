@@ -1,0 +1,4 @@
+Use this tool to edit an existing file. Follow these rules:
+1. Use this tool for a single contiguous block of edits. To edit multiple non-adjacent regions, make separate calls.
+2. Target must exactly match existing file text, including whitespace. Replacement must be a complete drop-in replacement for the Target.
+3. If Target appears multiple times in the file, every occurrence is replaced.

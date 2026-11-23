@@ -1,0 +1,58 @@
+// Extracted file offset 0x3732422, 4509 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package gaos.api;
+import "google/api/http.proto";
+import "google/api/policy.proto";
+import "google/api/resource.proto";
+import "net/proto2/proto/descriptor.proto";
+message VersioningMap {
+  message RestrictionEntry {
+    string key = 1;
+    string value = 2;
+  }
+  repeated .gaos.api.VersioningMap.RestrictionEntry restriction = 1;
+}
+message VisibilityMap {
+  message RestrictionEntry {
+    string key = 1;
+    string value = 2;
+  }
+  repeated .gaos.api.VisibilityMap.RestrictionEntry restriction = 1;
+}
+message HttpRuleMap {
+  message PlatformHttpsEntry {
+    string key = 1;
+    .google.api.HttpRule value = 2;
+  }
+  repeated .gaos.api.HttpRuleMap.PlatformHttpsEntry platform_https = 1;
+}
+message MethodPolicyMap {
+  message PlatformPoliciesEntry {
+    string key = 1;
+    .google.api.MethodPolicy value = 2;
+  }
+  repeated .gaos.api.MethodPolicyMap.PlatformPoliciesEntry platform_policies = 1;
+}
+message ResourceReferenceMap {
+  message PlatformResourceReferencesEntry {
+    string key = 1;
+    .google.api.ResourceReference value = 2;
+  }
+  repeated .gaos.api.ResourceReferenceMap.PlatformResourceReferencesEntry platform_resource_references = 1;
+}
+message ResourceDescriptorMap {
+  message PlatformResourcesEntry {
+    string key = 1;
+    .google.api.ResourceDescriptor value = 2;
+  }
+  repeated .gaos.api.ResourceDescriptorMap.PlatformResourcesEntry platform_resources = 1;
+}
+message ResponseMapping {
+  string media_type = 1;
+  string schema_name = 2;
+  repeated .gaos.api.VendorExtension vendor_extensions = 3;
+}
+message VendorExtension {
+  string key = 1;
+  string value = 2;
+}

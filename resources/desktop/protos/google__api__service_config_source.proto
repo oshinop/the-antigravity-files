@@ -1,0 +1,13 @@
+// Extracted file offset 0x364571d, 606 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/field_behavior.proto";
+import "google/api/service.proto";
+import "google/api/visibility.proto";
+import "net/proto2/proto/descriptor.proto";
+message ServiceConfigSource {
+  repeated string experiments = 1;
+  .proto2.FileDescriptorSet file_descriptor_set = 2;
+  .google.api.Service raw_service_config = 3;
+  repeated string api_root_directories = 4;
+}

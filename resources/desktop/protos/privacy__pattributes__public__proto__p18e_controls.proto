@@ -1,0 +1,11 @@
+// Extracted file offset 0x362c42c, 345 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package pattributes;
+import "google/api/inclusion.proto";
+message P18eControls {
+  enum Signals {
+    UNSPECIFIED = 0;
+    EXPLICIT_PTOKEN_ONLY = 2;
+    EXPLICIT_PTOKEN_AND_PRC = 3;
+  }
+}

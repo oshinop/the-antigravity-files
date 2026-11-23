@@ -1,0 +1,10 @@
+// Extracted file offset 0x362aef6, 332 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package pgraph.attributes;
+import "google/api/inclusion.proto";
+enum DataContent {
+  DATA_CONTENT_UNDEFINED = 0;
+  DATA_CONTENT_YES = 1;
+  DATA_CONTENT_NO = 2;
+  DATA_CONTENT_UNKNOWN = 3;
+}

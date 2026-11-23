@@ -1,0 +1,19 @@
+// Extracted file offset 0x3656124, 782 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+message ProjectProperties {
+  repeated .google.api.Property properties = 1;
+}
+message Property {
+  enum PropertyType {
+    UNSPECIFIED = 0;
+    INT64 = 1;
+    BOOL = 2;
+    STRING = 3;
+    DOUBLE = 4;
+  }
+  string name = 1;
+  .google.api.Property.PropertyType type = 2;
+  string description = 3;
+}

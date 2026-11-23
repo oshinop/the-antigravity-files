@@ -1,0 +1,13 @@
+// Extracted file offset 0x363a57d, 479 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+message Census {
+  repeated .google.api.CensusRule rules = 1;
+}
+message CensusRule {
+  string selector = 1;
+  string product_cui = 2;
+  bool log_product_cui = 3;
+}

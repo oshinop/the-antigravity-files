@@ -1,0 +1,53 @@
+// Extracted file offset 0x36c1cc6, 2272 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package logs.proto.wireless.performance.mobile;
+import "devrel/primes/protos/primes_annotations.proto";
+import "google/api/inclusion.proto";
+import "logs/proto/wireless/performance/mobile/annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "storage/googlesql/public/proto/type_annotation.proto";
+message NativeCrashInfo {
+  enum Abi {
+    ABI_UNKNOWN = 0;
+    ABI_ARMEABI_V7A = 1;
+    ABI_ARM64_V8A = 2;
+    ABI_X86 = 3;
+    ABI_X86_64 = 4;
+    ABI_RISCV64 = 5;
+  }
+  message StackFrame {
+    uint64 normalized_instruction_pointer = 1;
+    string symbol_name = 2;
+    int32 so_index = 3;
+  }
+  message SharedObject {
+    string so_name = 1;
+    string build_id = 2;
+  }
+  message StackTraceElement {
+    string declaring_class = 1;
+    string method_name = 2;
+    string file_name = 3;
+    int32 line_number = 4;
+  }
+  message NativeThreadMetadata {
+    string name = 1;
+    int32 thread_id = 2;
+  }
+  message NativeThread {
+    .logs.proto.wireless.performance.mobile.NativeCrashInfo.NativeThreadMetadata metadata = 1;
+    repeated .logs.proto.wireless.performance.mobile.NativeCrashInfo.StackFrame stack_frames = 2;
+  }
+  int32 signal_number = 1;
+  int32 signal_code = 2;
+  uint64 signal_address = 3;
+  .logs.proto.wireless.performance.mobile.NativeCrashInfo.Abi abi = 4;
+  repeated .logs.proto.wireless.performance.mobile.NativeCrashInfo.StackFrame stack_frames = 5;
+  repeated .logs.proto.wireless.performance.mobile.NativeCrashInfo.SharedObject shared_objects = 6;
+  uint64 java_thread_id = 7;
+  string java_thread_name = 8;
+  repeated .logs.proto.wireless.performance.mobile.NativeCrashInfo.StackTraceElement java_stack_trace_element = 9;
+  string abort_message = 10;
+  .logs.proto.wireless.performance.mobile.NativeCrashInfo.NativeThreadMetadata crashed_native_thread_metadata = 11;
+  repeated .logs.proto.wireless.performance.mobile.NativeCrashInfo.NativeThread non_crashed_native_threads = 12;
+}

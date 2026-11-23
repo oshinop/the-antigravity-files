@@ -1,0 +1,14 @@
+// Extracted file offset 0x36b01ce, 2005 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message ConsumerTrust {
+  message Storage {
+    enum PolicyEnforcementState {
+      ENFORCEMENT_UNKNOWN = 0;
+      ENFORCEMENT_VIA_SALSA = 1;
+    }
+    repeated .privacy.data_governance.attributes.ConsumerTrust.Storage.PolicyEnforcementState policy_enforcement_state = 1;
+  }
+}

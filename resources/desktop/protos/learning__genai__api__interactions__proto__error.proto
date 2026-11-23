@@ -1,0 +1,12 @@
+// Extracted file offset 0x3636846, 443 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/inclusion.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Error {
+  string code = 4;
+  string message = 2;
+}
+message ErrorWrapper {
+  .genai.Error error = 1;
+}

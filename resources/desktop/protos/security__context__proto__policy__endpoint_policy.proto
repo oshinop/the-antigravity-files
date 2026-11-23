@@ -1,0 +1,234 @@
+// Extracted file offset 0x380d102, 13659 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package security.context;
+import "google/api/inclusion.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/empty.proto";
+import "identity/ubermint/proto/universe.proto";
+import "privacy/data_governance/attributes/proto/annotations.proto";
+import "security/context/proto/policy/creds_condition.proto";
+import "security/context/proto/policy/cross_product_sharing.proto";
+import "security/context/proto/policy/policy_processing.proto";
+import "security/context/proto/policy/role_name.proto";
+import "security/context/proto/policy/usage_restriction.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message EndpointPolicy {
+  repeated .rpcsp.PolicyRewriteName enable_rewrites = 11;
+  repeated .rpcsp.PolicyRewriteName disable_rewrites = 12;
+  repeated .rpcsp.PolicyCheckName enable_checks = 13;
+  repeated .rpcsp.PolicyCheckName disable_checks = 14;
+  repeated string rpc_methods = 1;
+  repeated string actions = 2;
+  repeated string labels = 3;
+  repeated string http_handlers = 16;
+  repeated string http_paths = 18;
+  repeated .security.context.RoleBinding bindings = 4;
+  repeated .security.context.EndpointPolicyCondition conditions = 8;
+  repeated .security.context.EndpointPolicyDarklaunchCondition darklaunch_conditions = 17;
+  .privacy.data_governance.attributes.Annotations data_governance_annotations = 5; // oneof=data_governance_annotations_oneof
+  string includes_data_governance_annotations = 19; // oneof=data_governance_annotations_oneof
+  .security.context.AuthenticationConfig authentication_config = 9;
+  .security.context.ProxyServiceConfig proxy_service_config = 15;
+}
+message RoleBinding {
+  string description = 6;
+  .security.context.RoleName role = 1;
+  .security.context.Members members = 2;
+  repeated .security.context.BindingCondition conditions = 3;
+  .security.context.AdminAccessControlConfig admin_access_control = 4; // oneof=admin_config
+  .security.context.DisabledAdminAccessControlConfig disable_admin_access_control = 5; // oneof=admin_config
+  .security.context.MpaReviewerConfig reviewer_config = 7;
+}
+message AdminAccessControlConfig {
+  enum AdminAccessEnforcement {
+    ADMIN_ACCESS_ENFORCEMENT_DEFAULT = 0;
+  }
+  enum GinLoggingFailureBehavior {
+    UNSPECIFIED = 0;
+    FAIL_CLOSED = 1;
+  }
+  message BreakGlassConfig {
+    .security.context.BreakGlassMpaConfig require_mpa = 1;
+    bool require_omg = 2;
+  }
+  message Container {
+    enum BaselineControls {
+      AUTOMATIC = 0;
+      INPUT_PRESENCE = 1;
+      BREAK_GLASS_ONLY = 2;
+    }
+  }
+  bool allow_break_glass = 1; // default='false'
+  .security.context.AdminAccessControlConfig.BreakGlassConfig allow_break_glass_access = 5;
+  .security.context.AdminAccessControlConfig.AdminAccessEnforcement enforcement = 3;
+  .security.context.AdminAccessControlConfig.Container.BaselineControls baseline_controls = 7;
+  .security.context.MultiPartyAuthorizationConfig require_mpa = 2; // oneof=non_unilateral_access_controls
+  .security.context.AdminAccessControlConfig.GinLoggingFailureBehavior gin_logging_failure_behavior = 6; // default='UNSPECIFIED'
+}
+message MultiPartyAuthorizationConfig {
+  string review_guidance = 1;
+  .google.protobuf.Duration approval_cache_duration = 2;
+}
+message BreakGlassMpaConfig {
+}
+message DisabledAdminAccessControlConfig {
+  enum Audit {
+    AUDIT_UNSPECIFIED = 0;
+    DISABLE_LOGGING = 1;
+    ENABLE_LOGGING_LITE = 2;
+    ENABLE_LOGGING = 3;
+  }
+  bool disable_audit_logging = 1; // default='false'
+  .security.context.DisabledAdminAccessControlConfig.Audit audit = 2;
+}
+message MpaReviewerConfig {
+  repeated string preferred_reviewers_from_rotations = 2;
+  repeated string preferred_reviewers = 1;
+  repeated string includes = 3;
+}
+message Members {
+  repeated string includes = 10;
+  repeated string prod_users = 1;
+  repeated string prod_groups = 2;
+  repeated string local_prod_groups = 8;
+  repeated string prod_authority_selectors = 3;
+  repeated string corp_groups = 13;
+  .google.protobuf.Empty all = 9;
+  .google.protobuf.Empty all_normal_users = 6;
+  .google.protobuf.Empty self = 7;
+  .google.protobuf.Empty all_except_anonymous = 11;
+}
+message BindingCondition {
+  string description = 1;
+  .security.context.PeerUserCondition peer_user = 2; // oneof=condition_definition
+  .security.context.PeerUserCondition primary_peer_user = 12; // oneof=condition_definition
+  .security.context.ExcludePeerUserCondition exclude_peer_user = 15; // oneof=condition_definition
+  .security.context.ExcludePeerUserCondition exclude_primary_peer_user = 16; // oneof=condition_definition
+  .security.context.PeerSecurityRealmCondition peer_security_realm = 4; // oneof=condition_definition
+  .security.context.ExcludeInsecureUsersCondition exclude_insecure_users = 5; // oneof=condition_definition
+  .security.context.ExcludeProdAuthoritySelectorsCondition exclude_prod_authority_selectors = 17; // oneof=condition_definition
+  .security.context.ApplicationAuthorizationCheckCondition application_authorization_check = 8; // oneof=condition_definition
+  .security.context.ZanzibarAuthorizationCheckCondition zanzibar_authorization_check = 9; // oneof=condition_definition
+  .security.context.UserAttributionCondition user_attribution = 10; // oneof=condition_definition
+  .security.context.ImpersonationTargetCondition impersonation_target = 11; // oneof=condition_definition
+  .security.context.PeerDelegationTargetCondition peer_delegation_target = 14; // oneof=condition_definition
+  .security.context.CredsCondition creds = 13; // oneof=condition_definition
+  .security.context.SecurityRealmCondition security_realm = 18; // oneof=condition_definition
+}
+message PeerUserCondition {
+  repeated string includes = 5;
+  repeated string prod_users = 1;
+  repeated string prod_groups = 2;
+  repeated string local_prod_groups = 3;
+  .google.protobuf.Empty self = 4;
+}
+message ExcludePeerUserCondition {
+  repeated string prod_users = 1;
+  repeated string prod_groups = 2;
+  repeated string includes = 3;
+}
+message PeerSecurityRealmCondition {
+  repeated string includes = 7;
+  repeated string realms = 2;
+  .google.protobuf.Empty persons_in_corp = 9;
+  .google.protobuf.Empty local_realm = 11;
+  .google.protobuf.Empty local_campus = 3;
+  .google.protobuf.Empty local_metro = 4;
+  .google.protobuf.Empty local_cloud_region = 5;
+  .google.protobuf.Empty local_prod_region = 8;
+  .google.protobuf.Empty default_covering_realms = 6;
+  .google.protobuf.Empty crypto_core_covering_realms = 10;
+  .google.protobuf.Empty data_center_tier6 = 12;
+}
+message SecurityRealmCondition {
+  repeated string includes = 7;
+  repeated string realms = 2;
+  .google.protobuf.Empty persons_in_corp = 9;
+  .google.protobuf.Empty local_realm = 11;
+  .google.protobuf.Empty local_campus = 3;
+  .google.protobuf.Empty local_metro = 4;
+  .google.protobuf.Empty local_cloud_region = 5;
+  .google.protobuf.Empty local_prod_region = 8;
+  .google.protobuf.Empty default_covering_realms = 6;
+  .google.protobuf.Empty crypto_core_covering_realms = 10;
+  .google.protobuf.Empty data_center_tier6 = 12;
+}
+message ExcludeAgentsCondition {
+  repeated string exempt_prod_groups = 2;
+}
+message ExcludeInsecureUsersCondition {
+  repeated string prod_users = 1;
+  repeated string includes = 2;
+}
+message ExcludeProdAuthoritySelectorsCondition {
+}
+message UserAttributionCondition {
+  repeated string includes = 4;
+  repeated string prod_users = 5;
+  repeated string prod_groups = 1;
+  repeated string local_prod_groups = 2;
+  repeated string corp_groups = 6;
+  .google.protobuf.Empty self = 3;
+}
+message ImpersonationTargetCondition {
+  .google.protobuf.Empty all_normal_users = 1;
+  .google.protobuf.Empty all_prod_users = 2;
+}
+message PeerDelegationTargetCondition {
+  repeated string prod_users = 1;
+  .google.protobuf.Empty all_normal_users = 2;
+  .google.protobuf.Empty all_prod_users = 3;
+  repeated string includes = 4;
+}
+message AuthenticationConfig {
+  enum AllowedAuthenticationMethods {
+    UNSPECIFIED = 0;
+    LOAS_AND_DEFAULT_EUC = 1;
+    LOAS_ONLY = 2;
+  }
+  repeated .ubermint.UberMintPlatform additional_ubermint_platforms = 1;
+  bool default_anonymous_mode = 4; // default='false'
+  .security.context.ThinMintControl.Values thinmint_control = 5;
+  .security.context.AuthenticationConfig.AllowedAuthenticationMethods allowed_authentication_methods = 6;
+}
+message ThinMintControl {
+  enum Values {
+    UNSPECIFIED = 0;
+    IGNORED = 1;
+    FORWARDED = 2;
+    CONSUMED = 3;
+  }
+}
+message LegacyAuthorizationCheckRequiredCondition {
+}
+message ApplicationAuthorizationCheckCondition {
+}
+message ZanzibarAuthorizationCheckCondition {
+}
+message EndpointPolicyCondition {
+  string description = 1;
+  .security.context.PeerUserCondition peer_user = 2; // oneof=condition_definition
+  .security.context.PeerSecurityRealmCondition peer_security_realm = 3; // oneof=condition_definition
+  .security.context.CrossProductSharingCondition cross_product_sharing = 4; // oneof=condition_definition
+  .security.context.CredsCondition creds = 5; // oneof=condition_definition
+  .security.context.SecurityRealmCondition security_realm = 6; // oneof=condition_definition
+  .security.context.ExcludeAgentsCondition exclude_agents = 7; // oneof=condition_definition
+  .security.context.WorkspaceCldrTrustBoundaryCondition enforce_workspace_cldr_trust_boundary = 8; // oneof=condition_definition
+}
+message EndpointPolicyDarklaunchCondition {
+  string description = 1;
+  .security.context.CrossProductSharingCondition cross_product_sharing = 2; // oneof=condition_definition
+}
+message CrossProductSharingCondition {
+  message EnableConsentCheckCondition {
+    .security.context.PeerUserCondition exclude_peers = 1;
+  }
+  .security.context.CrossProductSharingCondition.EnableConsentCheckCondition enable_consent_check = 1; // oneof=check_type
+  .cross_product_sharing.EnableGcpOriginCheck enable_gcp_origin_check = 4; // oneof=check_type
+  .cross_product_sharing.DenyP18eHealthDataCheck deny_p18e_health_data = 5; // oneof=check_type
+  int32 override_product_id = 2;
+}
+message ProxyServiceConfig {
+}
+message WorkspaceCldrTrustBoundaryCondition {
+}

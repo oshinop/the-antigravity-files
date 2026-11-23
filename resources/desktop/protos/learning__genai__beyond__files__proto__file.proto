@@ -1,0 +1,16 @@
+// Extracted file offset 0x36446c1, 590 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package beyond.files;
+import "learning/genai/beyond/files/proto/extended_file_metadata.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message File {
+  string guri = 1;
+  bytes data = 2;
+  .beyond.files.FileMetadata metadata = 5;
+}
+message FileMetadata {
+  string name = 1;
+  string mime_type = 2;
+  string source_guri = 5;
+  .beyond.files.ExtendedFileMetadata extended_metadata = 3;
+}

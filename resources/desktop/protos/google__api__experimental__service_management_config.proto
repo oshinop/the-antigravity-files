@@ -1,0 +1,37 @@
+// Extracted file offset 0x369e385, 1665 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/any.proto";
+message ServiceManagementConfig {
+  enum DeploymentMode {
+    NORMAL = 0;
+    SKIP_CANARY = 1;
+  }
+  enum ConfigDestination {
+    UNSPECIFIED = 0;
+    STAGING = 1;
+  }
+  enum BuildMode {
+    BUILD_MODE_UNSPECIFIED = 0;
+    BUILD_MODE_V1 = 1;
+    BUILD_MODE_V2 = 2;
+  }
+  message UniverseConfig {
+    string name = 1;
+    bool turnup = 2;
+  }
+  .google.api.ServiceManagementConfig.DeploymentMode deployment_mode = 1;
+  bool include_legacy_components = 2;
+  .google.api.ServiceManagementConfig.ConfigDestination config_destination = 3;
+  string prod_service_name = 4;
+  .google.api.ServiceManagementConfig.BuildMode build_mode = 5;
+  .google.api.ServiceManagementConfig.UniverseConfig universe_config = 6;
+  .google.protobuf.Any proto_dep_info = 7;
+  string api_service_build_package_path = 9; // oneof=_api_service_build_package_path
+  repeated string toolchain_experiments = 10;
+  string stable_config_id = 11;
+  string stable_service_name = 12;
+}

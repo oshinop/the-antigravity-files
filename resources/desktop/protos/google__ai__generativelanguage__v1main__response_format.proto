@@ -1,0 +1,78 @@
+// Extracted file offset 0x36f8efe, 3226 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/struct.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message AudioResponseFormat {
+  enum MimeType {
+    MIME_TYPE_UNSPECIFIED = 0;
+    AUDIO_MP3 = 1;
+    AUDIO_OGG_OPUS = 2;
+    AUDIO_L16 = 3;
+    AUDIO_WAV = 4;
+    AUDIO_ALAW = 5;
+    AUDIO_MULAW = 6;
+  }
+  enum Delivery {
+    DELIVERY_UNSPECIFIED = 0;
+    INLINE = 1;
+    URI = 2;
+  }
+  .google.ai.generativelanguage.v1main.AudioResponseFormat.MimeType mime_type = 1; // oneof=_mime_type
+  .google.ai.generativelanguage.v1main.AudioResponseFormat.Delivery delivery = 2; // oneof=_delivery
+  int32 sample_rate = 3; // oneof=_sample_rate
+  int32 bit_rate = 4; // oneof=_bit_rate
+}
+message TextResponseFormat {
+  enum MimeType {
+    MIME_TYPE_UNSPECIFIED = 0;
+    APPLICATION_JSON = 1;
+    TEXT_PLAIN = 2;
+  }
+  .google.ai.generativelanguage.v1main.TextResponseFormat.MimeType mime_type = 1; // oneof=_mime_type
+  .google.protobuf.Value schema = 2; // oneof=_schema
+}
+message ImageResponseFormat {
+  enum MimeType {
+    MIME_TYPE_UNSPECIFIED = 0;
+    IMAGE_JPEG = 1;
+    IMAGE_PNG = 2;
+  }
+  enum Delivery {
+    DELIVERY_UNSPECIFIED = 0;
+    INLINE = 1;
+    URI = 2;
+  }
+  enum AspectRatio {
+    ASPECT_RATIO_UNSPECIFIED = 0;
+    ASPECT_RATIO_ONE_BY_ONE = 1;
+    ASPECT_RATIO_TWO_BY_THREE = 2;
+    ASPECT_RATIO_THREE_BY_TWO = 3;
+    ASPECT_RATIO_THREE_BY_FOUR = 4;
+    ASPECT_RATIO_FOUR_BY_THREE = 5;
+    ASPECT_RATIO_FOUR_BY_FIVE = 6;
+    ASPECT_RATIO_FIVE_BY_FOUR = 7;
+    ASPECT_RATIO_NINE_BY_SIXTEEN = 8;
+    ASPECT_RATIO_SIXTEEN_BY_NINE = 9;
+    ASPECT_RATIO_TWENTY_ONE_BY_NINE = 10;
+    ASPECT_RATIO_ONE_BY_EIGHT = 11;
+    ASPECT_RATIO_EIGHT_BY_ONE = 12;
+    ASPECT_RATIO_ONE_BY_FOUR = 13;
+    ASPECT_RATIO_FOUR_BY_ONE = 14;
+  }
+  enum ImageSize {
+    IMAGE_SIZE_UNSPECIFIED = 0;
+    IMAGE_SIZE_FIVE_TWELVE = 1;
+    IMAGE_SIZE_ONE_K = 2;
+    IMAGE_SIZE_TWO_K = 3;
+    IMAGE_SIZE_FOUR_K = 4;
+  }
+  .google.ai.generativelanguage.v1main.ImageResponseFormat.MimeType mime_type = 1; // oneof=_mime_type
+  .google.ai.generativelanguage.v1main.ImageResponseFormat.Delivery delivery = 2; // oneof=_delivery
+  .google.ai.generativelanguage.v1main.ImageResponseFormat.AspectRatio aspect_ratio = 3; // oneof=_aspect_ratio
+  .google.ai.generativelanguage.v1main.ImageResponseFormat.ImageSize image_size = 4; // oneof=_image_size
+}

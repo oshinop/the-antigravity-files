@@ -1,0 +1,27 @@
+// Extracted file offset 0x3679b77, 1196 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb_generate_object_format.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message VrClientInfo {
+  enum VrClientType {
+    UNKNOWN = 0;
+    ANDROID_CARDBOARD_SDK = 1;
+    IOS_CARDBOARD_SDK = 2;
+    ANDROID_UNITY_SDK = 3;
+    IOS_UNITY_SDK = 4;
+    WINDOWS = 5;
+  }
+  .wireless_android_play_playlog.VrClientInfo.VrClientType vr_client_type = 1;
+  string sdk_version = 2;
+  string fingerprint = 3;
+  string gvr_version = 4;
+  string manufacturer = 5;
+  string model = 6;
+  string language = 7;
+  string country = 8;
+  string unity_version = 9;
+  string unity_sdk_version = 10;
+}

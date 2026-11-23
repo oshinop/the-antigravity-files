@@ -1,0 +1,9 @@
+// Extracted file offset 0x363f607, 531 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package cloud_aiplatform.dataplane.cardolan;
+import "net/proto2/proto/descriptor.proto";
+enum ComplianceCheckType {
+  COMPLIANCE_CHECK_UNSPECIFIED = 0;
+  COMPLIANCE_CHECK_BLOCK_ITAR_PROJECT = 1;
+  COMPLIANCE_CHECK_BLOCK_IL5_PROJECT = 2;
+}

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 876" width="1200" height="876">
+<rect width="1200" height="876" fill="#ffffff"/>
+<text x="48.0" y="76.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="#202124" text-anchor="start">agy sent 4× as much telemetry as it sent to the model</text>
+<text x="48.0" y="112.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#5f6368" text-anchor="start">Where a session&#x27;s content goes with default settings</text>
+<rect x="48.0" y="314.0" width="320.0" height="360.0" rx="8" fill="#f1f3f4"/>
+<text x="72.0" y="358.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#1a73e8" text-anchor="start">agy on your machine</text>
+<circle cx="78.0" cy="403.0" r="4" fill="#5f6368"/>
+<text x="94.0" y="410.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#202124" text-anchor="start">Your prompts</text>
+<circle cx="78.0" cy="447.0" r="4" fill="#5f6368"/>
+<text x="94.0" y="454.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#202124" text-anchor="start">Files the agent reads</text>
+<circle cx="78.0" cy="491.0" r="4" fill="#5f6368"/>
+<text x="94.0" y="498.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#202124" text-anchor="start">Command output</text>
+<circle cx="78.0" cy="535.0" r="4" fill="#5f6368"/>
+<text x="94.0" y="542.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#202124" text-anchor="start">Model reasoning</text>
+<circle cx="78.0" cy="579.0" r="4" fill="#5f6368"/>
+<text x="94.0" y="586.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#202124" text-anchor="start">Git identity</text>
+<circle cx="78.0" cy="623.0" r="4" fill="#5f6368"/>
+<text x="94.0" y="630.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#202124" text-anchor="start">Home path</text>
+<path d="M368.0,434.0 C458.0,434.0 470.0,236.0 562.0,236.0" fill="none" stroke="#1a73e8" stroke-width="6" stroke-linecap="butt" stroke-linejoin="round"/>
+<path d="M560.0,236.0 L559.0,236.0" fill="none" stroke="#1a73e8" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"/>
+<polygon points="576.0,236.0 559.0,246.2 559.0,225.8" fill="#1a73e8"/>
+<rect x="580.0" y="160.0" width="572.0" height="152.0" rx="8" fill="#ffffff" stroke="#e8eaed" stroke-width="2"/>
+<rect x="580.0" y="160.0" width="8.0" height="152.0" rx="4" fill="#1a73e8"/>
+<text x="608.0" y="200.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#202124" text-anchor="start">Model inference</text>
+<text x="1128.0" y="202.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="700" fill="#1a73e8" text-anchor="end">0.63 MB</text>
+<text x="608.0" y="228.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">daily-cloudcode-pa…/streamGenerateContent</text>
+<text x="608.0" y="260.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="400" fill="#202124" text-anchor="start">Prompts and tool results needed to do the work. Total</text>
+<text x="608.0" y="284.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="400" fill="#202124" text-anchor="start">includes the review requests below.</text>
+<path d="M368.0,474.0 C458.0,474.0 470.0,408.0 562.0,408.0" fill="none" stroke="#d93025" stroke-width="16" stroke-linecap="butt" stroke-linejoin="round"/>
+<path d="M560.0,408.0 L554.0,408.0" fill="none" stroke="#d93025" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"/>
+<polygon points="576.0,408.0 554.0,421.2 554.0,394.8" fill="#d93025"/>
+<rect x="580.0" y="332.0" width="572.0" height="152.0" rx="8" fill="#ffffff" stroke="#e8eaed" stroke-width="2"/>
+<rect x="580.0" y="332.0" width="8.0" height="152.0" rx="4" fill="#d93025"/>
+<text x="608.0" y="372.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#202124" text-anchor="start">Clearcut telemetry</text>
+<text x="1128.0" y="374.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="700" fill="#d93025" text-anchor="end">2.12 MB</text>
+<text x="608.0" y="400.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">play.googleapis.com/log</text>
+<text x="608.0" y="432.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="400" fill="#202124" text-anchor="start">Prompts and full tool results: files, command output and</text>
+<text x="608.0" y="456.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="400" fill="#202124" text-anchor="start">the .env key verbatim. Startup logs begin before sign-in.</text>
+<path d="M368.0,514.0 C458.0,514.0 470.0,580.0 562.0,580.0" fill="none" stroke="#d93025" stroke-width="5" stroke-linecap="butt" stroke-linejoin="round"/>
+<path d="M560.0,580.0 L559.5,580.0" fill="none" stroke="#d93025" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"/>
+<polygon points="576.0,580.0 559.5,589.9 559.5,570.1" fill="#d93025"/>
+<rect x="580.0" y="504.0" width="572.0" height="152.0" rx="8" fill="#ffffff" stroke="#e8eaed" stroke-width="2"/>
+<rect x="580.0" y="504.0" width="8.0" height="152.0" rx="4" fill="#d93025"/>
+<text x="608.0" y="544.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#202124" text-anchor="start">Trajectory uploads</text>
+<text x="1128.0" y="546.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="700" fill="#d93025" text-anchor="end">0.62 MB</text>
+<text x="608.0" y="572.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">daily-cloudcode-pa…/recordTrajectoryAnalytics</text>
+<text x="608.0" y="604.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="400" fill="#202124" text-anchor="start">Whole turns: every step, model requests and reasoning,</text>
+<text x="608.0" y="628.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="400" fill="#202124" text-anchor="start">plus the system prompt, tool definitions and config.</text>
+<path d="M368.0,554.0 C458.0,554.0 470.0,752.0 562.0,752.0" fill="none" stroke="#f9ab00" stroke-width="3" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="8 6"/>
+<path d="M560.0,752.0 L560.5,752.0" fill="none" stroke="#f9ab00" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"/>
+<polygon points="576.0,752.0 560.5,761.3 560.5,742.7" fill="#f9ab00"/>
+<rect x="580.0" y="676.0" width="572.0" height="152.0" rx="8" fill="#ffffff" stroke="#e8eaed" stroke-width="2"/>
+<rect x="580.0" y="676.0" width="8.0" height="152.0" rx="4" fill="#f9ab00"/>
+<text x="608.0" y="716.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#202124" text-anchor="start">Review models</text>
+<text x="1128.0" y="718.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="700" fill="#b06000" text-anchor="end">≤100K tokens</text>
+<text x="608.0" y="744.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">…/streamGenerateContent, agent_monitoring</text>
+<text x="608.0" y="776.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="400" fill="#202124" text-anchor="start">An escalated review can receive that much session</text>
+<text x="608.0" y="800.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="400" fill="#202124" text-anchor="start">history. Included in the inference traffic above.</text>
+</svg>

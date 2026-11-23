@@ -1,0 +1,28 @@
+// Extracted file offset 0x3694874, 1523 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb_generate_object_format.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "search/wga/proto/logged_enums.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message WgaClientInfo {
+  message OsVersion {
+    int32 major_version = 1;
+    int32 minor_version = 2;
+    int32 build_number = 3;
+    int32 product_type = 4;
+    .wga.WindowsEdition windows_edition = 5;
+  }
+  message WebView2Version {
+    int32 major_version = 1;
+    int32 build_number = 2;
+  }
+  string build_version = 1;
+  .wireless_android_play_playlog.WgaClientInfo.OsVersion os_version = 2;
+  .wga.NetworkEnvironment network_environment = 3;
+  .wga.CpuArchitecture cpu_architecture = 4;
+  .wga.D3DFeatureLevel d3d_feature_level = 5;
+  .wireless_android_play_playlog.WgaClientInfo.WebView2Version webview2_version = 6;
+  bool has_package_identity = 7;
+}

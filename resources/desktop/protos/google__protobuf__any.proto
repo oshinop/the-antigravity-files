@@ -1,0 +1,7 @@
+// Extracted file offset 0x76aa554, 223 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.protobuf;
+message Any {
+  string type_url = 1;
+  bytes value = 2;
+}

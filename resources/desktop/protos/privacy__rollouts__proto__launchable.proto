@@ -1,0 +1,13 @@
+// Extracted file offset 0x3639884, 470 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package privacy.rollouts;
+import "google/api/inclusion.proto";
+import "privacy/ptoken/public/proto/policies/policy_id.proto";
+message Launchable {
+  enum Enum {
+    UNSPECIFIED = 0;
+    UNIT_TEST_LAUNCHABLE = 1;
+  }
+  .ptoken.PolicyId.Enum policy_id = 1; // oneof=type
+  .privacy.rollouts.Launchable.Enum launchable = 2; // oneof=type
+}

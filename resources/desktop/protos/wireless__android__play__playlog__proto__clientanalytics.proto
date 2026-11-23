@@ -1,0 +1,230 @@
+// Extracted file offset 0x37bd4e6, 9793 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "wireless/android/play/playlog/proto/client_info/client_info.proto";
+import "experiments/framework/extensions/heterodyne/proto/experiment_ids.proto";
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb.proto";
+import "java/com/google/apps/jspb/jspb_disable_randomization.proto";
+import "java/com/google/apps/jspb/jspb_generate_object_format.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "wireless/android/play/playlog/proto/clearcut_logger_aggregation_metadata.proto";
+import "wireless/android/play/playlog/proto/clearcut_logger_remote_config_metadata.proto";
+import "wireless/android/play/playlog/proto/compliance.proto";
+import "wireless/android/play/playlog/proto/log_source_enum.proto";
+import "wireless/android/privacy/annotations/proto/collection_basis_annotations.proto";
+message LogEventKeyValues {
+  string key = 1;
+  string value = 2;
+}
+message ActiveExperiments {
+  repeated string client_altering_experiment = 1;
+  repeated string other_experiment = 2;
+  repeated int32 gws_experiment = 3;
+  repeated int64 play_experiment = 4;
+  repeated int64 unsupported_play_experiment = 5;
+}
+message LogEvent {
+  enum InternalEvent {
+    NONE = 0;
+    WALL_CLOCK_SET = 1;
+    DEVICE_BOOT = 2;
+  }
+  int64 event_time_ms = 1;
+  int64 event_uptime_ms = 17;
+  int64 boot_count = 22;
+  int64 sequence_position = 21;
+  string tag = 2;
+  int32 event_code = 11;
+  string component_id = 26;
+  int64 event_flow_id = 12;
+  bool is_user_initiated = 10;
+  repeated .wireless_android_play_playlog.LogEventKeyValues value = 3;
+  bytes store = 4;
+  .wireless_android_play_playlog.AppUsage1pLogEvent app_usage_1p = 9;
+  bytes source_extension = 6;
+  string source_extension_js = 8;
+  string source_extension_json = 13;
+  string source_extension_json_proto3 = 29;
+  .wireless_android_play_playlog.ActiveExperiments exp = 7;
+  string test_id = 14;
+  sint64 timezone_offset_seconds = 15; // default='180000'
+  .experiments.heterodyne.ExperimentIds experiment_ids = 16;
+  bytes client_ve = 18;
+  string client_ve_js = 24;
+  .wireless_android_play_playlog.LogEvent.InternalEvent internal_event = 19;
+  repeated int32 test_code = 20;
+  repeated int32 generic_dimensions = 27;
+  .wireless_android_play_playlog.NetworkConnectionInfo network_connection_info = 23;
+  bool in_direct_boot_mode = 25;
+  string zwieback_cookie_override = 28;
+  double module_applied_sampling_rate = 30;
+  double client_applied_sampling_rate = 32;
+  .wireless_android_play_playlog.ClearcutLoggerRemoteConfigMetadata remote_config_metadata = 35;
+  .wireless_android_play_playlog.ComplianceData compliance_data = 33;
+  bool use_session_zwieback = 34;
+  .wireless_android_play_playlog.AggregationMetadata aggregation_metadata = 36;
+}
+message NetworkConnectionInfo {
+  enum NetworkType {
+    NONE = -1;
+    MOBILE = 0;
+    WIFI = 1;
+    MOBILE_MMS = 2;
+    MOBILE_SUPL = 3;
+    MOBILE_DUN = 4;
+    MOBILE_HIPRI = 5;
+    WIMAX = 6;
+    BLUETOOTH = 7;
+    DUMMY = 8;
+    ETHERNET = 9;
+    MOBILE_FOTA = 10;
+    MOBILE_IMS = 11;
+    MOBILE_CBS = 12;
+    WIFI_P2P = 13;
+    MOBILE_IA = 14;
+    MOBILE_EMERGENCY = 15;
+    PROXY = 16;
+    VPN = 17;
+  }
+  enum MobileSubtype {
+    UNKNOWN_MOBILE_SUBTYPE = 0;
+    GPRS = 1;
+    EDGE = 2;
+    UMTS = 3;
+    CDMA = 4;
+    EVDO_0 = 5;
+    EVDO_A = 6;
+    RTT = 7;
+    HSDPA = 8;
+    HSUPA = 9;
+    HSPA = 10;
+    IDEN = 11;
+    EVDO_B = 12;
+    LTE = 13;
+    EHRPD = 14;
+    HSPAP = 15;
+    GSM = 16;
+    TD_SCDMA = 17;
+    IWLAN = 18;
+    LTE_CA = 19;
+    NR = 20;
+    COMBINED = 100;
+  }
+  .wireless_android_play_playlog.NetworkConnectionInfo.NetworkType network_type = 1; // default='NONE'
+  .wireless_android_play_playlog.NetworkConnectionInfo.MobileSubtype mobile_subtype = 2; // default='UNKNOWN_MOBILE_SUBTYPE'
+}
+message ExperimentIdList {
+  repeated string id = 1;
+}
+message AppUsage1pLogEvent {
+  int32 app_type = 1;
+  string android_package_name = 2;
+  string version = 3;
+}
+message BatchedLogRequest {
+  repeated .wireless_android_play_playlog.LogRequest log_request = 1;
+  bool enable_per_request_status = 3;
+  bool in_direct_boot_mode = 4;
+  int64 last_zwieback_reset_wall_time_ms = 5;
+  repeated .wireless_android_play_playlog.ProductIdZwiebackToken product_id_zwieback_tokens = 6;
+  repeated .wireless_android_play_playlog.SessionZwieback session_zwiebacks = 7;
+}
+message RetainImports {
+  .wireless_android_play_playlog.LogSourceEnum.LogSource log_source = 1; // default='UNKNOWN'
+}
+message LogRequest {
+  enum SchedulerType {
+    UNKNOWN_SCHEDULER = 0;
+    ASAP = 1;
+    DEFAULT_PERIODIC = 2;
+    QOS_FAST_ONEOFF = 3;
+    QOS_DEFAULT_PERIODIC = 4;
+    QOS_UNMETERED_PERIODIC = 5;
+    BACKSTOP_PERIODIC = 6;
+  }
+  int64 request_time_ms = 4;
+  int64 request_uptime_ms = 8;
+  .wireless_android_play_playlog.ClientInfo client_info = 1;
+  .wireless_android_play_playlog.LogSourceEnum.LogSource log_source = 2; // default='UNKNOWN'
+  string log_source_name = 6;
+  string zwieback_cookie = 7;
+  repeated .wireless_android_play_playlog.LogEvent log_event = 3;
+  repeated bytes serialized_log_events = 5;
+  int64 log_event_dropped_count = 14;
+  .wireless_android_play_playlog.QosTierConfiguration.QosTier qos_tier = 9; // default='DEFAULT'
+  .wireless_android_play_playlog.LogRequest.SchedulerType scheduler = 10;
+  .wireless_android_play_playlog.DeviceStatus device_status = 11;
+  .wireless_android_play_playlog.ExternalTimestamp external_timestamp = 12;
+  .wireless_android_play_playlog.CollectForDebug collect_for_debug = 13;
+  uint32 app_mobilespec_id = 16;
+  .wireless_android_play_playlog.ComplianceData compliance_data = 18;
+}
+message DeviceStatus {
+  enum AutomaticTime {
+    UNKNOWN = 0;
+    AUTO_TIME_OFF = 1;
+    AUTO_TIME_ON = 2;
+  }
+  bool is_unmetered = 1;
+  bool is_charging = 2;
+  .wireless_android_play_playlog.DeviceStatus.AutomaticTime auto_time_status = 3;
+  bool is_googler_device = 4;
+}
+message ExternalTimestamp {
+  int64 time_ms = 1;
+  int64 uptime_ms = 2;
+  string source = 3;
+}
+message CollectForDebug {
+  int64 collect_start_ms = 3;
+  int64 collect_until_ms = 1;
+  bool skip_persistent_log_storage = 2;
+}
+message QosTierConfiguration {
+  enum QosTier {
+    DEFAULT = 0;
+    ANY_NETWORK_OK = 0;
+    UNMETERED_ONLY = 1;
+    UNMETERED_OR_DAILY = 2;
+    FAST_IF_RADIO_AWAKE = 3;
+    NEVER = 4;
+  }
+  string log_source_name = 1;
+  .wireless_android_play_playlog.QosTierConfiguration.QosTier qos_tier = 2;
+  .wireless_android_play_playlog.LogSourceEnum.LogSource log_source = 3; // default='UNKNOWN'
+}
+message ProductIdZwiebackToken {
+  int32 product_id = 1;
+  string zwieback_token = 2;
+}
+message SessionZwieback {
+  string log_source_name = 1; // default='UNKNOWN'
+  string zwieback_token = 2;
+}
+message QosTiersOverride {
+  repeated .wireless_android_play_playlog.QosTierConfiguration qos_tier_configuration = 1;
+  int64 qos_tier_fingerprint = 2;
+}
+message LogSourceBatchingDenylist {
+  repeated string log_source_name = 1;
+}
+message LogResponseDetails {
+  enum ResponseAction {
+    RESPONSE_ACTION_UNKNOWN = 0;
+    RETRY_REQUEST_LATER = 1;
+    DELETE_REQUEST = 2;
+  }
+  int32 log_request_index = 1;
+  .wireless_android_play_playlog.LogResponseDetails.ResponseAction response_action = 2;
+}
+message LogResponse {
+  int64 next_request_wait_millis = 1; // default='-1'
+  .wireless_android_play_playlog.ExperimentIdList experiments = 2;
+  .wireless_android_play_playlog.QosTiersOverride qos_tier = 3;
+  .wireless_android_play_playlog.LogSourceBatchingDenylist log_source_batching_denylist = 4;
+  repeated .wireless_android_play_playlog.LogResponseDetails log_response_details = 5;
+  repeated .wireless_android_play_playlog.ProductIdZwiebackToken product_id_zwieback_tokens = 6;
+  repeated .wireless_android_play_playlog.SessionZwieback session_zwiebacks = 7;
+}

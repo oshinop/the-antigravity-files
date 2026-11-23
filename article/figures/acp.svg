@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 670" width="1200" height="670">
+<rect width="1200" height="670" fill="#ffffff"/>
+<text x="48.0" y="76.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="#202124" text-anchor="start">Apps driving agy get none of the six subagent and fork controls</text>
+<text x="48.0" y="116.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="#202124" text-anchor="start">Codex offers</text>
+<text x="48.0" y="152.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#5f6368" text-anchor="start">What another app can see and control in each harness, per T3 Code&#x27;s declarations for its providers</text>
+<rect x="648.0" y="190.0" width="158.0" height="438.0" rx="8" fill="#e8f0fe" fill-opacity="0.6"/>
+<text x="727.0" y="224.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#1a73e8" text-anchor="middle">agy</text>
+<text x="897.0" y="224.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#202124" text-anchor="middle">Codex</text>
+<text x="1067.0" y="224.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#202124" text-anchor="middle">Claude Code</text>
+<text x="48.0" y="288.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="400" fill="#202124" text-anchor="start">Subagent as an openable conversation</text>
+<circle cx="727.0" cy="281.0" r="15" fill="#d93025"/>
+<path d="M721.6,275.6 L732.4,286.4 M732.4,275.6 L721.6,286.4" fill="none" stroke="#fff" stroke-width="2.6666666666666665" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="897.0" cy="281.0" r="15" fill="#188038"/>
+<path d="M890.3,281.4 L894.9,286.0 L904.1,276.0" fill="none" stroke="#fff" stroke-width="2.666666666666667" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1067.0" cy="281.0" r="15" fill="#d93025"/>
+<path d="M1061.6,275.6 L1072.4,286.4 M1072.4,275.6 L1061.6,286.4" fill="none" stroke="#fff" stroke-width="2.6666666666666665" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="48.0" y1="312.0" x2="1152.0" y2="312.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="350.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="400" fill="#202124" text-anchor="start">Subagent lifecycle events</text>
+<circle cx="727.0" cy="343.0" r="15" fill="#d93025"/>
+<path d="M721.6,337.6 L732.4,348.4 M732.4,337.6 L721.6,348.4" fill="none" stroke="#fff" stroke-width="2.6666666666666665" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="897.0" cy="343.0" r="15" fill="#188038"/>
+<path d="M890.3,343.4 L894.9,348.0 L904.1,338.0" fill="none" stroke="#fff" stroke-width="2.666666666666667" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1067.0" cy="343.0" r="15" fill="#188038"/>
+<path d="M1060.3,343.4 L1064.9,348.0 L1074.1,338.0" fill="none" stroke="#fff" stroke-width="2.666666666666667" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="48.0" y1="374.0" x2="1152.0" y2="374.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="412.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="400" fill="#202124" text-anchor="start">Wait for a subagent’s result</text>
+<circle cx="727.0" cy="405.0" r="15" fill="#d93025"/>
+<path d="M721.6,399.6 L732.4,410.4 M732.4,399.6 L721.6,410.4" fill="none" stroke="#fff" stroke-width="2.6666666666666665" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="897.0" cy="405.0" r="15" fill="#188038"/>
+<path d="M890.3,405.4 L894.9,410.0 L904.1,400.0" fill="none" stroke="#fff" stroke-width="2.666666666666667" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1067.0" cy="405.0" r="15" fill="#d93025"/>
+<path d="M1061.6,399.6 L1072.4,410.4 M1072.4,399.6 L1061.6,410.4" fill="none" stroke="#fff" stroke-width="2.6666666666666665" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="48.0" y1="436.0" x2="1152.0" y2="436.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="474.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="400" fill="#202124" text-anchor="start">Close a subagent</text>
+<circle cx="727.0" cy="467.0" r="15" fill="#d93025"/>
+<path d="M721.6,461.6 L732.4,472.4 M732.4,461.6 L721.6,472.4" fill="none" stroke="#fff" stroke-width="2.6666666666666665" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="897.0" cy="467.0" r="15" fill="#188038"/>
+<path d="M890.3,467.4 L894.9,472.0 L904.1,462.0" fill="none" stroke="#fff" stroke-width="2.666666666666667" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1067.0" cy="467.0" r="15" fill="#d93025"/>
+<path d="M1061.6,461.6 L1072.4,472.4 M1072.4,461.6 L1061.6,472.4" fill="none" stroke="#fff" stroke-width="2.6666666666666665" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="48.0" y1="498.0" x2="1152.0" y2="498.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="536.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="400" fill="#202124" text-anchor="start">Subagent permission requests reach the user</text>
+<circle cx="727.0" cy="529.0" r="15" fill="#d93025"/>
+<path d="M721.6,523.6 L732.4,534.4 M732.4,523.6 L721.6,534.4" fill="none" stroke="#fff" stroke-width="2.6666666666666665" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="897.0" cy="529.0" r="15" fill="#188038"/>
+<path d="M890.3,529.4 L894.9,534.0 L904.1,524.0" fill="none" stroke="#fff" stroke-width="2.666666666666667" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1067.0" cy="529.0" r="15" fill="#d93025"/>
+<path d="M1061.6,523.6 L1072.4,534.4 M1072.4,523.6 L1061.6,534.4" fill="none" stroke="#fff" stroke-width="2.6666666666666665" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="48.0" y1="560.0" x2="1152.0" y2="560.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="598.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="400" fill="#202124" text-anchor="start">Fork a conversation</text>
+<circle cx="727.0" cy="591.0" r="15" fill="#d93025"/>
+<path d="M721.6,585.6 L732.4,596.4 M732.4,585.6 L721.6,596.4" fill="none" stroke="#fff" stroke-width="2.6666666666666665" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="897.0" cy="591.0" r="15" fill="#188038"/>
+<path d="M890.3,591.4 L894.9,596.0 L904.1,586.0" fill="none" stroke="#fff" stroke-width="2.666666666666667" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1067.0" cy="591.0" r="15" fill="#188038"/>
+<path d="M1060.3,591.4 L1064.9,596.0 L1074.1,586.0" fill="none" stroke="#fff" stroke-width="2.666666666666667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

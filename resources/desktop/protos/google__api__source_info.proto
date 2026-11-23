@@ -1,0 +1,8 @@
+// Extracted file offset 0x362b042, 335 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/protobuf/any.proto";
+message SourceInfo {
+  repeated .google.protobuf.Any source_files = 1;
+}

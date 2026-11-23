@@ -1,0 +1,14 @@
+// Extracted file offset 0x366f797, 1070 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message ConsentForSensitiveData {
+  message Data {
+    bool policy_test = 1; // oneof=_policy_test
+  }
+  message Process {
+    bool cross_use_offered_together = 1;
+    .privacy.data_governance.attributes.classification.Category.HasCategory has_post_access_filtering = 2;
+  }
+}

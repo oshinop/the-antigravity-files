@@ -1,0 +1,5 @@
+// Extracted file offset 0x35f90cb, 112 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package exa.cortex_pb;
+message CustomExtensions {
+}

@@ -1,0 +1,11 @@
+// Extracted file offset 0x363c5bb, 493 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package privacy.context.external;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ExternalSotMappings {
+  message ExternalClientProvidedMapping {
+    int32 apple_age_range_lower_bound = 1;
+    int32 apple_age_range_upper_bound = 2;
+  }
+  .privacy.context.external.ExternalSotMappings.ExternalClientProvidedMapping client_provided_mapping = 8;
+}

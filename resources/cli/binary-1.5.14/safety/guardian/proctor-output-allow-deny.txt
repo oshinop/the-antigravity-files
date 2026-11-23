@@ -1,0 +1,11 @@
+
+
+Respond ONLY with a JSON object in this exact format:
+```json
+{
+  "action": "ALLOW" or "DENY" or "ASK_USER",
+  "attack_category": %s,
+  "reason": "<detailed security explanation>",
+  "user_detail": "<short USER-ONLY note: mechanism + location; terse>"
+}
+```

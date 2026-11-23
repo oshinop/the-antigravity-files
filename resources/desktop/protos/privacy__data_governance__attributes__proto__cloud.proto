@@ -1,0 +1,17 @@
+// Extracted file offset 0x366e6ed, 1065 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message Cloud {
+  message Data {
+    enum Commitment {
+      COMMITMENT_UNSPECIFIED = 0;
+      SECRET = 1;
+    }
+    repeated .privacy.data_governance.attributes.Cloud.Data.Commitment commitments = 1;
+  }
+  message Process {
+    bool is_gcp_infra = 1; // oneof=_is_gcp_infra
+  }
+}

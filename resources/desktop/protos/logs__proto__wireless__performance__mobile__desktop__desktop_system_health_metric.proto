@@ -1,0 +1,22 @@
+// Extracted file offset 0x3694281, 1482 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package logs.proto.wireless.performance.mobile.desktop;
+import "logs/proto/wireless/performance/mobile/cui_metric.proto";
+import "logs/proto/wireless/performance/mobile/desktop/extension_metric.proto";
+import "logs/proto/wireless/performance/mobile/desktop/trace_record.proto";
+import "logs/proto/wireless/performance/mobile/sampling.proto";
+import "logs/proto/wireless/performance/mobile/system_health_metric.proto";
+import "logs/proto/wireless/performance/mobile/tracing.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message DesktopSystemHealthMetric {
+  .logs.proto.wireless.performance.mobile.desktop.ApplicationInfo application_info = 1;
+  .logs.proto.wireless.performance.mobile.SamplingParameters sampling_parameters = 2;
+  .logs.proto.wireless.performance.mobile.CuiMetric cui_metric = 3;
+  .logs.proto.wireless.performance.mobile.desktop.MetricExtension metric_extension = 4;
+  .logs.proto.wireless.performance.mobile.ClientErrorLoggingMetric client_error_logging_metric = 5;
+  .logs.proto.wireless.performance.mobile.Trace trace = 6;
+  .logs.proto.wireless.performance.mobile.desktop.TraceRecord trace_record = 7;
+}
+message ApplicationInfo {
+  string mobilespec_id = 1;
+}

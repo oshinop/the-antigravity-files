@@ -1,0 +1,5 @@
+// Extracted file offset 0x35f2465, 101 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai.tools;
+message ArtifactData {
+}

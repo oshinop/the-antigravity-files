@@ -1,0 +1,5 @@
+
+Here is the most recent (pending) tool call Jetski wants to take:
+<PENDING_TOOL_CALL>
+%s
+</PENDING_TOOL_CALL>

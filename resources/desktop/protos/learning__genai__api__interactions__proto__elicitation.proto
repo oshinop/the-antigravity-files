@@ -1,0 +1,74 @@
+// Extracted file offset 0x3706d33, 3502 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/duration.proto";
+import "learning/genai/api/interactions/proto/content.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "third_party/jetski_prod/actor/proto/custom_extensions.proto";
+message UserTimeout {
+}
+message ElicitationPreamble {
+  repeated .genai.Content content = 1;
+  .agency.CustomExtensions custom_extensions = 100;
+}
+message ElicitationChoice {
+  string label = 1;
+  repeated .genai.Content display = 2;
+  .agency.CustomExtensions custom_extensions = 100;
+}
+message ConfirmationRequest {
+  .genai.ElicitationChoice positive_choice = 1;
+  .genai.ElicitationChoice negative_choice = 2;
+}
+message MultipleChoiceRequest {
+  repeated .genai.ElicitationChoice choices = 1;
+  bool allow_multiple_selections = 2;
+}
+message ConfirmationResponse {
+  bool is_confirmed = 1;
+}
+message MultipleChoiceResponse {
+  repeated string selected_choice_labels = 1;
+  .genai.ContentList user_input = 2;
+}
+message ElicitationQuestion {
+  string question_id = 1;
+  .genai.ElicitationPreamble prompt = 2;
+  .genai.ConfirmationRequest confirmation_request = 3; // oneof=type
+  .genai.MultipleChoiceRequest multiple_choice_request = 4; // oneof=type
+}
+message MultiQuestionRequest {
+  repeated .genai.ElicitationQuestion questions = 1;
+}
+message UserSkipped {
+}
+message ElicitationQuestionResponse {
+  string question_id = 1;
+  .genai.ContentList user_input = 2; // oneof=type
+  .genai.ConfirmationResponse confirmation = 3; // oneof=type
+  .genai.MultipleChoiceResponse multiple_choice = 4; // oneof=type
+  .genai.UserSkipped skipped = 5; // oneof=type
+}
+message MultiQuestionResponse {
+  repeated .genai.ElicitationQuestionResponse responses = 1;
+}
+message ElicitationCallStep {
+  string elicitation_id = 1;
+  .genai.ElicitationPreamble preamble = 2;
+  .genai.ConfirmationRequest confirmation_request = 3; // oneof=type
+  .genai.MultipleChoiceRequest multiple_choice_request = 5; // oneof=type
+  .genai.MultiQuestionRequest multi_question_request = 6; // oneof=type
+  .google.protobuf.Duration timeout_duration = 4;
+  string url = 7;
+}
+message ElicitationResultStep {
+  string elicitation_id = 1;
+  .genai.ContentList user_input = 2; // oneof=type
+  .genai.UserTimeout user_timeout = 3; // oneof=type
+  .genai.ConfirmationResponse confirmation = 4; // oneof=type
+  .genai.MultipleChoiceResponse multiple_choice = 5; // oneof=type
+  .genai.MultiQuestionResponse multi_question = 6; // oneof=type
+  .agency.CustomExtensions custom_extensions = 100;
+}

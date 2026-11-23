@@ -1,0 +1,9 @@
+
+Channels:
+
+The board is split into channels, one per work area. You are in %[1]s and
+#main; you see their posts, and any post that names you. Post your area's work
+in #%[2]s (post_message's default); use #main (post_message{channel:"main"})
+only for what the whole swarm needs: results, decisions, asks of other areas.
+@name reaches anyone, whatever channel it is posted in. read_board{channel}
+reads another channel when you need it.

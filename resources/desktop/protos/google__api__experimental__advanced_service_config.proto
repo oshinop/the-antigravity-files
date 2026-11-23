@@ -1,0 +1,124 @@
+// Extracted file offset 0x3734791, 4612 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package google.api;
+import "google/api/inclusion.proto";
+enum CacheStrategy {
+  LOCAL_ONLY = 0;
+  MEMCACHE_ONLY = 1;
+  LOCAL_AND_MEMCACHE = 2;
+}
+enum JspbVariant {
+  UNKNOWN = 0;
+  FAVA = 2;
+  GWT = 3;
+}
+message AdvancedServiceConfig {
+  repeated .google.api.RenameMethodRule rename_rules = 1;
+  repeated .google.api.UsageManagerRule usage_manager_rules = 2;
+  .google.api.CacheConfig oauth_cache = 3;
+  .google.api.CacheConfig usage_manager_cache = 4;
+  .google.api.CacheConfig quota_cache = 5;
+  .google.api.CacheConfig chemist_cache = 12;
+  repeated .google.api.ExtendedQuotaRule quota_rules = 6;
+  repeated .google.api.WebChannelConfig webchannel_config = 7;
+  repeated .google.api.TranslatorConfig translator_config = 8;
+  repeated .google.api.MessageLimitsRule message_limits_rules = 9;
+  .google.api.ChemistConfig chemist_config = 10;
+  .google.api.CacheConfig jwt_cache = 13;
+  .google.api.UbermintConfig ubermint_config = 14;
+  .google.api.BatchConfig batch = 15;
+  .google.api.QuotaConfig quota = 16;
+  .google.api.IAMConfig iam_config = 17;
+  repeated .google.api.EasyApisConfig easyapis_config = 18;
+  .google.api.ESFControlPlaneConfig esf_control_plane_config = 19;
+}
+message RenameMethodRule {
+  string selector = 1;
+  string rename_to = 2;
+}
+message UsageManagerRule {
+  string selector = 1;
+  string address = 2;
+  bool enable_cache = 3;
+}
+message ExtendedQuotaRule {
+  string selector = 1;
+  bool enable_cache = 2;
+  int32 quota_cache_lifetime_seconds = 3;
+}
+message CacheConfig {
+  bool disabled = 6;
+  .google.api.CacheStrategy strategy = 1;
+  int32 lifetime_seconds = 2;
+  int32 local_cache_size_bytes = 3;
+  int32 memcacheg_rpc_timeout_ms = 4;
+  int32 refresh_threshold_seconds = 5;
+}
+message WebChannelConfig {
+  string selector = 1;
+  repeated string url_paths = 2;
+}
+message TranslatorConfig {
+  string selector = 1;
+  bool output_all_primitive_fields_to_json = 2;
+  .google.api.JspbVariant jspb_variant = 3;
+  int32 jspb_pivot = 7;
+  bool jspb_accept_negative_unsigned_number = 11;
+  bool use_web_safe_base64_for_byte_fields = 4;
+  bool struct_integers_as_strings = 5;
+  bool add_trailing_zeros_for_timestamp_and_duration = 6;
+  int32 json_translation_max_recursion_depth = 9;
+  bool drop_empty_fields = 10;
+}
+message MessageLimitsRule {
+  string selector = 1;
+  int32 request_limit = 2;
+}
+message BatchConfig {
+  int32 inner_request_count_limit = 1;
+  int32 outer_request_size_limit = 2;
+}
+message ChemistConfig {
+  string address = 1;
+  string report_address = 2;
+  string policy_proxy_grpc_address = 3;
+}
+message UbermintConfig {
+  string consumer_address = 1;
+  string service_account_address = 2;
+  string yawns_only_service_account_uberminter_address = 3;
+  string prod_global_service_account_address = 4;
+}
+message IAMConfig {
+  string custom_address = 1;
+}
+message QuotaConfig {
+  message MaxCreditPercentagesEntry {
+    string key = 1;
+    double value = 2;
+  }
+  repeated .google.api.QuotaConfig.MaxCreditPercentagesEntry max_credit_percentages = 1;
+  repeated string custom_enforcement_metrics = 2;
+  repeated string org_quota_metrics = 3;
+  repeated string force_regionalized_enforcement_metrics = 4;
+  repeated .google.api.SkipQuotaRule esf_quota_skip_rules = 6;
+}
+message SkipQuotaRule {
+  enum ValueType {
+    VALUE_TYPE_UNSPECIFIED = 0;
+    BORG_USER = 1;
+    INTERNAL_PROJECT_ID = 2;
+  }
+  .google.api.SkipQuotaRule.ValueType type = 1;
+  repeated string values = 2;
+}
+message EasyApisConfig {
+  string selector = 1;
+  bool enable = 2;
+}
+message ESFControlPlaneConfig {
+  bool enable_dynamic_config_rollout = 1;
+  bool using_server_platform = 2;
+  string boq_or_pod_node_path = 3;
+  string prodspec_partition_name = 4;
+}

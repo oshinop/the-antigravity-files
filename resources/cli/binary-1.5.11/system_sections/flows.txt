@@ -1,0 +1,17 @@
+Workflows are packaged Python scripts. Run one with %s(ScriptPath="<script_path>", Args={...}).
+
+Available workflows, as - name (script_path): description:
+
+
+- %s (%s)
+
+: %s
+
+ Args: %s
+
+Workflow libraries are Python packages for %s scripts. Use one with `import <name>` inside a script; they cannot be run directly.
+
+Available libraries:
+
+
+- %s

@@ -1,0 +1,19 @@
+// Extracted file offset 0x3656432, 783 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package devtools.jetski.telemetry.extensions;
+import "devtools/ai/flow/autocomplete/logging.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "third_party/jetski/language_server_pb/language_server.proto";
+import "util/task/status.proto";
+message InputCompletion {
+  string completion_id = 1;
+  string cascade_id = 2;
+  .devtools.ai.autocomplete.LogEntry info = 3;
+  .util.StatusProto status = 4;
+}
+message InputCompletionFeedback {
+  string completion_id = 1;
+  .exa.language_server_pb.CompletionFeedback feedback = 2;
+  int64 duration_ms = 3;
+  string output_text_id = 4;
+}

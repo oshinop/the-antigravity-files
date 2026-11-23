@@ -1,0 +1,8 @@
+// Extracted file offset 0x3622ea0, 271 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.rpc.context;
+import "google/api/visibility.proto";
+import "google/protobuf/any.proto";
+message AbuseContext {
+  .google.protobuf.Any abuse_data = 1;
+}

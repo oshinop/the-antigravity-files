@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 562" width="1200" height="562">
+<rect width="1200" height="562" fill="#ffffff"/>
+<text x="48.0" y="76.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="#202124" text-anchor="start">/context shows a 1.0M window whatever the compaction limit</text>
+<text x="48.0" y="176.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#202124" text-anchor="start">Gemini 4 Argon</text>
+<text x="48.0" y="202.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="400" fill="#5f6368" text-anchor="start">Override set to 60,000: honoured</text>
+<rect x="372.0" y="156.0" width="780.0" height="34.0" rx="6" fill="#f1f3f4"/>
+<text x="1140.0" y="179.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="17" font-weight="400" fill="#5f6368" text-anchor="end">/context: 14.4k/1.0M</text>
+<rect x="372.0" y="156.0" width="46.8" height="34.0" rx="6" fill="#fce8e6"/>
+<line x1="418.8" y1="146.0" x2="418.8" y2="200.0" stroke="#d93025" stroke-width="3" stroke-linecap="round"/>
+<text x="428.8" y="216.0" text-anchor="start"><tspan font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025">compacts at 60K</tspan><tspan dx="8" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="400" fill="#5f6368">your setting</tspan></text>
+<text x="48.0" y="296.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#202124" text-anchor="start">Gemini 4 Neon</text>
+<text x="48.0" y="322.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="400" fill="#5f6368" text-anchor="start">Override set to 60,000: ignored</text>
+<rect x="372.0" y="276.0" width="780.0" height="34.0" rx="6" fill="#f1f3f4"/>
+<text x="1140.0" y="299.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="17" font-weight="400" fill="#5f6368" text-anchor="end">/context: 154.5k/1.0M</text>
+<rect x="372.0" y="276.0" width="399.4" height="34.0" rx="6" fill="#fce8e6"/>
+<line x1="771.4" y1="266.0" x2="771.4" y2="320.0" stroke="#d93025" stroke-width="3" stroke-linecap="round"/>
+<text x="781.4" y="336.0" text-anchor="start"><tspan font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025">compacts at 512K</tspan><tspan dx="8" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="400" fill="#5f6368">Google&#x27;s server</tspan></text>
+<text x="48.0" y="416.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#202124" text-anchor="start">Gemini 4 Hydrogen</text>
+<text x="48.0" y="442.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="400" fill="#5f6368" text-anchor="start">Override set to 10%: ignored</text>
+<rect x="372.0" y="396.0" width="780.0" height="34.0" rx="6" fill="#f1f3f4"/>
+<text x="1140.0" y="419.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="17" font-weight="400" fill="#5f6368" text-anchor="end">/context: 155.6k/1.0M</text>
+<rect x="372.0" y="396.0" width="399.4" height="34.0" rx="6" fill="#fce8e6"/>
+<line x1="771.4" y1="386.0" x2="771.4" y2="440.0" stroke="#d93025" stroke-width="3" stroke-linecap="round"/>
+<text x="781.4" y="456.0" text-anchor="start"><tspan font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025">compacts at 512K</tspan><tspan dx="8" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="17" font-weight="400" fill="#5f6368">Google&#x27;s server</tspan></text>
+<line x1="372.0" y1="484.0" x2="372.0" y2="492.0" stroke="#9aa0a6" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="372.0" y="514.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="400" fill="#5f6368" text-anchor="start">0</text>
+<line x1="571.7" y1="484.0" x2="571.7" y2="492.0" stroke="#9aa0a6" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="571.7" y="514.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="400" fill="#5f6368" text-anchor="middle">256K</text>
+<line x1="771.4" y1="484.0" x2="771.4" y2="492.0" stroke="#9aa0a6" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="771.4" y="514.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="400" fill="#5f6368" text-anchor="middle">512K</text>
+<line x1="971.0" y1="484.0" x2="971.0" y2="492.0" stroke="#9aa0a6" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="971.0" y="514.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="400" fill="#5f6368" text-anchor="middle">768K</text>
+<line x1="1152.0" y1="484.0" x2="1152.0" y2="492.0" stroke="#9aa0a6" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="1152.0" y="514.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="400" fill="#5f6368" text-anchor="end">1.0M</text>
+</svg>

@@ -1,0 +1,7 @@
+Active Workspaces:
+
+- %s
+
+The user does not have any active workspace. If the user's request involves creating a new project, you should create a reasonable subdirectory inside the default project directory at %v. If you do this, you should also recommend the user to set that subdirectory as the active workspace.
+
+Command Working Directory: %s

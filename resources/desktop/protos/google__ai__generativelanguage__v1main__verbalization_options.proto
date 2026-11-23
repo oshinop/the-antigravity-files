@@ -1,0 +1,217 @@
+// Extracted file offset 0x381de39, 14336 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/ai/generativelanguage/v1main/resolution.proto";
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message VerbalizationOptions {
+  enum VerbalizationMode {
+    VERBALIZATION_MODE_UNSPECIFIED = 0;
+    CONTENT_ONLY = 1;
+    REFERENCE_ONLY = 2;
+    CONTENT_AND_REFERENCE = 3;
+  }
+  enum MergeStrategy {
+    MERGE_STRATEGY_UNSPECIFIED = 0;
+    MERGE = 1;
+    EXPLICIT_OPTIONS = 2;
+  }
+  enum ImageEncoderType {
+    IMAGE_ENCODER_TYPE_UNSPECIFIED = 0;
+    COCAPLUS = 1;
+    GEMVIS_V1P1 = 2;
+    GEMVIS_V1P2 = 3;
+  }
+  enum AudioEncoderType {
+    AUDIO_ENCODER_TYPE_UNSPECIFIED = 0;
+    HARD_TOKENS = 1;
+    V9P4 = 2;
+  }
+  .google.ai.generativelanguage.v1main.VerbalizationSchema verbalization_schema = 1;
+  .google.ai.generativelanguage.v1main.TokenManagementOptions token_management_options = 2;
+  string recipe_id = 4; // oneof=_recipe_id
+  .google.ai.generativelanguage.v1main.MediaResolution image_media_resolution = 5;
+  .google.ai.generativelanguage.v1main.MediaResolution video_frame_media_resolution = 6;
+  .google.ai.generativelanguage.v1main.VerbalizationOptions.VerbalizationMode verbalization_mode = 7;
+  .google.ai.generativelanguage.v1main.VerbalizationOptions.MergeStrategy merge_strategy = 8;
+  .google.ai.generativelanguage.v1main.VerbalizationOptions.ImageEncoderType image_encoder_type = 9;
+  .google.ai.generativelanguage.v1main.VerbalizationOptions.AudioEncoderType audio_encoder_type = 10;
+}
+message VerbalizationSchema {
+  enum TableOutputType {
+    TABLE_OUTPUT_TYPE_UNSPECIFIED = 0;
+    TABLE_OUTPUT_TYPE_CSV = 1;
+    TABLE_OUTPUT_TYPE_MARKDOWN = 2;
+  }
+  enum SpreadsheetOutputFormat {
+    SPREADSHEET_OUTPUT_FORMAT_UNSPECIFIED = 0;
+    SPREADSHEET_OUTPUT_FORMAT_WORKBOOK = 1;
+  }
+  message CitationChunkingOptions {
+    message CitationGranularityOptions {
+      bool only_file_level_citations = 1; // oneof=_only_file_level_citations
+    }
+    message CitationTranscriptOptions {
+      enum CitationLabelGranularity {
+        CITATION_LABEL_GRANULARITY_UNSPECIFIED = 0;
+        SECTION = 1;
+      }
+      .google.ai.generativelanguage.v1main.VerbalizationSchema.CitationChunkingOptions.CitationTranscriptOptions.CitationLabelGranularity citation_label_granularity = 1;
+    }
+    bool citation_chunking_enabled = 1; // oneof=_citation_chunking_enabled
+    int32 citation_chunk_preferred_num_tokens = 2; // oneof=_citation_chunk_preferred_num_tokens
+    int32 citation_chunk_max_num_tokens = 3; // oneof=_citation_chunk_max_num_tokens
+    int32 citation_chunk_min_num_tokens = 4; // oneof=_citation_chunk_min_num_tokens
+    int32 citation_chunk_max_num_chunks = 5; // oneof=_citation_chunk_max_num_chunks
+    int32 citation_max_num_chunks_tokens_threshold = 6; // oneof=_citation_max_num_chunks_tokens_threshold
+    string table_top_caption = 7; // oneof=_table_top_caption
+    .google.ai.generativelanguage.v1main.VerbalizationSchema.CitationChunkingOptions.CitationGranularityOptions citation_granularity_options = 8; // oneof=_citation_granularity_options
+    .google.ai.generativelanguage.v1main.VerbalizationSchema.CitationChunkingOptions.CitationTranscriptOptions transcript_options = 9;
+  }
+  message PanAndScanSchema {
+    enum CoordinateFormat {
+      UNSPECIFIED = 0;
+      COORDINATE_FORMAT_DEFAULT = 1;
+    }
+    string original_image_text = 1; // oneof=_original_image_text
+    string cropped_image_text = 2; // oneof=_cropped_image_text
+    .google.ai.generativelanguage.v1main.VerbalizationSchema.PanAndScanSchema.CoordinateFormat coordinate_format = 3; // oneof=_coordinate_format
+  }
+  message MMVerbalizationOptions {
+    enum TimestampPrecisionFormat {
+      TIMESTAMP_FORMAT_UNSPECIFIED = 0;
+      DEFAULT = 1;
+      WITH_MILLIS = 2;
+    }
+    enum AudioTimestampingMode {
+      AUDIO_TIMESTAMPING_MODE_DEFAULT = 0;
+      AT_MOST_EVERY_MILLIS = 1;
+    }
+    message AudioTimestampingOptions {
+      .google.ai.generativelanguage.v1main.VerbalizationSchema.MMVerbalizationOptions.AudioTimestampingMode mode = 1;
+      int32 at_most_every_millis = 2;
+    }
+    bool bytes_enabled = 1; // oneof=_bytes_enabled
+    bool selected_tokens_enabled = 2; // oneof=_selected_tokens_enabled
+    bool image_facts_enabled = 4; // oneof=_image_facts_enabled
+    bool image_latents_enabled = 3; // oneof=_image_latents_enabled
+    bool audio_transcription_enabled = 5; // oneof=_audio_transcription_enabled
+    .google.ai.generativelanguage.v1main.VerbalizationSchema.MMVerbalizationOptions.TimestampPrecisionFormat timestamp_precision_format = 6; // oneof=_timestamp_precision_format
+    .google.ai.generativelanguage.v1main.VerbalizationSchema.MMVerbalizationOptions.AudioTimestampingOptions audio_timestamping_options = 7; // oneof=_audio_timestamping_options
+  }
+  message VideoComponentVerbalizationOptions {
+    .google.ai.generativelanguage.v1main.VerbalizationSchema.MMVerbalizationOptions frame_options = 1;
+    .google.ai.generativelanguage.v1main.VerbalizationSchema.MMVerbalizationOptions audio_options = 2;
+  }
+  message ModalityInterleavingOptions {
+    enum TimestampPrecision {
+      TIMESTAMP_PRECISION_DEFAULT = 0;
+      TIMESTAMP_PRECISION_MILLIS = 1;
+    }
+    bool no_frames_interleaving = 1;
+    bool no_audio_interleaving = 2;
+    bool interleave_transcript = 3;
+    .google.ai.generativelanguage.v1main.VerbalizationSchema.ModalityInterleavingOptions.TimestampPrecision timestamp_precision = 4;
+    int32 audio_timestamp_at_most_every_millis = 5;
+  }
+  message EmailQuotedTextDetectionOptions {
+    bool quoted_text_detection_enabled = 1; // oneof=_quoted_text_detection_enabled
+    bool email_text_cleaner_enabled = 2; // oneof=_email_text_cleaner_enabled
+    bool quotes_from_the_first_message_kept = 3; // oneof=_quotes_from_the_first_message_kept
+    bool fail_open = 4; // oneof=_fail_open
+    bool signatures_removed = 5; // oneof=_signatures_removed
+    bool group_footers_removed = 6; // oneof=_group_footers_removed
+  }
+  message EmailOptions {
+    enum EmailOutputFormat {
+      EMAIL_OUTPUT_FORMAT_UNSPECIFIED = 0;
+      FORMATTED_TEXT = 1;
+      JSON = 2;
+    }
+    .google.ai.generativelanguage.v1main.VerbalizationSchema.EmailOptions.EmailOutputFormat output_format = 1;
+    .google.ai.generativelanguage.v1main.VerbalizationSchema.EmailQuotedTextDetectionOptions quoted_text_detection_options = 2;
+    repeated string attachment_mime_types = 3;
+  }
+  message ChatOptions {
+    bool verbalize_unread_message_count = 1; // oneof=_verbalize_unread_message_count
+  }
+  message ImageFactsSchema {
+    message ImageFactsPiece {
+      string plain_text = 1; // oneof=piece
+      string ocr_text_format = 2; // oneof=piece
+      string whole_image_entities_format = 3; // oneof=piece
+      string image_region_entities_format = 4; // oneof=piece
+      string entities_format = 5; // oneof=piece
+      string people_entities_format = 6; // oneof=piece
+      string high_confidence_results_format = 7; // oneof=piece
+      string lens_scene_description_format = 8; // oneof=piece
+    }
+    string piece_separator = 1; // oneof=_piece_separator
+    string entities_separator = 2; // oneof=_entities_separator
+    string hcc_separator = 3; // oneof=_hcc_separator
+    repeated .google.ai.generativelanguage.v1main.VerbalizationSchema.ImageFactsSchema.ImageFactsPiece pieces = 4;
+    bool image_facts_after_image = 5; // oneof=_image_facts_after_image
+  }
+  message PdfSchema {
+    bool verbalize_page_number = 1; // oneof=_verbalize_page_number
+    bool verbalize_pdf_delimiters = 2; // oneof=_verbalize_pdf_delimiters
+    bool verbalize_text_delimiters = 3; // oneof=_verbalize_text_delimiters
+  }
+  message HighFidelityDocumentOptions {
+    enum CommentPlacement {
+      COMMENT_PLACEMENT_UNSPECIFIED = 0;
+      END_OF_CHAPTER = 1;
+      END_OF_PARAGRAPH = 2;
+      INLINE = 3;
+    }
+    .google.ai.generativelanguage.v1main.VerbalizationSchema.HighFidelityDocumentOptions.CommentPlacement comment_placement = 1;
+  }
+  message MeetingOptions {
+    enum GeneralVerbalizationMode {
+      GENERAL_VERBALIZATION_MODE_UNSPECIFIED = 0;
+      FULL = 1;
+      WITH_METADATA = 2;
+    }
+    message MeetingTranscriptOptions {
+      enum TimestampGranularity {
+        TIMESTAMP_GRANULARITY_UNSPECIFIED = 0;
+        SECTION = 1;
+        PARAGRAPH = 2;
+      }
+      .google.ai.generativelanguage.v1main.VerbalizationSchema.MeetingOptions.MeetingTranscriptOptions.TimestampGranularity timestamp_granularity = 1;
+    }
+    message MeetingCalendarOptions {
+      int32 max_invitee_count = 1;
+    }
+    .google.ai.generativelanguage.v1main.VerbalizationSchema.MeetingOptions.GeneralVerbalizationMode general_verbalization_mode = 1;
+    .google.ai.generativelanguage.v1main.VerbalizationSchema.MeetingOptions.MeetingTranscriptOptions transcript_options = 2;
+    .google.ai.generativelanguage.v1main.VerbalizationSchema.MeetingOptions.MeetingCalendarOptions calendar_options = 3;
+  }
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.TableOutputType table_output_type = 2; // oneof=_table_output_type
+  string separator = 4; // oneof=_separator
+  string page_index_format = 5; // oneof=_page_index_format
+  string page_end_format = 26; // oneof=_page_end_format
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.SpreadsheetOutputFormat spreadsheet_output_format = 27; // oneof=_spreadsheet_output_format
+  string truncation_marker = 8; // oneof=_truncation_marker
+  string timezone = 20; // oneof=_timezone
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.CitationChunkingOptions citation_chunking_options = 9;
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.PanAndScanSchema pan_and_scan_schema = 11;
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.MMVerbalizationOptions image_verbalization_options = 15;
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.MMVerbalizationOptions audio_verbalization_options = 16;
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.MMVerbalizationOptions video_verbalization_options = 17; // oneof=video_options
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.VideoComponentVerbalizationOptions video_component_options = 23; // oneof=video_options
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.ModalityInterleavingOptions modality_interleaving_options = 25;
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.EmailOptions email_options = 19;
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.ChatOptions chat_options = 21;
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.ImageFactsSchema image_facts_schema = 18;
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.PdfSchema pdf_schema = 22;
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.HighFidelityDocumentOptions high_fidelity_document_options = 24;
+  .google.ai.generativelanguage.v1main.VerbalizationSchema.MeetingOptions meeting_options = 28;
+  bool include_metadata = 29;
+}
+message TokenManagementOptions {
+  int32 max_num_tokens = 1; // oneof=_max_num_tokens
+}

@@ -1,0 +1,9 @@
+// Extracted file offset 0x364eead, 719 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package deepmind.evergreen.v1;
+import "google/api/inclusion.proto";
+message FormattingOptions {
+  bool enable_formatting = 1; // oneof=_enable_formatting
+  bool return_formatted_prompt = 2; // oneof=_return_formatted_prompt
+  bool limit_returned_prompt_to_text = 3; // oneof=_limit_returned_prompt_to_text
+}

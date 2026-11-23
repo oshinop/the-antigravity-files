@@ -1,0 +1,12 @@
+
+
+Respond ONLY with a JSON object in this format:
+```json
+{
+  "action": "DENY" or "ASK_USER",
+  "attack_category": %s,
+  "reason": "<detailed security explanation>",
+  "user_detail": "<short USER-ONLY note: mechanism + location; terse>"
+}
+```
+If the action is ALLOW, output only {"action": "ALLOW"} with no other fields.

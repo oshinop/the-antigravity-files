@@ -1,0 +1,25 @@
+// Extracted file offset 0x3693c8e, 1523 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/experimental/advanced_service_config.proto";
+import "google/api/experimental/authorization_config.proto";
+import "google/api/experimental/codegen.proto";
+import "google/api/experimental/mediation_config.proto";
+import "google/api/experimental/provisioning.proto";
+import "google/api/experimental/service_control_config.proto";
+import "google/api/experimental/service_management_config.proto";
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+message Experimental {
+  .google.api.Codegen codegen = 1;
+  .google.api.AdvancedServiceConfig advanced = 2;
+  .google.api.ServiceControlConfig service_control = 5;
+  .google.api.ServiceManagementConfig service_management = 7;
+  .google.api.AuthorizationConfig authorization = 8;
+  .google.api.Provisioning provisioning = 9;
+  .google.api.MediationConfig mediation = 10;
+  string cargo_container_prefixes = 12;
+  repeated string api_root_directories = 13;
+  bool boq_local_env = 14;
+  bool boq_testrealm_env = 15;
+}

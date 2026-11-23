@@ -1,0 +1,184 @@
+// Extracted file offset 0x37b88bb, 9721 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/ai/generativelanguage/v1main/generative_service.proto";
+import "google/ai/generativelanguage/v1main/safety.proto";
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/migration.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/any.proto";
+import "learning/genai/api/genai_versioning.proto";
+import "learning/genai/api/interactions/proto/content.proto";
+import "learning/genai/api/interactions/proto/thinking.proto";
+import "learning/genai/api/interactions/proto/tools.proto";
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message SystemInstruction {
+  message SystemInstructionContent {
+    .genai.Content content = 1; // oneof=instruction
+    .genai.Function function = 2; // oneof=instruction
+  }
+  repeated .genai.SystemInstruction.SystemInstructionContent contents = 1;
+}
+message ModelInteraction {
+  string model = 1;
+  .genai.GenerationConfig generation_config = 2;
+  .genai.ContextManagement context_management = 3;
+  repeated .google.ai.generativelanguage.v1main.SafetySetting safety_settings = 5;
+  .google.ai.generativelanguage.v1main.SecurityConfig security_config = 6;
+  .google.ai.generativelanguage.v1main.PolicyOverrides policy_overrides = 9;
+  .genai.SystemInstruction append_base_model_system_instruction = 7; // oneof=base_model_system_instruction
+  .genai.SystemInstruction replace_base_model_system_instruction = 8; // oneof=base_model_system_instruction
+}
+message GenerationConfig {
+  float temperature = 1;
+  float top_p = 2;
+  int32 top_k = 26;
+  int32 seed = 3;
+  repeated string stop_sequences = 6;
+  .genai.ToolChoiceType tool_choice_mode = 14; // oneof=tool_choice
+  .genai.ToolChoiceConfig tool_choice_config = 16; // oneof=tool_choice
+  .genai.ThinkingLevel thinking_level = 10;
+  .genai.ThinkingSummaries thinking_summaries = 11;
+  bool include_raw_thoughts = 24;
+  bool drop_cross_model_thought_signatures = 29;
+  .genai.PrefixMismatchBehavior prefix_mismatch_behavior = 31;
+  int32 max_output_tokens = 9;
+  repeated .genai.SpeechConfig speech_config = 12;
+  .genai.ImageConfig image_config = 13;
+  .genai.VideoConfig video_config = 25;
+  bool response_logprobs = 17;
+  int32 logprobs = 18;
+  .google.protobuf.Any execute_tool_auxiliary_inputs = 19;
+  uint64 scheduling_hash = 22;
+  .genai.TranscriptionConfig transcription_config = 23;
+  .genai.SpeakerConfig structured_speech_config = 27;
+  .genai.AudioConfig audio_config = 28;
+  .genai.ProactivityConfig proactivity_config = 30;
+  .genai.EmbeddingConfig embedding_config = 32;
+  .genai.AntiDistillationConfig anti_distillation_config = 33;
+}
+message VerbatimTranscriptionMode {
+  repeated string timestamp_granularities = 1;
+  string diarization_mode = 2;
+}
+message SmartTranscriptionMode {
+  string source_text = 10;
+}
+message TranscriptionMode {
+  .genai.VerbatimTranscriptionMode verbatim = 1; // oneof=type
+  .genai.SmartTranscriptionMode smart = 2; // oneof=type
+}
+message TranscriptionConfig {
+  enum Mode {
+    MODE_UNSPECIFIED = 0;
+    VERBATIM = 1;
+    SMART = 2;
+  }
+  repeated string language_codes = 3;
+  repeated string custom_vocabulary = 5;
+  .genai.TranscriptionConfig.Mode mode_enum = 6; // oneof=mode
+  .genai.TranscriptionMode mode_config = 9; // oneof=mode
+  repeated string timestamp_granularities = 1;
+  string diarization_mode = 2;
+  repeated string adaptation_phrases = 4;
+}
+message SpeakerConfig {
+  enum Mode {
+    MODE_UNSPECIFIED = 0;
+    VERBATIM = 1;
+    CONVERSATIONAL = 2;
+    NATURAL = 3;
+  }
+  enum TextNormalization {
+    TEXT_NORMALIZATION_UNSPECIFIED = 0;
+    AUTO = 1;
+    ENABLED = 2;
+    DISABLED = 3;
+  }
+  repeated .genai.SpeechConfig speakers = 1;
+  .genai.SpeakerConfig.Mode mode = 2;
+  .genai.SpeakerConfig.TextNormalization text_normalization = 3;
+  string voice = 4;
+  string language = 5;
+  float speed = 6;
+}
+message SpeechConfig {
+  string voice = 1;
+  string language = 2;
+  string speaker = 3;
+  float speech_rate = 4;
+  float speed = 5;
+}
+message AudioConfig {
+  enum VadMode {
+    VAD_MODE_UNSPECIFIED = 0;
+    AUTO = 1;
+    MANUAL = 2;
+  }
+  message AudioStream {
+    string id = 1;
+    string mime_type = 2;
+  }
+  .genai.AudioConfig.VadMode vad_mode = 1;
+  repeated .genai.AudioConfig.AudioStream input_streams = 2;
+}
+message ProactivityConfig {
+  bool proactive_audio = 1;
+  bool proactive_video = 2;
+}
+message ImageConfig {
+  enum PersonGeneration {
+    PERSON_GENERATION_UNSPECIFIED = 0;
+    ALLOW_ALL = 1;
+    ALLOW_ADULT = 2;
+    ALLOW_NONE = 3;
+  }
+  enum ProminentPeople {
+    PROMINENT_PEOPLE_UNSPECIFIED = 0;
+    ALLOW = 1;
+    BLOCK = 2;
+  }
+  enum Task {
+    TASK_UNSPECIFIED = 0;
+    UPSCALE = 1;
+    SVG_LAYERING = 2;
+  }
+  string aspect_ratio = 1;
+  string image_size = 2;
+  .genai.ImageConfig.PersonGeneration person_generation = 3;
+  .genai.ImageConfig.ProminentPeople prominent_people = 4;
+  .genai.ImageConfig.Task task = 5;
+}
+message VideoConfig {
+  enum Task {
+    TASK_UNSPECIFIED = 0;
+    TEXT_TO_VIDEO = 1;
+    IMAGE_TO_VIDEO = 2;
+    REFERENCE_TO_VIDEO = 3;
+    EDIT = 4;
+    EXTEND = 5;
+    UPSCALE = 6;
+  }
+  .genai.VideoConfig.Task task = 1;
+}
+message ContextManagement {
+  enum CompactionMode {
+    COMPACTION_MODE_UNSPECIFIED = 0;
+    AUTO = 1;
+    OFF = 2;
+  }
+  .genai.ContextManagement.CompactionMode compaction = 1;
+}
+message EmbeddingConfig {
+  int32 output_dimensionality = 1;
+  bool auto_truncate = 2;
+  bool document_ocr = 3;
+  bool audio_track_extraction = 4;
+}
+message AntiDistillationConfig {
+  bool drop_superior_model_thought_signatures = 1;
+  bool drop_cross_tenant_thought_signatures = 2;
+  bool drop_prefix_mismatched_thought_signatures = 3;
+}

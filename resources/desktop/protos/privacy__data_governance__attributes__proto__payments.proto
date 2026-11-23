@@ -1,0 +1,34 @@
+// Extracted file offset 0x3750f8e, 5148 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message Payments {
+  message Data {
+    enum Environment {
+      UNKNOWN_ENV = 0;
+      PRODUCTION_ENV = 1;
+      SHADOW_ENV = 2;
+      TESTING_ENV = 3;
+      DEVELOPMENT_ENV = 4;
+    }
+    enum DataType {
+      DT_UNKNOWN = 0;
+      DT_PAYMENTS_RISK_DATA = 1;
+      DT_PAYMENTS_SUPERCLASS_PROFILE = 2;
+      DT_PAYMENTS_SUPERCLASS_TRANSACTION = 3;
+      DT_PAYMENTS_SUPERCLASS_USER_ACTIVITY = 4;
+      DT_PAYMENTS_SPII = 10;
+      DT_PAYMENTS_EPHEMERAL = 9;
+      DT_OTHER = 8;
+    }
+    enum DataCategory {
+      UNKNOWN = 0;
+      WALLET_DATA = 1;
+      PAYMENTS_DATA = 2;
+    }
+    .privacy.data_governance.attributes.Payments.Data.Environment environment = 1;
+    repeated .privacy.data_governance.attributes.Payments.Data.DataType data_type = 2;
+    repeated .privacy.data_governance.attributes.Payments.Data.DataCategory data_category = 3;
+  }
+}

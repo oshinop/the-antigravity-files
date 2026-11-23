@@ -1,0 +1,30 @@
+// Extracted file offset 0x36623e2, 938 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package exa.browser_payload_pb;
+enum UrlPolicyEnforcement {
+  URL_POLICY_ENFORCEMENT_UNSPECIFIED = 0;
+  URL_POLICY_ENFORCEMENT_NONE = 1;
+  URL_POLICY_ENFORCEMENT_MAIN_PROCESS_GUARD = 2;
+  URL_POLICY_ENFORCEMENT_CDP_FETCH = 3;
+}
+message BrowserHello {
+  bool supports_isolated_world = 2;
+  bool supports_scripts = 3;
+  .exa.browser_payload_pb.BrowserExecutor executor = 5;
+  .exa.browser_payload_pb.UrlPolicyEnforcement url_policy_enforcement = 6;
+}
+message BrowserExecutor {
+  string id = 1;
+  string version = 2;
+  uint32 protocol_version = 3;
+}
+message BrowserRequest {
+  string action = 1;
+  string params_json = 2;
+}
+message BrowserResult {
+  bool ok = 1;
+  string error_code = 2;
+  string error = 3;
+  string result_json = 4;
+}

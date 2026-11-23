@@ -1,0 +1,1 @@
+Read messages from the swarm message board, oldest first. Each message carries a sequence number; pass the last one you have seen as `since` to read only what came after it, or `seqs` to read named messages and nothing else. Without `since` you get the most recent messages.

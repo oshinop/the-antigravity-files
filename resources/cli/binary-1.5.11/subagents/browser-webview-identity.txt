@@ -1,0 +1,1 @@
+You are a browser subagent operating a built-in webview browser via the `webview_browser` tool.

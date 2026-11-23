@@ -1,0 +1,67 @@
+// Extracted file offset 0x36c64da, 2353 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.iam.v1;
+import "google/api/auditing.proto";
+import "google/iam/v1/rule.proto";
+import "google/type/expr.proto";
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "google/iam/v1/pam_binding_id.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "tech/iam/proto/logging.proto";
+message Policy {
+  int32 version = 1;
+  repeated .google.iam.v1.Binding bindings = 4;
+  repeated .google.iam.v1.AuditConfig audit_configs = 6;
+  repeated .google.iam.v1.Rule rules = 2;
+  bytes etag = 3;
+}
+message Binding {
+  string role = 1;
+  repeated string members = 2;
+  .google.type.Expr condition = 3;
+  string binding_id = 4;
+  .google.iam.v1.PamBindingId pam_binding_id = 5;
+}
+message AuditConfig {
+  string service = 1;
+  repeated .google.iam.v1.AuditLogConfig audit_log_configs = 3;
+}
+message AuditLogConfig {
+  enum LogType {
+    LOG_TYPE_UNSPECIFIED = 0;
+    ADMIN_READ = 1;
+    DATA_WRITE = 2;
+    DATA_READ = 3;
+  }
+  .google.iam.v1.AuditLogConfig.LogType log_type = 1;
+  repeated string exempted_members = 2;
+  bool ignore_child_exemptions = 3;
+}
+message PolicyDelta {
+  repeated .google.iam.v1.BindingDelta binding_deltas = 1;
+  repeated .google.iam.v1.AuditConfigDelta audit_config_deltas = 2;
+}
+message BindingDelta {
+  enum Action {
+    ACTION_UNSPECIFIED = 0;
+    ADD = 1;
+    REMOVE = 2;
+  }
+  .google.iam.v1.BindingDelta.Action action = 1;
+  string role = 2;
+  string member = 3;
+  .google.type.Expr condition = 4;
+}
+message AuditConfigDelta {
+  enum Action {
+    ACTION_UNSPECIFIED = 0;
+    ADD = 1;
+    REMOVE = 2;
+  }
+  .google.iam.v1.AuditConfigDelta.Action action = 1;
+  string service = 2;
+  string exempted_member = 3;
+  string log_type = 4;
+  bool ignore_child_exemptions = 5;
+}

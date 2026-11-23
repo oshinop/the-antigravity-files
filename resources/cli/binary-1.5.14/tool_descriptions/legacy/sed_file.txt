@@ -1,0 +1,12 @@
+Edit files using sed expressions. Executes GNU sed with the given Basic Regular Expressions sequentially on the target file in-place. SUBSTITUTIONS: 's/old/new/' replaces text. Add 'g' flag to replace all occurrences on each line.
+DELETIONS: 'Nd' deletes line N. 'N,Md' deletes lines N through M.
+APPENDS: Use the file_content argument with the r command to append lines — this avoids all escaping issues.Pass file_content: {"block1": "your code here..."} and use 'Nr block1' in expressions to append the content at the end of line N. The content is written verbatim with no escaping needed.
+REPLACING: You should generally lean on deleting + appending with the r command to replace lines to avoid escape issues. For example to replace lines 20-35, use expressions: ["20,35d", "19r new"] with file_content: {"new": "\nint add(int a, int b) {\n  return a + b;\n}"}. You still have a/i/c commands but be careful with escaping characters, in general err on the side of caution and use d + r to do line replacements/insertions/appending. Note the \n at the beginning of new, since r APPENDS to the END of line 19 in the example.
+RULES:
+- Order line-addressed expressions from BOTTOM of file to TOP to prevent line number shifts.
+- You should try plan all changes upfront in a single call, but sometimes it may be better to make sequential sed edits if they're overlapping.
+- Do NOT make parallel sed_file calls to the same file.
+- Only reference line numbers you have actually viewed.
+- Newline in a/i/c/s requires escaping the backslashes with \\n.
+- Use alternate delimiters when patterns contain '/': 's|old/path|new/path|g'.
+- Case conversion modifiers (\U, \L, \u, \l) are NOT supported.

@@ -1,0 +1,58 @@
+// Extracted file offset 0x36c0b12, 2265 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package evergreen.v2;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Content {
+  repeated .evergreen.v2.Chunk chunks = 1;
+}
+message Chunk {
+  enum Role {
+    ROLE_UNSPECIFIED = 0;
+    ROLE_USER = 1;
+    ROLE_ASSISTANT = 2;
+    ROLE_SYSTEM = 3;
+    ROLE_DEVELOPER = 4;
+    ROLE_CONTEXT = 5;
+    ROLE_TOOL_CALL = 6;
+    ROLE_TOOL_RESULT = 7;
+  }
+  enum Channel {
+    CHANNEL_UNSPECIFIED = 0;
+    CHANNEL_THOUGHT = 1;
+  }
+  .evergreen.v2.ChunkMetadata metadata = 1;
+  string ref = 3; // oneof=payload
+  bytes data = 10; // oneof=payload
+  string tokens_ref = 11; // oneof=tokens
+  .evergreen.v2.TokenizedChunk tokens_chunk = 12; // oneof=tokens
+  .evergreen.v2.Chunk.Role role = 8;
+  .evergreen.v2.Chunk.Channel channel = 9;
+}
+message ChunkMetadata {
+  string mimetype = 1;
+  string role = 2;
+  string channel = 4;
+  string environment = 5;
+  string original_file_name = 3;
+  .google.protobuf.Timestamp capture_time = 6;
+  repeated .google.protobuf.Any experimental = 100;
+  bytes thought_signature = 7;
+}
+message Array {
+  string dtype = 1;
+  bytes data = 2;
+  repeated int32 shape = 3;
+}
+message TokenizedChunk {
+  string tokenizer = 1;
+  repeated int32 token_ids = 2;
+  repeated bytes data = 3;
+  repeated float logprobs = 5;
+  .evergreen.v2.Array soft_tokens = 6;
+  .evergreen.v2.Array top_k_tokens = 7;
+  .evergreen.v2.Array top_k_scores = 8;
+}

@@ -1,0 +1,27 @@
+// Extracted file offset 0x3665805, 969 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package devtools.jetski.telemetry.extensions;
+import "google/protobuf/timestamp.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message RemoteAgentVmEvent {
+  enum EventType {
+    EVENT_TYPE_UNSPECIFIED = 0;
+    EVENT_TYPE_START = 1;
+    EVENT_TYPE_STOP = 2;
+    EVENT_TYPE_CLAIM = 3;
+  }
+  enum StopReason {
+    STOP_REASON_UNSPECIFIED = 0;
+    STOP_REASON_IDLE = 1;
+    STOP_REASON_TTL = 2;
+    STOP_REASON_UNEXPECTED = 3;
+    STOP_REASON_DELETED = 4;
+    STOP_REASON_OTHER = 5;
+  }
+  .devtools.jetski.telemetry.extensions.RemoteAgentVmEvent.EventType event_type = 1;
+  .devtools.jetski.telemetry.extensions.RemoteAgentVmEvent.StopReason stop_reason = 2;
+  string kind = 3;
+  string uvm_name = 4;
+  .google.protobuf.Timestamp start_time = 5;
+  .google.protobuf.Timestamp end_time = 6;
+}

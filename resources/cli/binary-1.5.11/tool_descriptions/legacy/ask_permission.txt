@@ -1,0 +1,65 @@
+{
+  "type": "object",
+  "properties": {
+    "Action": {
+      "type": "string",
+      "enum": %s,
+      "description": "The action to perform."
+    },
+    "Target": {
+      "type": "string",
+      "description": "The target of the action (e.g., the command string, file path)"
+    },
+    "Reason": {
+      "type": "string",
+      "description": "The reason why permission is needed"
+    }
+  },
+  "required": ["Action", "Target"],
+  "additionalProperties": false
+}
+
+Use this tool to ask for permission after a failure due to insufficient permissions, specifically when you need additional permissions for file reads or writes after a terminal command or file operation encounters a permission error.
+
+
+CRITICAL: Request the narrowest scope that covers your planned operations without requiring repeated asks. For example, prefer a subdirectory over a whole project. Never request wildcard (`*`) or root-level permissions.
+
+
+IMPORTANT: Do NOT use this tool to request persistent exceptions for commands that make network requests, run arbitrary code, or download unverified files (e.g., curl, wget, pip, npm). For such operations, invoke the run_command tool directly so the user can explicitly review and approve the individual process execution.
+
+
+Valid actions, their target formats, and matching behaviors are:
+
+
+- Each token in the granted target is matched as a full word (internally treated as an anchored regular expression: `^(?:pattern)$`).
+
+
+- The system checks if the granted tokens form a prefix of the requested command tokens.
+
+
+- Example: `git commit` matches `git commit -m "msg"` but NOT `git commit-next`.
+
+
+
+Note: `read_file` and `write_file` apply to both files and directories (providing recursive access).
+
+
+- To allow `blaze build`: Action=`command`, Target=`blaze build`
+
+
+- To read anything in a directory: Action=`read_file`, Target=`/path/to/directory`
+
+
+- To read a specific file: Action=`read_file`, Target=`/path/to/file`
+
+
+- To edit files in a directory: Action=`write_file`, Target=`/path/to/directory`
+
+
+- To edit a specific file: Action=`write_file`, Target=`/path/to/file`
+
+
+- To fetch any Google page: Action=`read_url`, Target=`google.com`
+
+
+- For all tools on an MCP server: Action=`mcp`, Target=`server_name/*`

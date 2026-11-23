@@ -1,0 +1,1 @@
+Lists directory entries and inspects files or executables (existence, text/script vs binary type, size, modification time, and symlink targets) in memory without spawning a shell. Resolves relative paths against the command's working directory and bare command names against ~/.local/bin and PATH. Prefer this over running ls, stat, file, which, type, readlink, or find.

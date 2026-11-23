@@ -1,0 +1,10 @@
+// Extracted file offset 0x36344cd, 420 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package logs.proto.wireless.performance.mobile;
+import "logs/proto/visual_element/user_action_enum.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message InteractionContext {
+  .logs.UserAction user_action = 1;
+  int32 type_id = 2;
+  repeated int32 path_to_root = 3;
+}

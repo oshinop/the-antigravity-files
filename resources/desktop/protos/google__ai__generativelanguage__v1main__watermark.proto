@@ -1,0 +1,14 @@
+// Extracted file offset 0x3644474, 589 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/api/inclusion.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+enum Watermark {
+  WATERMARK_UNSPECIFIED = 0;
+  WATERMARK_NONE = 1;
+  WATERMARK_VEO = 2;
+  WATERMARK_AI = 3;
+  WATERMARK_GEMINI_SPARKLE = 4;
+}

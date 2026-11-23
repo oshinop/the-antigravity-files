@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1074" width="1200" height="1074">
+<rect width="1200" height="1074" fill="#ffffff"/>
+<text x="48.0" y="76.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="#202124" text-anchor="start">agy fully supports one of eight everyday CLI features</text>
+<text x="48.0" y="112.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#5f6368" text-anchor="start">Session, history, image and setup features in five coding-agent CLIs</text>
+<rect x="326.0" y="130.0" width="158.0" height="908.0" rx="8" fill="#e8f0fe" fill-opacity="0.6"/>
+<text x="405.0" y="164.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#1a73e8" text-anchor="middle">agy</text>
+<text x="571.0" y="164.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#202124" text-anchor="middle">omp</text>
+<text x="737.0" y="164.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#202124" text-anchor="middle">Codex</text>
+<text x="903.0" y="164.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#202124" text-anchor="middle">pi</text>
+<text x="1069.0" y="164.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#202124" text-anchor="middle">Gemini CLI</text>
+<text x="48.0" y="240.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#202124" text-anchor="start">Session tree you can</text>
+<text x="48.0" y="266.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#202124" text-anchor="start">move around in</text>
+<rect x="376.2" y="203.0" width="57.7" height="32.0" rx="16.0" fill="#fce8e6"/>
+<text x="405.0" y="225.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025" text-anchor="middle">No</text>
+<text x="405.0" y="260.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">fork at latest</text>
+<text x="405.0" y="283.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">turn only</text>
+<rect x="537.9" y="214.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="571.0" y="237.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="571.0" y="271.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">/tree</text>
+<rect x="694.8" y="203.0" width="84.4" height="32.0" rx="16.0" fill="#fef7e0"/>
+<text x="737.0" y="225.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#b06000" text-anchor="middle">Partly</text>
+<text x="737.0" y="260.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">fork, backtrack;</text>
+<text x="737.0" y="283.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">no tree</text>
+<rect x="869.9" y="214.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="903.0" y="237.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="903.0" y="271.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">/tree</text>
+<rect x="1040.2" y="230.0" width="57.7" height="32.0" rx="16.0" fill="#fce8e6"/>
+<text x="1069.0" y="252.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025" text-anchor="middle">No</text>
+<line x1="48.0" y1="298.0" x2="1152.0" y2="298.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="357.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#202124" text-anchor="start">Export a whole session</text>
+<rect x="376.2" y="307.0" width="57.7" height="32.0" rx="16.0" fill="#fce8e6"/>
+<text x="405.0" y="329.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025" text-anchor="middle">No</text>
+<text x="405.0" y="364.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">/copy one</text>
+<text x="405.0" y="387.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">response</text>
+<rect x="537.9" y="318.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="571.0" y="341.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="571.0" y="375.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">HTML, share link</text>
+<rect x="703.9" y="318.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="737.0" y="341.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="737.0" y="375.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">Markdown</text>
+<rect x="869.9" y="318.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="903.0" y="341.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="903.0" y="375.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">HTML, JSONL</text>
+<rect x="1035.9" y="307.0" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="1069.0" y="329.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="1069.0" y="364.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">Markdown,</text>
+<text x="1069.0" y="387.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">JSON</text>
+<line x1="48.0" y1="402.0" x2="1152.0" y2="402.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="461.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#202124" text-anchor="start">Search prompt history</text>
+<rect x="376.2" y="411.0" width="57.7" height="32.0" rx="16.0" fill="#fce8e6"/>
+<text x="405.0" y="433.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025" text-anchor="middle">No</text>
+<text x="405.0" y="468.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">recall only, no</text>
+<text x="405.0" y="491.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">search</text>
+<rect x="537.9" y="422.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="571.0" y="445.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="571.0" y="479.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">Ctrl+R</text>
+<rect x="703.9" y="422.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="737.0" y="445.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="737.0" y="479.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">Ctrl+R</text>
+<rect x="860.8" y="422.5" width="84.4" height="32.0" rx="16.0" fill="#fef7e0"/>
+<text x="903.0" y="445.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#b06000" text-anchor="middle">Partly</text>
+<text x="903.0" y="479.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">browse only</text>
+<rect x="1035.9" y="422.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="1069.0" y="445.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="1069.0" y="479.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">Ctrl+R</text>
+<line x1="48.0" y1="506.0" x2="1152.0" y2="506.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="552.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#202124" text-anchor="start">Images in the</text>
+<text x="48.0" y="578.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#202124" text-anchor="start">conversation</text>
+<rect x="362.8" y="515.0" width="84.4" height="32.0" rx="16.0" fill="#fef7e0"/>
+<text x="405.0" y="537.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#b06000" text-anchor="middle">Partly</text>
+<text x="405.0" y="572.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">side viewer,</text>
+<text x="405.0" y="595.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">Kitty only</text>
+<rect x="537.9" y="515.0" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="571.0" y="537.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="571.0" y="572.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">Kitty, iTerm2,</text>
+<text x="571.0" y="595.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">Sixel</text>
+<rect x="703.9" y="515.0" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="737.0" y="537.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="737.0" y="572.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">Kitty, iTerm2,</text>
+<text x="737.0" y="595.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">Sixel</text>
+<rect x="869.9" y="526.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="903.0" y="549.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="903.0" y="583.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">Kitty, iTerm2</text>
+<rect x="1040.2" y="542.0" width="57.7" height="32.0" rx="16.0" fill="#fce8e6"/>
+<text x="1069.0" y="564.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025" text-anchor="middle">No</text>
+<line x1="48.0" y1="610.0" x2="1152.0" y2="610.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="656.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#202124" text-anchor="start">Reads the shared</text>
+<text x="48.0" y="682.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#202124" text-anchor="start">~/.agents/skills</text>
+<rect x="376.2" y="630.5" width="57.7" height="32.0" rx="16.0" fill="#fce8e6"/>
+<text x="405.0" y="653.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025" text-anchor="middle">No</text>
+<text x="405.0" y="687.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">issue #103</text>
+<rect x="537.9" y="646.0" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="571.0" y="668.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<rect x="703.9" y="646.0" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="737.0" y="668.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<rect x="869.9" y="646.0" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="903.0" y="668.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<rect x="1035.9" y="646.0" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="1069.0" y="668.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<line x1="48.0" y1="714.0" x2="1152.0" y2="714.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="760.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#202124" text-anchor="start">/init writes a project</text>
+<text x="48.0" y="786.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#202124" text-anchor="start">instruction file</text>
+<rect x="376.2" y="734.5" width="57.7" height="32.0" rx="16.0" fill="#fce8e6"/>
+<text x="405.0" y="757.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025" text-anchor="middle">No</text>
+<text x="405.0" y="791.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">issue #194</text>
+<rect x="537.9" y="750.0" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="571.0" y="772.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<rect x="703.9" y="750.0" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="737.0" y="772.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<rect x="874.2" y="750.0" width="57.7" height="32.0" rx="16.0" fill="#fce8e6"/>
+<text x="903.0" y="772.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025" text-anchor="middle">No</text>
+<rect x="1035.9" y="750.0" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="1069.0" y="772.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<line x1="48.0" y1="818.0" x2="1152.0" y2="818.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="864.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#202124" text-anchor="start">Telemetry to your own</text>
+<text x="48.0" y="890.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#202124" text-anchor="start">collector</text>
+<rect x="376.2" y="827.0" width="57.7" height="32.0" rx="16.0" fill="#fce8e6"/>
+<text x="405.0" y="849.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025" text-anchor="middle">No</text>
+<text x="405.0" y="884.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">Google only,</text>
+<text x="405.0" y="907.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">issue #366</text>
+<rect x="537.9" y="838.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="571.0" y="861.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="571.0" y="895.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">OpenTelemetry</text>
+<rect x="703.9" y="838.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="737.0" y="861.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="737.0" y="895.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">OpenTelemetry</text>
+<rect x="872.0" y="827.0" width="62.0" height="32.0" rx="16.0" fill="#f1f3f4"/>
+<text x="903.0" y="849.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#5f6368" text-anchor="middle">n/a</text>
+<text x="903.0" y="884.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">sends only an</text>
+<text x="903.0" y="907.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">install ping</text>
+<rect x="1035.9" y="838.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="1069.0" y="861.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="1069.0" y="895.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">OpenTelemetry</text>
+<line x1="48.0" y1="922.0" x2="1152.0" y2="922.0" stroke="#e8eaed" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="48.0" y="968.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#202124" text-anchor="start">Documented custom</text>
+<text x="48.0" y="994.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="500" fill="#202124" text-anchor="start">model endpoint</text>
+<rect x="371.9" y="931.0" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="405.0" y="953.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="405.0" y="988.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">Gemini-format</text>
+<text x="405.0" y="1011.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">base URL</text>
+<rect x="537.9" y="942.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="571.0" y="965.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="571.0" y="999.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">models.yml</text>
+<rect x="703.9" y="942.5" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="737.0" y="965.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="737.0" y="999.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">provider config</text>
+<rect x="869.9" y="931.0" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="903.0" y="953.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="903.0" y="988.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">custom</text>
+<text x="903.0" y="1011.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">providers</text>
+<rect x="1035.9" y="931.0" width="66.2" height="32.0" rx="16.0" fill="#e6f4ea"/>
+<text x="1069.0" y="953.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="middle">Yes</text>
+<text x="1069.0" y="988.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">base URL</text>
+<text x="1069.0" y="1011.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">variable</text>
+</svg>

@@ -1,0 +1,304 @@
+// Extracted file offset 0x38c4fcd, 20369 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/resource.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/duration.proto";
+import "google/rpc/status.proto";
+import "learning/agents/agency/proto/storage_options.proto";
+import "learning/genai/api/genai_versioning.proto";
+import "learning/genai/api/interactions/proto/agents.proto";
+import "learning/genai/api/interactions/proto/content.proto";
+import "learning/genai/api/interactions/proto/elicitation.proto";
+import "learning/genai/api/interactions/proto/environment.proto";
+import "learning/genai/api/interactions/proto/execution_options.proto";
+import "learning/genai/api/interactions/proto/hooks.proto";
+import "learning/genai/api/interactions/proto/interaction.proto";
+import "learning/genai/api/interactions/proto/interaction_config_update.proto";
+import "learning/genai/api/interactions/proto/media_stream_steps.proto";
+import "learning/genai/api/interactions/proto/models.proto";
+import "learning/genai/api/interactions/proto/remote_environment.proto";
+import "learning/genai/api/interactions/proto/response_format.proto";
+import "learning/genai/api/interactions/proto/runtime_context_update.proto";
+import "learning/genai/api/interactions/proto/sse_events.proto";
+import "learning/genai/api/interactions/proto/state_update.proto";
+import "learning/genai/api/interactions/proto/steps.proto";
+import "learning/genai/api/interactions/proto/tools.proto";
+import "learning/genai/api/interactions/proto/user_action_input.proto";
+import "learning/genai/api/interactions/proto/user_steps.proto";
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+import "learning/genai/api/webhooks/proto/webhook_messages.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum InputDeliveryMode {
+  INPUT_DELIVERY_MODE_UNSPECIFIED = 0;
+  QUEUE = 1;
+  IMMEDIATE = 2;
+  SILENT = 3;
+  BLOCKING = 4;
+  ONLY_IF_IDLE = 5;
+}
+message ClientEventBatch {
+  .genai.CreateInteractionEvent create_interaction = 7; // oneof=connect_request
+  .genai.ReconnectInteractionEvent reconnect_interaction = 8; // oneof=connect_request
+  repeated .genai.ClientEvent events = 1;
+  .genai.CompleteInteractionEvent complete_interaction = 5; // oneof=end_request
+  .genai.CancelInteractionEvent cancel_interaction = 6; // oneof=end_request
+  .genai.DisconnectEvent disconnect = 9; // oneof=end_request
+  int64 ack_output_seq_num = 2;
+  int64 ack_output_epoch = 11;
+  string parent = 10;
+}
+message ClientEvent {
+  .genai.Payload payload = 3; // oneof=event_type
+  .genai.RetryInteractionEvent retry_interaction = 4; // oneof=event_type
+  int64 seq_num = 10;
+  int64 timestamp_micros = 11;
+}
+message ServerEventBatch {
+  .genai.InteractionCreatedEvent interaction_created = 7; // oneof=connect_reply
+  .genai.InteractionReconnectedEvent interaction_reconnected = 8; // oneof=connect_reply
+  repeated .genai.ServerEvent events = 1;
+  .genai.InteractionCompletedEvent interaction_completed = 6; // oneof=end_signal
+  .genai.ReconnectionRequiredEvent reconnection_required = 9; // oneof=end_signal
+  .genai.Yield yield = 10; // oneof=end_signal
+  int64 ack_input_seq_num = 2;
+  int64 commit_output_seq_num = 11;
+  int64 epoch = 12;
+}
+message FunctionInvocation {
+  string call_id = 1;
+  string name = 2;
+  .genai.Struct arguments = 3;
+}
+message FunctionResultEvent {
+  string call_id = 1;
+  string name = 2;
+  bool is_error = 3;
+  .genai.Value result = 4;
+}
+message ElicitationResultEvent {
+  string elicitation_id = 1;
+  .genai.ContentList user_input = 2; // oneof=result
+  .genai.UserTimeout user_timeout = 3; // oneof=result
+  .genai.ConfirmationResponse confirmation = 4; // oneof=result
+  .genai.MultipleChoiceResponse multiple_choice = 5; // oneof=result
+}
+message SkillDeclaration {
+  string name = 1;
+  string description = 2;
+}
+message SlashCommandDeclaration {
+  string name = 1;
+  string description = 2;
+}
+message CapabilitiesUpdate {
+  repeated .genai.SkillDeclaration available_skills = 1;
+  repeated .genai.SkillDeclaration added_skills = 2;
+  repeated string removed_skill_names = 3;
+  repeated .genai.SlashCommandDeclaration available_slash_commands = 4;
+}
+message ServerEvent {
+  .genai.Payload payload = 3; // oneof=event_type
+  .genai.InteractionPausedEvent interaction_paused = 5; // oneof=event_type
+  .genai.Pivot pivot = 14; // oneof=event_type
+  .genai.InputPayload input_payload = 18; // oneof=event_type
+  int64 seq_num = 10;
+  int64 timestamp_micros = 11;
+  int64 previous_seq_num_gap = 15;
+  .genai.Interaction.Usage usage = 12;
+  .genai.Interaction.LogprobsResult logprobs_result = 13;
+  bytes continuation_token = 17;
+}
+message CreateInteractionEvent {
+  message LabelsEntry {
+    string key = 1;
+    string value = 2;
+  }
+  string unique_creation_token = 1;
+  string interaction_id = 22;
+  string parent_interaction_id = 2;
+  .genai.ModelInteraction model_interaction = 3; // oneof=config
+  .genai.AgentInteraction agent_interaction = 4; // oneof=config
+  string system_instruction = 5;
+  repeated .genai.Content developer_instructions = 20;
+  .genai.AppendedDeveloperInstructions appended_developer_instructions = 21;
+  string previous_interaction_id = 15;
+  .genai.InitialSteps initial_steps = 27; // oneof=initial_history
+  string fork_from_interaction_id = 28; // oneof=initial_history
+  repeated .genai.Step inputs = 6;
+  repeated .genai.Tool tools = 7;
+  string env_id = 8; // oneof=environment
+  .genai.EnvironmentConfig remote_environment = 9; // oneof=environment
+  .genai.LocalEnvironmentConfig local_environment = 105; // oneof=environment
+  .genai.SelfHostedEnvironmentConfig self_hosted_environment = 106; // oneof=environment
+  repeated .genai.ResponseModality response_modalities = 10;
+  repeated .genai.ResponseFormat response_format = 12;
+  bool store = 50;
+  bool background = 51;
+  .agency.StorageOptions storage_options = 52;
+  .genai.ExecutionOptions execution_options = 23;
+  string client_id = 18;
+  repeated .genai.CreateInteractionEvent.LabelsEntry labels = 24;
+  .genai.TriggerMetadata trigger_metadata = 25;
+  bytes continuation_token = 26;
+  .genai.ServiceTier service_tier = 13;
+  .genai.WebhookConfig webhook_config = 14;
+}
+message InitialSteps {
+  repeated .genai.Step steps = 1;
+}
+message InteractionCreatedEvent {
+  string interaction_id = 1;
+  repeated .genai.SkillDeclaration available_skills = 2;
+  repeated .genai.SlashCommandDeclaration available_slash_commands = 3;
+  bool is_durable = 4;
+  int64 epoch = 5;
+}
+message ReconnectInteractionEvent {
+  string interaction_id = 1;
+  int64 next_output_seq_num = 2;
+  bool skip_buffered_output = 8;
+  bool background = 3;
+  .agency.StorageOptions storage_options = 4;
+  string client_id = 5;
+  string last_event_id = 6;
+  .genai.TriggerMetadata trigger_metadata = 7;
+  int64 epoch = 9;
+  string lease_token = 10;
+}
+message TriggerMetadata {
+  string trigger_id = 1;
+  string trigger_run_id = 2;
+}
+message InteractionReconnectedEvent {
+  int64 next_input_seq_num = 1;
+  int64 epoch = 2;
+  int64 next_output_seq_num = 3;
+}
+message CompleteInteractionEvent {
+}
+message CancelInteractionEvent {
+}
+message DisconnectEvent {
+}
+message InteractionCompletedEvent {
+  .google.rpc.Status status = 1;
+  string created = 2;
+  string updated = 3;
+  .genai.Interaction.Usage usage = 4;
+  .genai.Interaction.LogprobsResult logprobs_result = 5;
+  .genai.Interaction.Status interaction_status = 6;
+}
+message ReconnectionRequiredEvent {
+}
+message RetryInteractionEvent {
+}
+message InteractionPausedEvent {
+  .google.rpc.Status status = 1;
+}
+message Pivot {
+  enum PivotDecision {
+    UNSPECIFIED = 0;
+    FULL_REWRITE = 1;
+    PUNT = 2;
+    SOFT_PUNT = 3;
+  }
+  .genai.Pivot.PivotDecision decision = 1;
+}
+message Payload {
+  string sub_interaction_id = 6;
+  string client_payload_id = 24;
+  .genai.Step step = 11; // oneof=event_type
+  .genai.StepStart step_start = 1; // oneof=event_type
+  .genai.StepDelta step_delta = 2; // oneof=event_type
+  .genai.StepStop step_stop = 3; // oneof=event_type
+  .genai.LiveUserInputStep user_input = 200; // oneof=event_type
+  .genai.MediaStreamAppend media_stream_append = 202; // oneof=event_type
+  .genai.RuntimeContextUpdate runtime_context_update = 205; // oneof=event_type
+  .genai.InputEvent input = 207; // oneof=event_type
+  .genai.InputCommitEvent input_commit = 208; // oneof=event_type
+  .genai.InteractionConfigUpdate interaction_config_update = 209; // oneof=event_type
+  .genai.ErrorEvent error = 12; // oneof=event_type
+  .genai.PlaybackAwaitingEvent playback_awaiting = 20; // oneof=event_type
+  .genai.PlaybackInterruptionEvent playback_interruption = 21; // oneof=event_type
+  .genai.PlaybackCompleteEvent playback_complete = 22; // oneof=event_type
+  .genai.AudioTruncationEvent audio_truncation = 23; // oneof=event_type
+  .genai.StateUpdate state_update = 13; // oneof=event_type
+  .genai.Interaction.Usage usage_update = 30; // oneof=event_type
+  .genai.FunctionInvocation function_invocation = 14; // oneof=event_type
+  .genai.CallHookRequest call_hook_request = 15; // oneof=event_type
+  .genai.FilesystemRequest filesystem_request = 31; // oneof=event_type
+  .genai.CommandExecutionRequest command_execution_request = 32; // oneof=event_type
+  .genai.CapabilitiesUpdate capabilities_update = 17; // oneof=event_type
+  .genai.LedgerRecordEvent ledger_record = 35; // oneof=event_type
+  .genai.HookRequest hook_request = 36; // oneof=event_type
+  .genai.CallHookResponse call_hook_response = 16; // oneof=event_type
+  .genai.FilesystemResponse filesystem_response = 33; // oneof=event_type
+  .genai.CommandExecutionResponse command_execution_response = 34; // oneof=event_type
+  .genai.HookResponse hook_response = 37; // oneof=event_type
+  .genai.UserActionInput user_action = 28; // oneof=event_type
+  .genai.WorldSetupEvent world_setup = 29; // oneof=event_type
+  .genai.FunctionResultEvent function_result = 18; // oneof=event_type
+  .genai.ElicitationResultEvent elicitation_result = 19; // oneof=event_type
+}
+message InputPayload {
+  .genai.Payload payload = 1;
+  string client_id = 2;
+  int64 input_seq_num = 3;
+}
+message Yield {
+  int64 next_input_seq_num = 1;
+  int64 last_output_seq_num = 2;
+}
+message InputQueuingStrategy {
+  enum Priority {
+    PRIORITY_UNSPECIFIED = 0;
+    LOW = 1;
+    MEDIUM = 2;
+    HIGH = 3;
+    CRITICAL = 4;
+  }
+  .genai.InputQueuingStrategy.Priority priority = 1;
+  bool allow_eviction = 2;
+}
+message ThinkerInvocationResultMetadata {
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    IN_PROGRESS = 1;
+    RESOLVED = 2;
+  }
+  repeated string invocation_ids = 1;
+  .genai.ThinkerInvocationResultMetadata.Status status = 2;
+}
+message InputEvent {
+  repeated .genai.Content content = 1;
+  repeated .genai.UserInputContent input_content = 6;
+  repeated .genai.Step steps = 9;
+  .genai.InputDeliveryMode mode = 3;
+  repeated string resolved_thinker_invocation_ids = 4;
+  .genai.InputQueuingStrategy queuing_strategy = 7;
+  .genai.ThinkerInvocationResultMetadata thinker_invocation_result_metadata = 8;
+}
+message WorldSetupEvent {
+  .genai.TextContent world_prompt = 1;
+  .genai.ImageContent reference_image = 2;
+}
+message PlaybackAwaitingEvent {
+  int32 source_step_index = 1;
+}
+message PlaybackInterruptionEvent {
+  int32 source_step_index = 1;
+}
+message PlaybackCompleteEvent {
+  int32 source_step_index = 1;
+  .google.protobuf.Duration audio_duration = 2;
+}
+message AudioTruncationEvent {
+  int32 source_step_index = 1;
+  .google.protobuf.Duration truncated_audio_duration = 2;
+}
+message LedgerRecordEvent {
+  bytes record = 1;
+}

@@ -1,0 +1,170 @@
+// Extracted file offset 0x37801df, 6477 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package exa.remote_agent_proxy_pb;
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/rpc/code.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "third_party/jetski/codeium_common_pb/codeium_common.proto";
+import "third_party/jetski/project_pb/project.proto";
+enum Voice {
+  VOICE_UNSPECIFIED = 0;
+  VOICE_FOLA = 1;
+  VOICE_ARLO = 2;
+  VOICE_CLEO = 3;
+  VOICE_FINN = 4;
+  VOICE_GERO = 5;
+  VOICE_LORA = 6;
+  VOICE_NENO = 7;
+  VOICE_OLIN = 8;
+  VOICE_TARI = 9;
+}
+enum VoiceTrajectoryStatus {
+  VOICE_TRAJECTORY_STATUS_UNSPECIFIED = 0;
+  VOICE_TRAJECTORY_STATUS_RUNNING = 1;
+  VOICE_TRAJECTORY_STATUS_USER_ENDED = 2;
+  VOICE_TRAJECTORY_STATUS_TALKER_ENDED = 3;
+  VOICE_TRAJECTORY_STATUS_ERROR = 4;
+  VOICE_TRAJECTORY_STATUS_ABANDONED = 5;
+}
+enum VoiceStepStatus {
+  VOICE_STEP_STATUS_UNSPECIFIED = 0;
+  VOICE_STEP_STATUS_RUNNING = 1;
+  VOICE_STEP_STATUS_DONE = 2;
+  VOICE_STEP_STATUS_ERROR = 3;
+  VOICE_STEP_STATUS_CANCELED = 4;
+}
+enum ThinkerNoteKind {
+  THINKER_NOTE_KIND_UNSPECIFIED = 0;
+  THINKER_NOTE_KIND_PROGRESS = 1;
+  THINKER_NOTE_KIND_NEEDS_INPUT = 2;
+  THINKER_NOTE_KIND_CANCELED = 3;
+}
+enum TalkerTool {
+  TALKER_TOOL_UNSPECIFIED = 0;
+  TALKER_TOOL_CANCEL_THINKER = 1;
+  TALKER_TOOL_ANSWER_PERMISSION = 2;
+  TALKER_TOOL_SET_PROGRESS_UPDATES = 3;
+  TALKER_TOOL_HANG_UP = 4;
+}
+enum PermissionDecision {
+  PERMISSION_DECISION_UNSPECIFIED = 0;
+  PERMISSION_DECISION_ALLOW_ONCE = 1;
+  PERMISSION_DECISION_ALLOW_CONVERSATION = 2;
+  PERMISSION_DECISION_ALLOW_WORKSPACE = 3;
+  PERMISSION_DECISION_ALLOW_GLOBAL = 4;
+  PERMISSION_DECISION_ALLOW_PROJECT = 5;
+  PERMISSION_DECISION_DENY = 6;
+}
+enum VoiceErrorReason {
+  VOICE_ERROR_REASON_UNSPECIFIED = 0;
+  VOICE_ERROR_REASON_UNCLASSIFIED = 1;
+  VOICE_ERROR_REASON_ACCESS_DENIED = 2;
+  VOICE_ERROR_REASON_CREDENTIAL_EXPIRED = 3;
+  VOICE_ERROR_REASON_CREDENTIAL_RESTRICTED = 4;
+  VOICE_ERROR_REASON_QUOTA_EXHAUSTED = 5;
+  VOICE_ERROR_REASON_CAPACITY_EXHAUSTED = 6;
+  VOICE_ERROR_REASON_SERVER_UNAVAILABLE = 7;
+  VOICE_ERROR_REASON_ROUTE_NOT_FOUND = 8;
+  VOICE_ERROR_REASON_START_TIMEOUT = 9;
+  VOICE_ERROR_REASON_CALL_TIMEOUT = 10;
+  VOICE_ERROR_REASON_STREAM_EXPIRED = 11;
+  VOICE_ERROR_REASON_STREAM_CANCELED = 12;
+  VOICE_ERROR_REASON_CONNECTION_LOST = 13;
+  VOICE_ERROR_REASON_AUDIO_BACKLOG = 14;
+  VOICE_ERROR_REASON_CLIENT_OUTDATED = 15;
+  VOICE_ERROR_REASON_REQUEST_REJECTED = 16;
+  VOICE_ERROR_REASON_HISTORY_UNAVAILABLE = 17;
+  VOICE_ERROR_REASON_NO_RESPONSE = 18;
+}
+enum VoiceComponent {
+  VOICE_COMPONENT_UNSPECIFIED = 0;
+  VOICE_COMPONENT_MICROPHONE = 1;
+  VOICE_COMPONENT_CLIENT = 2;
+  VOICE_COMPONENT_LANGUAGE_SERVER = 3;
+  VOICE_COMPONENT_RAP = 4;
+  VOICE_COMPONENT_TALKER = 5;
+  VOICE_COMPONENT_TRANSCRIBER = 6;
+  VOICE_COMPONENT_THINKER = 7;
+}
+message VoiceTrajectory {
+  string voice_trajectory_id = 1;
+  string cascade_id = 2;
+  .exa.remote_agent_proxy_pb.VoiceTrajectoryMetadata metadata = 3;
+  .google.protobuf.Timestamp start_time = 4;
+  .google.protobuf.Timestamp end_time = 5;
+  .exa.remote_agent_proxy_pb.VoiceTrajectoryStatus status = 6;
+  .exa.remote_agent_proxy_pb.VoiceError error = 7;
+  repeated .exa.remote_agent_proxy_pb.VoiceStep steps = 8;
+  .exa.remote_agent_proxy_pb.VoiceTrajectoryStats stats = 9;
+}
+message VoiceTrajectoryMetadata {
+  .exa.codeium_common_pb.RuntimeEnvironment runtime_environment = 1;
+  .exa.project_pb.BackendType backend = 2;
+  .exa.remote_agent_proxy_pb.Voice voice = 3;
+  string variant_id = 4;
+  string client_version = 5;
+  string rap_release = 6;
+  string talker_interaction_id = 7;
+  string language_server_version = 8;
+  bool speak_progress = 9;
+  string client_type = 10;
+}
+message VoiceStep {
+  .exa.remote_agent_proxy_pb.VoiceStepStatus status = 1;
+  .google.protobuf.Timestamp start_time = 2;
+  .google.protobuf.Timestamp end_time = 3;
+  .exa.remote_agent_proxy_pb.VoiceError error = 4;
+  .exa.remote_agent_proxy_pb.UserSpeech user_speech = 10; // oneof=payload
+  .exa.remote_agent_proxy_pb.TalkerSpeech talker_speech = 11; // oneof=payload
+  .exa.remote_agent_proxy_pb.ThinkerHandoff thinker_handoff = 12; // oneof=payload
+  .exa.remote_agent_proxy_pb.ThinkerNote thinker_note = 13; // oneof=payload
+  .exa.remote_agent_proxy_pb.Reconnect reconnect = 14; // oneof=payload
+  .exa.remote_agent_proxy_pb.TalkerToolCall talker_tool_call = 15; // oneof=payload
+}
+message UserSpeech {
+  string text = 1;
+  string asr_final_text = 2;
+  repeated string ghost_texts = 3;
+}
+message TalkerSpeech {
+  string text = 1;
+  int32 spoken_char_count = 2; // oneof=_spoken_char_count
+}
+message ThinkerHandoff {
+  string invocation_id = 1;
+  string request = 2;
+  string answer = 3;
+  repeated int32 cascade_step_indices = 4;
+}
+message ThinkerNote {
+  .exa.remote_agent_proxy_pb.ThinkerNoteKind kind = 1;
+  string text = 2;
+  bool spoken = 3;
+  repeated int32 cascade_step_indices = 4;
+}
+message Reconnect {
+  .exa.remote_agent_proxy_pb.VoiceComponent stream = 1;
+  .exa.remote_agent_proxy_pb.VoiceError cause = 2;
+  int32 attempt_count = 3;
+  string talker_interaction_id = 4;
+}
+message TalkerToolCall {
+  string invocation_id = 1;
+  .exa.remote_agent_proxy_pb.TalkerTool tool = 2;
+  .exa.remote_agent_proxy_pb.PermissionDecision decision = 3;
+  string note = 4;
+  string result = 5;
+}
+message VoiceError {
+  .exa.remote_agent_proxy_pb.VoiceErrorReason reason = 1;
+  .exa.remote_agent_proxy_pb.VoiceComponent component = 2;
+  .google.rpc.Code code = 3; // oneof=_code
+  string trace_id = 4;
+  string detail = 5;
+}
+message VoiceTrajectoryStats {
+  .google.protobuf.Duration microphone_duration = 1;
+  .google.protobuf.Duration silent_microphone_duration = 2;
+  .google.protobuf.Duration talker_duration = 3;
+}

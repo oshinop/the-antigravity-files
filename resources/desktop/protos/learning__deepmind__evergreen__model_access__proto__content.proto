@@ -1,0 +1,50 @@
+// Extracted file offset 0x36ca5ea, 2442 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package deepmind.evergreen.v1;
+import "google/api/inclusion.proto";
+import "google/gdm/evergreen/evergreen.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+import "net/proto2/proto/descriptor.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Content {
+  repeated .deepmind.evergreen.v1.ContentChunk chunks = 1;
+}
+message ContentChunk {
+  string mimetype = 1;
+  bytes data = 2; // oneof=content
+  string blobref = 7; // oneof=content
+  string chunk_id = 3;
+  .deepmind.evergreen.v1.Metadata metadata = 4;
+  string substream_name = 5;
+  .deepmind.evergreen.v1.TokenizedChunk tokens = 6;
+}
+message EvergreenProtoOptions {
+  bool is_control_chunk = 1;
+}
+message Metadata {
+  repeated .google.protobuf.Any other = 1;
+  string role = 3;
+  string file_name = 4;
+  int32 file_size = 5;
+  .deepmind.evergreen.v1.EvergreenProtoOptions proto_options = 6;
+  string group_id = 7;
+  string channel = 9;
+  string environment = 11;
+  .google.protobuf.Timestamp capture_time = 8;
+  repeated string tags = 10;
+  bytes thought_signature = 12;
+}
+message TokenizedChunk {
+  string tokenizer = 1;
+  repeated int32 token_ids = 2;
+  string soft_tokens_dtype = 6;
+  bytes soft_tokens = 7;
+  int32 soft_tokens_length = 8;
+  int32 soft_tokens_num_channels = 9;
+  repeated bytes data = 3;
+  repeated string token_name = 4;
+  repeated float logprob = 5;
+  .evergreen.v2.Array top_k_tokens = 10;
+  .evergreen.v2.Array top_k_scores = 11;
+}

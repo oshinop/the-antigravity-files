@@ -1,0 +1,35 @@
+// Extracted file offset 0x36c5bb8, 2338 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package gemini_coder.agentexecutor;
+import "third_party/gemini_coder/proto/trajectory.proto";
+import "third_party/jetski/context_module_pb/context_module.proto";
+import "third_party/jetski/cortex_pb/cortex.proto";
+import "third_party/jetski/language_server_pb/language_server.proto";
+message Input {
+  .gemini_coder.agentexecutor.SendUserMessage send_user_message = 10; // oneof=kind
+  .exa.language_server_pb.CancelCascadeInvocationRequest cancel_invocation = 5; // oneof=kind
+  .exa.language_server_pb.CancelCascadeStepsRequest cancel_steps = 6; // oneof=kind
+  .exa.language_server_pb.RevertToCascadeStepRequest revert_to_step = 2; // oneof=kind
+  .exa.language_server_pb.HandleCascadeUserInteractionRequest user_interaction = 9; // oneof=kind
+  .gemini_coder.agentexecutor.AppendTrajectorySuffixRequest append_trajectory_suffix = 17; // oneof=kind
+  .gemini_coder.agentexecutor.RawSteps raw_steps = 4; // oneof=kind
+  .exa.language_server_pb.SkipBrowserSubagentRequest skip_browser_subagent = 13; // oneof=kind
+  .exa.language_server_pb.SendStepsToBackgroundRequest send_steps_to_background = 15; // oneof=kind
+}
+message SendUserMessage {
+  .exa.language_server_pb.SendUserCascadeMessageRequest request = 1;
+  .exa.context_module_pb.ContextModuleResult active_user_state = 2;
+  .exa.cortex_pb.AgentConfigResolution agent_config_resolution = 3;
+}
+message RawSteps {
+  repeated .gemini_coder.Step steps = 1;
+  .exa.cortex_pb.CortexStepPlannerResponse planner_response = 2;
+  .exa.cortex_pb.CascadeConfig override_config = 3;
+  .exa.cortex_pb.AgentConfigResolution agent_config_resolution = 4;
+}
+message AppendTrajectorySuffixRequest {
+  int32 expected_num_steps = 1;
+  repeated .gemini_coder.Step steps = 2;
+  repeated .exa.cortex_pb.CortexStepGeneratorMetadata generator_metadatas = 3;
+  repeated .exa.cortex_pb.ExecutorMetadata executor_metadatas = 4;
+}

@@ -1,0 +1,48 @@
+// Extracted file offset 0x36e2d20, 2834 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package ptoken.policy_rollouts;
+import "google/api/inclusion.proto";
+import "privacy/ptoken/public/client/integration_id.proto";
+import "privacy/ptoken/public/proto/policies/policy_id.proto";
+import "privacy/rollouts/proto/launchable.proto";
+import "privacy/rollouts/proto/request_context_enforceable_mode_config.proto";
+import "privacy/rollouts/proto/rollout_signal.proto";
+message RolloutThresholds {
+  int32 aom_percent = 3;
+  int32 hard_enforcement_bucket_threshold = 6;
+  int32 online_hard_enforcement_bucket_threshold = 4;
+  int32 offline_hard_enforcement_bucket_threshold = 5;
+  int32 task_hard_enforcement_bucket_threshold = 7;
+}
+message PerPolicyRolloutConfig {
+  .ptoken.PolicyId.Enum policy_id = 1;
+  .ptoken.policy_rollouts.RequestContextEnforceableModeConfig.RequestContextEnforceableMode mode = 2;
+  .ptoken.policy_rollouts.RolloutThresholds thresholds = 6;
+  string template_info = 7;
+}
+message AttributesDarkLaunchConfig {
+  int32 dark_launch_sampling_permyriad = 1;
+  int32 row_level_dark_launch_sampling_permyriad = 2;
+}
+message PerLaunchGroupRolloutConfig {
+  .privacy.rollouts.LaunchGroup.Enum launch_group = 1;
+  .ptoken.policy_rollouts.RequestContextEnforceableModeConfig.RequestContextEnforceableMode mode = 2;
+  .ptoken.policy_rollouts.RolloutThresholds thresholds = 3;
+}
+message PerLaunchableRolloutConfig {
+  .privacy.rollouts.Launchable launchable = 1;
+  .ptoken.policy_rollouts.RequestContextEnforceableModeConfig.RequestContextEnforceableMode mode = 2;
+  .ptoken.policy_rollouts.RolloutThresholds thresholds = 3;
+}
+message RolloutConfig {
+  .ptoken.IntegrationId.Enum integration_id = 2;
+  repeated .ptoken.policy_rollouts.PerPolicyRolloutConfig per_policy_rollout_configs = 1;
+  .ptoken.policy_rollouts.AttributesDarkLaunchConfig attributes_dark_launch_config = 3;
+  repeated .ptoken.policy_rollouts.PerLaunchGroupRolloutConfig per_launch_group_rollout_configs = 4;
+  repeated .ptoken.policy_rollouts.PerLaunchableRolloutConfig per_launchable_rollout_configs = 5;
+  .ptoken.policy_rollouts.DownstreamRolloutControl downstream_rollout_control = 6;
+}
+message DownstreamRolloutControl {
+  bool add_rollout_enforcement_mode_in_request_context = 1;
+  bool add_rollout_enforcement_mode_in_defaults = 2;
+}

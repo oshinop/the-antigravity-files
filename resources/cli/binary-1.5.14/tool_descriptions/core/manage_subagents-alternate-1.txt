@@ -1,0 +1,1 @@
+Manage the direct subagents of this conversation. 'list' reports each one's conversationId (the id used to kill or message it) and live state. Killing a subagent also kills its descendants and deletes their branched workspaces; logs and artifacts are preserved.

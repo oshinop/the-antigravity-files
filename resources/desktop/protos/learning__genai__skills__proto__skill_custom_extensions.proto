@@ -1,0 +1,5 @@
+// Extracted file offset 0x36038e4, 129 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai.skills;
+message SkillCustomExtensions {
+}

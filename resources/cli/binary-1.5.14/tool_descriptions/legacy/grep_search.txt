@@ -1,0 +1,7 @@
+Use ripgrep to find exact pattern matches within files or directories.
+
+Results are returned in JSON format and for each match you will receive the:
+
+- LineContent: the content of the matching line (only when MatchPerLine is true)
+
+Total results are capped at %d matches. Use the Includes option to filter by file type or specific paths to refine your search.

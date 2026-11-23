@@ -1,0 +1,176 @@
+[
+ {
+  "functionDeclarations": [
+   {
+    "name": "read_file",
+    "description": "Read the contents of a text, image, pdf, video, or audio file. Each read returns at most 800 lines or 46080 bytes.",
+    "parameters": {
+     "type": "OBJECT",
+     "properties": {
+      "ByteOffset": {
+       "type": "INTEGER",
+       "description": "Byte offset into the line range. Use to continue reading when content is truncated by the byte limit."
+      },
+      "EndLine": {
+       "type": "INTEGER",
+       "description": "End line to read (inclusive). Omit to read until the end of the file, within the per-read limits."
+      },
+      "Path": {
+       "type": "STRING",
+       "description": "The absolute path of the file to read."
+      },
+      "StartLine": {
+       "type": "INTEGER",
+       "description": "Start line to read (inclusive). Omit to read from the beginning of the file."
+      }
+     },
+     "required": [
+      "Path"
+     ]
+    }
+   },
+   {
+    "name": "search_web",
+    "description": "Performs a web search for a given query. Returns a summary of relevant information along with URL citations.",
+    "parameters": {
+     "type": "OBJECT",
+     "properties": {
+      "domain": {
+       "type": "STRING",
+       "description": "Optional domain to recommend the search prioritize"
+      },
+      "query": {
+       "type": "STRING"
+      }
+     },
+     "required": [
+      "query"
+     ]
+    }
+   },
+   {
+    "name": "run_command",
+    "description": "Execute a command in the workspace. Operating System: [os]. Shell: [shell]. Each command runs in a new session (working directory changes and environment variables do not persist across calls). Commands that do not finish within the specified wait time continue running in the background as tasks; the system will notify you when they finish, so do not poll their status or set timers to check on them.",
+    "parameters": {
+     "type": "OBJECT",
+     "properties": {
+      "CommandLine": {
+       "type": "STRING",
+       "description": "The exact command line string to execute."
+      },
+      "IsDaemon": {
+       "type": "BOOLEAN",
+       "description": "Set to true for long-running support processes that are meant to keep running in the background indefinitely and are not expected to finish on their own (e.g., dev servers, file watchers, tunnels). Leave false (the default) for normal commands that are expected to terminate."
+      },
+      "WaitMsBeforeAsync": {
+       "type": "INTEGER",
+       "description": "Milliseconds to wait for the command to finish before backgrounding it (500 to 10000). Set to a larger value (e.g. 5000-10000) for commands expected to finish synchronously; set to 500 for commands intended to run in the background."
+      },
+      "toolSummary": {
+       "type": "STRING",
+       "description": "Brief 2-5 word noun phrase describing the command task. Capitalize like a sentence. Some examples: 'Git status check', 'Unit test execution', 'Package build', 'Dev server startup'."
+      }
+     },
+     "required": [
+      "CommandLine",
+      "toolSummary",
+      "WaitMsBeforeAsync"
+     ]
+    }
+   },
+   {
+    "name": "send_message",
+    "description": "Send a message to another agent, such as a subagent or a peer. Not a channel to the user.",
+    "parameters": {
+     "type": "OBJECT",
+     "properties": {
+      "Message": {
+       "type": "STRING",
+       "description": "Content of the message.",
+       "minLength": "1"
+      },
+      "Recipient": {
+       "type": "STRING",
+       "description": "Conversation ID of the agent to message.",
+       "minLength": "1"
+      }
+     },
+     "required": [
+      "Recipient",
+      "Message"
+     ]
+    }
+   },
+   {
+    "name": "schedule",
+    "description": "Schedule a one-shot timer (DurationSeconds) or a recurring cron job (CronExpression) that notifies you via Prompt. This tool call runs as a background task and returns immediately; end your turn (call no more tools) to wait for notifications. A timer with a TimerCondition is cancelled early by a matching message, which is itself your wakeup. Set IsDaemon only for a cron that should keep firing after the current task is done. Set ExactTiming only when a cron must fire at the exact wall-clock time without jitter. Use the manage_task tool to cancel active schedules, and never use a shell sleep command as a timer.",
+    "parameters": {
+     "type": "OBJECT",
+     "properties": {
+      "CronExpression": {
+       "type": "STRING",
+       "description": "Standard 5-field cron expression for a recurring schedule (e.g. '*/5 * * * *' for every 5 minutes). Mutually exclusive with DurationSeconds."
+      },
+      "DurationSeconds": {
+       "type": "INTEGER",
+       "description": "Seconds to wait for a one-shot timer. Mutually exclusive with CronExpression."
+      },
+      "ExactTiming": {
+       "type": "BOOLEAN",
+       "description": "Cron only. Set true only when the user explicitly requires the schedule to fire at the exact wall-clock time without jitter. Leave false (the default) for polling, monitoring, or periodic tasks so triggers are jittered to avoid load spikes."
+      },
+      "IsDaemon": {
+       "type": "BOOLEAN",
+       "description": "Cron only. Set true only for an independent standing job that should keep firing after the current task is done."
+      },
+      "MaxIterations": {
+       "type": "INTEGER",
+       "description": "Cron only. Maximum number of triggers before the schedule stops; defaults to unlimited."
+      },
+      "Prompt": {
+       "type": "STRING",
+       "description": "Message sent to you as a high-priority notification when the timer fires or the cron triggers."
+      },
+      "TimerCondition": {
+       "type": "STRING",
+       "description": "Timer only. Cancels the timer early when a matching message arrives: 'never' (default), 'any' (any message), or a sender ID (a message from that subagent or background task)."
+      }
+     },
+     "required": [
+      "Prompt"
+     ]
+    }
+   },
+   {
+    "name": "manage_task",
+    "description": "Manage the background tasks of this conversation: 'list' the running tasks, check a task's 'status' and recent log output, 'send_input' to a running task, or 'kill' one. Refer to tasks by the TaskId that 'list' reports; keep task references human-readable when talking to the user.",
+    "parameters": {
+     "type": "OBJECT",
+     "properties": {
+      "Action": {
+       "type": "STRING",
+       "description": "'list' reports the running tasks; the other actions operate on the task named in TaskId.",
+       "enum": [
+        "list",
+        "kill",
+        "status",
+        "send_input"
+       ]
+      },
+      "Input": {
+       "type": "STRING",
+       "description": "Input to deliver to the task. Required for 'send_input'."
+      },
+      "TaskId": {
+       "type": "STRING",
+       "description": "Task to manage, as reported by 'list'. Required for 'kill', 'status' and 'send_input'."
+      }
+     },
+     "required": [
+      "Action"
+     ]
+    }
+   }
+  ]
+ }
+]

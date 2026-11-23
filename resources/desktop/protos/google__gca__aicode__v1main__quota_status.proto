@@ -1,0 +1,37 @@
+// Extracted file offset 0x368972f, 1402 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.gca.aicode.v1main;
+import "google/api/versioning.proto";
+import "google/protobuf/timestamp.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message QuotaSummary {
+  message Group {
+    string display_name = 1;
+    string description = 2;
+    repeated .google.gca.aicode.v1main.QuotaSummary.Bucket buckets = 3;
+  }
+  message Bucket {
+    string bucket_id = 1;
+    string display_name = 2;
+    string description = 3;
+    string refresh_window_label = 4;
+    float remaining_fraction = 5;
+    bool disabled = 6;
+    .google.protobuf.Timestamp reset_time = 7;
+  }
+  string description = 1;
+  repeated .google.gca.aicode.v1main.QuotaSummary.Group groups = 2;
+}
+message Credit {
+  enum CreditType {
+    CREDIT_TYPE_UNSPECIFIED = 0;
+    GOOGLE_ONE_AI = 1;
+  }
+  .google.gca.aicode.v1main.Credit.CreditType credit_type = 1;
+  int64 credit_amount = 2;
+  int64 minimum_usable_credit_amount = 3;
+}
+message CreditUsageMetadata {
+  repeated .google.gca.aicode.v1main.Credit consumed_credits = 1;
+  repeated .google.gca.aicode.v1main.Credit remaining_credits = 2;
+}

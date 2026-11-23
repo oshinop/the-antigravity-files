@@ -1,0 +1,11 @@
+// Extracted file offset 0x364ebdf, 718 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package googlesql;
+import "net/proto2/proto/descriptor.proto";
+enum TableType {
+  DEFAULT_TABLE_TYPE = 0;
+  SQL_TABLE = 1;
+  VALUE_TABLE = 2;
+}
+message WireFormatAnnotationEmptyMessage {
+}

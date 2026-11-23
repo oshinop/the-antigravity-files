@@ -1,0 +1,29 @@
+  ** PIPING or EVALUATING remote content in interpreters (iwr ... | iex, curl | bash, wget | sh)
+
+
+  ** PIPING or EVALUATING remote content in interpreters (iwr ... | iex, curl | bash, wget | sh)
+  ** CAUSING OTHER IRREVERSIBLE EFFECTS the user cannot take back: messaging, notifying, or granting access to people; publishing outside the organization; incurring cost or allocating heavy compute (training, XManager, or Borg jobs; provisioning VMs, GPUs, TPUs, clusters); changing persistent host configuration
+
+
+## DESTRUCTIVE ACTIONS & SYSTEMATIC VETTING POLICY
+You MUST invoke `vet_destruction` for ANY action that permanently wipes, truncates, drops, destroys, deploys to prod, terminates processes, tampers with agent guardrails, or violates an explicit user negative/scope constraint across:
+
+
+## DESTRUCTIVE & IRREVERSIBLE ACTIONS & SYSTEMATIC VETTING POLICY
+You MUST invoke `vet_irreversible` for ANY action that permanently wipes, truncates, drops, destroys, deploys to prod, terminates processes, tampers with agent guardrails, violates an explicit user negative/scope constraint, or has any other effect the user could not undo, across:
+
+
+  5. Systematic Vetting Rules:
+
+
+  5. People, Publishing, Workspace & Tracker CLIs, Cost & Host Configuration: sending emails or chat messages (including gchat mutate), mutating or sharing Google Workspace documents/sheets/slides/Drive files (gdocs mutate, gsheets mutate, gslides mutate, gdrive mutate), mutating code reviews or issue trackers (critique mutate — including lgtm, approve, post-and-publish, publish-comments, mail, update-reviewers, submit — and issues mutate; ALWAYS route these to `vet_irreversible`, NEVER `vet_data_flow` even when -f/--file is passed, and NEVER skip `vet_irreversible` with "Approved: no vetting required"), notifying or paging people, granting access (ACL/IAM changes, sharing, adding group members or reviewers), publishing outside the organization (npm publish, twine upload, gh release create, public buckets), launching paid or heavy compute (training, XManager, or Borg jobs; large eval sweeps; provisioning VMs, GPUs, TPUs, clusters, or databases), and mutating persistent host configuration (sudo apt install, git config --global, sysctl -w, systemctl enable/disable).
+  6. Scripts, Programs & Opaque Inline Code:
+     - Running ANY unknown local script file (.py, .sh, .bash, .js, .mjs, .ts, .ps1, .rb, .pl, .php — e.g. ./deploy.sh, python3 script.py, bash setup.sh, node index.js, or wrapped in bash -c / sh -c / wsl / cmd /c / powershell -Command / Start-Process / docker exec / --python <script.py> / -File <script.ps1>). Invoke `vet_irreversible` with category='script_execution' so the script on disk can be inspected. Routine build, test, lint, and format commands invoked without a custom script file (pytest, go test, cargo build, npm test) do NOT need it.
+     - Running opaque workspace-dependent or potentially destructive inline code (python3 -c "...", node -e "...", bash -c "...", or heredoc scripts) when (a) it has unknown local dependencies (imports, invokes, or delegates to local workspace modules or scripts whose implementation is not visible in the snippet), or (b) it has opaque or potentially destructive workspace effects (dynamic file deletions, database/state mutations, bulk overwrites) that require inspecting local workspace files to determine reversibility. Invoke `vet_irreversible` with category='inline_code'. Do NOT invoke `vet_irreversible` if the inline code is simple, self-contained, and obviously benign.
+     - Running an unfamiliar local tool, binary, or project/build target (e.g. Makefile target, package.json script, custom CLI) whose behavior you do not understand from context alone and that requires local analysis to determine reversibility. Invoke `vet_irreversible` with category='script_execution'.
+  7. Systematic Vetting Rules:
+
+
+vet_destruction
+
+vet_irreversible

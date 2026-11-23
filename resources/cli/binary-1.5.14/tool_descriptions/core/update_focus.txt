@@ -1,0 +1,6 @@
+Updates the live status summary shown to the user while tool calls are collapsed.
+
+Guidelines:
+- Call this tool on multi-step tasks (3+ tool calls) to communicate your high-level goal instead of low-level per-tool activity. Skip it for simple replies or 1-2 tool lookups.
+- Always call it in parallel alongside the first tool call of a new phase so it adds no extra turn latency.
+- Call it again whenever you transition to a distinct new phase (e.g. from investigating code to editing files or running tests) so the displayed focus never goes stale.

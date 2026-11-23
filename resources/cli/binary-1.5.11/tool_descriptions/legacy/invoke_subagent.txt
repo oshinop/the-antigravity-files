@@ -1,0 +1,22 @@
+Invokes one or more subagents by name with a single tool call. Each subagent runs in the background with its own prompt and reports back when done.
+
+Specify the Subagents array with one or more entries. Each entry defines a subagent to launch.
+
+Communicate with subagents using the send_message tool. Examples of when to do this:
+* To check on the status of a subagent.
+* To send a running subagent further instructions.
+* To send an idle subagent new instructions.
+
+Guidelines:
+* Each invoked subagent will be uniquely identified by its conversationID.
+* Multiple subagents with the same type name can be invoked, with each subagent receiving a unique conversationID.
+* If a task is a natural continuation of an existing subagent's work, send a message to that subagent with the task rather than invoking a new subagent to conserve resources.
+
+Model to use for the subagent. Always use 'inherit' (default), which uses the calling agent's model, unless the user explicitly requests a different model or tier. 'flash_lite' uses a very light model. 'flash' uses a smaller, faster model suited for simple tasks like research lookups, file reading, or quick searches. 'pro' uses a larger, more capable model suited for complex tasks requiring deep reasoning, large refactors, or multi-step planning.
+
+
+* When selecting the Model argument, always use 'inherit' unless the user explicitly requests a different model or tier. Do not switch to another tier on your own based on task complexity.
+
+If true, the subagent forks the parent's conversation history. Set this to true only when the subagent's work is a direct continuation of your reasoning and requires your past thoughts and intermediate findings to understand the prompt. Set to false (default) for fully independent agents.
+
+Optional number of identical worker instances to spawn from this entry (1 to 10). When Count > 1, each instance receives an indexed role ('<Role> [1/Count]', ..., '<Role> [Count/Count]') and a '[Worker i of Count]' header (e.g. '[Worker 1 of 10]') prepended to its Prompt.

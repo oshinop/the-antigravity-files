@@ -1,0 +1,12 @@
+// Extracted file offset 0x3635218, 431 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api.expr.v1alpha1;
+import "google/api/expr/v1alpha1/value.proto";
+message Explain {
+  message ExprStep {
+    int64 id = 1;
+    int32 value_index = 2;
+  }
+  repeated .google.api.expr.v1alpha1.Value values = 1;
+  repeated .google.api.expr.v1alpha1.Explain.ExprStep expr_steps = 2;
+}

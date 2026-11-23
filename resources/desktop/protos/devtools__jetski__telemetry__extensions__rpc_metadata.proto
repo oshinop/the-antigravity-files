@@ -1,0 +1,10 @@
+// Extracted file offset 0x362fe4a, 387 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package devtools.jetski.telemetry.extensions;
+import "google/rpc/code.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message RpcMetadata {
+  string rpc_name = 1;
+  .google.rpc.Code status_code = 2;
+  int64 latency_ms = 3;
+}

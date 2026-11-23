@@ -1,0 +1,21 @@
+// Extracted file offset 0x366f36a, 1069 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai.tools;
+import "learning/genai/api/interactions/proto/content.proto";
+import "learning/genai/beyond/files/proto/file.proto";
+import "learning/genai/tools/proto/artifact_data.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "third_party/jetski/cortex_pb/custom_extensions.proto";
+import "third_party/jetski_prod/actor/proto/custom_extensions.proto";
+message Artifact {
+  string name = 1;
+  .genai.tools.ArtifactData inline_data = 2; // oneof=data
+  .beyond.files.File file = 3; // oneof=data
+  .genai.ImageContent image = 4; // oneof=data
+  .genai.AudioContent audio = 5; // oneof=data
+  .genai.VideoContent video = 6; // oneof=data
+  .genai.DocumentContent document = 7; // oneof=data
+}
+message Artifacts {
+  repeated .genai.tools.Artifact artifacts = 1;
+}

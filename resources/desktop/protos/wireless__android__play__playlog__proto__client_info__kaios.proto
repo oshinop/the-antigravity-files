@@ -1,0 +1,14 @@
+// Extracted file offset 0x3657391, 792 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb_generate_object_format.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message KaiosClientInfo {
+  string app_version = 1;
+  string core_app_version = 3;
+  string device_model = 2;
+  string mcc_mnc = 4;
+  string locale = 5;
+}

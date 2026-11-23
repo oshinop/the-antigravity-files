@@ -1,0 +1,8 @@
+// Extracted file offset 0x362a0fc, 321 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.internal.cloud.code.v1internal;
+import "google/api/field_behavior.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Entitlement {
+  string user_tier = 1;
+}

@@ -1,0 +1,260 @@
+// Extracted file offset 0x37d985c, 11151 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/ai/generativelanguage/v1main/execution_mode.proto";
+import "google/ai/generativelanguage/v1main/tool_type.proto";
+import "learning/genai/beyond/recipe_runner/finish_reason.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum PolicyRatingCategory {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_HARASSMENT = 1;
+  CATEGORY_HATE_SPEECH = 2;
+  CATEGORY_SEXUALLY_EXPLICIT = 3;
+  CATEGORY_DANGEROUS_CONTENT = 4;
+  CATEGORY_MINOR_DANGEROUS_CONTENT = 22;
+  CATEGORY_PHOTO_REALISTIC_MINOR_DANGEROUS_CONTENT = 53;
+  CATEGORY_MINOR_SEXUALLY_SUGGESTIVE = 54;
+  CATEGORY_VIOLENCE = 18;
+  CATEGORY_INSULT = 5;
+  CATEGORY_DEROGATORY = 6;
+  CATEGORY_DISTILLATION = 7;
+  CATEGORY_U18_DANGEROUS = 8;
+  CATEGORY_U18_HARASSMENT = 9;
+  CATEGORY_U18_MEDICAL = 10;
+  CATEGORY_U18_REGULATED_GOODS = 11;
+  CATEGORY_U18_SEXUALLY_SUGGESTIVE = 12;
+  CATEGORY_U18_VIOLENCE = 13;
+  CATEGORY_U18_HATE_SPEECH = 14;
+  CATEGORY_IDENTIFIABLE_PERSON = 15;
+  CATEGORY_PHOTO_REALISTIC_MINOR = 16;
+  CATEGORY_SEXUALLY_SUGGESTIVE = 17;
+  CATEGORY_INAPPROPRIATE_MINOR_AUDIO = 19;
+  CATEGORY_INAPPROPRIATE_IDENTIFIABLE_PERSON_AUDIO = 56;
+  CATEGORY_IDENTIFIABLE_PERSON_AUDIO = 20;
+  CATEGORY_FOUNDATIONAL_AUDIO = 55;
+  CATEGORY_GIBBERISH_AUDIO = 21;
+  CATEGORY_CHILD_SAFETY = 23;
+  CATEGORY_NPOV_INTENT = 24;
+  CATEGORY_UNDERSPECIFIED_ANIMAL = 57;
+  CATEGORY_GENITALIA_QUERY = 58;
+  CATEGORY_UNGROUNDED_INFERENCE = 59;
+  CATEGORY_HATE_SPEECH_SEVERITY = 25;
+  CATEGORY_DANGEROUS_CONTENT_SEVERITY = 26;
+  CATEGORY_HARASSMENT_SEVERITY = 27;
+  CATEGORY_SEXUALLY_EXPLICIT_SEVERITY = 28;
+  CATEGORY_SPII = 35;
+  CATEGORY_REGULATED_GOODS = 36;
+  CATEGORY_PUBLIC_INTEREST = 37;
+  CATEGORY_PROFANITY = 38;
+  CATEGORY_LEGAL = 39;
+  CATEGORY_MEDICAL = 40;
+  CATEGORY_FINANCIAL = 41;
+  CATEGORY_MALICIOUS = 42;
+  CATEGORY_CSI = 49;
+  CATEGORY_PHOTO_REALISTIC_MINOR_IMAGE = 50;
+  CATEGORY_PHOTO_REALISTIC_MINOR_VIDEO = 51;
+  CATEGORY_IDENTIFIABLE_PERSON_MEDIA = 52;
+  CATEGORY_U18_HATE_SPEECH_IMAGE = 29;
+  CATEGORY_U18_DANGEROUS_IMAGE = 30;
+  CATEGORY_U18_HARASSMENT_IMAGE = 31;
+  CATEGORY_U18_SEXUALLY_SUGGESTIVE_IMAGE = 32;
+  CATEGORY_U18_MEDICAL_IMAGE = 33;
+  CATEGORY_U18_VIOLENCE_IMAGE = 34;
+  CATEGORY_CYBER_MALICIOUS = 43;
+  CATEGORY_CHEMICAL_MALICIOUS = 44;
+  CATEGORY_BIOLOGICAL_MALICIOUS = 45;
+  CATEGORY_NUCLEAR_MALICIOUS = 46;
+  CATEGORY_RADIOLOGICAL_MALICIOUS = 47;
+  CATEGORY_PROMPT_INJECTION = 48;
+  CATEGORY_INDIRECT_PROMPT_INJECTION = 64;
+  CATEGORY_SYSTEM_INSTRUCTION_LEAKAGE = 60;
+  CATEGORY_SENSITIVE_PERSONAL_DATA = 61;
+  CATEGORY_REGIONAL_SPEECH_EDIT = 62;
+  CATEGORY_IDENTIFIABLE_PERSON_MEDIA_SSM = 63;
+  CATEGORY_JAILBREAK = 65;
+}
+enum PolicyRatingThreshold {
+  THRESHOLD_UNSPECIFIED = 0;
+  THRESHOLD_NEGLIGIBLE = 1;
+  THRESHOLD_LOW = 2;
+  THRESHOLD_MEDIUM = 3;
+  THRESHOLD_HIGH = 4;
+}
+enum ReturnMaskErrorType {
+  RETURN_MASK_ERROR_TYPE_UNSPECIFIED = 0;
+  RETURN_MASK_ERROR_TYPE_INVALID_PATH = 1;
+  RETURN_MASK_ERROR_TYPE_NON_LEAF_NODE = 2;
+  RETURN_MASK_ERROR_TYPE_NOT_ANNOTATED_FOR_RETURN = 3;
+}
+enum InvocationType {
+  INVOCATION_TYPE_UNSPECIFIED = 0;
+  INVOCATION_TYPE_MAIN_MODEL = 1;
+  INVOCATION_TYPE_INPUT_POLICY = 2;
+  INVOCATION_TYPE_SPECULATIVE_INPUT_POLICY = 21;
+  INVOCATION_TYPE_OUTPUT_POLICY = 3;
+  INVOCATION_TYPE_MAIN_MODEL_CANCELLED_TAKEDOWN = 4;
+  INVOCATION_TYPE_MAIN_MODEL_CANCELLED_DYNAMIC_PROMPT = 5;
+  INVOCATION_TYPE_TOKENIZER = 6;
+  INVOCATION_TYPE_PROMPT_CLASSIFIER = 7;
+  INVOCATION_TYPE_MULTICHOICE_CLASSIFIER = 18;
+  INVOCATION_TYPE_PROMPT_REWRITER = 19;
+  INVOCATION_TYPE_DYNAMIC_PROMPT_MODEL = 8;
+  INVOCATION_TYPE_THOUGHT_SUMMARIZER = 9;
+  INVOCATION_TYPE_AUDIO_TRANSCRIBER = 10;
+  INVOCATION_TYPE_IMAGE_TOKENIZER = 11;
+  INVOCATION_TYPE_AUDIO_TOKENIZER = 12;
+  INVOCATION_TYPE_SMARTCHOICES_EMBEDDING = 13;
+  INVOCATION_TYPE_TEXT_EMBEDDER = 14;
+  INVOCATION_TYPE_VIDEO_ENCODER = 15;
+  INVOCATION_TYPE_VIDEO_DECODER = 16;
+  INVOCATION_TYPE_LATENT_DIFFUSION_MODEL = 17;
+  INVOCATION_TYPE_IMAGE_ENCODER = 22;
+  INVOCATION_TYPE_IMAGE_DECODER = 23;
+  INVOCATION_TYPE_RAI_CLASSIFIER = 20;
+  INVOCATION_TYPE_AUDIO_ENCODER = 24;
+  INVOCATION_TYPE_AUDIO_DECODER = 25;
+  INVOCATION_TYPE_TOOL_EXECUTION = 26;
+  INVOCATION_TYPE_GEMPACTION_SUMMARIZER = 27;
+  INVOCATION_TYPE_GEMINI_AUDIO_TRANSCRIBER = 28;
+}
+enum ActionType {
+  ACTION_TYPE_UNSPECIFIED = 0;
+  ACTION_TYPE_ALLOW = 1;
+  ACTION_TYPE_TAKEDOWN = 2;
+  ACTION_TYPE_DYNAMIC_PROMPT = 3;
+  ACTION_TYPE_REPROMPTING = 4;
+  ACTION_TYPE_REWRITE_RESPONSE = 5;
+  ACTION_TYPE_DYNAMIC_MODEL_SELECTION = 6;
+  ACTION_TYPE_SOFT_TAKEDOWN = 7;
+  ACTION_TYPE_GENERATION_RETRY = 8;
+}
+message ClientLog {
+  .google.ai.generativelanguage.v1main.RecipeIdentifier recipe_info = 4;
+  .google.ai.generativelanguage.v1main.FinishDetails recipe_finish_details = 14;
+  repeated .google.ai.generativelanguage.v1main.BackendInvocationLog backend_invocation_logs = 15;
+  .google.ai.generativelanguage.v1main.ReturnedBeyondExtensionError return_mask_errors = 22;
+  .google.ai.generativelanguage.v1main.ToolExecutionLog tool_execution_log = 24;
+  .google.ai.generativelanguage.v1main.PromptTokenMetadataLog prompt_token_metadata_log = 26;
+  repeated string session_tags = 31;
+}
+message RecipeIdentifier {
+  string recipe_id = 1;
+  string static_recipe_id = 2;
+}
+message ReturnedBeyondExtensionError {
+  repeated .google.ai.generativelanguage.v1main.ReturnMaskErrorType error_types = 1;
+}
+message BackendInvocationLog {
+  .google.ai.generativelanguage.v1main.InvocationType invocation_type = 1;
+  .google.ai.generativelanguage.v1main.FinishDetails finish_details = 2;
+  .google.ai.generativelanguage.v1main.UniserveDebugInfo uniserve_debug_info = 17;
+  repeated .google.ai.generativelanguage.v1main.TransactionTokensLog transaction_tokens = 18;
+}
+message BoolList {
+  repeated bool bool_values = 1;
+}
+message EnumList {
+  repeated int64 enum_values = 1;
+}
+message FinishDetails {
+  .beyond.FinishReason finish_reason = 1;
+  repeated .google.ai.generativelanguage.v1main.PolicyDirectiveLog prompt_policy_directive_log = 2;
+  repeated .google.ai.generativelanguage.v1main.PolicyDirectiveLog response_policy_directive_log = 3;
+  .google.ai.generativelanguage.v1main.IntrospectionScoresLog introspection_scores_log = 4;
+}
+message HardTokensLog {
+  repeated int32 tokens = 1;
+}
+message IntrospectionScoresLog {
+  message LabelScoreLog {
+    message RewindEventLog {
+      float threshold = 1;
+      float score = 2;
+    }
+    string label = 1;
+    float aggregated_score = 3;
+    repeated .google.ai.generativelanguage.v1main.IntrospectionScoresLog.LabelScoreLog.RewindEventLog rewind_events = 4;
+  }
+  message ClassifierResultLog {
+    string classifier_name = 1;
+    repeated .google.ai.generativelanguage.v1main.IntrospectionScoresLog.LabelScoreLog label_scores = 2;
+  }
+  repeated .google.ai.generativelanguage.v1main.IntrospectionScoresLog.ClassifierResultLog classifiers = 1;
+}
+message PerTokenValuesLog {
+  repeated float token_logprobs = 1;
+  repeated bytes token_values = 2;
+  bool trainable = 3;
+  repeated int32 top_k_tokens = 4;
+  repeated float top_k_logprobs = 5;
+}
+message PolicyClassifierOutputLog {
+  string name = 1;
+  bool is_positive_classification = 2;
+  double score = 3;
+  int64 enum_value = 4;
+  .google.ai.generativelanguage.v1main.ScoreList score_list = 5;
+  .google.ai.generativelanguage.v1main.EnumList enum_list = 6;
+  .google.ai.generativelanguage.v1main.BoolList bool_list = 7;
+}
+message PolicyClassifierResultLog {
+  string name = 1;
+  repeated .google.ai.generativelanguage.v1main.PolicyClassifierOutputLog policy_classifier_output_logs = 2;
+  string classifier_hash = 3;
+  string result_class_name = 4;
+}
+message PolicyDirectiveLog {
+  message PolicyRatingOutputLog {
+    .google.ai.generativelanguage.v1main.PolicyRatingCategory category = 1;
+    double double_rating = 2;
+    .google.ai.generativelanguage.v1main.PolicyRatingThreshold threshold_rating = 3;
+  }
+  .beyond.FinishReason finish_reason = 1;
+  repeated .google.ai.generativelanguage.v1main.PolicyDirectiveLog.PolicyRatingOutputLog policy_rating_outputs = 2;
+  string triggering_policy_rule_name = 3;
+  repeated .google.ai.generativelanguage.v1main.PolicyClassifierResultLog policy_classifier_result_logs = 4;
+  .google.ai.generativelanguage.v1main.ActionType action_type = 5;
+  string triggering_policy_rule_cel_expression = 6;
+}
+message PromptTokenMetadataLog {
+  int64 total_formatted_token_count = 1;
+  int64 formatting_and_control_token_count = 2;
+  int64 system_tokens = 3;
+  int64 func_decl_first_party_tokens = 4;
+  int64 func_resp_tokens = 5;
+  int64 document_text_tokens = 6;
+  int64 context_tool_call_zero_party_tokens = 7;
+  int64 thinking_signature_tokens = 8;
+  int64 image_text_tokens = 9;
+}
+message ScoreList {
+  repeated double scores = 1;
+}
+message TokenizedChunkLog {
+  .google.ai.generativelanguage.v1main.TokenizedTextLog text = 1;
+}
+message TokenizedTextLog {
+  .google.ai.generativelanguage.v1main.HardTokensLog hard_tokens = 1;
+  .google.ai.generativelanguage.v1main.PerTokenValuesLog per_token_values = 2;
+}
+message ToolCallLog {
+  message Status {
+    int32 code = 1;
+    string message = 2;
+  }
+  .google.ai.generativelanguage.v1main.ToolType tool_type = 1;
+  .google.ai.generativelanguage.v1main.ExecutionMode execution_mode = 2;
+  double latency_ms = 3;
+  .google.ai.generativelanguage.v1main.ToolCallLog.Status status = 4;
+  int64 response_byte_size = 5;
+}
+message ToolExecutionLog {
+  repeated .google.ai.generativelanguage.v1main.ToolCallLog tool_calls = 1;
+}
+message TransactionTokensLog {
+  repeated .google.ai.generativelanguage.v1main.TokenizedChunkLog request_chunks = 1;
+  repeated .google.ai.generativelanguage.v1main.TokenizedChunkLog response_chunks = 2;
+}
+message UniserveDebugInfo {
+  string serving_borg_cell = 10;
+}

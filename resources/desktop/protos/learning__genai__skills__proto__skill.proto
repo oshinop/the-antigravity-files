@@ -1,0 +1,37 @@
+// Extracted file offset 0x367c613, 1227 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai.skills;
+import "google/api/visibility.proto";
+import "learning/genai/skills/proto/skill_custom_extensions.proto";
+import "security/thinmint/proto/core/thinmint_core.proto";
+message SkillFile {
+  string mime_type = 1;
+  string text = 2; // oneof=content
+  bytes data = 3; // oneof=content
+  string guri = 4; // oneof=content
+  .thinmint.ThinMint thin_mint = 5;
+}
+message Skill {
+  message MetadataEntry {
+    string key = 1;
+    string value = 2;
+  }
+  message InlineResources {
+    message ResourcesEntry {
+      string key = 1;
+      .genai.skills.SkillFile value = 2;
+    }
+    repeated .genai.skills.Skill.InlineResources.ResourcesEntry resources = 1;
+  }
+  string name = 1;
+  string skill_id = 2;
+  string description = 3;
+  string content = 4;
+  repeated string allowed_tools = 5;
+  repeated .genai.skills.Skill.MetadataEntry metadata = 6;
+  .genai.skills.Skill.InlineResources inline_resources = 7; // oneof=resources
+  .genai.skills.SkillFile zipped_resources = 8; // oneof=resources
+  string version = 9;
+  repeated string channels = 10;
+  .genai.skills.SkillCustomExtensions custom_extensions = 100;
+}

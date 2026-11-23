@@ -1,0 +1,28 @@
+USER_REQUEST
+
+The user is: %s.
+
+2006-01-02T15:04:05Z07:00
+
+The current local time is: %s.
+
+
+The user's current state is as follows:
+%s
+
+
+The user has uploaded %d audio file(s). Consider them as a part of their message.
+
+
+The user has uploaded %d video(s):
+
+ADDITIONAL_METADATA
+
+USER_SETTINGS_CHANGE
+
+
+Video number %v description: 
+%s
+
+
+The user has uploaded %d image(s):

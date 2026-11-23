@@ -1,0 +1,14 @@
+// Extracted file offset 0x364c5f3, 684 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/timestamp.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ConfigGeneratorBuildData {
+  int64 changelist = 1; // oneof=_changelist
+  .google.protobuf.Timestamp invocation_time = 2;
+}
+message BuildData {
+  .google.api.ConfigGeneratorBuildData config_generator = 1;
+}

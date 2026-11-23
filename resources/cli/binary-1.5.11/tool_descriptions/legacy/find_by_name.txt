@@ -1,0 +1,5 @@
+Search for files and subdirectories within a specified directory using fd.
+Search uses smart case and will ignore gitignored files by default.
+Pattern and Excludes both use the glob format. If you are searching for Extensions, there is no need to specify both Pattern AND Extensions.
+To avoid overwhelming output, the results are capped at 50 matches. Use the various arguments to filter the search scope as needed.
+Results will include the type, size, modification time, and relative path.

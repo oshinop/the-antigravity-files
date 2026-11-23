@@ -1,0 +1,13 @@
+// Extracted file offset 0x3652252, 755 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+enum DataFormat {
+  FORMAT_UNSPECIFIED = 0;
+  FORMAT_FULL = 1;
+  FORMAT_LOG = 2;
+}
+message CloudAdminAccess {
+  .privacy.data_governance.attributes.DataFormat data_format = 1; // oneof=_data_format
+}

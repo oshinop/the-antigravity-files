@@ -1,0 +1,9 @@
+// Extracted file offset 0x3622529, 268 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+enum StackType {
+  STACK_TYPE_UNSPECIFIED = 0;
+  STABLE = 1;
+  EXPRESS = 2;
+}

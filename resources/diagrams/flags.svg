@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 778" width="1200" height="778">
+<rect width="1200" height="778" fill="#ffffff"/>
+<text x="48.0" y="76.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="#202124" text-anchor="start">73 of 635 server flags control safety, permissions or data</text>
+<text x="48.0" y="112.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#5f6368" text-anchor="start">Flags agy receives from Google&#x27;s server at startup, grouped by what their names say they control</text>
+<text x="432.0" y="177.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#202124" text-anchor="end">Code Assist, Gemini CLI &amp; other Google</text>
+<text x="432.0" y="201.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#202124" text-anchor="end">products</text>
+<rect x="456.0" y="165.0" width="380.0" height="34.0" rx="6" fill="#bdc1c6"/>
+<text x="848.0" y="190.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#202124" text-anchor="start">193</text>
+<text x="432.0" y="261.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#202124" text-anchor="end">Tools, plugins &amp; integrations</text>
+<rect x="456.0" y="237.0" width="228.4" height="34.0" rx="6" fill="#bdc1c6"/>
+<text x="696.4" y="262.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#202124" text-anchor="start">116</text>
+<text x="432.0" y="333.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#202124" text-anchor="end">Agents, sessions &amp; workflows</text>
+<rect x="456.0" y="309.0" width="177.2" height="34.0" rx="6" fill="#bdc1c6"/>
+<text x="645.2" y="334.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#202124" text-anchor="start">90</text>
+<text x="432.0" y="405.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#d93025" text-anchor="end">Safety, permissions &amp; data collection</text>
+<rect x="456.0" y="381.0" width="143.7" height="34.0" rx="6" fill="#d93025"/>
+<text x="611.7" y="406.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#d93025" text-anchor="start">73</text>
+<text x="679.7" y="405.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="400" fill="#d93025" text-anchor="start">auto-command-config</text>
+<text x="679.7" y="431.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="400" fill="#d93025" text-anchor="start">auto-mode-permission-preset</text>
+<text x="679.7" y="457.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="400" fill="#d93025" text-anchor="start">enable-rpc-sandbox-proxy-allow-all</text>
+<text x="679.7" y="483.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="400" fill="#d93025" text-anchor="start">log-artifacts-config</text>
+<text x="679.7" y="509.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="400" fill="#d93025" text-anchor="start">policy-guardian-config</text>
+<text x="432.0" y="557.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#202124" text-anchor="end">Models, prompts &amp; context</text>
+<rect x="456.0" y="533.0" width="118.1" height="34.0" rx="6" fill="#bdc1c6"/>
+<text x="586.1" y="558.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#202124" text-anchor="start">60</text>
+<text x="679.7" y="557.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">generic-system-prompt</text>
+<text x="432.0" y="629.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#202124" text-anchor="end">Interface, onboarding &amp; promotion</text>
+<rect x="456.0" y="605.0" width="112.2" height="34.0" rx="6" fill="#bdc1c6"/>
+<text x="580.2" y="630.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#202124" text-anchor="start">57</text>
+<text x="432.0" y="701.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#202124" text-anchor="end">Infrastructure, quotas &amp; other</text>
+<rect x="456.0" y="677.0" width="90.6" height="34.0" rx="6" fill="#bdc1c6"/>
+<text x="558.6" y="702.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" fill="#202124" text-anchor="start">46</text>
+</svg>

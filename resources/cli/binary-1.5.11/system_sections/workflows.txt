@@ -1,0 +1,12 @@
+ are markdown-based guides providing step-by-step instructions for specific tasks.
+
+If a workflow looks relevant, or the user explicitly uses a slash command like /slash-command to invoke a workflow, then view the workflow file.
+
+
+
+Here is the current list of 
+
+, along with a description on when to use them. They are provided in - [slash command] (path): [description] format.
+
+
+- /%s (%s): %s

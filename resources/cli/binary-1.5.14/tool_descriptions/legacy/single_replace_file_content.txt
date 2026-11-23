@@ -1,0 +1,3 @@
+Use this tool ONLY when you are making a SINGLE CONTIGUOUS block of edits to the same file (i.e. replacing a single contiguous block of text).
+
+Do NOT make multiple parallel calls to this tool for the same file.

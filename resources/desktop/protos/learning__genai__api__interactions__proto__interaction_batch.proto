@@ -1,0 +1,56 @@
+// Extracted file offset 0x36d824c, 2679 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/protobuf/struct.proto";
+import "learning/genai/api/genai_versioning.proto";
+import "learning/genai/api/interactions/proto/error.proto";
+import "learning/genai/api/interactions/proto/interaction.proto";
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+import "learning/genai/api/webhooks/proto/webhook_messages.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message InteractionBatch {
+  enum Status {
+    UNSPECIFIED = 0;
+    QUEUED = 1;
+    IN_PROGRESS = 2;
+    COMPLETED = 3;
+    FAILED = 4;
+    CANCELLED = 5;
+    EXPIRED = 6;
+  }
+  message RequestCounts {
+    int32 total = 1;
+    int32 completed = 2;
+    int32 failed = 3;
+  }
+  string id = 1;
+  string model = 2;
+  .genai.InteractionBatch.Status status = 3;
+  string display_name = 4;
+  string created = 5;
+  string updated = 6;
+  string expires = 7;
+  .genai.InteractionBatch.RequestCounts request_counts = 8;
+  string input_file = 9; // oneof=requests
+  .genai.InteractionBatchRequestItemList inline_requests = 10; // oneof=requests
+  string responses = 11;
+  .genai.WebhookConfig webhook_config = 12;
+  .genai.Error error = 13;
+}
+message InteractionBatchRequestItemList {
+  repeated .genai.InteractionBatchRequestItem items = 1;
+}
+message InteractionBatchRequestItem {
+  string request_id = 1;
+  .google.protobuf.Struct metadata = 2;
+  .genai.Interaction request = 3;
+}
+message InteractionBatchOutputItem {
+  string request_id = 1;
+  .google.protobuf.Struct metadata = 2;
+  .genai.Interaction response = 3;
+  .genai.Error error = 4;
+  int32 status_code = 5;
+}

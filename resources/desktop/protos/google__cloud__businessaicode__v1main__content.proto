@@ -1,0 +1,468 @@
+// Extracted file offset 0x387d8c4, 18317 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.cloud.businessaicode.v1main;
+import "google/api/field_behavior.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/struct.proto";
+import "net/proto2/contrib/validator/annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum DiffChangeType {
+  DIFF_CHANGE_TYPE_UNSPECIFIED = 0;
+  INSERT = 1;
+  DELETE = 2;
+  UNCHANGED = 3;
+}
+enum Type {
+  TYPE_UNSPECIFIED = 0;
+  STRING = 1;
+  NUMBER = 2;
+  INTEGER = 3;
+  BOOLEAN = 4;
+  ARRAY = 5;
+  OBJECT = 6;
+  NULL = 7;
+}
+enum HarmCategory {
+  HARM_CATEGORY_UNSPECIFIED = 0;
+  HARM_CATEGORY_HARASSMENT = 7;
+  HARM_CATEGORY_HATE_SPEECH = 8;
+  HARM_CATEGORY_SEXUALLY_EXPLICIT = 9;
+  HARM_CATEGORY_DANGEROUS_CONTENT = 10;
+}
+enum HarmProbability {
+  HARM_PROBABILITY_UNSPECIFIED = 0;
+  NEGLIGIBLE = 1;
+  LOW = 2;
+  MEDIUM = 3;
+  HIGH = 4;
+}
+enum HarmBlockThreshold {
+  HARM_BLOCK_THRESHOLD_UNSPECIFIED = 0;
+  BLOCK_LOW_AND_ABOVE = 1;
+  BLOCK_MEDIUM_AND_ABOVE = 2;
+  BLOCK_ONLY_HIGH = 3;
+  BLOCK_NONE = 4;
+  OFF = 5;
+}
+enum FinishReason {
+  FINISH_REASON_UNSPECIFIED = 0;
+  STOP = 1;
+  MAX_TOKENS = 2;
+  SAFETY = 3;
+  RECITATION = 4;
+  OTHER = 5;
+  BLOCKLIST = 6;
+  PROHIBITED_CONTENT = 7;
+  SPII = 8;
+  MALFORMED_FUNCTION_CALL = 9;
+  IMAGE_SAFETY = 10;
+  IMAGE_PROHIBITED_CONTENT = 11;
+  IMAGE_RECITATION = 12;
+  IMAGE_OTHER = 13;
+  UNEXPECTED_TOOL_CALL = 14;
+  NO_IMAGE = 15;
+}
+enum Modality {
+  MODALITY_UNSPECIFIED = 0;
+  TEXT = 1;
+  IMAGE = 2;
+  VIDEO = 3;
+  AUDIO = 4;
+  DOCUMENT = 5;
+}
+message AiCodeConfig {
+  message AdditionalContent {
+    repeated .google.cloud.businessaicode.v1main.FileEdit file_edits = 1;
+  }
+  string experience = 1;
+  repeated .google.cloud.businessaicode.v1main.SourceFile files = 3;
+  .google.cloud.businessaicode.v1main.AiCodeConfig.AdditionalContent additional_content = 4; // oneof=_additional_content
+}
+message Content {
+  repeated .google.cloud.businessaicode.v1main.Part parts = 1;
+  string role = 2;
+}
+message Part {
+  string text = 1; // oneof=data
+  .google.cloud.businessaicode.v1main.Blob inline_data = 2; // oneof=data
+  .google.cloud.businessaicode.v1main.FileData file_data = 3; // oneof=data
+  .google.cloud.businessaicode.v1main.FunctionCall function_call = 4; // oneof=data
+  .google.cloud.businessaicode.v1main.FunctionResponse function_response = 5; // oneof=data
+  .google.cloud.businessaicode.v1main.ExecutableCode executable_code = 6; // oneof=data
+  .google.cloud.businessaicode.v1main.CodeExecutionResult code_execution_result = 7; // oneof=data
+  .google.cloud.businessaicode.v1main.VideoMetadata video_metadata = 8; // oneof=metadata
+  bool thought = 9;
+  bytes thought_signature = 10;
+}
+message Blob {
+  string mime_type = 1;
+  bytes data = 2;
+}
+message FileData {
+  string mime_type = 1;
+  string file_uri = 2;
+}
+message FunctionCall {
+  string name = 1;
+  .google.protobuf.Struct args = 2;
+  string id = 3;
+}
+message FunctionResponse {
+  string name = 1;
+  .google.protobuf.Struct response = 2;
+  string id = 3;
+  repeated .google.cloud.businessaicode.v1main.FunctionResponsePart parts = 4;
+}
+message FunctionResponsePart {
+  .google.cloud.businessaicode.v1main.FunctionResponseBlob inline_data = 1; // oneof=data
+}
+message FunctionResponseBlob {
+  string mime_type = 1;
+  bytes data = 2;
+}
+message Tool {
+  enum PhishBlockThreshold {
+    PHISH_BLOCK_THRESHOLD_UNSPECIFIED = 0;
+    BLOCK_LOW_AND_ABOVE = 30;
+    BLOCK_MEDIUM_AND_ABOVE = 40;
+    BLOCK_HIGH_AND_ABOVE = 50;
+    BLOCK_HIGHER_AND_ABOVE = 55;
+    BLOCK_VERY_HIGH_AND_ABOVE = 60;
+    BLOCK_ONLY_EXTREMELY_HIGH = 100;
+  }
+  message EnterpriseWebSearch {
+    repeated string exclude_domains = 1;
+    .google.cloud.businessaicode.v1main.Tool.PhishBlockThreshold blocking_confidence = 2;
+  }
+  repeated .google.cloud.businessaicode.v1main.FunctionDeclaration function_declarations = 1;
+  .google.cloud.businessaicode.v1main.Tool.EnterpriseWebSearch enterprise_web_search = 8;
+}
+message FunctionDeclaration {
+  string name = 1;
+  string description = 2;
+  .google.cloud.businessaicode.v1main.Schema parameters = 3;
+  .google.protobuf.Value parameters_json_schema = 6; // oneof=_parameters_json_schema
+  .google.cloud.businessaicode.v1main.Schema response = 4; // oneof=_response
+  .google.protobuf.Value response_json_schema = 7; // oneof=_response_json_schema
+}
+message Schema {
+  message PropertiesEntry {
+    string key = 1;
+    .google.cloud.businessaicode.v1main.Schema value = 2;
+  }
+  .google.cloud.businessaicode.v1main.Type type = 1;
+  string format = 2;
+  string description = 3;
+  bool nullable = 4;
+  repeated string enum = 5;
+  .google.cloud.businessaicode.v1main.Schema items = 6;
+  repeated .google.cloud.businessaicode.v1main.Schema.PropertiesEntry properties = 7;
+  repeated string required = 8;
+  double minimum = 9; // oneof=_minimum
+  double maximum = 10; // oneof=_maximum
+  int64 min_length = 11; // oneof=_min_length
+  int64 max_length = 12; // oneof=_max_length
+  string pattern = 13; // oneof=_pattern
+  .google.protobuf.Value example = 14; // oneof=_example
+  string title = 15;
+  .google.protobuf.Value default = 16;
+  int64 min_items = 17;
+  int64 max_items = 18;
+  int64 min_properties = 19;
+  int64 max_properties = 20;
+  repeated string property_ordering = 21;
+  repeated .google.cloud.businessaicode.v1main.Schema any_of = 22;
+}
+message ToolConfig {
+  .google.cloud.businessaicode.v1main.FunctionCallingConfig function_calling_config = 1;
+}
+message FunctionCallingConfig {
+  enum Mode {
+    MODE_UNSPECIFIED = 0;
+    AUTO = 1;
+    ANY = 2;
+    NONE = 3;
+  }
+  .google.cloud.businessaicode.v1main.FunctionCallingConfig.Mode mode = 1;
+  repeated string allowed_function_names = 2;
+}
+message SafetySetting {
+  enum HarmBlockMethod {
+    HARM_BLOCK_METHOD_UNSPECIFIED = 0;
+    SEVERITY = 1;
+    PROBABILITY = 2;
+  }
+  .google.cloud.businessaicode.v1main.HarmCategory category = 1;
+  .google.cloud.businessaicode.v1main.HarmBlockThreshold threshold = 2;
+  .google.cloud.businessaicode.v1main.SafetySetting.HarmBlockMethod method = 3;
+}
+message ImageConfig {
+  enum PersonGeneration {
+    PERSON_GENERATION_UNSPECIFIED = 0;
+    ALLOW_ALL = 1;
+    ALLOW_ADULT = 2;
+    ALLOW_NONE = 3;
+  }
+  enum ProminentPeople {
+    PROMINENT_PEOPLE_UNSPECIFIED = 0;
+    ALLOW_PROMINENT_PEOPLE = 1;
+    BLOCK_PROMINENT_PEOPLE = 2;
+  }
+  message ImageOutputOptions {
+    string mime_type = 1; // oneof=_mime_type
+    int32 compression_quality = 2; // oneof=_compression_quality
+  }
+  .google.cloud.businessaicode.v1main.ImageConfig.ImageOutputOptions image_output_options = 1; // oneof=_image_output_options
+  string aspect_ratio = 2; // oneof=_aspect_ratio
+  .google.cloud.businessaicode.v1main.ImageConfig.PersonGeneration person_generation = 3; // oneof=_person_generation
+  string image_size = 4; // oneof=_image_size
+  .google.cloud.businessaicode.v1main.ImageConfig.ProminentPeople prominent_people = 5;
+}
+message GenerationConfig {
+  enum Modality {
+    MODALITY_UNSPECIFIED = 0;
+    TEXT = 1;
+    IMAGE = 2;
+    AUDIO = 3;
+  }
+  enum MediaResolution {
+    MEDIA_RESOLUTION_UNSPECIFIED = 0;
+    MEDIA_RESOLUTION_LOW = 1;
+    MEDIA_RESOLUTION_MEDIUM = 2;
+    MEDIA_RESOLUTION_HIGH = 3;
+  }
+  message ThinkingConfig {
+    enum ThinkingLevel {
+      THINKING_LEVEL_UNSPECIFIED = 0;
+      LOW = 1;
+      MEDIUM = 2;
+      HIGH = 3;
+      MINIMAL = 4;
+      EXTRA_HIGH = 5;
+    }
+    bool include_thoughts = 1; // oneof=_include_thoughts
+    int32 thinking_budget = 2; // oneof=_thinking_budget
+    .google.cloud.businessaicode.v1main.GenerationConfig.ThinkingConfig.ThinkingLevel thinking_level = 3; // oneof=_thinking_level
+    int32 min_thinking_budget = 4; // oneof=_min_thinking_budget
+  }
+  int32 candidate_count = 1; // oneof=_candidate_count
+  repeated string stop_sequences = 2;
+  int32 max_output_tokens = 4; // oneof=_max_output_tokens
+  float temperature = 5; // oneof=_temperature
+  float top_p = 6; // oneof=_top_p
+  float top_k = 7; // oneof=_top_k
+  int32 seed = 8; // oneof=_seed
+  string response_mime_type = 9; // oneof=_response_mime_type
+  .google.cloud.businessaicode.v1main.Schema response_schema = 10; // oneof=_response_schema
+  .google.protobuf.Value response_json_schema = 11; // oneof=_response_json_schema
+  float presence_penalty = 12; // oneof=_presence_penalty
+  float frequency_penalty = 13; // oneof=_frequency_penalty
+  .google.cloud.businessaicode.v1main.GenerationConfig.ThinkingConfig thinking_config = 14;
+  bool response_logprobs = 15; // oneof=_response_logprobs
+  int32 logprobs = 16; // oneof=_logprobs
+  repeated .google.cloud.businessaicode.v1main.GenerationConfig.Modality response_modalities = 17;
+  .google.cloud.businessaicode.v1main.GenerationConfig.MediaResolution media_resolution = 18;
+  .google.cloud.businessaicode.v1main.ImageConfig image_config = 30; // oneof=_image_config
+}
+message Candidate {
+  int32 index = 1;
+  .google.cloud.businessaicode.v1main.Content content = 2;
+  .google.cloud.businessaicode.v1main.FinishReason finish_reason = 3;
+  repeated .google.cloud.businessaicode.v1main.SafetyRating safety_ratings = 4;
+  .google.cloud.businessaicode.v1main.CitationMetadata citation_metadata = 5;
+  string finish_message = 6; // oneof=_finish_message
+  .google.cloud.businessaicode.v1main.GroundingMetadata grounding_metadata = 7;
+  double avg_logprobs = 8;
+  .google.cloud.businessaicode.v1main.UrlContextMetadata url_context_metadata = 10;
+  .google.cloud.businessaicode.v1main.AiCodeOutput aicode_output = 1001;
+}
+message AiCodeOutput {
+  message DerivedContent {
+    int32 start_index = 1; // oneof=_start_index
+    int32 end_index = 2; // oneof=_end_index
+    .google.cloud.businessaicode.v1main.OutputSourceFile file = 3; // oneof=content
+    .google.cloud.businessaicode.v1main.CodeBlock code_block = 4; // oneof=content
+    .google.cloud.businessaicode.v1main.TextBlock text_block = 5; // oneof=content
+    .google.cloud.businessaicode.v1main.PredictionMetadata prediction_metadata = 6; // oneof=content
+  }
+  repeated .google.cloud.businessaicode.v1main.AiCodeOutput.DerivedContent contents = 1;
+}
+message OutputSourceFile {
+  string file_uri = 1;
+  string content = 2;
+}
+message TextBlock {
+  string content = 1;
+}
+message PredictionMetadata {
+  double score = 1;
+  double classifier_score = 2;
+}
+message SafetyRating {
+  .google.cloud.businessaicode.v1main.HarmCategory category = 1;
+  .google.cloud.businessaicode.v1main.HarmProbability probability = 2;
+  bool blocked = 3;
+}
+message CitationMetadata {
+  repeated .google.cloud.businessaicode.v1main.Citation citations = 1;
+}
+message Citation {
+  int32 start_index = 1;
+  int32 end_index = 2;
+  string uri = 3;
+  string license = 4;
+}
+message ExecutableCode {
+  enum Language {
+    LANGUAGE_UNSPECIFIED = 0;
+    PYTHON = 1;
+  }
+  .google.cloud.businessaicode.v1main.ExecutableCode.Language language = 1;
+  string code = 2;
+}
+message CodeExecutionResult {
+  enum Outcome {
+    OUTCOME_UNSPECIFIED = 0;
+    OUTCOME_OK = 1;
+    OUTCOME_FAILED = 2;
+    OUTCOME_DEADLINE_EXCEEDED = 3;
+  }
+  .google.cloud.businessaicode.v1main.CodeExecutionResult.Outcome outcome = 1;
+  string output = 2;
+}
+message VideoMetadata {
+  .google.protobuf.Duration start_offset = 1;
+  .google.protobuf.Duration end_offset = 2;
+  double fps = 3;
+}
+message GroundingMetadata {
+  message SearchEntryPoint {
+    string rendered_content = 1;
+    bytes sdk_blob = 2;
+  }
+  message GroundingChunk {
+    message Web {
+      string uri = 1; // oneof=_uri
+      string title = 2; // oneof=_title
+    }
+    .google.cloud.businessaicode.v1main.GroundingMetadata.GroundingChunk.Web web = 1; // oneof=chunk_type
+  }
+  message GroundingSupport {
+    .google.cloud.businessaicode.v1main.GroundingMetadata.Segment segment = 1; // oneof=_segment
+    repeated int32 grounding_chunk_indices = 2;
+    repeated float confidence_scores = 3;
+  }
+  message Segment {
+    int32 part_index = 1;
+    int32 start_index = 2;
+    int32 end_index = 3;
+    string text = 4;
+  }
+  repeated string web_search_queries = 1;
+  .google.cloud.businessaicode.v1main.GroundingMetadata.SearchEntryPoint search_entry_point = 2; // oneof=_search_entry_point
+  repeated .google.cloud.businessaicode.v1main.GroundingMetadata.GroundingChunk grounding_chunks = 3;
+  repeated .google.cloud.businessaicode.v1main.GroundingMetadata.GroundingSupport grounding_supports = 4;
+  .google.cloud.businessaicode.v1main.RetrievalMetadata retrieval_metadata = 5; // oneof=_retrieval_metadata
+}
+message RetrievalMetadata {
+  float google_search_dynamic_retrieval_score = 1;
+}
+message UrlContextMetadata {
+  repeated .google.cloud.businessaicode.v1main.UrlMetadata url_metadata = 1;
+}
+message UrlMetadata {
+  enum UrlRetrievalStatus {
+    URL_RETRIEVAL_STATUS_UNSPECIFIED = 0;
+    URL_RETRIEVAL_STATUS_SUCCESS = 1;
+    URL_RETRIEVAL_STATUS_ERROR = 2;
+  }
+  string retrieved_url = 1;
+  .google.cloud.businessaicode.v1main.UrlMetadata.UrlRetrievalStatus url_retrieval_status = 2;
+}
+message ModalityTokenCount {
+  .google.cloud.businessaicode.v1main.Modality modality = 1;
+  int32 token_count = 2;
+}
+message CodeBlock {
+  string content = 1;
+  string programming_language = 2;
+}
+message SourceFile {
+  enum InclusionReason {
+    INCLUSION_REASON_UNSPECIFIED = 0;
+    ACTIVE = 1;
+    OPEN = 2;
+    RECENTLY_CLOSED = 3;
+    RECENTLY_EDITED = 4;
+    COLOCATED = 5;
+    RELATED = 6;
+    USER_SELECTED = 7;
+  }
+  message FileSegment {
+    string content = 1;
+    bool is_selected = 2;
+  }
+  repeated .google.cloud.businessaicode.v1main.SourceFile.InclusionReason inclusion_reason = 1;
+  string file_uri = 2;
+  string programming_language = 3; // oneof=_programming_language
+  repeated .google.cloud.businessaicode.v1main.SourceFile.FileSegment segments = 4;
+}
+message FileEdit {
+  enum EditType {
+    EDIT_TYPE_UNSPECIFIED = 0;
+    TYPED = 1;
+    PASTED = 2;
+    AI_GENERATED = 3;
+  }
+  string file_uri = 1;
+  repeated .google.cloud.businessaicode.v1main.CodeEdit edit = 2;
+  .google.cloud.businessaicode.v1main.FileEdit.EditType edit_type = 3;
+}
+message CodeEdit {
+  int32 start_line = 1;
+  int32 end_line = 2;
+  repeated .google.cloud.businessaicode.v1main.DiffLine lines = 3;
+}
+message DiffLine {
+  string text = 1;
+  .google.cloud.businessaicode.v1main.DiffChangeType type = 2;
+  .google.cloud.businessaicode.v1main.CharacterDiff character_diff = 3;
+}
+message CharacterDiff {
+  repeated .google.cloud.businessaicode.v1main.CharacterDiffChange changes = 1;
+}
+message CharacterDiffChange {
+  string text = 1;
+  .google.cloud.businessaicode.v1main.DiffChangeType type = 2;
+}
+message Model {
+  enum Feature {
+    FEATURE_UNSPECIFIED = 0;
+    IMAGE_INPUT = 1;
+    IMAGE_OUTPUT = 2;
+    JSON_SCHEMA_OUTPUT = 3;
+    BROWSE_AS_A_TOOL = 4;
+    SEARCH_AS_A_TOOL = 5;
+    TOP_P = 6;
+    AUDIO_INPUT = 7;
+    AUDIO_OUTPUT = 8;
+    CODE_EXECUTION = 9;
+    FUNCTION_CALLING = 10;
+    THINKING = 11;
+    THINKING_LEVEL = 12;
+    VIDEO_INPUT = 13;
+    DOCUMENT_INPUT = 14;
+  }
+  string model_id = 1;
+  string display_name = 2;
+  string description = 3;
+  string canonical_model_id = 4;
+  string version = 5;
+  int32 input_token_limit = 6; // oneof=_input_token_limit
+  int32 output_token_limit = 7; // oneof=_output_token_limit
+  repeated .google.cloud.businessaicode.v1main.GenerationConfig.ThinkingConfig.ThinkingLevel supported_thinking_levels = 8;
+  repeated .google.cloud.businessaicode.v1main.Model.Feature supported_features = 9;
+  .google.cloud.businessaicode.v1main.GenerationConfig generation_config = 10;
+}

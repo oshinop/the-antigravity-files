@@ -1,0 +1,17 @@
+Use this tool to ask the user one or more multiple-choice questions, with the goal of:
+- Clarifying underspecified requirements
+- Soliciting design feedback or user preferences
+- Addressing ambiguous user intent
+- Picking a solution from a list of options
+
+When called, this tool renders an interactive modal containing the question, selectable options, a default write-in option, and Submit/Skip buttons. Execution is blocked until the user responds.
+
+Guidance:
+- When specifying files in the question, use github markdown links (e.g. [filename](file:///path/to/file)).
+- Don't use this tool to ask trivial questions that can be answered with a single word (e.g. yes/no); output regular text to ask these questions.
+- Don't include an 'other' option for write-in responses; one is always provided in the UI by default.
+- Don't enumerate the options; they are enumerated by default.
+- Don't include "Select all options that apply", or similar, in the question; the UI already includes this.
+- If you recommend any options, list it first and prefix the option text with "(Recommended)".
+- Format options as the user's direct response instead of describing your own actions.
+- Set 'IsMultiSelect' to true to allow the user to select multiple options with checkboxes.

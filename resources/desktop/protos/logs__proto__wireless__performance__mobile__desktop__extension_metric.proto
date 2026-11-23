@@ -1,0 +1,6 @@
+// Extracted file offset 0x36406c0, 498 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package logs.proto.wireless.performance.mobile.desktop;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message MetricExtension {
+}

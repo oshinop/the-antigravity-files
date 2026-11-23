@@ -1,0 +1,7 @@
+// Extracted file offset 0x3620b8b, 258 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package privacy.context.external;
+message ExternalPRequestContext {
+  int32 origin_associated_product_id = 13;
+  bool is_incognito = 24;
+}

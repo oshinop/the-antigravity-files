@@ -1,0 +1,12 @@
+// Extracted file offset 0x362b828, 340 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package google.api;
+import "google/api/inclusion.proto";
+message Codegen {
+  repeated .google.api.CodegenRule rules = 1;
+}
+message CodegenRule {
+  string selector = 1;
+  string json_name = 2;
+  bool resource_reference = 3;
+}

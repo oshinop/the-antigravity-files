@@ -1,0 +1,9 @@
+// Extracted file offset 0x363d177, 509 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package devrel.primes.protos;
+import "devrel/primes/protos/anonymization.proto";
+import "net/proto2/proto/descriptor.proto";
+message PrimesAnonymizationAnnotation {
+  .devrel.primes.protos.AnonymizedMessageSource source = 1;
+  .devrel.primes.protos.AnonymizationMethod method = 2;
+}

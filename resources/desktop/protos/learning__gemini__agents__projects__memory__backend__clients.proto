@@ -1,0 +1,38 @@
+// Extracted file offset 0x36851d1, 1328 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package learning.gemini.memory;
+import "google/protobuf/duration.proto";
+import "learning/gemini/agents/projects/memory/backend/storage.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum ClientId {
+  CLIENT_ID_UNSPECIFIED = 0;
+  CLIENT_ID_JETSKI = 1;
+  CLIENT_ID_REMY = 2;
+  CLIENT_ID_SOBI = 3;
+  CLIENT_ID_ASTRA = 4;
+  CLIENT_ID_JITRO = 5;
+  CLIENT_ID_VSWE = 6;
+  CLIENT_ID_VEGA = 7;
+  CLIENT_ID_AVID = 8;
+  CLIENT_ID_NEEDLEWORK = 9;
+  CLIENT_ID_GEMINI_API = 10;
+  CLIENT_ID_MANGO = 11;
+  CLIENT_ID_NIVAS = 12;
+  CLIENT_ID_PROBER = 13;
+  CLIENT_ID_ASK_STUDIO = 14;
+}
+message ClientRegistry {
+  message GroupRetentionPolicy {
+    string group_id = 1;
+    .google.protobuf.Duration memory_ttl = 2;
+  }
+  message ClientPermission {
+    .learning.gemini.memory.ClientId client_id = 1;
+    repeated string allowed_users = 2;
+    repeated string allowed_mdb_groups = 3;
+    .learning.gemini.memory.StorageBackendType storage = 4;
+    .google.protobuf.Duration default_memory_ttl = 5;
+    repeated .learning.gemini.memory.ClientRegistry.GroupRetentionPolicy group_retention_policies = 6;
+  }
+  repeated .learning.gemini.memory.ClientRegistry.ClientPermission clients = 1;
+}

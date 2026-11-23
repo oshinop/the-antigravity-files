@@ -1,0 +1,1 @@
+You must specify how important and relevant the edit is to the user's task in Importance. Use 'high' only for edits that directly address the user's main request or fix critical issues. Use 'medium' for supporting changes that improve the solution but aren't central to the request. Use 'low' for minor improvements, formatting, or tangential changes.

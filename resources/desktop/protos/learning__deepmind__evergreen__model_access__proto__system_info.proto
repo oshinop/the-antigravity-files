@@ -1,0 +1,56 @@
+// Extracted file offset 0x36cb909, 2468 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package deepmind.evergreen.v1;
+import "google/api/inclusion.proto";
+import "google/protobuf/struct.proto";
+import "learning/deepmind/evergreen/model_access/proto/content.proto";
+import "learning/deepmind/evergreen/model_access/proto/generation_config.proto";
+import "learning/deepmind/goodall/proto/evergreen/gdm_labs_config.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum Capability {
+  CAPABILITY_UNSPECIFIED = 0;
+  CAPABILITY_INTERACTIVE_TOKENIZE = 1;
+  CAPABILITY_REALTIME_INTERACTION = 2;
+}
+message ContentExample {
+  string title = 1;
+  .deepmind.evergreen.v1.Content content = 2;
+}
+message SubstreamInfo {
+  string substream_name = 1;
+  repeated string mimetypes = 2;
+}
+message SystemConfiguration {
+  message CheckpointInfo {
+    string path = 1;
+  }
+  string identifier = 1;
+  .google.protobuf.Struct vars = 2;
+  repeated .deepmind.evergreen.v1.SystemConfiguration subsystems = 3;
+  repeated .deepmind.evergreen.v1.SystemConfiguration.CheckpointInfo checkpoints = 4;
+  .deepmind.evergreen.v1.GenerationConfig default_generation_config = 11;
+  int32 max_input_token_count = 5;
+  int32 max_output_token_count = 6;
+  .deepmind.evergreen.v1.Content preamble = 7;
+  int32 batch_size = 8;
+  bool history_cache_enabled = 9;
+  repeated string model_specific_config_types = 10;
+}
+message RuntimeInfo {
+  int64 xmanager_xid = 1;
+  repeated string endpoint_urls = 3;
+}
+message SystemInfo {
+  string name = 1;
+  string title = 2;
+  string description = 3;
+  repeated string allowed_users = 4;
+  repeated .deepmind.evergreen.v1.ContentExample content_examples = 5;
+  repeated string docs_to_ack = 6;
+  repeated .deepmind.evergreen.v1.SubstreamInfo input_substreams = 7;
+  repeated .deepmind.evergreen.v1.SubstreamInfo output_substreams = 8;
+  .deepmind.evergreen.v1.SystemConfiguration system_configuration = 9;
+  .deepmind.evergreen.v1.RuntimeInfo runtime_info = 11;
+  repeated .deepmind.evergreen.v1.Capability capabilities = 12;
+  .deepmind_goodall_proto_evergreen.GdmLabsConfig gdm_labs_config = 13;
+}

@@ -1,0 +1,5 @@
+// Extracted file offset 0x3632979, 377 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package agency;
+message CustomExtensions {
+}

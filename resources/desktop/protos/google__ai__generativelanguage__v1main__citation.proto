@@ -1,0 +1,15 @@
+// Extracted file offset 0x3665f99, 975 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message CitationMetadata {
+  repeated .google.ai.generativelanguage.v1main.CitationSource citation_sources = 1;
+}
+message CitationSource {
+  int32 start_index = 1; // oneof=_start_index
+  int32 end_index = 2; // oneof=_end_index
+  string uri = 3; // oneof=_uri
+  string license = 4; // oneof=_license
+}

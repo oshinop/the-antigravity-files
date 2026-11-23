@@ -1,0 +1,20 @@
+// Extracted file offset 0x36d443e, 2624 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package data_residency.mapping.workspace;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+enum WorkspaceDataResidencyLocation {
+  WORKSPACE_DATA_RESIDENCY_LOCATION_UNSPECIFIED = 0;
+  EU = 1;
+  US = 2;
+  CA = 3;
+  AU = 4;
+  BR = 5;
+  IN = 6;
+  JP = 7;
+  GB = 8;
+  PROTOTYPE = 10;
+  REGIONPROTOTYPE = 11;
+  XX = 12;
+  DE = 13;
+}

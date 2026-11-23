@@ -1,0 +1,10 @@
+// Extracted file offset 0x365c106, 865 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message Kansas {
+  message Storage {
+    bool require_pseudonymous_reads = 1;
+  }
+}

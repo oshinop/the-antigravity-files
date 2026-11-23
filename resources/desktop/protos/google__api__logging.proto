@@ -1,0 +1,13 @@
+// Extracted file offset 0x364490f, 592 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/policy.proto";
+message Logging {
+  message LoggingDestination {
+    string monitored_resource = 3;
+    repeated string logs = 1;
+  }
+  repeated .google.api.Logging.LoggingDestination producer_destinations = 1;
+  repeated .google.api.Logging.LoggingDestination consumer_destinations = 2;
+}

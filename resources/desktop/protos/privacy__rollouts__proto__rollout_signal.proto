@@ -1,0 +1,36 @@
+// Extracted file offset 0x3658653, 810 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package privacy.rollouts;
+import "google/api/inclusion.proto";
+message LaunchGroup {
+  enum Enum {
+    LAUNCH_GROUP_UNSPECIFIED = 0;
+    OPT_IN_PURPOSE_CONSENT_WAVE1 = 1;
+    POSI_WAVE1 = 2;
+    DMA52_WAVE3 = 3;
+    CSD_WAVE1 = 4;
+    DMA52_WAVE4 = 5;
+    DMA52_BUGFIX_V6_1 = 6;
+    PERSONAL_INTELLIGENCE_WAVE1 = 7;
+    DMA52_WAVE4_5 = 8;
+    DMA52_WAVE5 = 9;
+    P18E_HEALTH_WRITE_WAVE1 = 10;
+    P18E_HEALTH_READ_WAVE1 = 11;
+    DMA52_WAVE4_V7_2 = 12;
+  }
+}
+message Mode {
+  enum Enum {
+    MODE_UNSPECIFIED = 0;
+    DISCOVERY_OPT_IN = 1;
+    TESTING_EARLY_OPT_IN = 2;
+    HARD_ENFORCEMENT_OPT_IN = 3;
+    OPT_OUT = 4;
+    OPT_OUT_FILTERING = 5;
+    WEAK_OPT_OUT_FILTERING = 6;
+  }
+}
+message RolloutSignal {
+  .privacy.rollouts.LaunchGroup.Enum launch_group = 1;
+  .privacy.rollouts.Mode.Enum mode = 2;
+}

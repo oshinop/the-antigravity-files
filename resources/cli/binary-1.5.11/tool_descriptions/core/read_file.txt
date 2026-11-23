@@ -1,0 +1,13 @@
+application/*
+
+application/pdf
+
+, or 
+
+Read the contents of a %s file.
+
+%d lines
+
+%d bytes
+
+ Each read returns at most %s.

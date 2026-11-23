@@ -1,0 +1,36 @@
+// Extracted file offset 0x36814a1, 1293 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/label.proto";
+import "google/api/launch_stage.proto";
+import "google/api/monitoring_migration.proto";
+import "google/api/policy.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/struct.proto";
+message MonitoredResourceDescriptor {
+  string name = 5;
+  string type = 1;
+  string display_name = 2;
+  string description = 3;
+  repeated .google.api.LabelDescriptor labels = 4;
+  string label_extractor = 8;
+  .google.api.LaunchStage launch_stage = 7;
+  .google.api.MonitoringMigration monitoring_migration = 6;
+}
+message MonitoredResource {
+  message LabelsEntry {
+    string key = 1;
+    string value = 2;
+  }
+  string type = 1;
+  repeated .google.api.MonitoredResource.LabelsEntry labels = 2;
+}
+message MonitoredResourceMetadata {
+  message UserLabelsEntry {
+    string key = 1;
+    string value = 2;
+  }
+  .google.protobuf.Struct system_labels = 1;
+  repeated .google.api.MonitoredResourceMetadata.UserLabelsEntry user_labels = 2;
+}

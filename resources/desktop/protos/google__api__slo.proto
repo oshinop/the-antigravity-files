@@ -1,0 +1,94 @@
+// Extracted file offset 0x3711760, 3716 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/type/calendar_period.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Slo {
+  .google.protobuf.Duration rolling_period = 1; // oneof=period_type
+  .google.type.CalendarPeriod calendar_period = 2; // oneof=period_type
+  repeated .google.api.SloObjective objectives = 3;
+  repeated .google.api.SloRule rules = 4;
+  .google.api.SloRepoMetadata metadata = 5;
+  bool report_resource_location = 6;
+}
+message SloBadMinute {
+  string minimum_bad_to_total_ratio = 1;
+}
+message SloObjective {
+  enum LatencyExperience {
+    LATENCY_EXPERIENCE_UNSPECIFIED = 0;
+    DELIGHTING = 1;
+    SATISFYING = 2;
+    ANNOYING = 3;
+  }
+  message AvailabilityCriteria {
+  }
+  message LatencyCriteria {
+    .google.protobuf.Duration threshold = 3;
+    .google.api.SloObjective.LatencyExperience latency_experience = 4;
+  }
+  message OperationAvailabilityCriteria {
+  }
+  message OperationLatencyCriteria {
+    .google.protobuf.Duration threshold = 1;
+    .google.api.SloObjective.LatencyExperience latency_experience = 2;
+  }
+  message SloObjectiveMetadata {
+    enum LifecycleStage {
+      LIFECYCLE_STAGE_UNSPECIFIED = 0;
+      EXPERIMENTAL = 1;
+      CURRENT = 2;
+      TARGET = 3;
+      RETIRED = 4;
+    }
+    .google.api.SloObjective.SloObjectiveMetadata.LifecycleStage lifecycle_stage = 1;
+    repeated .google.api.CustomMetadataPair custom_metadata_pairs = 2;
+  }
+  string name = 1;
+  .google.api.SloObjective.AvailabilityCriteria availability = 2; // oneof=sli
+  .google.api.SloObjective.LatencyCriteria latency = 3; // oneof=sli
+  .google.api.SloObjective.OperationAvailabilityCriteria operation_availability = 5; // oneof=sli
+  .google.api.SloObjective.OperationLatencyCriteria operation_latency = 6; // oneof=sli
+  double goal = 4;
+  string locations = 7;
+  .google.api.SloObjective.SloObjectiveMetadata slo_objective_metadata = 8;
+  .google.api.SloBadMinute bad_minute = 9; // oneof=model
+}
+message SloRule {
+  message SloRuleMetadata {
+    message SloObjectiveMetadataOverride {
+      string objective = 1;
+      .google.api.SloObjective.SloObjectiveMetadata slo_objective_metadata = 2;
+    }
+    repeated .google.api.CustomMetadataPair custom_metadata_pairs = 1;
+    repeated .google.api.SloRule.SloRuleMetadata.SloObjectiveMetadataOverride slo_objective_metadata_overrides = 2;
+  }
+  string selector = 1;
+  repeated string objectives = 2;
+  string name = 3;
+  .google.api.SloRule.SloRuleMetadata slo_rule_metadata = 4;
+}
+message SloRepoMetadata {
+  repeated string teams = 1;
+  repeated string emails = 2;
+  string learnmore_url = 3;
+  .google.protobuf.Timestamp approve_time = 4;
+  repeated string approvers = 5;
+  string taxonomy_id = 6;
+  bool enable_per_consumer_sli = 7;
+  bool enable_slomatic = 8;
+  string owning_group = 9;
+  .google.api.SloAccessControl slo_access_control = 11;
+}
+message SloAccessControl {
+  repeated string reader_groups = 1;
+  repeated string annotations_writer_groups = 2;
+}
+message CustomMetadataPair {
+  string key = 1;
+  repeated string value = 2;
+}

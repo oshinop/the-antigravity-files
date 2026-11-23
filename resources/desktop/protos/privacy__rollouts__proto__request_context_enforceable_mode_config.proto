@@ -1,0 +1,21 @@
+// Extracted file offset 0x3671536, 1096 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package ptoken.policy_rollouts;
+import "google/api/inclusion.proto";
+import "privacy/ptoken/public/proto/policies/policy_id.proto";
+message RequestContextEnforceableModeConfig {
+  enum RequestContextEnforceableMode {
+    UNSPECIFIED = 0;
+    NOT_ENFORCEABLE = 1;
+    EARLY_ENFORCEABLE = 2;
+    ENFORCEABLE = 3;
+    DISCOVERY_ENFORCEABLE = 4;
+    LAUNCHED = 5;
+  }
+  .ptoken.PolicyId policy_id = 1;
+  .ptoken.policy_rollouts.RequestContextEnforceableModeConfig.RequestContextEnforceableMode request_context_enforceable_mode = 2;
+  .ptoken.policy_rollouts.RequestContextEnforceableModeConfig.RequestContextEnforceableMode request_context_enforceable_mode_without_consents = 3;
+}
+message RequestContextEnforceableModeConfigs {
+  repeated .ptoken.policy_rollouts.RequestContextEnforceableModeConfig request_context_enforceable_mode_configs = 1;
+}

@@ -1,0 +1,39 @@
+// Extracted file offset 0x36a7a3f, 1854 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package security.context;
+import "google/api/inclusion.proto";
+import "security/context/proto/policy/dataaccessscope_condition.proto";
+import "security/context/proto/policy/usage_restriction.proto";
+message CredsCondition {
+  .security.context.DeviceTrustLevelCondition device_trust_level = 1; // oneof=condition
+  .security.context.OauthCondition oauth = 2; // oneof=condition
+  .security.context.OsidDomainCondition osid_domain = 3; // oneof=condition
+  .security.context.DataAccessScopeCondition data_access_scope = 4; // oneof=condition
+}
+message DeviceTrustLevelCondition {
+  enum TrustLevel {
+    INDETERMINATE = 0;
+    UNTRUSTED_DEVICE = 2;
+    REMEDIATION_TRUSTED_DEVICE = 5;
+    MINIMALLY_TRUSTED_DEVICE = 10;
+    MOSTLY_TRUSTED_DEVICE = 20;
+    FULLY_TRUSTED_DEVICE = 30;
+    HIT_TRUSTED_DEVICE = 35;
+    RIX_TRUSTED_DEVICE = 40;
+    RMG_TRUSTED_DEVICE = 50;
+  }
+  .security.context.DeviceTrustLevelCondition.TrustLevel minimum = 1;
+  bool loas_origin_trusted = 2;
+}
+message OauthCondition {
+  enum OAuthMode {
+    ALLOW_ALL = 0;
+    ALLOW_NON_OAUTH_ONLY = 1;
+    ALLOW_OAUTH_ONLY = 2;
+  }
+  repeated int32 allow_scopes = 1;
+  .security.context.OauthCondition.OAuthMode mode = 2;
+}
+message OsidDomainCondition {
+  repeated string allow_domains = 1;
+}

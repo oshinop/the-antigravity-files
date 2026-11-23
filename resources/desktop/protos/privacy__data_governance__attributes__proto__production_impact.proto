@@ -1,0 +1,47 @@
+// Extracted file offset 0x374bf96, 5084 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "net/proto2/proto/descriptor.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+import "privacy/data_governance/attributes/proto/data_integrity.proto";
+message ProductionImpact {
+  enum HasImpact {
+    IMPACT_UNDEFINED = 0;
+    YES = 1;
+    NO = 2;
+  }
+  enum OutageScope {
+    OUTAGE_SCOPE_UNSPECIFIED = 0;
+    OUTAGE_SCOPE_CLUSTER = 1;
+    OUTAGE_SCOPE_ZONAL = 2;
+    OUTAGE_SCOPE_REGIONAL = 3;
+    OUTAGE_SCOPE_MULTI_REGIONAL = 4;
+    OUTAGE_SCOPE_GLOBAL = 5;
+  }
+  enum OutageSeverity {
+    OUTAGE_SEVERITY_UNSPECIFIED = 0;
+    OUTAGE_SEVERITY_HUGE = 1;
+    OUTAGE_SEVERITY_MAJOR = 2;
+    OUTAGE_SEVERITY_MEDIUM = 3;
+    OUTAGE_SEVERITY_MINOR = 4;
+    OUTAGE_SEVERITY_NEGLIGIBLE = 5;
+  }
+  enum ImpersonationScope {
+    IMPERSONATION_SCOPE_UNSPECIFIED = 0;
+    IMPERSONATION_SCOPE_UNIVERSAL = 1;
+    IMPERSONATION_SCOPE_LIMITED = 2;
+  }
+  .privacy.data_governance.attributes.ProductionImpact.HasImpact tamper_primary_data = 1;
+  .privacy.data_governance.attributes.ProductionImpact.HasImpact bypass_access_controls = 2;
+  .privacy.data_governance.attributes.ProductionImpact.HasImpact bypass_production_controls = 3;
+  .privacy.data_governance.attributes.ProductionImpact.HasImpact bypass_logging = 4;
+  .privacy.data_governance.attributes.ProductionImpact.HasImpact change_production_environment = 5;
+  .privacy.data_governance.attributes.ProductionImpact.HasImpact unconstrained_access = 6;
+  .privacy.data_governance.attributes.ProductionImpact.OutageScope outage_scope = 9;
+  .privacy.data_governance.attributes.ProductionImpact.OutageSeverity outage_severity = 10;
+  .privacy.data_governance.attributes.Toolbox.RecoveryType recovery_type = 11;
+  .privacy.data_governance.attributes.ProductionImpact.ImpersonationScope impersonation_scope = 12;
+  bool other = 7;
+  repeated int64 impacted_team_product_id = 8;
+}

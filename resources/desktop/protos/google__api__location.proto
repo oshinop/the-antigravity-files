@@ -1,0 +1,31 @@
+// Extracted file offset 0x368ad24, 1409 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message SupportedLocation {
+  message LocationGroup {
+    string group_id = 1;
+    string locations = 2;
+  }
+  message LocationProperties {
+    message LabelsEntry {
+      string key = 1;
+      string value = 2;
+    }
+    string location_id = 1;
+    string display_name = 2;
+    repeated .google.api.SupportedLocation.LocationProperties.LabelsEntry labels = 3;
+    bool for_testing = 4;
+  }
+  message LocationPolicy {
+    repeated .google.api.SupportedLocation.LocationProperties location_properties = 1;
+  }
+  string location_id = 1;
+  string regions = 5;
+  string zones = 6;
+  string geos = 9;
+  repeated .google.api.SupportedLocation.LocationGroup groups = 7;
+  .google.api.SupportedLocation.LocationPolicy location_policy_override = 8;
+}

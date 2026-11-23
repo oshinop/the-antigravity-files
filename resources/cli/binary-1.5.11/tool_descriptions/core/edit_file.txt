@@ -1,0 +1,4 @@
+Use this tool to edit an existing file. Follow these rules:
+1. For one change, set Target and Replacement. To change several separate places in the same file, set Edits to a list of {Target, Replacement} pairs instead and make them all in one call. Edits are applied in order and all-or-nothing.
+2. Target must exactly match existing file text, including whitespace. Replacement must be a complete drop-in replacement for the Target. No line numbers are needed.
+3. Target must appear exactly once in the file. If it appears multiple times, the edit fails: add surrounding context to make it unique, or set AllowMultiple to true to replace every occurrence.

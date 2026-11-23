@@ -1,0 +1,23 @@
+// Extracted file offset 0x3684260, 1312 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "learning/genai/api/genai_versioning.proto";
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message MediaStreamAppend {
+  .genai.AudioStreamAppend audio = 2; // oneof=event_type
+  .genai.VideoStreamAppend video = 3; // oneof=event_type
+}
+message AudioStreamAppend {
+  bytes data = 1;
+  string stream_id = 2;
+}
+message VideoStreamAppend {
+  bytes data = 1;
+  string mime_type = 2;
+  string stream_id = 3;
+}
+message InputCommitEvent {
+}

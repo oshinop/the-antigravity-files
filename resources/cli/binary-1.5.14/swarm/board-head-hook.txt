@@ -1,0 +1,3 @@
+[board] nothing has been posted yet. Wait for messages rather than looping.
+
+[board] the latest message is #%d (you have read up to #%d). Read anything you have missed, and wait for messages when you have nothing left to do.

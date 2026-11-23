@@ -1,0 +1,22 @@
+Use this tool to edit an existing file. Follow these rules:
+
+
+%d. %s
+
+make multiple calls to this tool
+
+make a single call to this tool. Specify each edit as a separate ReplacementChunk
+
+specify multiple separate ReplacementChunks
+
+For %s ReplacementChunk, specify StartLine, EndLine, TargetContent and ReplacementContent. StartLine and EndLine should specify a range of lines containing precisely the instances of TargetContent that you wish to edit. To edit a single instance of the TargetContent, the range should be such that it contains that specific instance of the TargetContent and no other instances. In TargetContent, specify the precise lines of code to edit. These lines MUST EXACTLY MATCH text in the existing file content. In ReplacementContent, specify the replacement content for the specified target content. This must be a complete drop-in replacement of the TargetContent, with necessary modifications made.
+
+For %s ReplacementChunk, specify TargetContent and ReplacementContent. In TargetContent, specify the precise lines of code to edit. These lines MUST EXACTLY MATCH text in the existing file content. In ReplacementContent, specify the replacement content for the specified target content. This must be a complete drop-in replacement of the TargetContent, with necessary modifications made.
+
+To edit multiple, non-adjacent lines of code in the same file, %s.
+
+If you are making multiple edits across a single file, %s. DO NOT try to replace the entire existing content with the new content, this is very expensive.
+
+You may not edit file extensions: [%s]
+
+IMPORTANT: The TargetContent of each ReplacementChunk MUST be a unique substring within the file. Otherwise, the tool call will error out.

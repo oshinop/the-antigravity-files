@@ -1,0 +1,19 @@
+// Extracted file offset 0x3649c15, 655 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package pattributes;
+import "privacy/pattributes/public/proto/collection_basis.proto";
+message CollectionBasisAnd {
+  repeated .pattributes.CollectionBasis basis = 1;
+  repeated .pattributes.CollectionBasisOr or_spec = 2;
+}
+message CollectionBasisOr {
+  repeated .pattributes.CollectionBasis basis = 1;
+  repeated .pattributes.CollectionBasisAnd2 and_spec = 2;
+}
+message CollectionBasisAnd2 {
+  repeated .pattributes.CollectionBasis basis = 1;
+  repeated .pattributes.CollectionBasisOr2 or_spec = 2;
+}
+message CollectionBasisOr2 {
+  repeated .pattributes.CollectionBasis basis = 1;
+}

@@ -1,0 +1,64 @@
+// Extracted file offset 0x36f9b98, 3228 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package logs.proto.wireless.android.play.playlog;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "wireless/android/play/playlog/proto/log_source_enum.proto";
+message ClearcutGolangClientTelemetry {
+  message TelemetryDebugging {
+    repeated string error_types = 1;
+  }
+  repeated .logs.proto.wireless.android.play.playlog.ClearcutGolangTelemetryWindow telemetry_windows = 10;
+  .logs.proto.wireless.android.play.playlog.ClearcutGolangClientTelemetry.TelemetryDebugging telemetry_debugging = 11;
+}
+message ClearcutGolangTelemetryWindow {
+  int64 logger_id = 10;
+  int32 sequence_number = 11;
+  .wireless_android_play_playlog.LogSourceEnum.LogSource log_source = 12; // default='UNKNOWN'
+  int64 window_start_time_ms = 13;
+  int64 window_end_time_ms = 14;
+  int32 num_records_logged = 15;
+  repeated .logs.proto.wireless.android.play.playlog.GolangTelemetryUpload uploads = 16;
+  bool is_final = 17;
+}
+message GolangTelemetryUpload {
+  enum UploadResult {
+    UPLOAD_RESULT_REASON_UNKNOWN = 0;
+    UPLOAD_RESULT_SUCCESS = 1;
+    UPLOAD_RESULT_NO_EVENTS_TO_UPLOAD = 2;
+    UPLOAD_RESULT_RETRYABLE = 10;
+    UPLOAD_RESULT_RETRYABLE_UNINSTRUMENTED_ERROR = 11;
+    UPLOAD_RESULT_RETRYABLE_HTTP_CLIENT_INVALID_ERROR_TYPE = 12;
+    UPLOAD_RESULT_RETRYABLE_HTTP_TIMEOUT = 13;
+    UPLOAD_RESULT_RETRYABLE_HTTP_TOO_MANY_REDIRECTS = 14;
+    UPLOAD_RESULT_RETRYABLE_AUTH_FAILURE = 15;
+    UPLOAD_RESULT_RETRYABLE_HTTP_REQUEST_CREATION_ERROR = 16;
+    UPLOAD_RESULT_RETRYABLE_TLS_FAILURE = 17;
+    UPLOAD_RESULT_RETRYABLE_CLIENT_FAILED_HTTP_REQUEST_CONSTRUCTION = 18;
+    UPLOAD_RESULT_DROP = 100;
+    UPLOAD_RESULT_DROP_REQUEST_SERIALIZATION = 101;
+    UPLOAD_RESULT_DROP_AUTH_FAILURE = 102;
+    UPLOAD_RESULT_DROP_REQUEST_OVERSIZE = 103;
+    UPLOAD_RESULT_DROP_INCONCLUSIVE = 200;
+    UPLOAD_RESULT_DROP_RESPONSE_READ_FAILURE = 201;
+    UPLOAD_RESULT_DROP_RESPONSE_DESERIALIZATION = 202;
+  }
+  message UploadDebugDetails {
+    int32 error_type_index = 1;
+  }
+  int64 upload_start_time_ms = 10;
+  int32 events_attempted = 11;
+  .logs.proto.wireless.android.play.playlog.GolangTelemetryUpload.UploadResult upload_result = 22;
+  int32 http_status = 12;
+  int32 events_uploaded = 13;
+  int32 dropped_by_serialization = 14;
+  int32 dropped_by_not_success_not_retryable = 15;
+  int32 dropped_by_read_failure = 16;
+  int32 dropped_by_deserialization = 17;
+  int32 events_removed_from_buffer = 18;
+  int64 upload_end_time_ms = 19;
+  int64 upload_payload_size_bytes = 20;
+  int64 http_request_content_bytes = 21;
+  int32 events_backlogged = 23;
+  bool is_final = 24;
+  .logs.proto.wireless.android.play.playlog.GolangTelemetryUpload.UploadDebugDetails upload_debug_details = 25;
+}

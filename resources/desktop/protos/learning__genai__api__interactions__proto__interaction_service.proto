@@ -1,0 +1,14 @@
+// Extracted file offset 0x365fc13, 918 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "learning/genai/api/interactions/proto/events.proto";
+import "learning/genai/api/interactions/proto/interaction.proto";
+import "learning/genai/api/interactions/proto/interactions_service_messages.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+service InteractionService {
+  rpc CreateInteractionBidiStream (stream .genai.ClientEventBatch) returns (stream .genai.ServerEventBatch);
+  rpc CreateInteractionStream (.genai.CreateInteractionEvent) returns (stream .genai.ServerEventBatch);
+  rpc CreateInteraction (.genai.CreateInteractionEvent) returns (.genai.Interaction);
+  rpc GetActorInteraction (.genai.GetActorInteractionRequest) returns (.genai.ActorInteraction);
+  rpc StreamActorInteraction (.genai.StreamActorInteractionRequest) returns (stream .genai.StreamActorInteractionResponse);
+}

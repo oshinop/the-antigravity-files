@@ -1,0 +1,17 @@
+// Extracted file offset 0x3670869, 1089 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "net/proto2/proto/descriptor.proto";
+message Visibility {
+  repeated .google.api.VisibilityRule rules = 1;
+}
+message VisibilityRule {
+  enum FailureMode {
+    FAILURE_MODE_UNSPECIFIED = 0;
+    FALLBACK_PUBLIC = 1;
+    FAIL_CLOSED = 2;
+  }
+  string selector = 1;
+  string restriction = 2;
+  .google.api.VisibilityRule.FailureMode failure_mode = 4;
+}

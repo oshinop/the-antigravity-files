@@ -1,0 +1,5 @@
+Use this tool ONLY when you are making MULTIPLE, NON-CONTIGUOUS edits to the same file (i.e., you are changing more than one separate block of text). If you are making a single contiguous block of edits, use the %s tool instead.
+
+Do NOT make multiple parallel calls to this tool or the %s tool for the same file.
+
+Do NOT use this tool if you are only editing a single contiguous block of lines.

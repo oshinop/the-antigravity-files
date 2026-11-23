@@ -1,0 +1,24 @@
+// Extracted file offset 0x3666edf, 980 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message Experimental {
+  message Data {
+    enum DataCopy {
+      DATA_COPY_UNDEFINED = 0;
+      DATA_COPY_DISALLOWED = 1;
+      DATA_COPY_DISALLOWED_ON_PII = 2;
+      DATA_COPY_DISALLOWED_ON_PII_WITHOUT_TTL = 3;
+    }
+    enum DatasetTag {
+      UNKNOWN_DATASET = 0;
+      OTHER_DATASET = 1;
+      HULK = 2;
+      OOLONG = 3;
+    }
+    .privacy.data_governance.attributes.Experimental.Data.DataCopy data_copy = 1;
+    .privacy.data_governance.attributes.Experimental.Data.DatasetTag dataset_tag = 2;
+  }
+  .privacy.data_governance.attributes.Experimental.Data data = 1;
+}

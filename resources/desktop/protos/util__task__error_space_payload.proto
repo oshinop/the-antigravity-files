@@ -1,0 +1,7 @@
+// Extracted file offset 0x76aa854, 123 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package util;
+message ErrorSpacePayload {
+  int32 code = 1;
+  string space = 2;
+}

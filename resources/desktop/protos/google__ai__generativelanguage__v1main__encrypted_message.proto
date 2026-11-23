@@ -1,0 +1,20 @@
+// Extracted file offset 0x366e2ca, 1059 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/api/field_behavior.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message BidiGenerateContentEncryptedClientMessage {
+  bytes encrypted_message_data = 1;
+}
+message BidiGenerateContentEncryptedServerMessage {
+  enum ConversationReadyState {
+    UNSPECIFIED = 0;
+    NEW = 1;
+    RESUMED = 2;
+  }
+  bytes encrypted_message_data = 1;
+  string encryption_server_address = 2;
+  .google.ai.generativelanguage.v1main.BidiGenerateContentEncryptedServerMessage.ConversationReadyState conversation_ready = 3;
+}

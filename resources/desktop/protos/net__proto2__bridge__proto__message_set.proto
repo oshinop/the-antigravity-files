@@ -1,0 +1,5 @@
+// Extracted file offset 0x76b0da0, 147 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package proto2.bridge;
+message MessageSet {
+}

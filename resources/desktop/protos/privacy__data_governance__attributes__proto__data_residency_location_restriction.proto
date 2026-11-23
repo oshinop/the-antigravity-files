@@ -1,0 +1,8 @@
+// Extracted file offset 0x36379cb, 454 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "dataresidency/mapping/data_residency_locations.proto";
+import "google/api/inclusion.proto";
+message DataResidencyLocationRestriction {
+  repeated .data_residency.mapping.DataResidencyLocationEnum locations = 1;
+}

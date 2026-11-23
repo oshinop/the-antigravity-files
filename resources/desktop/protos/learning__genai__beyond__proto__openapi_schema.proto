@@ -1,0 +1,48 @@
+// Extracted file offset 0x3696056, 1543 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package learning.genai.beyond;
+import "google/protobuf/struct.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Schema {
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    STRING = 1;
+    NUMBER = 2;
+    INTEGER = 3;
+    BOOLEAN = 4;
+    ARRAY = 5;
+    OBJECT = 6;
+    NULL = 7;
+  }
+  message PropertiesEntry {
+    string key = 1;
+    .learning.genai.beyond.Schema value = 2;
+  }
+  message DefsEntry {
+    string key = 1;
+    .learning.genai.beyond.Schema value = 2;
+  }
+  .learning.genai.beyond.Schema.Type type = 1;
+  string format = 2;
+  string title = 15;
+  string description = 3;
+  bool nullable = 4;
+  .google.protobuf.Value default = 18;
+  repeated string enum = 5;
+  .learning.genai.beyond.Schema items = 6;
+  repeated .learning.genai.beyond.Schema prefix_items = 17;
+  int64 min_items = 11;
+  int64 max_items = 9;
+  double minimum = 12;
+  double maximum = 13;
+  int64 min_length = 21;
+  int64 max_length = 22;
+  string pattern = 23;
+  repeated .learning.genai.beyond.Schema any_of = 14;
+  repeated .learning.genai.beyond.Schema.PropertiesEntry properties = 7;
+  .learning.genai.beyond.Schema additional_properties_schema = 16;
+  repeated string property_ordering = 10;
+  repeated string required = 8;
+  string ref = 19;
+  repeated .learning.genai.beyond.Schema.DefsEntry defs = 20;
+}

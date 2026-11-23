@@ -1,0 +1,14 @@
+// Extracted file offset 0x368d9ca, 1457 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package gaos.parsing;
+import "net/proto2/proto/descriptor.proto";
+enum JsonType {
+  JSON_TYPE_UNSPECIFIED = 0;
+  JSON_TYPE_OBJECT = 1;
+  JSON_TYPE_ARRAY = 2;
+  JSON_TYPE_VALUE = 3;
+}
+message StaticJsonField {
+  string key = 1;
+  string value = 2;
+}

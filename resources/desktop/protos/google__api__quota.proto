@@ -1,0 +1,113 @@
+// Extracted file offset 0x37335bf, 4562 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/launch_stage.proto";
+import "google/api/policy.proto";
+import "google/api/visibility.proto";
+message Quota {
+  repeated .google.api.QuotaGroup groups = 1;
+  repeated .google.api.QuotaRule rules = 2;
+  repeated .google.api.QuotaLimit limits = 3;
+  repeated .google.api.MetricRule metric_rules = 4;
+  string supported_regions = 5;
+  string supported_locations = 6;
+}
+message MetricRule {
+  enum DynamicCostType {
+    DYNAMIC_COST_TYPE_UNSPECIFIED = 0;
+    REQUEST_BODY_BYTES = 1;
+    REQUEST_BODY_AND_HEADER_BYTES = 2;
+    RESPONSE_BODY_BYTES = 3;
+    RESPONSE_BODY_AND_HEADER_BYTES = 4;
+  }
+  message MetricCostsEntry {
+    string key = 1;
+    int64 value = 2;
+  }
+  message DynamicMetricCostsEntry {
+    string key = 1;
+    .google.api.MetricRule.DynamicCostType value = 2;
+  }
+  message AgenticMetricCostsEntry {
+    string key = 1;
+    int64 value = 2;
+  }
+  message NonagenticMetricCostsEntry {
+    string key = 1;
+    int64 value = 2;
+  }
+  string selector = 1;
+  repeated .google.api.MetricRule.MetricCostsEntry metric_costs = 2;
+  repeated .google.api.MetricRule.DynamicMetricCostsEntry dynamic_metric_costs = 3;
+  repeated .google.api.MetricRule.AgenticMetricCostsEntry agentic_metric_costs = 4;
+  repeated .google.api.MetricRule.NonagenticMetricCostsEntry nonagentic_metric_costs = 5;
+  bool enable_quota_user_override_without_ip_fallback = 6;
+}
+message QuotaRule {
+  string selector = 1;
+  repeated .google.api.QuotaGroupMapping groups = 2;
+  bool disable_quota = 3;
+}
+message QuotaGroupMapping {
+  string group = 1;
+  int32 cost = 2;
+}
+message QuotaGroup {
+  string name = 1;
+  string description = 2;
+  repeated .google.api.QuotaLimit limits = 3;
+  bool billable = 4;
+}
+message QuotaLimit {
+  enum LimitType {
+    CLIENT_PROJECT = 0;
+    USER = 1;
+  }
+  enum QuotaType {
+    QUOTA_TYPE_UNSPECIFIED = 0;
+    PRECISE_ALLOCATION = 1;
+    IMPRECISE_ORIGINAL_RATE = 2;
+    IMPRECISE_CONCURRENT = 3;
+    IMPRECISE_FLEX_RATE_FIXED = 4;
+    IMPRECISE_FLEX_RATE_FLOATING = 5;
+  }
+  enum TrafficSource {
+    TRAFFIC_SOURCE_UNSPECIFIED = 0;
+    TRAFFIC_SOURCE_NONAGENTIC = 1;
+    TRAFFIC_SOURCE_AGENTIC = 2;
+  }
+  message ValuesEntry {
+    string key = 1;
+    int64 value = 2;
+  }
+  message ValueVisibilityRestrictionsEntry {
+    string key = 1;
+    string value = 2;
+  }
+  string name = 6;
+  .google.api.QuotaLimit.LimitType limit_by = 1;
+  string description = 2;
+  int64 default_limit = 3;
+  int64 max_limit = 4;
+  int64 free_tier = 7;
+  string duration = 5;
+  string metric = 8;
+  string unit = 9;
+  repeated .google.api.QuotaLimit.ValuesEntry values = 10;
+  bool is_precise = 11;
+  string display_name = 12;
+  bool is_fixed = 13;
+  string visibility_restriction = 14;
+  bool enable_per_cell_rate_limiting = 15;
+  string supported_regions = 16;
+  string supported_locations = 17;
+  .google.api.LaunchStage launch_stage = 18;
+  bool is_concurrent = 19;
+  int64 max_project_cardinality = 20;
+  int64 max_org_cardinality = 21; // oneof=_max_org_cardinality
+  .google.api.QuotaLimit.QuotaType quota_type = 22;
+  .google.api.QuotaLimit.TrafficSource traffic_source = 23;
+  repeated .google.api.QuotaLimit.ValueVisibilityRestrictionsEntry value_visibility_restrictions = 24;
+}

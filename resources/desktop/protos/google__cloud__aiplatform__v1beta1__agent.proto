@@ -1,0 +1,239 @@
+// Extracted file offset 0x37d185b, 10839 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.cloud.aiplatform.v1beta1;
+import "google/api/field_behavior.proto";
+import "google/api/policy.proto";
+import "google/api/resource.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "google/cloud/aiplatform/common/proto_field_options.proto";
+import "google/cloud/aiplatform/v1beta1/encryption_spec.proto";
+import "google/cloud/automl/common/proto_field_options.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "learning/genai/api/interactions/proto/environment.proto";
+import "net/proto2/contrib/validator/annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum AgentMemoryRevisionView {
+  AGENT_MEMORY_REVISION_VIEW_UNSPECIFIED = 0;
+  AGENT_MEMORY_REVISION_VIEW_BASIC = 1;
+  AGENT_MEMORY_REVISION_VIEW_CONTENT_DIFF = 2;
+}
+enum AgentMemoryView {
+  AGENT_MEMORY_VIEW_UNSPECIFIED = 0;
+  AGENT_MEMORY_VIEW_BASIC = 1;
+  AGENT_MEMORY_VIEW_FULL = 2;
+}
+message Agent {
+  message ModelConfig {
+    string model = 1;
+    float temperature = 2;
+  }
+  message MetadataEntry {
+    string key = 1;
+    string value = 2;
+  }
+  .google.protobuf.Value base_environment = 10; // oneof=environment
+  string name = 1;
+  string id = 2;
+  .google.protobuf.Timestamp created = 3;
+  .google.protobuf.Timestamp updated = 4;
+  string object = 13;
+  string effective_identity = 14;
+  .google.cloud.aiplatform.v1beta1.Persona persona = 16;
+  .google.cloud.aiplatform.v1beta1.AgentIdentity agent_identity = 17;
+  .google.cloud.aiplatform.v1beta1.Principal owner = 18;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryConfig memory_config = 21;
+  .google.cloud.aiplatform.v1beta1.AgentStatus status = 19;
+  string base_agent = 11;
+  repeated .google.cloud.aiplatform.v1beta1.Agent.MetadataEntry metadata = 12;
+  string description = 9;
+  string system_instruction = 5;
+  repeated .google.cloud.aiplatform.v1beta1.AgentTool tools = 7;
+  .google.cloud.aiplatform.v1beta1.AllowedTeammates allowed_teammates = 22;
+  .google.cloud.aiplatform.v1beta1.ObservabilityConfig observability_config = 23;
+  .google.cloud.aiplatform.v1beta1.EncryptionSpec encryption_spec = 24;
+  string ai_application = 25;
+  .google.cloud.aiplatform.v1beta1.Agent.ModelConfig model_config = 26;
+}
+message ObservabilityConfig {
+  bool observability_enabled = 1;
+  bool sensitive_logging_enabled = 2;
+  string artifact_gcs_bucket = 3;
+}
+message AllowedTeammates {
+  repeated .google.cloud.aiplatform.v1beta1.Teammate teammates = 1;
+}
+message Teammate {
+  enum ExpansionMode {
+    EXPANSION_MODE_UNSPECIFIED = 0;
+    INFER = 1;
+    EXPANDED = 2;
+    NON_EXPANDED = 3;
+  }
+  string email = 1;
+  string gaia_id = 2;
+  .google.cloud.aiplatform.v1beta1.Teammate.ExpansionMode expansion_mode = 3;
+}
+message AgentTool {
+  message HeadersEntry {
+    string key = 1;
+    string value = 2;
+  }
+  string type = 1;
+  string name = 2;
+  string url = 3;
+  repeated .google.cloud.aiplatform.v1beta1.AgentTool.HeadersEntry headers = 4;
+}
+message AgentMemoryConfig {
+  bool disable_memory = 1;
+}
+message Persona {
+  string display_name = 1;
+  string role = 2;
+  string avatar_url = 3;
+  string personality = 4;
+}
+message AgentIdentity {
+  string gaia_id = 1;
+  string email = 2;
+  .google.cloud.aiplatform.v1beta1.Tenant tenant = 3;
+}
+message Tenant {
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    WORKSPACE_CUSTOMER = 1;
+  }
+  .google.cloud.aiplatform.v1beta1.Tenant.Type type = 1;
+  string id = 2;
+}
+message Principal {
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    USER = 1;
+  }
+  .google.cloud.aiplatform.v1beta1.Principal.Type type = 1;
+  string id = 2;
+}
+message AgentStatus {
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    ACTIVE = 1;
+    SUSPENDED = 2;
+    ARCHIVED = 3;
+    DELETED = 4;
+    PROVISIONING = 5;
+  }
+  message SuspensionReason {
+    enum Reason {
+      REASON_UNSPECIFIED = 0;
+      ABUSE = 1;
+      ADMIN = 2;
+      USER_INITIATED = 3;
+    }
+    .google.cloud.aiplatform.v1beta1.AgentStatus.SuspensionReason.Reason reason = 1;
+    .google.protobuf.Timestamp suspension_time = 2;
+  }
+  .google.cloud.aiplatform.v1beta1.AgentStatus.State state = 1;
+  .google.cloud.aiplatform.v1beta1.AgentStatus.SuspensionReason suspension_reason = 2;
+  .google.protobuf.Timestamp delete_time = 3;
+}
+message AgentMemory {
+  string name = 1;
+  string category = 2;
+  string path = 3;
+  string title = 4;
+  string summary = 5;
+  string memory_type = 6;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryContent content = 7;
+  .google.protobuf.Timestamp create_time = 8;
+  .google.protobuf.Timestamp update_time = 9;
+  string etag = 10;
+  .google.protobuf.Timestamp delete_time = 11;
+  .google.protobuf.Timestamp purge_time = 12;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryProvenance provenance = 13;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryObservedProvenance observed_provenance = 14;
+}
+message AgentMemoryProvenance {
+  enum TrustClass {
+    TRUST_CLASS_UNSPECIFIED = 0;
+    TRUSTED_SYSTEM = 1;
+    VERIFIED_USER_INPUT = 2;
+    INTERNAL_TOOL_OUTPUT = 3;
+    UNTRUSTED_EXTERNAL = 4;
+  }
+  message IdentityAttribution {
+    string agent_id = 1;
+    string invoker_id = 2;
+    string principal = 3;
+    string task_id = 4;
+    string session_id = 5;
+  }
+  message Source {
+    string uri = 1; // oneof=source
+    .google.cloud.aiplatform.v1beta1.AgentMemoryProvenance.MemoryEntrySource entry = 2; // oneof=source
+    .google.cloud.aiplatform.v1beta1.AgentMemoryProvenance.TrustClass trust_class = 3;
+    string footnote_key = 5;
+  }
+  message MemoryEntrySource {
+    string memory = 1;
+    string path = 2;
+    string etag = 3;
+  }
+  message ExecutionContext {
+    message AttributesEntry {
+      string key = 1;
+      string value = 2;
+    }
+    repeated .google.cloud.aiplatform.v1beta1.AgentMemoryProvenance.ExecutionContext.AttributesEntry attributes = 1;
+  }
+  int32 schema_version = 1;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryProvenance.IdentityAttribution identity_attribution = 2;
+  repeated .google.cloud.aiplatform.v1beta1.AgentMemoryProvenance.Source sources = 3;
+  int32 sources_elided = 4;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryProvenance.ExecutionContext execution_context = 5;
+  repeated string tags = 6;
+  .google.protobuf.Timestamp assert_time = 7;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryProvenance.TrustClass trust_class = 8;
+}
+message AgentMemoryObservedProvenance {
+  enum Operation {
+    OPERATION_UNSPECIFIED = 0;
+    CREATE = 1;
+    UPDATE = 2;
+    REMOVE = 3;
+  }
+  message Principal {
+    string name = 1;
+  }
+  .google.cloud.aiplatform.v1beta1.AgentMemoryObservedProvenance.Principal caller = 1;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryObservedProvenance.Principal end_user = 2;
+  .google.protobuf.Timestamp record_time = 3;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryObservedProvenance.Operation operation = 4;
+  string last_revision = 5;
+  string current_revision = 6;
+}
+message AgentMemoryRevision {
+  string name = 1;
+  .google.protobuf.Timestamp create_time = 2;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryProvenance provenance = 3;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryObservedProvenance observed_provenance = 4;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryContentDiff content_diff = 5;
+}
+message AgentMemoryContentDiff {
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    COMPUTED = 1;
+    REVISION_NOT_KEPT = 2;
+    TOO_LARGE = 3;
+    NOT_TEXT = 4;
+  }
+  .google.cloud.aiplatform.v1beta1.AgentMemoryContentDiff.State state = 1;
+  repeated string hunks = 2;
+  bool truncated = 3;
+  bool coarse = 4;
+}
+message AgentMemoryContent {
+  string text = 1; // oneof=content
+  string mime_type = 2;
+}

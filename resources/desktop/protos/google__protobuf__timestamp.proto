@@ -1,0 +1,7 @@
+// Extracted file offset 0x3620a89, 258 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.protobuf;
+message Timestamp {
+  int64 seconds = 1;
+  int32 nanos = 2;
+}

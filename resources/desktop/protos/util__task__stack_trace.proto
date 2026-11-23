@@ -1,0 +1,10 @@
+// Extracted file offset 0x76aa92c, 258 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package util;
+import "net/proto2/bridge/proto/message_set.proto";
+message StackTrace {
+  repeated uint64 addresses = 1;
+}
+message StackTraces {
+  repeated .util.StackTrace traces = 1;
+}

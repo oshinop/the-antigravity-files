@@ -1,0 +1,183 @@
+// Extracted file offset 0x3781b2c, 6520 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message UrlMap {
+  message UrlMapRule {
+    message Header {
+      string key = 1;
+      string value = 2;
+    }
+    string selector = 1;
+    .google.api.GfeTarget backend = 2; // oneof=specifier
+    .google.api.LegacyGfeService legacy_gfe_service = 6; // oneof=specifier
+    .google.api.EasyApisRoutingConfig easyapis_routing_config = 8; // oneof=specifier
+    .google.api.RLSTarget rls = 9; // oneof=specifier
+    .google.api.ScottyTarget scotty = 10; // oneof=specifier
+    .google.api.TrafficMoverTarget traffic_mover = 13; // oneof=specifier
+    repeated string example_paths = 3;
+    repeated string path_regex = 5;
+    repeated string path_exact = 11;
+    repeated string path_prefix = 12;
+    repeated .google.api.UrlMap.UrlMapRule.Header headers = 14;
+    string grpc_location = 7;
+  }
+  string name = 1;
+  string description = 2;
+  .google.api.GfeTarget default_backend = 3;
+  repeated .google.api.UrlMap.UrlMapRule rules = 4;
+  .google.api.HttpFrontendOptions http_config = 5;
+  .google.api.RLSTarget rls = 6;
+}
+message BackendOptions {
+  enum MaxConnections {
+    MAX_CONNECTIONS_DEFAULT = 0;
+    MAX_CONNECTIONS_LOW = 1;
+    MAX_CONNECTIONS_MEDIUM = 2;
+    MAX_CONNECTIONS_HIGH = 3;
+  }
+  enum BackendResponsiveness {
+    BACKEND_RESPONSIVENESS_DEFAULT = 0;
+    BACKEND_RESPONSIVENESS_FAST = 1;
+    BACKEND_RESPONSIVENESS_MEDIUM = 2;
+    BACKEND_RESPONSIVENESS_SLOW = 3;
+  }
+  enum BackendPickingAlgorithm {
+    PICKING_ALGORITHM_DEFAULT = 0;
+    PICKING_ALGORITHM_WEIGHTED_ROUND_ROBIN = 1;
+    PICKING_ALGORITHM_LEAST_LOADED = 2;
+  }
+  enum StickinessOption {
+    STICKINESS_NONE = 0;
+    STICKINESS_SOFT_CLIENT_IP_PORT = 1;
+    STICKINESS_HARD_TASK_LEVEL = 10;
+  }
+  string healthz_string = 1;
+  .google.api.BackendOptions.MaxConnections max_connections = 2;
+  .google.api.BackendOptions.BackendResponsiveness backend_responsiveness = 3;
+  .google.api.BackendOptions.BackendPickingAlgorithm backend_picking_algorithm = 4;
+  .google.api.BackendOptions.StickinessOption stickiness_option = 5;
+}
+message GfeTarget {
+  string target = 1;
+  string cloudpath_target = 4;
+  .google.api.BackendOptions backend_options = 2;
+  string traffic_mover_id = 3;
+}
+message LegacyGfeService {
+  string service = 1;
+}
+message EasyApisRoutingConfig {
+  string backend_target_template = 1;
+  repeated string locations = 2;
+  string traffic_mover_id = 3;
+}
+message HttpFrontendOptions {
+  enum QosClass {
+    QOS_CLASS_DEFAULT = 0;
+    QOS_CLASS_AF2 = 4;
+    QOS_CLASS_AF3 = 5;
+    QOS_CLASS_AF4 = 6;
+  }
+  enum GrpcMode {
+    GRPC_DEFAULT = 0;
+    GRPC_DISABLED = 1;
+    GRPC_ENABLED_SIMPLE = 2;
+    GRPC_ENABLED_WITH_BACKEND_GRPC = 3;
+  }
+  enum RequestSize {
+    REQUEST_SIZE_DEFAULT = 0;
+    REQUEST_SIZE_LOW = 1;
+    REQUEST_SIZE_MEDIUM = 2;
+    REQUEST_SIZE_HIGH = 3;
+  }
+  enum ResponseEncoding {
+    RESPONSE_ENCODING_DEFAULT = 0;
+    RESPONSE_ENCODING_SMART_GZIP = 1;
+    RESPONSE_ENCODING_ORIGINAL = 2;
+  }
+  enum TcpKeepalive {
+    TCP_KEEPALIVE_DEFAULT = 0;
+    TCP_KEEPALIVE_DISABLED = 1;
+    TCP_KEEPALIVE_FAST = 2;
+  }
+  .google.api.HttpFrontendOptions.QosClass qos_class = 1;
+  .google.api.HttpFrontendOptions.GrpcMode grpc_mode = 2;
+  .google.api.HttpFrontendOptions.RequestSize request_size = 3;
+  int32 cache_hit_log_fallthrough_denom = 4;
+  string dos_service = 5;
+  bool block_in_embargoed_countries = 6;
+  bool block_geographically_for_enterprise_management = 11;
+  bool allow_internal_redirects = 7;
+  string cookie_policy = 8;
+  bool allow_websocket_upgrade = 9;
+  .google.api.HttpFrontendOptions.ResponseEncoding response_encoding = 10;
+  .google.api.HttpFrontendOptions.TcpKeepalive tcp_keepalive = 12;
+}
+message ScottyTarget {
+  string target = 1;
+  string universe = 2;
+  string location = 3;
+  string partition = 4;
+  string sub_partition = 5;
+  string customer = 6;
+  .google.api.BackendOptions backend_options = 7;
+  string traffic_mover_id = 8;
+}
+message RLSTarget {
+  repeated .google.api.HttpKeyBuilder http_keybuilders = 1;
+  repeated .google.api.GrpcKeyBuilder grpc_keybuilders = 2;
+  string lookup_service = 3;
+  string namespace = 4;
+  repeated string valid_lb_services = 5;
+  string default_lb_service = 6;
+  .google.api.BackendOptions backend_options = 7;
+  string traffic_mover_id = 8;
+}
+message TrafficMoverTarget {
+  string original_backend_traffic_mover_id = 1;
+  string alternative_backend_traffic_mover_id = 2;
+  float traffic_fraction = 3; // oneof=migration_config
+  bool cleanup_phase = 4; // oneof=migration_config
+  string force_alternative_service_if_header_present = 5;
+  string force_original_service_if_header_present = 6;
+  string force_original_service_if_header_not_present = 7;
+}
+message HttpKeyBuilder {
+  message ConstantKeysEntry {
+    string key = 1;
+    string value = 2;
+  }
+  repeated string host_patterns = 1;
+  repeated string path_patterns = 2;
+  repeated .google.api.NameMatcher query_parameters = 3;
+  repeated .google.api.NameMatcher headers = 4;
+  repeated .google.api.HttpKeyBuilder.ConstantKeysEntry constant_keys = 5;
+}
+message NameMatcher {
+  string key = 1;
+  repeated string names = 2;
+  bool required_match = 3;
+}
+message GrpcKeyBuilder {
+  message Name {
+    string service = 1;
+    string method = 2;
+  }
+  message ExtraKeys {
+    string host = 1;
+    string service = 2;
+    string method = 3;
+  }
+  message ConstantKeysEntry {
+    string key = 1;
+    string value = 2;
+  }
+  repeated .google.api.GrpcKeyBuilder.Name names = 1;
+  .google.api.GrpcKeyBuilder.ExtraKeys extra_keys = 3;
+  repeated .google.api.NameMatcher headers = 2;
+  repeated .google.api.GrpcKeyBuilder.ConstantKeysEntry constant_keys = 4;
+}

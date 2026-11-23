@@ -1,0 +1,60 @@
+// Extracted file offset 0x36b9b75, 2139 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "google/rpc/code.proto";
+import "google/rpc/error_details.proto";
+import "net/proto2/proto/descriptor.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Errors {
+  string domain = 1;
+  repeated .google.api.FieldError common_field_errors = 4;
+  repeated .google.api.ErrorMessage error_messages = 2;
+  string error_catalog_product_id = 3;
+}
+message ErrorParameter {
+  enum ParameterType {
+    PARAMETER_TYPE_UNSPECIFIED = 0;
+    STRING = 1;
+    INTEGER = 2;
+    INT64 = 3;
+    DECIMAL = 4;
+    STRING_LIST = 5;
+  }
+  string name = 1;
+  .google.api.ErrorParameter.ParameterType parameter_type = 2;
+  string description = 3;
+  bool pii_safe = 4;
+}
+message FieldError {
+  string reason = 1;
+  repeated string fields = 2;
+  string description = 3;
+  string message = 4;
+}
+message ApiVersionSelector {
+  repeated string operation_selectors = 1;
+  string api_versions = 2;
+}
+message ErrorMessage {
+  string reason = 13;
+  string name = 1;
+  string domain = 9990;
+  string description = 14;
+  int32 http_code = 2;
+  .google.rpc.Code canonical_code = 9;
+  string message = 3;
+  string localized_message = 4;
+  repeated string fields = 5;
+  repeated .google.api.ErrorParameter parameters = 16;
+  string troubleshooting_link = 6;
+  .google.rpc.Help help = 18;
+  string api_versions = 7;
+  repeated .google.api.ApiVersionSelector api_version_selectors = 11;
+  string name_suffix = 8;
+  string internal_message = 10;
+  repeated .google.api.FieldError field_errors = 15;
+  repeated string additional_details = 12;
+  string visibility_restriction = 17;
+}

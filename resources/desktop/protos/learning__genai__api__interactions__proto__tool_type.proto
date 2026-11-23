@@ -1,0 +1,20 @@
+// Extracted file offset 0x3659303, 817 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/inclusion.proto";
+import "learning/genai/api/genai_versioning.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum ToolType {
+  TOOL_TYPE_UNSPECIFIED = 0;
+  TOOL_TYPE_FUNCTION = 1;
+  TOOL_TYPE_CODE_EXECUTION_PYTHON = 2;
+  TOOL_TYPE_CODE_EXECUTION_BASH = 3;
+  TOOL_TYPE_GOOGLE_SEARCH_WEB = 4;
+  TOOL_TYPE_GOOGLE_SEARCH_IMAGE = 5;
+  TOOL_TYPE_GOOGLE_SEARCH_VISUAL = 6;
+  TOOL_TYPE_URL_CONTEXT = 7;
+  TOOL_TYPE_GOOGLE_MAPS = 8;
+  TOOL_TYPE_FILE_SEARCH = 9;
+  TOOL_TYPE_TOOL_SEARCH = 10;
+  TOOL_TYPE_VIDEO_UNDERSTANDING = 11;
+}

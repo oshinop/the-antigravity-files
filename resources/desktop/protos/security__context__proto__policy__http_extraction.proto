@@ -1,0 +1,23 @@
+// Extracted file offset 0x367ae4c, 1213 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package security.context;
+import "google/api/inclusion.proto";
+message HttpExtractionRules {
+  repeated .security.context.HttpResourceRule resources = 1;
+  repeated .security.context.HttpReasonRule reasons = 2;
+  repeated .security.context.HttpQueryRule queries = 3;
+}
+message HttpResourceRule {
+  .security.context.HttpFieldSelector selector = 1;
+  string resource_registry_type = 2;
+}
+message HttpReasonRule {
+  .security.context.HttpFieldSelector selector = 1;
+}
+message HttpQueryRule {
+  .security.context.HttpFieldSelector selector = 1;
+}
+message HttpFieldSelector {
+  string header = 1; // oneof=source
+  string param = 2; // oneof=source
+}

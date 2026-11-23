@@ -1,0 +1,1 @@
+Manage your message inbox. Use this tool to list all messages or read the full content of a specific message. Do not use this tool to poll for messages.

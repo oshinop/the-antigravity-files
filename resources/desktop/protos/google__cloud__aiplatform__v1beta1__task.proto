@@ -1,0 +1,346 @@
+// Extracted file offset 0x382ff7a, 15382 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.cloud.aiplatform.v1beta1;
+import "google/api/field_behavior.proto";
+import "google/api/policy.proto";
+import "google/api/resource.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "google/cloud/aiplatform/v1beta1/environment.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "google/rpc/status.proto";
+import "learning/genai/api/interactions/proto/environment.proto";
+import "learning/genai/api/interactions/proto/response_format.proto";
+import "learning/genai/api/interactions/proto/steps.proto";
+import "learning/genai/api/interactions/proto/tools.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum Priority {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_REALTIME = 1;
+  PRIORITY_DEFERRED = 2;
+}
+message Task {
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    IDLE = 1;
+    WORKING = 2;
+    REQUIRES_ACTION = 3;
+    COMPLETED = 4;
+    FAILED = 5;
+    CANCELLED = 6;
+    QUEUED = 7;
+    SUSPENDED = 8;
+    SUSPENDING = 9;
+  }
+  enum ScheduleState {
+    SCHEDULE_STATE_UNSPECIFIED = 0;
+    SCHEDULE_ACTIVE = 1;
+    SCHEDULE_PAUSED = 2;
+    SCHEDULE_FINISHED = 3;
+  }
+  message StatusDetail {
+    enum StatusReason {
+      STATUS_REASON_UNSPECIFIED = 0;
+      QUOTA_EXHAUSTED = 1;
+      SPEND_CAP_REACHED = 2;
+      LICENSE_REQUIRED = 3;
+      ADMIN_SUSPENDED = 4;
+      PARENT_SUSPENDED = 5;
+      DEFERRED = 6;
+      CREDENTIALS_EXPIRED = 7;
+      BUDGET_EXHAUSTED = 8;
+    }
+    .google.cloud.aiplatform.v1beta1.Task.StatusDetail.StatusReason reason = 1;
+    string detail = 2;
+  }
+  message LabelsEntry {
+    string key = 1;
+    string value = 2;
+  }
+  string name = 1;
+  string title = 2;
+  string summary = 3;
+  string assigned_agent = 4;
+  string assigned_agent_identity = 22;
+  string parent_task_id = 11;
+  string root_task_id = 14;
+  .google.cloud.aiplatform.v1beta1.TaskSpec spec = 5;
+  .google.cloud.aiplatform.v1beta1.Task.Status status = 6;
+  .google.cloud.aiplatform.v1beta1.TaskOutcome outcome = 7;
+  .google.protobuf.Timestamp create_time = 8;
+  .google.protobuf.Timestamp update_time = 9;
+  .google.protobuf.Timestamp status_update_time = 21;
+  repeated .google.cloud.aiplatform.v1beta1.Task.LabelsEntry labels = 10;
+  .google.cloud.aiplatform.v1beta1.Task.StatusDetail status_detail = 13;
+  .google.cloud.aiplatform.v1beta1.Task.ScheduleState schedule_state = 15;
+  .google.protobuf.Timestamp next_run_time = 16;
+  int64 run_count = 17;
+  repeated .google.cloud.aiplatform.v1beta1.Goal goals = 18;
+  .google.cloud.aiplatform.v1beta1.BudgetConsumptionDetail budget_consumption_detail = 19;
+}
+message TaskSpec {
+  enum InteractionMode {
+    INTERACTION_MODE_UNSPECIFIED = 0;
+    LIVE = 1;
+  }
+  message HitlConfig {
+    enum ApprovalMode {
+      APPROVAL_MODE_UNSPECIFIED = 0;
+      APPROVAL_MODE_ASK = 1;
+      APPROVAL_MODE_AUTO = 2;
+    }
+    .google.cloud.aiplatform.v1beta1.TaskSpec.HitlConfig.ApprovalMode approval_mode = 1;
+    bool auto_approve_allowed_tools = 2;
+  }
+  message ModelConfig {
+    enum ModelSelectionMode {
+      MODEL_SELECTION_MODE_UNSPECIFIED = 0;
+      AUTO = 1;
+      USER_SELECTED = 2;
+    }
+    string model = 1;
+    float temperature = 2;
+    string effort_level = 3;
+    int32 max_output_tokens = 4;
+    .google.cloud.aiplatform.v1beta1.TaskSpec.ModelConfig.ModelSelectionMode model_selection_mode = 5;
+  }
+  message LiveConfig {
+    enum Verbosity {
+      VERBOSITY_UNSPECIFIED = 0;
+      VERBOSE = 10;
+      DEBUG = 20;
+    }
+    enum NarrationDetail {
+      NARRATION_DETAIL_UNSPECIFIED = 0;
+      NONE = 10;
+      MINIMAL = 20;
+      STANDARD = 30;
+      DETAILED = 40;
+    }
+    .google.cloud.aiplatform.v1beta1.TaskSpec.ModelConfig model_config = 1;
+    string system_instruction = 2;
+    string voice_name = 3;
+    .google.cloud.aiplatform.v1beta1.TaskSpec.LiveConfig.Verbosity verbosity = 4;
+    bool video_input = 5;
+    .google.cloud.aiplatform.v1beta1.TaskSpec.LiveConfig.NarrationDetail narration_detail = 6;
+  }
+  message SubtaskConfig {
+    int32 max_depth = 1; // oneof=_max_depth
+    bool allow_browser_use = 2; // oneof=_allow_browser_use
+  }
+  repeated .genai.Step inputs = 7;
+  string system_instruction = 8;
+  .genai.ResponseFormat expected_output = 9;
+  repeated .google.cloud.aiplatform.v1beta1.Verifier verifiers = 10;
+  .google.cloud.aiplatform.v1beta1.ContextScope scope = 2;
+  .google.cloud.aiplatform.v1beta1.TaskTrigger schedule = 3;
+  .google.cloud.aiplatform.v1beta1.Priority priority = 4;
+  .google.cloud.aiplatform.v1beta1.Budget budget = 5;
+  int32 max_retries = 6;
+  bool delta_streaming = 11;
+  .google.cloud.aiplatform.v1beta1.TaskSpec.InteractionMode interaction_mode = 12;
+  .google.cloud.aiplatform.v1beta1.TaskSpec.HitlConfig hitl_config = 24;
+  .google.cloud.aiplatform.v1beta1.TaskSpec.ModelConfig model_config = 15;
+  .google.cloud.aiplatform.v1beta1.TaskSpec.LiveConfig live_config = 17;
+  .google.cloud.aiplatform.v1beta1.TaskSpec.SubtaskConfig subtask_config = 18;
+}
+message Verifier {
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    PENDING = 1;
+    RUNNING = 2;
+    PASSED = 3;
+    FAILED = 4;
+    REMOVED = 5;
+  }
+  .google.cloud.aiplatform.v1beta1.AutoVerification auto_verification = 7; // oneof=kind
+  .google.cloud.aiplatform.v1beta1.NlCriteria nl_criteria = 2; // oneof=kind
+  .google.cloud.aiplatform.v1beta1.CommandCheck command_check = 3; // oneof=kind
+  .google.cloud.aiplatform.v1beta1.HumanVerification human_check = 4; // oneof=kind
+  string name = 1;
+  bool required = 5;
+  .google.cloud.aiplatform.v1beta1.Verifier.State state = 6;
+}
+message NlCriteria {
+  string criteria = 1;
+}
+message CommandCheck {
+  string command = 1;
+  string expected_output = 2;
+}
+message HumanVerification {
+  string question = 1;
+}
+message AutoVerification {
+}
+message Goal {
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    ACTIVE = 1;
+    SUCCEEDED = 2;
+    FAILED = 3;
+    DROPPED = 4;
+  }
+  string id = 1;
+  string display_name = 2;
+  string spec = 3;
+  .google.cloud.aiplatform.v1beta1.Goal.State state = 4;
+  repeated .google.cloud.aiplatform.v1beta1.Verifier verifiers = 5;
+}
+message ContextScope {
+  message SkillConfig {
+    message ValuesEntry {
+      string key = 1;
+      string value = 2;
+    }
+    repeated .google.cloud.aiplatform.v1beta1.ContextScope.SkillConfig.ValuesEntry values = 1;
+  }
+  message SkillConfigsEntry {
+    string key = 1;
+    .google.cloud.aiplatform.v1beta1.ContextScope.SkillConfig value = 2;
+  }
+  .genai.EnvironmentConfig environment = 1; // oneof=environment_config
+  .genai.LocalEnvironmentConfig local_environment = 4; // oneof=environment_config
+  .google.cloud.aiplatform.v1beta1.StandaloneEnvironmentConfig standalone_environment = 9; // oneof=environment_config
+  .google.cloud.aiplatform.v1beta1.NoEnvironmentConfig no_environment = 10; // oneof=environment_config
+  .google.cloud.aiplatform.v1beta1.HybridEnvironment hybrid_environment = 15; // oneof=environment_config
+  .google.cloud.aiplatform.v1beta1.ToolRefs allowed_tools = 6; // oneof=tool_scope
+  .google.cloud.aiplatform.v1beta1.ToolRefs excluded_tools = 5; // oneof=tool_scope
+  repeated .genai.Tool tools = 2;
+  .google.cloud.aiplatform.v1beta1.TaskMemoryConfig memory_config = 3;
+  .google.cloud.aiplatform.v1beta1.DataConnectorConfig data_connector_config = 7;
+  .google.cloud.aiplatform.v1beta1.ExternalMount external_mount = 11;
+  .google.cloud.aiplatform.v1beta1.ExternalBrowser external_browser = 14;
+  repeated .google.cloud.aiplatform.v1beta1.SkillOverrideConfig skill_overrides = 12;
+  repeated .google.cloud.aiplatform.v1beta1.ContextScope.SkillConfigsEntry skill_configs = 17;
+  .google.cloud.aiplatform.v1beta1.CollaborativeProjectConfig collaborative_project = 13;
+}
+message ExternalMount {
+  string source_path = 1;
+  string mount_path = 2;
+}
+message ExternalBrowser {
+}
+message HybridEnvironment {
+  repeated .google.cloud.aiplatform.v1beta1.Environment environments = 1;
+}
+message SkillOverrideConfig {
+  repeated string target_skill_ids = 1;
+  string override_skill_id = 2;
+}
+message CollaborativeProjectConfig {
+  string collaborative_project = 1;
+}
+message StandaloneEnvironmentConfig {
+  string environment = 1;
+}
+message NoEnvironmentConfig {
+}
+message DataConnectorConfig {
+  message DataConnectorsEntry {
+    string key = 1;
+    string value = 2;
+  }
+  string engine_resource_name = 1;
+  repeated .google.cloud.aiplatform.v1beta1.DataConnectorConfig.DataConnectorsEntry data_connectors = 2;
+}
+message ToolRefs {
+  message CliToolScope {
+    repeated string cli_tools = 1;
+  }
+  repeated string tool_names = 1;
+  repeated string methods = 2;
+  repeated .google.cloud.aiplatform.v1beta1.ResourceRef resources = 3;
+  .google.cloud.aiplatform.v1beta1.ToolRefs.CliToolScope cli_tool_scope = 4;
+}
+message ResourceRef {
+  string resource = 2; // oneof=target
+  bool self_created = 3; // oneof=target
+  string resource_type = 1;
+  repeated string recipients = 4;
+}
+message TaskMemoryConfig {
+  .google.cloud.aiplatform.v1beta1.KnowledgeCatalogConfig knowledge_catalog_config = 1;
+  bool disable_memory = 2;
+}
+message KnowledgeCatalogConfig {
+  bool knowledge_catalog_enabled = 1;
+  repeated string enabled_connectors = 2;
+  string project_id = 3;
+}
+message TaskTrigger {
+  .google.cloud.aiplatform.v1beta1.OneOffSchedule one_off = 1; // oneof=trigger
+  .google.cloud.aiplatform.v1beta1.RecurringSchedule recurring = 3; // oneof=trigger
+}
+message RecurringSchedule {
+  enum OverlapPolicy {
+    OVERLAP_POLICY_UNSPECIFIED = 0;
+    SKIP = 1;
+    ALLOW_CONCURRENT = 2;
+    QUEUE = 3;
+  }
+  .google.cloud.aiplatform.v1beta1.CronSchedule cron = 1; // oneof=schedule
+  .google.cloud.aiplatform.v1beta1.EventSchedule event_source = 2; // oneof=schedule
+  .google.protobuf.Timestamp start_time = 3;
+  .google.protobuf.Timestamp end_time = 4;
+  int64 max_run_count = 5; // oneof=_max_run_count
+  .google.cloud.aiplatform.v1beta1.RecurringSchedule.OverlapPolicy overlap_policy = 6;
+}
+message CronSchedule {
+  string expression = 1;
+  string time_zone = 2;
+}
+message EventSchedule {
+  string event_source = 1;
+}
+message OneOffSchedule {
+  .google.protobuf.Timestamp run_at = 1; // oneof=when
+  .google.protobuf.Duration delay = 2; // oneof=when
+}
+message Budget {
+  int64 max_total_tokens = 1;
+  int64 max_tool_calls = 2;
+  .google.protobuf.Duration max_wallclock = 3;
+}
+message BudgetConsumptionDetail {
+  message Consumption {
+    int64 limit = 1;
+    int64 spent = 2;
+  }
+  message Attribution {
+    message Root {
+    }
+    message SubTask {
+      string task = 1;
+    }
+    message Spend {
+      int64 token_count = 1;
+      int64 tool_call_count = 2;
+    }
+    .google.cloud.aiplatform.v1beta1.BudgetConsumptionDetail.Attribution.Root root = 1; // oneof=consumer
+    .google.cloud.aiplatform.v1beta1.BudgetConsumptionDetail.Attribution.SubTask sub_task = 2; // oneof=consumer
+    .google.cloud.aiplatform.v1beta1.BudgetConsumptionDetail.Attribution.Spend spent = 3;
+  }
+  .google.cloud.aiplatform.v1beta1.BudgetConsumptionDetail.Consumption token_consumption = 1;
+  .google.cloud.aiplatform.v1beta1.BudgetConsumptionDetail.Consumption tool_call_consumption = 2;
+  repeated .google.cloud.aiplatform.v1beta1.BudgetConsumptionDetail.Attribution attributions = 3;
+}
+message TaskOutcome {
+  enum Result {
+    RESULT_UNSPECIFIED = 0;
+    SUCCEEDED = 1;
+    FAILED = 2;
+    CANCELLED = 3;
+    UNVERIFIED = 4;
+  }
+  message VerifierResult {
+    string name = 1;
+    bool passed = 2;
+    string detail = 3;
+  }
+  .google.cloud.aiplatform.v1beta1.TaskOutcome.Result result = 1;
+  repeated .google.cloud.aiplatform.v1beta1.TaskOutcome.VerifierResult verifier_results = 2;
+  .google.rpc.Status status = 3;
+}

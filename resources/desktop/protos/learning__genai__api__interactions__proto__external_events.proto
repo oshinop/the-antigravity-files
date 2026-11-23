@@ -1,0 +1,42 @@
+// Extracted file offset 0x3738fe5, 4704 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "learning/genai/api/genai_versioning.proto";
+import "learning/genai/api/interactions/proto/events.proto";
+import "learning/genai/api/interactions/proto/hooks.proto";
+import "learning/genai/api/interactions/proto/interaction_config_update.proto";
+import "learning/genai/api/interactions/proto/media_stream_steps.proto";
+import "learning/genai/api/interactions/proto/user_action_input.proto";
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ExternalClientEvent {
+  .genai.CreateInteractionEvent create_interaction = 1; // oneof=event_type
+  .genai.ReconnectInteractionEvent reconnect_interaction = 2; // oneof=event_type
+  .genai.CompleteInteractionEvent complete_interaction = 4; // oneof=event_type
+  .genai.CancelInteractionEvent cancel_interaction = 5; // oneof=event_type
+  .genai.DisconnectEvent disconnect = 9; // oneof=event_type
+  .genai.InputEvent input = 11; // oneof=event_type
+  .genai.MediaStreamAppend media_stream_append = 12; // oneof=event_type
+  .genai.InputCommitEvent input_commit = 13; // oneof=event_type
+  .genai.CallHookResponse call_hook_response = 14; // oneof=event_type
+  .genai.UserActionInput user_action = 28; // oneof=event_type
+  .genai.WorldSetupEvent world_setup = 29; // oneof=event_type
+  .genai.FunctionResultEvent function_result = 15; // oneof=event_type
+  .genai.ElicitationResultEvent elicitation_result = 16; // oneof=event_type
+  .genai.InteractionConfigUpdate interaction_config_update = 17; // oneof=event_type
+}
+message ExternalClientEventList {
+  repeated .genai.ExternalClientEvent events = 1;
+}
+message ExternalClientEventBatch {
+  .genai.ExternalClientEvent event = 1; // oneof=event_type
+  .genai.ExternalClientEventList event_list = 2; // oneof=event_type
+}
+message ExternalServerEvent {
+  .genai.InteractionCreatedEvent interaction_created = 1; // oneof=event_type
+  .genai.InteractionReconnectedEvent interaction_reconnected = 2; // oneof=event_type
+  .genai.ServerEvent event = 3; // oneof=event_type
+  .genai.InteractionCompletedEvent interaction_completed = 4; // oneof=event_type
+}

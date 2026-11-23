@@ -1,0 +1,125 @@
+// Extracted file offset 0x37e4d18, 11859 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+import "privacy/pgraph/proto/attributes/data_content.proto";
+message Apps {
+  enum Product {
+    UNKNOWN_APP = 0;
+    OTHER_APP = 1;
+    GMAIL = 2;
+    CALENDAR = 3;
+    DRIVE = 4;
+    HANGOUTS_CHAT = 5;
+    CLOUD_SEARCH = 6;
+  }
+  message DataType {
+    .privacy.data_governance.attributes.AppsCommon apps_common = 1;
+    .privacy.data_governance.attributes.Gmail gmail = 2;
+  }
+  message Process {
+    message DataLocationTransformation {
+      bool excludes_data_located_entities = 1;
+      bool cross_region_move_allowed = 2;
+      repeated int64 approved_boundary_crossing_id = 3;
+    }
+    .privacy.data_governance.attributes.Apps.Process.DataLocationTransformation data_location_transformation = 1;
+  }
+  message Data {
+    repeated .privacy.data_governance.attributes.Apps.Product product = 1;
+    .privacy.data_governance.attributes.Apps.DataType data = 2;
+  }
+  message DataCollectedUnderSpecialTerms {
+    .privacy.data_governance.attributes.classification.Category.HasCategory consumer_labs = 1;
+    .privacy.data_governance.attributes.classification.Category.HasCategory enterprise_labs = 2;
+  }
+}
+message AppsCommon {
+  enum ContentType {
+    CONTENT_TYPE_UNKNOWN = 0;
+    CONTENT_TYPE_OTHER = 1;
+    CONTENT_EMAIL = 2;
+  }
+  enum MetadataType {
+    METADATA_TYPE_UNKNOWN = 0;
+    METADATA_TYPE_OTHER = 1;
+    METADATA_EMAIL = 2;
+    GAIA_ID = 3;
+  }
+  enum DataClass {
+    DATA_CLASS_UNKNOWN = 0;
+    DATA_CLASS_PRIMARY_CONTENT = 1;
+    DATA_CLASS_TRANSFORMED_PRIMARY_CONTENT = 2;
+    DATA_CLASS_CONTENT_DESCRIPTORS = 3;
+    DATA_CLASS_SENSITIVE_EVENTS = 4;
+    DATA_CLASS_TRAFFIC_DATA = 4;
+    DATA_CLASS_USER_TO_USER_GRAPH = 5;
+    DATA_CLASS_ENTITY_RELATIONSHIPS = 5;
+    DATA_CLASS_PERMISSIONS_AND_MEMBERSHIPS = 14;
+    DATA_CLASS_COMPLEX_ADMIN_POLICIES = 6;
+    DATA_CLASS_COMPLEX_USER_SETTINGS = 7;
+    DATA_CLASS_METADATA = 8;
+    DATA_CLASS_INTERACTION_EVENTS_AND_SUMMARIES = 9;
+    DATA_CLASS_INTERACTION_DATA = 9;
+    DATA_CLASS_IDENTITIES = 10;
+    DATA_CLASS_NON_IDENTIFIABLE_DERIVED_DATA = 11;
+    DATA_CLASS_SIMPLE_SETTINGS = 12;
+    DATA_CLASS_SYSTEM_DATA = 13;
+  }
+  enum ResourceLevelScope {
+    UNKNOWN_SCOPE = 0;
+    OLYMPUS_USERS_RESOURCE = 3;
+    NON_OLYMPUS_USERS_RESOURCE = 4;
+  }
+  enum ResourceStatus {
+    UNKNOWN_STATUS = 0;
+    OLYMPUS_EXEMPTED_RESOURCE = 1;
+    OLYMPUS_SQL_TRANSLATOR_COMPUTED = 2;
+    OLYMPUS_SQL_TRANSLATOR_DETERMINED_OUT_OF_SCOPE = 3;
+  }
+  message WorkspaceClass {
+    .privacy.data_governance.attributes.AppsCommon.DataClass data_class = 1;
+  }
+  message PolicyTest {
+    bool data_regions = 1;
+  }
+  message DataRegionsDataClassScopeOverride {
+    .pgraph.attributes.DataContent contains_phase1_in_scope_data_class = 1;
+  }
+  message DataRegionsOverride {
+    .pgraph.attributes.DataContent contains_workspace_region_restricted_data = 1;
+  }
+  repeated .privacy.data_governance.attributes.AppsCommon.ContentType content = 1;
+  repeated .privacy.data_governance.attributes.AppsCommon.MetadataType metadata = 2;
+  repeated .privacy.data_governance.attributes.AppsCommon.WorkspaceClass workspace_class = 3;
+  repeated .privacy.data_governance.attributes.AppsCommon.ResourceLevelScope resource_level_scope = 4;
+  repeated .privacy.data_governance.attributes.AppsCommon.ResourceStatus resource_status = 5;
+  .privacy.data_governance.attributes.AppsCommon.PolicyTest policy_test = 6;
+  .privacy.data_governance.attributes.AppsCommon.DataRegionsDataClassScopeOverride data_regions_data_class_scope_override = 7;
+  .privacy.data_governance.attributes.AppsCommon.DataRegionsOverride data_regions_override = 8;
+}
+message Gmail {
+  enum ContentType {
+    CONTENT_TYPE_UNKNOWN = 0;
+    CONTENT_TYPE_OTHER = 1;
+    HISTORY_RECORD = 2;
+    LABEL = 3;
+    MESSAGE = 4;
+    FILTER = 5;
+    ATTACHMENT = 6;
+    THREAD = 7;
+  }
+  enum MetadataType {
+    METADATA_TYPE_UNKNOWN = 0;
+    METADATA_TYPE_OTHER = 1;
+    HISTORY_ID = 2;
+    LABEL_ID = 3;
+    MESSAGE_ID = 4;
+    FILTER_ID = 5;
+    ATTACHMENT_ID = 6;
+    THREAD_ID = 7;
+  }
+  repeated .privacy.data_governance.attributes.Gmail.ContentType content = 1;
+  repeated .privacy.data_governance.attributes.Gmail.MetadataType metadata = 2;
+}

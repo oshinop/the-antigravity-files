@@ -1,0 +1,97 @@
+// Extracted file offset 0x3767cbf, 5992 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/duration.proto";
+import "identity/accesscontrol/proto/data_access_scopes.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ToolAnnotations {
+  string title = 1;
+  bool read_only_hint = 2;
+  bool destructive_hint = 3;
+  bool idempotent_hint = 4;
+  bool open_world_hint = 5;
+  .google.ai.generativelanguage.v1main.SecurityAnnotations security_annotations = 6;
+}
+message SecurityAnnotations {
+  enum PartyBoundary {
+    PARTY_BOUNDARY_UNSPECIFIED = 0;
+    PARTY_BOUNDARY_FIRST_PARTY = 1;
+    PARTY_BOUNDARY_FIRST_PARTY_CALLS_THIRD_PARTY = 2;
+    PARTY_BOUNDARY_THIRD_PARTY = 3;
+  }
+  .google.ai.generativelanguage.v1main.ExternalCommunication external_communication = 1;
+  repeated .google.ai.generativelanguage.v1main.UndoWindow undo_difficulty_windows = 2;
+  .google.ai.generativelanguage.v1main.ChangeScope scope_of_change = 3;
+  .google.ai.generativelanguage.v1main.DataSensitivity expected_input_sensitivity = 4;
+  .google.ai.generativelanguage.v1main.DataSensitivity expected_output_sensitivity = 5;
+  bool introduces_untrusted_data = 6;
+  bool generative = 7;
+  repeated .identity_accesscontrol.DataAccessScope data_access_scopes = 8;
+  .google.ai.generativelanguage.v1main.SecurityAnnotations.PartyBoundary party_boundary = 9;
+}
+message ExternalCommunication {
+  enum EgressCapability {
+    EGRESS_CAPABILITY_UNSPECIFIED = 0;
+    NO_EGRESS = 1;
+    USER_PRIVATE = 2;
+    TRUSTED_FIXED_DESTINATION = 3;
+    TRUSTED_DOMAIN_ARBITRARY_RECIPIENT = 4;
+    UNTRUSTED_ARBITRARY_DOMAIN = 5;
+    PUBLIC_BROADCAST = 6;
+  }
+  .google.ai.generativelanguage.v1main.ExternalCommunication.EgressCapability capability = 1;
+}
+message DataSensitivity {
+  enum Confidentiality {
+    CONFIDENTIALITY_UNSPECIFIED = 0;
+    PUBLIC = 1;
+    CONFIDENTIAL = 2;
+    NEED_TO_KNOW = 3;
+  }
+  .google.ai.generativelanguage.v1main.DataSensitivity.Confidentiality confidentiality = 1;
+  string category = 2;
+}
+message UndoWindow {
+  enum UndoDifficulty {
+    UNDO_DIFFICULTY_UNSPECIFIED = 0;
+    LOW = 1;
+    MEDIUM = 2;
+    HIGH = 3;
+    IMPOSSIBLE = 4;
+  }
+  .google.ai.generativelanguage.v1main.UndoWindow.UndoDifficulty undo_difficulty = 1;
+  .google.protobuf.Duration duration = 2;
+}
+message ChangeScope {
+  enum Tier {
+    TIER_UNSPECIFIED = 0;
+    TIER0 = 1;
+    TIER1 = 2;
+    TIER2 = 3;
+    TIER3 = 4;
+    TIER4 = 5;
+  }
+  message ConversationWindowScope {
+  }
+  message ProductDomainScope {
+    string url = 1;
+  }
+  message HostEnvironmentScope {
+    enum AccessLevel {
+      ACCESS_LEVEL_UNSPECIFIED = 0;
+      INSPECTION = 1;
+      FILE_WRITE = 2;
+      SHELL_EXECUTION = 3;
+      ENVIRONMENT_MODIFICATION = 4;
+    }
+    .google.ai.generativelanguage.v1main.ChangeScope.HostEnvironmentScope.AccessLevel access_level = 1;
+  }
+  .google.ai.generativelanguage.v1main.ChangeScope.Tier sensitivity_tier = 1;
+  .google.ai.generativelanguage.v1main.ChangeScope.ProductDomainScope product_domain = 3; // oneof=scope
+  .google.ai.generativelanguage.v1main.ChangeScope.HostEnvironmentScope host_environment = 4; // oneof=scope
+  .google.ai.generativelanguage.v1main.ChangeScope.ConversationWindowScope conversation_window = 5; // oneof=scope
+}

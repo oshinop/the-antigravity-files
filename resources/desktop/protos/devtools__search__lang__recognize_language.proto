@@ -1,0 +1,21 @@
+// Extracted file offset 0x36618ef, 841 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package codesearch;
+import "devtools/search/lang/lang.proto";
+message RecognizeLanguageClassifiers {
+  repeated .codesearch.Classifier anchored_classifiers = 1;
+  repeated .codesearch.Classifier content_classifiers = 2;
+  repeated .codesearch.Classifier filename_classifiers = 3;
+  repeated .codesearch.LanguageDescriptor languages = 4;
+}
+message Classifier {
+  .devtools.search.Language language = 1;
+  double score = 2;
+  string regexp = 3;
+}
+message LanguageDescriptor {
+  .devtools.search.Language language = 1;
+  string name = 2;
+  repeated string aliases = 3;
+  repeated .devtools.search.Language also_search_for = 4;
+}

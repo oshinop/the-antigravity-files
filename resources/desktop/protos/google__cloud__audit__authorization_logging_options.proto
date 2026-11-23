@@ -1,0 +1,16 @@
+// Extracted file offset 0x3641175, 553 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.cloud.audit;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message AuthorizationLoggingOptions {
+  enum PermissionType {
+    PERMISSION_TYPE_UNSPECIFIED = 0;
+    ADMIN_READ = 1;
+    ADMIN_WRITE = 2;
+    DATA_READ = 3;
+    DATA_WRITE = 4;
+  }
+  .google.cloud.audit.AuthorizationLoggingOptions.PermissionType permission_type = 1;
+}

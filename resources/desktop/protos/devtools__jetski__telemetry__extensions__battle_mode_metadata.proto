@@ -1,0 +1,10 @@
+// Extracted file offset 0x363fc45, 489 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package devtools.jetski.telemetry.extensions;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "third_party/jetski/cortex_pb/cortex.proto";
+message BattleModeMetadata {
+  string parent_trajectory_id = 1;
+  string parent_cascade_id = 2;
+  .exa.cortex_pb.BattleModeInfo battle_mode_info = 3;
+}

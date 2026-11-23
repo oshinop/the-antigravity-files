@@ -1,0 +1,31 @@
+// Extracted file offset 0x3694e67, 1528 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/policy.proto";
+import "google/api/visibility.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message P4SAAuthPolicy {
+  string owner_project_id = 1; // oneof=_owner_project_id
+  bool allow_nonproduction_accounts = 2; // oneof=_allow_nonproduction_accounts
+  bool allow_access_on_success = 3; // oneof=_allow_access_on_success
+}
+message Control {
+  enum FailureMode {
+    DEFAULT_FAIL_OPEN = 0;
+    FAIL_CLOSED = 1;
+  }
+  message PolicyCallback {
+    string resource_type = 1;
+    string policy_callback_backend_address = 2;
+    string policy_callback_address = 3;
+    repeated string resource_patterns = 4;
+    string location_extractor = 5; // oneof=_location_extractor
+    string selector = 6;
+  }
+  string environment = 1;
+  .google.api.Control.FailureMode failure_mode = 2;
+  repeated .google.api.MethodPolicy method_policies = 4;
+  repeated .google.api.Control.PolicyCallback policy_callbacks = 5;
+  .google.api.P4SAAuthPolicy p4sa_auth_policy = 6;
+}

@@ -1,0 +1,150 @@
+// Extracted file offset 0x37a5c7f, 7969 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.cloud.aiplatform.v1beta1;
+import "google/api/field_behavior.proto";
+import "google/api/policy.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "google/cloud/aiplatform/common/proto_field_options.proto";
+import "google/cloud/aiplatform/v1beta1/task.proto";
+import "learning/genai/api/interactions/proto/interaction.proto";
+import "learning/genai/api/interactions/proto/media_stream_steps.proto";
+import "learning/genai/api/interactions/proto/sse_events.proto";
+import "learning/genai/api/interactions/proto/steps.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum InteractionMode {
+  INTERACTION_MODE_UNSPECIFIED = 0;
+  INTERACTION_MODE_LIVE = 1;
+}
+message TaskClientEventBatch {
+  .google.cloud.aiplatform.v1beta1.CreateTaskEvent create_task = 1; // oneof=connect_request
+  .google.cloud.aiplatform.v1beta1.SubscribeTaskEvent subscribe_task = 2; // oneof=connect_request
+  .google.cloud.aiplatform.v1beta1.CompleteTaskEvent complete_task = 4; // oneof=end_request
+  .google.cloud.aiplatform.v1beta1.CancelTaskEvent cancel_task = 5; // oneof=end_request
+  .google.cloud.aiplatform.v1beta1.SuspendTaskEvent suspend_task = 8; // oneof=end_request
+  .google.cloud.aiplatform.v1beta1.Goal add_goal = 9; // oneof=directives
+  .google.cloud.aiplatform.v1beta1.GoalDrop drop_goal = 10; // oneof=directives
+  .google.cloud.aiplatform.v1beta1.GoalUpdate update_goal = 11; // oneof=directives
+  .google.cloud.aiplatform.v1beta1.VerifierAddition add_verifier = 12; // oneof=directives
+  .google.cloud.aiplatform.v1beta1.VerifierRemoval remove_verifier = 13; // oneof=directives
+  .google.cloud.aiplatform.v1beta1.VerifierReview review_verifier = 14; // oneof=directives
+  string parent = 7;
+  repeated .google.cloud.aiplatform.v1beta1.TaskClientEvent events = 3;
+  int64 ack_output_seq_num = 6;
+}
+message CreateTaskEvent {
+  string parent = 1;
+  string unique_creation_token = 2;
+  .google.cloud.aiplatform.v1beta1.Task task = 3;
+  string client_id = 4;
+  .google.cloud.aiplatform.v1beta1.InteractionMode interaction_mode = 5;
+  .google.cloud.aiplatform.v1beta1.UserContext user_context = 6;
+}
+message SubscribeTaskEvent {
+  string task = 1;
+  int64 next_step_seq_num = 2;
+  bool background = 3;
+  string client_id = 4;
+  string continuation_token = 5;
+  .google.cloud.aiplatform.v1beta1.InteractionMode interaction_mode = 6;
+}
+message TaskClientEvent {
+  .genai.Step input = 1; // oneof=event_type
+  .genai.MediaStreamAppend media_chunk = 2; // oneof=event_type
+  string event_id = 3;
+  string traceparent = 4;
+  .google.cloud.aiplatform.v1beta1.UserContext user_context = 5;
+  int64 seq_num = 10;
+  int64 timestamp_micros = 11;
+}
+message UserContext {
+  enum Channel {
+    CHANNEL_UNSPECIFIED = 0;
+    CHAT = 1;
+    EMAIL = 2;
+  }
+  string location = 2;
+  string time_zone = 3;
+  .google.cloud.aiplatform.v1beta1.UserContext.Channel channel = 4;
+}
+message CompleteTaskEvent {
+}
+message CancelTaskEvent {
+}
+message SuspendTaskEvent {
+  .google.cloud.aiplatform.v1beta1.Task.StatusDetail status_detail = 1;
+  bool operate_on_self = 2; // oneof=_operate_on_self
+}
+message GoalDrop {
+  string goal_id = 1;
+}
+message GoalUpdate {
+  string goal_id = 1;
+  string spec = 2;
+}
+message VerifierAddition {
+  string goal_id = 1;
+  .google.cloud.aiplatform.v1beta1.Verifier verifier = 2;
+}
+message VerifierRemoval {
+  string goal_id = 1;
+  int32 verifier_index = 2; // oneof=_verifier_index
+}
+message VerifierReview {
+  string goal_id = 1;
+  int32 verifier_index = 2; // oneof=_verifier_index
+  bool approved = 3;
+  string reason = 4;
+}
+message TaskServerEventBatch {
+  .google.cloud.aiplatform.v1beta1.TaskCreatedEvent task_created = 1; // oneof=connect_reply
+  .google.cloud.aiplatform.v1beta1.TaskSubscribedEvent task_subscribed = 2; // oneof=connect_reply
+  .google.cloud.aiplatform.v1beta1.TaskCompletedEvent task_completed = 4; // oneof=end_signal
+  repeated .google.cloud.aiplatform.v1beta1.TaskServerEvent events = 3;
+  int64 ack_input_seq_num = 5;
+  .google.cloud.aiplatform.v1beta1.TaskYieldedEvent yielded = 6;
+  string assigned_agent_identity = 7;
+  .google.cloud.aiplatform.v1beta1.PlaybackInterruptedEvent playback_interruption = 8;
+}
+message TaskCreatedEvent {
+  string task = 1;
+  string client_id = 2;
+}
+message TaskSubscribedEvent {
+  int64 next_step_seq_num = 1;
+  .google.cloud.aiplatform.v1beta1.Task.Status status = 2;
+  string client_id = 3;
+}
+message TaskServerEvent {
+  .genai.Step step = 1; // oneof=event_type
+  .google.cloud.aiplatform.v1beta1.TaskStatusEvent status_changed = 2; // oneof=event_type
+  .genai.StepStart step_start = 3; // oneof=event_type
+  .genai.StepDelta step_delta = 4; // oneof=event_type
+  .genai.StepStop step_stop = 5; // oneof=event_type
+  .google.cloud.aiplatform.v1beta1.TaskUpdateEvent task_update = 9; // oneof=event_type
+  string event_id = 7;
+  string trajectory_id = 8;
+  int64 seq_num = 10;
+  int64 timestamp_micros = 11;
+  string continuation_token = 12;
+  .genai.Interaction.Usage step_usage = 13;
+}
+message TaskStatusEvent {
+  .google.cloud.aiplatform.v1beta1.Task.Status task_status = 1;
+  .google.cloud.aiplatform.v1beta1.Task.StatusDetail status_detail = 2;
+}
+message TaskCompletedEvent {
+  .google.cloud.aiplatform.v1beta1.TaskOutcome outcome = 1;
+}
+message TaskYieldedEvent {
+}
+message PlaybackInterruptedEvent {
+  int32 source_step_index = 1;
+}
+message TaskUpdateEvent {
+  message TaskUpdate {
+    string title = 1; // oneof=update
+    string summary = 2; // oneof=update
+  }
+  repeated .google.cloud.aiplatform.v1beta1.TaskUpdateEvent.TaskUpdate updates = 1;
+}

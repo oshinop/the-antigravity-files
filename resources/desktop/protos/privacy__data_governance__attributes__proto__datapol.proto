@@ -1,0 +1,18 @@
+// Extracted file offset 0x3660a72, 926 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "storage/datapol/annotations/proto/workspace_annotations.proto";
+message DatapolAnnotations {
+  enum UnannotatedFieldState {
+    UNANNOTATED_FIELD_STATE_UNSPECIFIED = 0;
+    UNANNOTATED_FIELD = 1;
+    UNANNOTATED_FIELD_IN_VETTED_FILE = 2;
+  }
+  repeated .datapol.SemanticType semantic_types = 1;
+  .datapol.Qualifier qualifier = 2;
+  .datapol.LocationQualifier location_qualifier = 3;
+  repeated .apps_annotations.SemanticType apps_semantic_types = 4;
+  .privacy.data_governance.attributes.DatapolAnnotations.UnannotatedFieldState unannotated_field = 6;
+}

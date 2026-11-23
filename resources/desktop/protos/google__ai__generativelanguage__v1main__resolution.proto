@@ -1,0 +1,30 @@
+// Extracted file offset 0x3674988, 1140 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/api/inclusion.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+enum Resolution {
+  RESOLUTION_UNSPECIFIED = 0;
+  RESOLUTION_P1280X720 = 1;
+  RESOLUTION_P720X1280 = 2;
+  RESOLUTION_P1920X1080 = 3;
+  RESOLUTION_P1080X1920 = 4;
+  RESOLUTION_P3840X2160 = 5;
+  RESOLUTION_P2160X3840 = 6;
+  RESOLUTION_P720X720 = 7;
+  RESOLUTION_P640X368 = 8;
+  RESOLUTION_P368X640 = 9;
+}
+message MediaResolution {
+  enum Level {
+    MEDIA_RESOLUTION_UNSPECIFIED = 0;
+    MEDIA_RESOLUTION_LOW = 1;
+    MEDIA_RESOLUTION_MEDIUM = 2;
+    MEDIA_RESOLUTION_HIGH = 3;
+    MEDIA_RESOLUTION_ULTRA_HIGH = 4;
+  }
+  .google.ai.generativelanguage.v1main.MediaResolution.Level level = 1; // oneof=value
+  int32 num_tokens = 2; // oneof=value
+}

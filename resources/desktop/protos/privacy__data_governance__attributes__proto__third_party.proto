@@ -1,0 +1,23 @@
+// Extracted file offset 0x36a1f3a, 1739 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message ThirdParty {
+  message Data {
+    enum ThirdPartyDataCategory {
+      DATA_CATEGORY_UNSPECIFIED = 0;
+      DATA_CATEGORY_OPEN_SOURCE_LICENSE = 1;
+      DATA_CATEGORY_PUBLIC_CUSTOM_LICENSE = 2;
+      DATA_CATEGORY_PRIVATE_CONTRACT = 3;
+    }
+    message LicenseInfo {
+      string expire_date_time = 1;
+    }
+    repeated .privacy.data_governance.attributes.ThirdParty.Data.ThirdPartyDataCategory data_category = 1;
+    .privacy.data_governance.attributes.ThirdParty.Data.LicenseInfo license_info = 2;
+    .privacy.data_governance.attributes.classification.Category.HasCategory allowed_for_commercial_use = 3;
+    .privacy.data_governance.attributes.classification.Category.HasCategory allowed_for_ml = 4;
+  }
+  .privacy.data_governance.attributes.ThirdParty.Data data = 1;
+}

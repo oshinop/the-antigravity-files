@@ -1,0 +1,21 @@
+// Extracted file offset 0x365199a, 743 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package devtools.ai.autocomplete;
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum ContextKind {
+  CONTEXT_KIND_UNSPECIFIED = 0;
+  CONTEXT_KIND_FILE = 1;
+  CONTEXT_KIND_USER_TURN = 2;
+  CONTEXT_KIND_MODEL_RESPONSE = 3;
+  CONTEXT_KIND_MODEL_THOUGHT = 4;
+}
+message LogEntry {
+  string id = 1;
+  repeated .devtools.ai.autocomplete.ContextKind used_contexts = 10;
+  uint64 left_context_hash = 7;
+  uint64 right_context_hash = 8;
+  int64 cursor = 9;
+  string model_id = 4;
+  int64 model_latency_micros = 5;
+  double probability = 6;
+}

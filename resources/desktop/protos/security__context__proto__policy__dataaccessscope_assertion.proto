@@ -1,0 +1,15 @@
+// Extracted file offset 0x367cade, 1229 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package security.context;
+import "google/api/inclusion.proto";
+import "identity/accesscontrol/proto/data_access_scopes.proto";
+message DataAccessScopeAssertion {
+  message LegacyAllowMissingVerdictAssertion {
+    repeated string original_requesters = 2;
+    bool loas_and_uptick = 3;
+    bool all_impersonation = 4;
+    bool all_non_oauth = 5;
+  }
+  repeated .identity_accesscontrol.DataAccessScope accepted_authorized_scopes = 1;
+  .security.context.DataAccessScopeAssertion.LegacyAllowMissingVerdictAssertion legacy_allow_missing_verdict = 2;
+}

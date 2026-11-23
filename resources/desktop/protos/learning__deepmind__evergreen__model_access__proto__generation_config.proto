@@ -1,0 +1,115 @@
+// Extracted file offset 0x37638a0, 5688 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package deepmind.evergreen.v1;
+import "google/ai/generativelanguage/v1main/content.proto";
+import "google/api/inclusion.proto";
+import "google/protobuf/any.proto";
+import "learning/deepmind/evergreen/model_access/proto/content.proto";
+import "learning/deepmind/evergreen/model_access/proto/formatting_options.proto";
+import "learning/genai/beyond/proto/openapi_schema.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message GenerationConfig {
+  enum SystemInstructionMode {
+    SYSTEM_INSTRUCTION_MODE_UNSPECIFIED = 0;
+    SYSTEM_INSTRUCTION_MODE_APPEND = 1;
+    SYSTEM_INSTRUCTION_MODE_REPLACE = 2;
+  }
+  int32 seed = 1; // oneof=_seed
+  .google.protobuf.Any model_specific_options = 2; // oneof=_model_specific_options
+  .deepmind.evergreen.v1.TokenGenerationConfig token_generation = 3; // oneof=_token_generation
+  bool write_cache = 4; // oneof=_write_cache
+  bool read_cache = 5; // oneof=_read_cache
+  .deepmind.evergreen.v1.FormattingOptions formatting_options = 6; // oneof=_formatting_options
+  string lora_overlay = 7; // oneof=_lora_overlay
+  uint64 rpc_scheduling_hash = 8; // oneof=_rpc_scheduling_hash
+  string accounting_user = 9; // oneof=_accounting_user
+  int32 num_samples = 10; // oneof=_num_samples
+  bool force_enable_slot_pinning = 11; // oneof=_force_enable_slot_pinning
+  .deepmind.evergreen.v1.PostProcessingOptions post_processing_options = 12; // oneof=_post_processing_options
+  bool enable_attribution_scoring = 14; // oneof=_enable_attribution_scoring
+  .deepmind.evergreen.v1.GenerationConfig.SystemInstructionMode system_instruction_mode = 13; // oneof=_system_instruction_mode
+  bool disable_all_policy = 15; // oneof=_disable_all_policy
+  bool uniserve_logging_allowed = 16; // oneof=_uniserve_logging_allowed
+}
+message PostProcessingOptions {
+  bool disable_channel_post_processor = 1; // oneof=_disable_channel_post_processor
+  bool disable_tool_call_post_processor = 2; // oneof=_disable_tool_call_post_processor
+  bool disable_thought_channel_filtering = 3; // oneof=_disable_thought_channel_filtering
+}
+message PrebuiltVoiceConfig {
+  string voice_name = 1; // oneof=_voice_name
+}
+message ReplicatedVoiceConfig {
+  string mime_type = 1; // oneof=_mime_type
+  bytes voice_sample_audio = 2; // oneof=_voice_sample_audio
+  bytes consent_audio = 3; // oneof=_consent_audio
+}
+message VoiceConfig {
+  .deepmind.evergreen.v1.PrebuiltVoiceConfig prebuilt_voice_config = 1; // oneof=voice_config
+  .deepmind.evergreen.v1.ReplicatedVoiceConfig replicated_voice_config = 2; // oneof=voice_config
+}
+message SpeechConfig {
+  .deepmind.evergreen.v1.VoiceConfig voice_config = 1;
+  string language_code = 2;
+}
+message TokenGenerationConfig {
+  message StructuredOutputConfig {
+    string response_mimetype = 1;
+    .learning.genai.beyond.Schema response_schema = 2;
+  }
+  .deepmind.evergreen.v1.SamplingConfig sampling = 1; // oneof=_sampling
+  int32 length = 2; // oneof=_length
+  repeated .deepmind.evergreen.v1.ContentChunk early_stopping_suffixes = 3;
+  bool return_stopping_suffix = 4; // oneof=_return_stopping_suffix
+  string constraint = 5; // oneof=_constraint
+  bytes structured_output = 6; // oneof=_structured_output
+  repeated .google.ai.generativelanguage.v1main.Modality response_modalities = 7;
+  .deepmind.evergreen.v1.SpeechConfig speech_config = 8; // oneof=_speech_config
+}
+message SamplingConfig {
+  message Greedy {
+  }
+  message Nucleus {
+    float top_p = 1; // oneof=_top_p
+    float temperature = 2; // oneof=_temperature
+  }
+  message TopK {
+    int32 kval = 1; // oneof=_kval
+    float temperature = 2; // oneof=_temperature
+  }
+  message Beam {
+    int32 beam_size = 1; // oneof=_beam_size
+  }
+  message Typical {
+    float top_p = 1; // oneof=_top_p
+    float temperature = 2; // oneof=_temperature
+  }
+  message CombinedTopPTopK {
+    float top_p = 1; // oneof=_top_p
+    int32 kval = 2; // oneof=_kval
+    float temperature = 3; // oneof=_temperature
+  }
+  message MinP {
+    float min_p = 1; // oneof=_min_p
+    float temperature = 2; // oneof=_temperature
+  }
+  .deepmind.evergreen.v1.SamplingConfig.Greedy greedy = 1; // oneof=config
+  .deepmind.evergreen.v1.SamplingConfig.Nucleus nucleus = 2; // oneof=config
+  .deepmind.evergreen.v1.SamplingConfig.TopK top_k = 3; // oneof=config
+  .deepmind.evergreen.v1.SamplingConfig.Beam beam = 4; // oneof=config
+  .deepmind.evergreen.v1.SamplingConfig.Typical typical = 5; // oneof=config
+  .deepmind.evergreen.v1.SamplingConfig.CombinedTopPTopK combined_top_p_top_k = 6; // oneof=config
+  .deepmind.evergreen.v1.SamplingConfig.MinP min_p = 7; // oneof=config
+}
+message HotSwapConfig {
+  string expected_checkpoint_path = 1;
+}
+message SupportedOutputModalitiesConfig {
+  enum Modality {
+    MODALITY_UNSPECIFIED = 0;
+    MODALITY_TEXT = 1;
+    MODALITY_IMAGE = 2;
+    MODALITY_AUDIO = 3;
+  }
+  repeated .deepmind.evergreen.v1.SupportedOutputModalitiesConfig.Modality modalities = 1;
+}

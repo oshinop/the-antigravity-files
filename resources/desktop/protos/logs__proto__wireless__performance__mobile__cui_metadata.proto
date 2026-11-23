@@ -1,0 +1,10 @@
+// Extracted file offset 0x363d974, 517 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package logs.proto.wireless.performance.mobile;
+import "logs/proto/wireless/performance/mobile/cui_metric.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message CuiMetadata {
+  int32 cui_id = 1;
+  .logs.proto.wireless.performance.mobile.CuiMetric.Status status = 2;
+  .logs.proto.wireless.performance.mobile.CuiMetric.IncompleteReason incomplete_reason = 3;
+}

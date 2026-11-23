@@ -1,0 +1,11 @@
+// Extracted file offset 0x365897d, 811 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+enum LoggingMode {
+  LOGGING_MODE_UNSPECIFIED = 0;
+  LOGGING_MODE_TELEMETRY_ONLY = 1;
+  LOGGING_MODE_FINE_GRAINED = 2;
+}

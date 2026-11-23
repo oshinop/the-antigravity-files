@@ -1,0 +1,18 @@
+// Extracted file offset 0x366b9c3, 1038 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/any.proto";
+import "learning/genai/api/genai_versioning.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message RuntimeContextUpdate {
+  message UserLocale {
+    string language_code = 1;
+    string region_code = 2;
+  }
+  .google.protobuf.Any location_context = 2;
+  string timezone = 3;
+  .genai.RuntimeContextUpdate.UserLocale user_locale = 4;
+  .google.protobuf.Any tool_context_extensions = 5;
+}

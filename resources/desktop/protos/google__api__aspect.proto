@@ -1,0 +1,15 @@
+// Extracted file offset 0x36551fc, 773 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/protobuf/struct.proto";
+message Aspect {
+  message AspectRule {
+    string selector = 1;
+    .google.protobuf.Struct config = 2;
+  }
+  string kind = 1;
+  .google.protobuf.Struct spec = 2;
+  repeated .google.api.Aspect.AspectRule rules = 3;
+}

@@ -1,0 +1,60 @@
+// Extracted file offset 0x36cdfc6, 2503 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package logs.proto.wireless.performance.mobile;
+import "google/api/inclusion.proto";
+import "logs/proto/wireless/performance/mobile/annotations.proto";
+import "logs/proto/wireless/performance/mobile/process_stats.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "storage/googlesql/public/proto/type_annotation.proto";
+message MemoryUsageMetric {
+  enum MemoryEventCode {
+    UNKNOWN = 0;
+    APP_CREATED = 1;
+    APP_TO_BACKGROUND = 2;
+    APP_TO_FOREGROUND = 3;
+    APP_IN_BACKGROUND_FOR_SECONDS = 4;
+    APP_IN_FOREGROUND_FOR_SECONDS = 5;
+    DELTA_OF_MEMORY = 6;
+    PERIODIC = 7;
+  }
+  .logs.proto.wireless.performance.mobile.MemoryStats memory_stats = 1;
+  .logs.proto.wireless.performance.mobile.ProcessStats process_stats = 2;
+  .logs.proto.wireless.performance.mobile.MemoryUsageMetric.MemoryEventCode memory_event_code = 3;
+  .logs.proto.wireless.performance.mobile.DeviceStats device_stats = 4;
+  string activity_name = 5;
+}
+message MemoryStats {
+  .logs.proto.wireless.performance.mobile.AndroidMemoryStats android_memory_stats = 1;
+}
+message AndroidMemoryStats {
+  int32 dalvik_pss_kb = 1;
+  int32 native_pss_kb = 2;
+  int32 other_pss_kb = 3;
+  int32 dalvik_private_dirty_kb = 4;
+  int32 native_private_dirty_kb = 5;
+  int32 other_private_dirty_kb = 6;
+  int32 total_pss_by_mem_info_kb = 19;
+  int32 total_private_clean_kb = 7;
+  int32 total_shared_dirty_kb = 8;
+  int32 total_swappable_pss_kb = 9;
+  int32 other_graphics_pss_kb = 10;
+  int32 summary_java_heap_kb = 11;
+  int32 summary_code_kb = 12;
+  int32 summary_stack_kb = 13;
+  int32 summary_graphics_kb = 14;
+  int32 summary_private_other_kb = 15;
+  int32 summary_system_kb = 16;
+  int32 available_memory_kb = 17;
+  int32 total_memory_mb = 18;
+  int64 rss_hwm_kb = 20;
+  int64 total_rss_kb = 21;
+  int64 anon_rss_kb = 22;
+  int64 swap_kb = 23;
+  int64 vm_size_kb = 24;
+  int64 dmabuf_rss_bytes = 25;
+  int64 dmabuf_rss_hwm_bytes = 26;
+  int64 dmabuf_pss_bytes = 27;
+}
+message DeviceStats {
+  bool is_screen_on = 1;
+}

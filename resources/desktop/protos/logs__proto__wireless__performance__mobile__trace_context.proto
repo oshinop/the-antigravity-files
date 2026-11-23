@@ -1,0 +1,28 @@
+// Extracted file offset 0x368d41c, 1454 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package logs.proto.wireless.performance.mobile;
+import "google/api/inclusion.proto";
+import "google/protobuf/duration.proto";
+import "logs/proto/wireless/performance/mobile/android/trace_record.proto";
+import "logs/proto/wireless/performance/mobile/extension_metric.proto";
+import "logs/proto/wireless/performance/mobile/tracing.proto";
+import "privacy/pattributes/annotations/proto_field.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message TraceContext {
+  .logs.proto.wireless.performance.mobile.Trace trace = 1; // oneof=trace_type
+  .logs.proto.wireless.performance.mobile.android.TraceRecord tiktok_trace_record = 3; // oneof=trace_type
+  .logs.proto.wireless.performance.mobile.TraceMetadata trace_metadata = 2;
+}
+message TraceMetadata {
+  message Entry {
+    uint64 entity_id = 1;
+    .logs.proto.wireless.performance.mobile.MetricExtension metric_extension = 2;
+    bool is_dominant_span = 3;
+    bool is_ui_thread = 4;
+    bool is_synthetic_entity = 5;
+    uint64 original_parent_id = 6;
+  }
+  repeated .logs.proto.wireless.performance.mobile.TraceMetadata.Entry entries = 1;
+  .google.protobuf.Duration time_since_boot = 2;
+  bool is_partial_trace = 3;
+}

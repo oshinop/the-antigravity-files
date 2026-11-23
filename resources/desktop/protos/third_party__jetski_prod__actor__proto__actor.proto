@@ -1,0 +1,9 @@
+// Extracted file offset 0x361f897, 253 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package agency;
+message ActorRefProto {
+  string actor_config_name = 1;
+  string realm = 2;
+  string tag = 3;
+  string actor_id = 4;
+}

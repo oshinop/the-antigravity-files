@@ -1,0 +1,144 @@
+// Extracted file offset 0x373c726, 4748 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message FilesystemRequest {
+  message ReadFile {
+    bytes path = 1;
+  }
+  message WriteFile {
+    bytes path = 1;
+    uint32 permissions = 2;
+    bool append = 3;
+    bytes data = 4;
+    bool more_data = 5;
+  }
+  message WriteFileData {
+    bytes data = 1;
+    bool more_data = 2;
+  }
+  message Stat {
+    bytes path = 1;
+  }
+  message ReadDir {
+    bytes path = 1;
+  }
+  message MkdirAll {
+    bytes path = 1;
+    uint32 permissions = 2;
+  }
+  message Remove {
+    bytes path = 1;
+    bool recursive = 2;
+  }
+  message Rename {
+    bytes old_path = 1;
+    bytes new_path = 2;
+  }
+  message Cancel {
+  }
+  bytes request_id = 1;
+  .genai.FilesystemRequest.ReadFile read_file = 2; // oneof=operation
+  .genai.FilesystemRequest.WriteFile write_file = 3; // oneof=operation
+  .genai.FilesystemRequest.WriteFileData write_file_data = 4; // oneof=operation
+  .genai.FilesystemRequest.Stat stat = 5; // oneof=operation
+  .genai.FilesystemRequest.ReadDir read_dir = 6; // oneof=operation
+  .genai.FilesystemRequest.MkdirAll mkdir_all = 7; // oneof=operation
+  .genai.FilesystemRequest.Remove remove = 8; // oneof=operation
+  .genai.FilesystemRequest.Rename rename = 9; // oneof=operation
+  .genai.FilesystemRequest.Cancel cancel = 15; // oneof=operation
+}
+message FilesystemResponse {
+  message Error {
+    enum Code {
+      CODE_UNSPECIFIED = 0;
+      NOT_EXIST = 1;
+      EXIST = 2;
+      PERMISSION = 3;
+      IS_DIR = 4;
+      NOT_DIR = 5;
+      INVALID = 6;
+      UNIMPLEMENTED = 7;
+      CANCELLED = 8;
+      OTHER = 9;
+    }
+    .genai.FilesystemResponse.Error.Code code = 1;
+    string message = 2;
+  }
+  message ReadFileData {
+    bytes data = 1;
+    bool more_data = 2;
+  }
+  message FileInfo {
+    enum Type {
+      TYPE_UNSPECIFIED = 0;
+      TYPE_REGULAR = 1;
+      TYPE_DIRECTORY = 2;
+      TYPE_SYMLINK = 3;
+      TYPE_NAMED_PIPE = 4;
+      TYPE_SOCKET = 5;
+      TYPE_DEVICE = 6;
+      TYPE_CHAR_DEVICE = 7;
+      TYPE_IRREGULAR = 8;
+    }
+    bytes name = 1;
+    .genai.FilesystemResponse.FileInfo.Type type = 2;
+    uint32 permissions = 3;
+    int64 size = 4;
+    int64 mod_time_micros = 5;
+  }
+  message ReadDirData {
+    repeated .genai.FilesystemResponse.FileInfo entries = 1;
+    bool more_data = 2;
+  }
+  message Done {
+  }
+  bytes request_id = 1;
+  .genai.FilesystemResponse.Error error = 2; // oneof=result
+  .genai.FilesystemResponse.ReadFileData read_file_data = 3; // oneof=result
+  .genai.FilesystemResponse.FileInfo stat = 4; // oneof=result
+  .genai.FilesystemResponse.ReadDirData read_dir_data = 5; // oneof=result
+  .genai.FilesystemResponse.Done done = 6; // oneof=result
+}
+message CommandExecutionRequest {
+  message Start {
+    message EnvironmentVariable {
+      bytes name = 1;
+      bytes value = 2;
+    }
+    bytes command_line = 1;
+    bytes working_dir = 2;
+    repeated .genai.CommandExecutionRequest.Start.EnvironmentVariable env = 3;
+  }
+  message Stdin {
+    bytes data = 1;
+  }
+  message CloseStdin {
+  }
+  message Cancel {
+  }
+  bytes request_id = 1;
+  .genai.CommandExecutionRequest.Start start = 2; // oneof=operation
+  .genai.CommandExecutionRequest.Stdin stdin = 3; // oneof=operation
+  .genai.CommandExecutionRequest.CloseStdin close_stdin = 4; // oneof=operation
+  .genai.CommandExecutionRequest.Cancel cancel = 5; // oneof=operation
+}
+message CommandExecutionResponse {
+  message Started {
+  }
+  message Exited {
+    int32 exit_code = 1;
+    int32 signal = 2;
+  }
+  message Error {
+    string message = 1;
+  }
+  bytes request_id = 1;
+  .genai.CommandExecutionResponse.Started started = 2; // oneof=event
+  bytes stdout = 3; // oneof=event
+  bytes stderr = 4; // oneof=event
+  .genai.CommandExecutionResponse.Exited exited = 5; // oneof=event
+  .genai.CommandExecutionResponse.Error error = 6; // oneof=event
+}

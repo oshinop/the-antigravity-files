@@ -1,0 +1,12 @@
+// Extracted file offset 0x364e0da, 702 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package pattributes;
+import "privacy/data_governance/attributes/proto/purpose.proto";
+import "privacy/pattributes/public/proto/collection_basis.proto";
+import "privacy/pattributes/public/proto/collection_basis_expression.proto";
+message ProtoFieldUploadJustification {
+  string external_transparency_description = 5173;
+  .pattributes.CollectionBasisAnd collection_basis_and = 5174; // oneof=collection_basis_oneof
+  .pattributes.CollectionBasis collection_basis = 5175; // oneof=collection_basis_oneof
+  repeated .privacy.data_governance.attributes.ProcessingPurpose.Purpose purposes = 5176;
+}

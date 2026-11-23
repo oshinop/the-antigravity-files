@@ -1,0 +1,1784 @@
+// Extracted file offset 0x3b7134f, 84887 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.gca.aicode.v1main;
+import "apiserving/proto/media.proto";
+import "gdata/rosy/proto/data.proto";
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "google/longrunning/operations.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+import "google/rpc/status.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+import "third_party/jetski/codeium_common_pb/codeium_common.proto";
+import "third_party/jetski/cortex_pb/cortex.proto";
+import "third_party/jetski/diff_action_pb/diff_action.proto";
+import "third_party/jetski/jetski_cortex_pb/jetski_cortex.proto";
+import "third_party/jetski/language_server_pb/language_server.proto";
+import "third_party/jetski/remote_agent_proxy_pb/remote_agent_proxy.proto";
+import "third_party/jetski/remote_agent_proxy_pb/voice.proto";
+import "third_party/jetski/remote_agent_proxy_pb/voice_trajectory.proto";
+enum VcsType {
+  VCS_TYPE_UNSPECIFIED = 0;
+  VCS_TYPE_PIPER = 1;
+  VCS_TYPE_FIG = 2;
+  VCS_TYPE_JJ = 3;
+  VCS_TYPE_GOB_COG = 6;
+}
+enum IdentityType {
+  IDENTITY_TYPE_UNSPECIFIED = 0;
+  IDENTITY_TYPE_SELF = 1;
+  IDENTITY_TYPE_CORP_AGENT = 2;
+  IDENTITY_TYPE_GROUP_AGENT = 3;
+}
+enum PermissionSettingsScope {
+  PERMISSION_SETTINGS_SCOPE_UNSPECIFIED = 0;
+  PERMISSION_SETTINGS_SCOPE_GLOBAL = 1;
+  PERMISSION_SETTINGS_SCOPE_PROJECT = 2;
+}
+enum PermissionGrantList {
+  PERMISSION_GRANT_LIST_UNSPECIFIED = 0;
+  PERMISSION_GRANT_LIST_ALLOW = 1;
+  PERMISSION_GRANT_LIST_ASK = 2;
+  PERMISSION_GRANT_LIST_DENY = 3;
+}
+enum AgentStatus {
+  AGENT_STATUS_UNSPECIFIED = 0;
+  AGENT_STATUS_PROVISIONING = 1;
+  AGENT_STATUS_ACTIVE = 2;
+  AGENT_STATUS_STOPPED = 3;
+  AGENT_STATUS_FAILED = 4;
+  AGENT_STATUS_UPDATING = 5;
+  AGENT_STATUS_DISABLED = 6;
+}
+enum AgentRole {
+  AGENT_ROLE_UNSPECIFIED = 0;
+  AGENT_ROLE_TEAM = 1;
+  AGENT_ROLE_ADMIN = 2;
+}
+enum AgentBrainStyle {
+  AGENT_BRAIN_STYLE_UNSPECIFIED = 0;
+  AGENT_BRAIN_STYLE_ONESWARM = 1;
+  AGENT_BRAIN_STYLE_DISPATCHER = 2;
+  AGENT_BRAIN_STYLE_OTTO = 3;
+}
+enum AgentMemoryMode {
+  AGENT_MEMORY_MODE_UNSPECIFIED = 0;
+  AGENT_MEMORY_MODE_OFF = 1;
+  AGENT_MEMORY_MODE_ON = 2;
+  AGENT_MEMORY_MODE_PER_KEY = 3;
+}
+enum AgentConnectorTriggerState {
+  AGENT_CONNECTOR_TRIGGER_STATE_UNSPECIFIED = 0;
+  AGENT_CONNECTOR_TRIGGER_STATE_PENDING = 1;
+  AGENT_CONNECTOR_TRIGGER_STATE_ACTIVE = 2;
+  AGENT_CONNECTOR_TRIGGER_STATE_PAUSED = 3;
+  AGENT_CONNECTOR_TRIGGER_STATE_FAILED = 4;
+}
+enum AgentRemoteSessionAuthor {
+  AGENT_REMOTE_SESSION_AUTHOR_UNSPECIFIED = 0;
+  AGENT_REMOTE_SESSION_AUTHOR_USER = 1;
+  AGENT_REMOTE_SESSION_AUTHOR_AGENT = 2;
+}
+enum AgentRemoteSessionDeliveryState {
+  AGENT_REMOTE_SESSION_DELIVERY_STATE_UNSPECIFIED = 0;
+  AGENT_REMOTE_SESSION_DELIVERY_STATE_NOT_DELIVERED = 1;
+  AGENT_REMOTE_SESSION_DELIVERY_STATE_DELIVERED = 2;
+  AGENT_REMOTE_SESSION_DELIVERY_STATE_PENDING = 3;
+  AGENT_REMOTE_SESSION_DELIVERY_STATE_FAILED = 4;
+}
+enum AgentSessionKey {
+  AGENT_SESSION_KEY_UNSPECIFIED = 0;
+  AGENT_SESSION_KEY_THREAD = 1;
+  AGENT_SESSION_KEY_INCIDENT = 2;
+}
+enum CustomizationKind {
+  CUSTOMIZATION_KIND_UNSPECIFIED = 0;
+  CUSTOMIZATION_KIND_PLUGIN = 1;
+  CUSTOMIZATION_KIND_SKILL = 2;
+}
+message StartCascadeRequest {
+  string initial_prompt = 2;
+  repeated .exa.codeium_common_pb.TextOrScopeItem items = 7;
+  repeated string workspace_uris = 4;
+  .exa.remote_agent_proxy_pb.Environment environment = 5;
+  bool force_third_party_routing = 8;
+  .exa.remote_agent_proxy_pb.ConfigOverrides config_overrides = 6;
+  string project_id = 9;
+  string ace_vm_id = 10;
+  repeated .exa.codeium_common_pb.Media media = 11;
+  string title = 12;
+  repeated string tags = 13;
+  string client_message_id = 14;
+  string agent_path = 15;
+  .google.gca.aicode.v1main.CoordinatorConfig coordinator = 16;
+  .exa.codeium_common_pb.PermissionGrantsConfig permissions_config = 17;
+}
+message StartCascadeResponse {
+  string cascade_id = 1;
+  .exa.jetski_cortex_pb.ExecutionStatus execution_status = 2;
+}
+message SendUserCascadeMessageRequest {
+  string cascade_id = 1;
+  string message_text = 2;
+  repeated .exa.codeium_common_pb.TextOrScopeItem items = 4;
+  .exa.cortex_pb.MessageDeliveryStrategy delivery_strategy = 5;
+  bool continue_execution = 6;
+  .exa.remote_agent_proxy_pb.ConfigOverrides config_overrides = 7;
+  repeated .exa.codeium_common_pb.Media media = 8;
+  repeated .exa.codeium_common_pb.ArtifactComment artifact_comments = 9;
+  repeated .exa.codeium_common_pb.FileDiffComment file_diff_comments = 10;
+  repeated .exa.codeium_common_pb.FileComment file_comments = 11;
+  repeated string tags = 12;
+  string client_message_id = 13;
+  .exa.codeium_common_pb.PermissionGrantsConfig permissions_config = 14;
+}
+message SendUserCascadeMessageResponse {
+  string cascade_id = 1;
+  .exa.jetski_cortex_pb.ExecutionStatus execution_status = 2;
+}
+message StreamAgentStateUpdatesRequest {
+  string conversation_id = 1;
+  string resume_token = 5;
+  .exa.jetski_cortex_pb.Slice initial_steps_page_bounds = 3;
+  .exa.jetski_cortex_pb.ClientTrajectoryVerbosity trajectory_verbosity = 4;
+}
+message StreamAgentStateUpdatesResponse {
+  .exa.jetski_cortex_pb.AgentStateUpdate update = 1;
+  string resume_token = 2;
+  int64 pending_agent_messages_sequence_number = 3;
+  .google.gca.aicode.v1main.TrajectoryTruncation main_trajectory_truncation = 4;
+}
+message GetConversationRequest {
+  string conversation_id = 1;
+  string page_token = 2;
+  int32 page_size = 3;
+  .exa.jetski_cortex_pb.ClientTrajectoryVerbosity trajectory_verbosity = 5;
+}
+message GetConversationResponse {
+  string conversation_id = 1;
+  .exa.jetski_cortex_pb.AgentStateUpdate update = 2;
+  string next_page_token = 3;
+  string resume_token = 4;
+  .exa.codeium_common_pb.Model pinned_model = 5;
+  string model_display_name = 6;
+  string execution_identity = 7;
+  string pinned_capsule_id = 8;
+  int64 pending_agent_messages_sequence_number = 9;
+}
+message ListConversationsRequest {
+  string page_token = 1;
+  int32 page_size = 2;
+  string project_id = 4;
+  repeated string agent_identities = 5;
+}
+message ListConversationsResponse {
+  message ExecutionIdentitiesEntry {
+    string key = 1;
+    string value = 2;
+  }
+  repeated .exa.jetski_cortex_pb.CascadeTrajectorySummary conversations = 1;
+  string next_page_token = 2;
+  repeated .google.gca.aicode.v1main.ListConversationsResponse.ExecutionIdentitiesEntry execution_identities = 3;
+}
+message Workspace {
+  string workspace_uri = 1;
+  string display_name = 2;
+  int64 update_time_micros = 3;
+  string project_id = 4;
+  bool archived = 6;
+  string owner = 7;
+}
+message ListWorkspacesRequest {
+  string execution_identity = 1;
+  repeated string agent_identities = 2;
+}
+message ListWorkspacesResponse {
+  repeated .google.gca.aicode.v1main.Workspace workspaces = 1;
+}
+message CreateWorkspaceRequest {
+  string workspace_name = 1;
+  .google.gca.aicode.v1main.VcsType vcs_type = 2;
+  string prompt_text = 3;
+  string execution_identity = 4;
+  .google.gca.aicode.v1main.CogWorkspaceOptions cog_options = 5; // oneof=vcs_options
+}
+message CogWorkspaceOptions {
+  string gob_repo = 1;
+  string branch_ref = 2;
+}
+message CreateWorkspaceResponse {
+  .google.gca.aicode.v1main.Workspace workspace = 1;
+}
+message SearchGobReposRequest {
+  string query = 1;
+  int32 max_results = 2;
+}
+message SearchGobReposResponse {
+  repeated string repo_keys = 1;
+}
+message ListAvailableModelsRequest {
+  string execution_identity = 1;
+}
+message ModelOption {
+  .exa.codeium_common_pb.Model model = 1;
+  string display_name = 2;
+  string description = 3;
+  bool is_default = 4;
+  .exa.codeium_common_pb.QuotaInfo quota_info = 5;
+  string model_id = 6;
+}
+message ListAvailableModelsResponse {
+  repeated .google.gca.aicode.v1main.ModelOption models = 1;
+}
+message GetMendelFlagsRequest {
+}
+message GetMendelFlagsResponse {
+  .exa.codeium_common_pb.ExperimentConfig experiment_config = 1;
+}
+message UserAccountSettings {
+  bool telemetry_enabled = 1;
+  bool user_data_collection_force_disabled = 2;
+  bool marketing_emails_enabled = 3;
+}
+message GetUserAccountSettingsRequest {
+}
+message GetUserAccountSettingsResponse {
+  .google.gca.aicode.v1main.UserAccountSettings settings = 1;
+}
+message SetUserAccountSettingsRequest {
+  .google.gca.aicode.v1main.UserAccountSettings settings = 1;
+}
+message SetUserAccountSettingsResponse {
+  .google.gca.aicode.v1main.UserAccountSettings settings = 1;
+}
+message GetUserProfileRequest {
+}
+message GetUserProfileResponse {
+  string email = 1;
+  .google.gca.aicode.v1main.UserPlan plan = 2;
+}
+message UserPlan {
+  string id = 1;
+  string display_name = 2;
+  string upgrade_text = 3;
+  string upgrade_uri = 4;
+  string upgrade_button_text = 5;
+}
+message DeleteAllUserDataRequest {
+}
+message DeleteAllUserDataResponse {
+}
+message GetUserDataDeletionStatusRequest {
+}
+message GetUserDataDeletionStatusResponse {
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    NONE = 1;
+    IN_PROGRESS = 2;
+  }
+  .google.gca.aicode.v1main.GetUserDataDeletionStatusResponse.State state = 1;
+}
+message ListSlashCommandsRequest {
+  repeated string workspace_uris = 1;
+  string execution_identity = 2;
+  string conversation_id = 3;
+}
+message ListSlashCommandsResponse {
+  repeated .exa.language_server_pb.SlashCommandDefinition commands = 1;
+}
+message ListCustomizationsRequest {
+  string workspace_uri = 1;
+  string execution_identity = 2;
+}
+message ListCustomizationsResponse {
+  enum PartialReason {
+    PARTIAL_REASON_UNSPECIFIED = 0;
+    DEADLINE_EXCEEDED = 1;
+    WORKSPACE_UNREADABLE = 2;
+  }
+  repeated .exa.cortex_pb.WorkflowSpec skills = 1;
+  repeated .exa.cortex_pb.WorkflowSpec shadowed_skills = 2;
+  repeated .exa.cortex_pb.CortexMemory rules = 3;
+  repeated .exa.cortex_pb.AgentCustomization agents = 4;
+  repeated .google.gca.aicode.v1main.ListCustomizationsResponse.PartialReason partial_reasons = 5;
+}
+message ReadFileRequest {
+  string path = 1;
+  string conversation_id = 2;
+  string revision = 3;
+  bool user_initiated = 4;
+  int64 max_content_bytes = 5; // oneof=_max_content_bytes
+  int64 offset = 6; // oneof=_offset
+  string git_commit_id = 7; // oneof=git_version
+  bool git_staged = 8; // oneof=git_version
+}
+message ReadFileResponse {
+  message FileMetadata {
+    .google.gca.aicode.v1main.ReadDirResponse.Type type = 1;
+    int64 size_bytes = 2;
+  }
+  bytes content = 1;
+  bool truncated = 2;
+  .google.gca.aicode.v1main.ReadFileResponse.FileMetadata metadata = 3;
+}
+message ReadDirRequest {
+  string path = 1;
+  string conversation_id = 2;
+  bool user_initiated = 3;
+}
+message ReadDirResponse {
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    TYPE_FILE = 1;
+    TYPE_DIRECTORY = 2;
+    TYPE_SYMLINK = 3;
+  }
+  message Entry {
+    string name = 1;
+    .google.gca.aicode.v1main.ReadDirResponse.Type type = 2;
+  }
+  repeated .google.gca.aicode.v1main.ReadDirResponse.Entry entries = 1;
+  bool truncated = 2;
+}
+message SearchFilesRequest {
+  string path = 1;
+  string query = 2;
+  string conversation_id = 3;
+  int32 max_results = 4;
+  bool include_directories = 5;
+  bool user_initiated = 6;
+}
+message SearchFilesResponse {
+  message Match {
+    string path = 1;
+    string relative_path = 2;
+    bool is_directory = 3;
+  }
+  repeated .google.gca.aicode.v1main.SearchFilesResponse.Match matches = 1;
+  bool truncated = 2;
+}
+message GetTurnDiffRequest {
+  string conversation_id = 1;
+  uint32 step_index = 2;
+  bool stats_only = 3;
+  repeated string file_uris = 4;
+}
+message GetTurnDiffResponse {
+  message FileDiffsEntry {
+    string key = 1;
+    .exa.language_server_pb.FileDiffData value = 2;
+  }
+  repeated .google.gca.aicode.v1main.GetTurnDiffResponse.FileDiffsEntry file_diffs = 1;
+  int32 total_additions = 2;
+  int32 total_deletions = 3;
+  .exa.cortex_pb.CortexStepUserInput user_input = 4;
+  int32 turn_start_index = 5;
+  int32 turn_end_index_exclusive = 6;
+}
+message GetCodeActionDiffRequest {
+  string conversation_id = 1;
+  int32 step_index = 2;
+}
+message GetCodeActionDiffResponse {
+  .exa.diff_action_pb.DiffBlock diff = 1;
+}
+message ListEnvironmentsRequest {
+  string execution_identity = 1;
+}
+message Environment {
+  enum ConnectionState {
+    CONNECTION_STATE_UNSPECIFIED = 0;
+    STARTING = 1;
+    CONNECTED = 2;
+    DISCONNECTED = 3;
+  }
+  message Capsule {
+    string capsule_id = 1;
+    repeated string tags = 2;
+    .google.protobuf.Timestamp expiration_time = 3;
+  }
+  message Ace {
+    enum SetupStep {
+      SETUP_STEP_UNSPECIFIED = 0;
+      SETTING_UP_VM = 1;
+      SETTING_UP_ENVIRONMENT = 2;
+      CLONING_REPOSITORIES = 3;
+      COPYING_FILES = 4;
+    }
+    string vm_id = 1;
+    .google.gca.aicode.v1main.Environment.Ace.SetupStep setup_step = 2;
+  }
+  .google.gca.aicode.v1main.Environment.Capsule capsule = 1; // oneof=provider
+  .google.gca.aicode.v1main.Environment.Ace ace = 3; // oneof=provider
+  bool is_default = 2;
+  .google.gca.aicode.v1main.Environment.ConnectionState connection_state = 4;
+}
+message ListEnvironmentsResponse {
+  repeated .google.gca.aicode.v1main.Environment environments = 1;
+}
+message EnsureEnvironmentRequest {
+  message CapsuleOptions {
+    .google.protobuf.Duration min_remaining_lifetime_duration = 1;
+  }
+  message AceOptions {
+    string project_id = 1;
+    string vm_id = 2;
+    string cascade_id = 3;
+    bool prepare_spare = 4;
+  }
+  .google.gca.aicode.v1main.EnsureEnvironmentRequest.CapsuleOptions capsule = 1; // oneof=provider
+  .google.gca.aicode.v1main.EnsureEnvironmentRequest.AceOptions ace = 2; // oneof=provider
+  string execution_identity = 3;
+}
+message EnsureEnvironmentResponse {
+  .google.gca.aicode.v1main.Environment environment = 1;
+}
+message ListTriggerOptionsRequest {
+}
+message ListTriggerOptionsResponse {
+  repeated .exa.remote_agent_proxy_pb.TriggerOption trigger_options = 1;
+  bool oauth_consent_required = 2;
+  string oauth_authorize_uri = 3;
+}
+message CreateTriggerRequest {
+  .exa.remote_agent_proxy_pb.RemoteTrigger trigger = 1;
+}
+message CreateTriggerResponse {
+  .exa.remote_agent_proxy_pb.RemoteTrigger trigger = 1;
+}
+message UpdateTriggerRequest {
+  .exa.remote_agent_proxy_pb.RemoteTrigger trigger = 1;
+  repeated string update_mask = 2;
+}
+message UpdateTriggerResponse {
+  .exa.remote_agent_proxy_pb.RemoteTrigger trigger = 1;
+}
+message DeleteTriggerRequest {
+  string trigger_id = 1;
+  bool abort_active_runs = 2;
+}
+message DeleteTriggerResponse {
+}
+message ListTriggersRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+message ListTriggersResponse {
+  repeated .exa.remote_agent_proxy_pb.RemoteTrigger triggers = 1;
+  string next_page_token = 2;
+}
+message RunTriggerRequest {
+  string trigger_id = 1;
+}
+message RunTriggerResponse {
+}
+message IdentityOption {
+  string username = 1;
+  string display_name = 2;
+  .google.gca.aicode.v1main.IdentityType identity_type = 3;
+}
+message ListIdentitiesRequest {
+  string page_token = 1;
+  int32 page_size = 2;
+}
+message ListIdentitiesResponse {
+  repeated .google.gca.aicode.v1main.IdentityOption identities = 1;
+  string next_page_token = 2;
+}
+message GetVersionControlStateRequest {
+  string workspace_uri = 1;
+  .google.gca.aicode.v1main.CitcWorkspace citc = 2; // oneof=workspace
+  .google.gca.aicode.v1main.GitRepository git = 3; // oneof=workspace
+}
+message GetVersionControlStateResponse {
+  .exa.language_server_pb.WatchVersionControlStateResponse state = 1;
+}
+message CitcWorkspace {
+  string workspace_uri = 1;
+}
+message GitRepository {
+  string conversation_id = 1;
+  string path = 2;
+}
+message RunVersionControlActionRequest {
+  .google.gca.aicode.v1main.GitAction git = 1; // oneof=action
+}
+message GitAction {
+  message Stage {
+    repeated string paths = 1;
+  }
+  message Unstage {
+    repeated string paths = 1;
+  }
+  message Discard {
+    repeated string paths = 1;
+    bool unstaged_only = 2;
+  }
+  message Commit {
+    string message = 1;
+    bool amend = 2;
+  }
+  message Push {
+  }
+  .google.gca.aicode.v1main.GitRepository repository = 1;
+  .google.gca.aicode.v1main.GitAction.Stage stage = 2; // oneof=operation
+  .google.gca.aicode.v1main.GitAction.Unstage unstage = 3; // oneof=operation
+  .google.gca.aicode.v1main.GitAction.Discard discard = 4; // oneof=operation
+  .google.gca.aicode.v1main.GitAction.Commit commit = 5; // oneof=operation
+  .google.gca.aicode.v1main.GitAction.Push push = 6; // oneof=operation
+}
+message RunVersionControlActionResponse {
+  .exa.language_server_pb.GitCommitResponse git_commit = 1; // oneof=result
+  .exa.language_server_pb.GitPushResponse git_push = 2; // oneof=result
+}
+message CancelCascadeRequest {
+  string cascade_id = 1;
+  string reason = 2;
+  string ace_vm_id = 3;
+  repeated int32 step_indices = 4;
+  bool kill_background_tasks = 5;
+}
+message CancelCascadeResponse {
+}
+message ListPluginsRequest {
+  string return_to_app = 1;
+}
+message ListPluginsResponse {
+  repeated .exa.remote_agent_proxy_pb.PluginInfo plugins = 1;
+}
+message PluginInstallation {
+  enum Target {
+    TARGET_UNSPECIFIED = 0;
+    LOCAL = 1;
+    REMOTE = 2;
+    BOTH = 3;
+  }
+  string plugin_id = 1;
+  .google.gca.aicode.v1main.PluginInstallation.Target target = 2;
+  repeated .exa.remote_agent_proxy_pb.PluginConnection connections = 3;
+  .google.protobuf.Timestamp create_time = 4;
+  .google.protobuf.Timestamp update_time = 5;
+  string credential_key = 6;
+}
+message InstallPluginRequest {
+  string plugin_id = 1;
+  .google.gca.aicode.v1main.PluginInstallation.Target target = 2;
+  string return_to_app = 3;
+}
+message InstallPluginResponse {
+  .google.gca.aicode.v1main.PluginInstallation installation = 1;
+  string authorize_uri = 2;
+}
+message UninstallPluginRequest {
+  string plugin_id = 1;
+  .google.gca.aicode.v1main.PluginInstallation.Target target = 2;
+}
+message UninstallPluginResponse {
+  .google.gca.aicode.v1main.PluginInstallation installation = 1;
+}
+message ListPluginInstallationsRequest {
+}
+message ListPluginInstallationsResponse {
+  repeated .google.gca.aicode.v1main.PluginInstallation installations = 1;
+}
+message GeneratePluginAccessTokenRequest {
+  string plugin_id = 1;
+  string account = 2;
+  bool force_refresh = 3;
+}
+message GeneratePluginAccessTokenResponse {
+  string access_token = 1;
+  .google.protobuf.Timestamp expire_time = 2;
+  string account = 3;
+}
+message LocalPluginOAuthConfig {
+  string client_id = 1;
+  string client_secret = 2;
+  string authorize_uri = 3;
+  string token_uri = 4;
+  repeated string scopes = 5;
+  repeated string domains = 6;
+  string identity_uri = 7;
+  string identity_json_path = 8;
+}
+message StartLocalPluginSignInRequest {
+  enum SignInMode {
+    SIGN_IN_MODE_UNSPECIFIED = 0;
+    SIGN_IN_IF_NOT_YET = 1;
+    SIGN_IN_NEVER = 2;
+    SIGN_IN_ALWAYS = 3;
+  }
+  .google.gca.aicode.v1main.LocalPluginOAuthConfig oauth_config = 1;
+  int32 loopback_port = 2;
+  .google.gca.aicode.v1main.StartLocalPluginSignInRequest.SignInMode sign_in_mode = 3;
+  string return_to_app = 4;
+  string catalog_plugin_id = 5;
+}
+message StartLocalPluginSignInResponse {
+  string plugin_id = 1;
+  string authorize_uri = 2;
+  string state = 3;
+  bool connected = 4;
+}
+message CompleteLocalPluginSignInRequest {
+  string state = 1;
+  string code = 2;
+}
+message CompleteLocalPluginSignInResponse {
+  .google.gca.aicode.v1main.PluginInstallation installation = 1;
+}
+message GetChangelistStatusRequest {
+  repeated int64 cl_numbers = 1;
+  bool include_content = 2;
+  bool include_checks = 3;
+}
+message GetChangelistStatusResponse {
+  repeated .exa.language_server_pb.ChangelistStatus statuses = 1;
+}
+message GetGitHubPullRequestsRequest {
+  repeated .exa.language_server_pb.GitHubPullRequestRef pull_requests = 1;
+}
+message GetGitHubPullRequestsResponse {
+  repeated .exa.language_server_pb.GitHubPullRequestStatus statuses = 1;
+}
+message ProjectResource {
+  enum Visibility {
+    VISIBILITY_UNSPECIFIED = 0;
+    PUBLIC = 1;
+    PRIVATE = 2;
+  }
+  string type = 1;
+  string resource_id = 2;
+  string display_name = 3;
+  string url = 4;
+  string icon_url = 5;
+  string project_id = 6;
+  string mime_type = 7;
+  int64 size_bytes = 8;
+  string mount_path = 9;
+  .google.protobuf.Timestamp create_time = 10;
+  .google.protobuf.Timestamp update_time = 11;
+  .google.gca.aicode.v1main.ProjectResource.Visibility visibility = 12;
+  string default_branch = 13;
+}
+message ListAvailableResourcesRequest {
+  string type = 1;
+}
+message ListAvailableResourcesResponse {
+  repeated .google.gca.aicode.v1main.ProjectResource resources = 1;
+  string oauth_access_token = 2;
+  string oauth_client_id = 3;
+}
+message ListResourceProvidersRequest {
+}
+message ListResourceProvidersResponse {
+  repeated .exa.remote_agent_proxy_pb.ResourceProviderInfo providers = 1;
+}
+message UpdateProjectResourcesRequest {
+  string project_id = 1;
+  string title = 2;
+  repeated .google.gca.aicode.v1main.ProjectResource add_resources = 3;
+  repeated .google.gca.aicode.v1main.ProjectResource delete_resources = 4;
+}
+message UpdateProjectResourcesResponse {
+  repeated .google.gca.aicode.v1main.ProjectResource resources = 1;
+}
+message ListProjectResourcesRequest {
+  string project_id = 1;
+  string type = 2;
+}
+message ListProjectResourcesResponse {
+  repeated .google.gca.aicode.v1main.ProjectResource resources = 1;
+}
+message ProjectConfig {
+  string project_id = 1;
+  string title = 2;
+  int64 update_time_micros = 3;
+  bool archived = 4;
+  repeated .google.gca.aicode.v1main.ProjectResource resources = 5;
+  .google.gca.aicode.v1main.PermissionSettings permission_settings = 6;
+  string setup_script = 7;
+}
+message CreateProjectRequest {
+  .google.gca.aicode.v1main.ProjectConfig project = 1;
+  string project_id = 2;
+}
+message CreateProjectResponse {
+  .google.gca.aicode.v1main.ProjectConfig project = 1;
+}
+message ListProjectsRequest {
+}
+message ListProjectsResponse {
+  repeated .google.gca.aicode.v1main.ProjectConfig projects = 1;
+}
+message ConversationConfig {
+  string interaction_id = 1;
+  bool pinned = 2;
+  bool archived = 3;
+  string title = 4;
+  bool marked_as_unread = 5;
+  .google.protobuf.Timestamp last_user_view_time = 6;
+  string conversation_group_id = 7;
+  .exa.codeium_common_pb.AgentPermissionPreset permission_preset = 8;
+  .google.gca.aicode.v1main.CoordinatorConfig coordinator = 9;
+}
+message CoordinatorConfig {
+  string icon = 1;
+  string color = 2;
+  string goal = 3;
+  string instructions = 4;
+  repeated .google.gca.aicode.v1main.CoordinatorResource resources = 5;
+}
+message CoordinatorResource {
+  string type = 1;
+  string resource_id = 2;
+}
+message UpsertConversationConfigRequest {
+  .google.gca.aicode.v1main.ConversationConfig config = 1;
+  .google.protobuf.FieldMask update_mask = 2;
+}
+message UpsertConversationConfigResponse {
+  .google.gca.aicode.v1main.ConversationConfig config = 1;
+}
+message DisconnectPluginRequest {
+  string plugin_id = 1;
+  string account = 2;
+}
+message DisconnectPluginResponse {
+}
+message UpdateProjectRequest {
+  .google.gca.aicode.v1main.ProjectConfig project = 1;
+  .google.protobuf.FieldMask update_mask = 2;
+}
+message UpdateProjectResponse {
+  .google.gca.aicode.v1main.ProjectConfig project = 1;
+}
+message DeleteAgentMessageRequest {
+  string conversation_id = 1;
+  string message_id = 2;
+}
+message DeleteAgentMessageResponse {
+}
+message CreateTerminalRequest {
+  string conversation_id = 1;
+  string request_id = 2;
+}
+message CreateTerminalResponse {
+  .exa.language_server_pb.TerminalInfo terminal = 1;
+}
+message ListTerminalsRequest {
+  string conversation_id = 1;
+}
+message ListTerminalsResponse {
+  repeated .exa.language_server_pb.TerminalInfo terminals = 1;
+}
+message SendTerminalInputRequest {
+  string terminal_id = 1;
+  bytes input = 2; // oneof=action
+  .exa.language_server_pb.TerminalSize resize = 3; // oneof=action
+  string input_stream_id = 4;
+  int64 input_offset = 5;
+}
+message SendTerminalInputResponse {
+  int64 acked_offset = 1;
+}
+message StreamTerminalOutputRequest {
+  string terminal_id = 1;
+  int64 resume_offset = 2;
+}
+message StreamTerminalOutputResponse {
+  bytes output = 1; // oneof=event
+  int32 exit_code = 2; // oneof=event
+  int64 offset = 3;
+}
+message CloseTerminalRequest {
+  string terminal_id = 1;
+}
+message CloseTerminalResponse {
+}
+message UploadProjectFileRequest {
+  string project_id = 1;
+  string file_name = 2;
+  bytes content = 3;
+  string mime_type = 4;
+  int64 size_bytes = 5;
+  bytes inline_content = 6; // oneof=source
+  string blob_handle = 7; // oneof=source
+  string title = 8;
+  .gdata.Media blob = 9;
+  .apiserving.MediaRequestInfo media_request_info = 10;
+}
+message UploadProjectFileResponse {
+  .google.gca.aicode.v1main.ProjectResource resource = 1;
+  .apiserving.MediaResponseInfo media_response_info = 2;
+}
+message ReadProjectResourceRequest {
+  string project_id = 1;
+  string type = 2;
+  string resource_id = 3;
+}
+message ReadProjectResourceResponse {
+  .google.gca.aicode.v1main.ProjectResource resource = 1;
+  bytes content = 2;
+  bool truncated = 3;
+}
+message HandleCascadeUserInteractionRequest {
+  string conversation_id = 1;
+  .exa.cortex_pb.CascadeUserInteraction interaction = 2;
+}
+message HandleCascadeUserInteractionResponse {
+}
+message PermissionSettings {
+  .exa.codeium_common_pb.PermissionGrantsConfig grants = 1;
+  .exa.codeium_common_pb.AgentPermissionPreset permission_preset = 2;
+  .exa.codeium_common_pb.ArtifactReviewMode artifact_review_mode = 3; // oneof=_artifact_review_mode
+  .exa.codeium_common_pb.BrowserJsExecutionPolicy browser_js_execution_policy = 4; // oneof=_browser_js_execution_policy
+}
+message GetPermissionSettingsRequest {
+  string project_id = 1;
+}
+message GetPermissionSettingsResponse {
+  .google.gca.aicode.v1main.PermissionSettings global = 1;
+  .google.gca.aicode.v1main.PermissionSettings project = 2;
+}
+message SetPermissionPresetRequest {
+  .google.gca.aicode.v1main.PermissionSettingsScope scope = 1;
+  string project_id = 2;
+  .exa.codeium_common_pb.AgentPermissionPreset preset = 3;
+}
+message SetPermissionPresetResponse {
+  .google.gca.aicode.v1main.PermissionSettings settings = 1;
+}
+message SetArtifactReviewModeRequest {
+  .google.gca.aicode.v1main.PermissionSettingsScope scope = 1;
+  string project_id = 2;
+  .exa.codeium_common_pb.ArtifactReviewMode artifact_review_mode = 3; // oneof=_artifact_review_mode
+}
+message SetArtifactReviewModeResponse {
+  .google.gca.aicode.v1main.PermissionSettings settings = 1;
+}
+message SetBrowserJsExecutionPolicyRequest {
+  .google.gca.aicode.v1main.PermissionSettingsScope scope = 1;
+  string project_id = 2;
+  .exa.codeium_common_pb.BrowserJsExecutionPolicy browser_js_execution_policy = 3; // oneof=_browser_js_execution_policy
+}
+message SetBrowserJsExecutionPolicyResponse {
+  .google.gca.aicode.v1main.PermissionSettings settings = 1;
+}
+message AddPermissionGrantsRequest {
+  .google.gca.aicode.v1main.PermissionSettingsScope scope = 1;
+  string project_id = 2;
+  .google.gca.aicode.v1main.PermissionGrantList list = 3;
+  repeated string grants = 4;
+}
+message AddPermissionGrantsResponse {
+  .google.gca.aicode.v1main.PermissionSettings settings = 1;
+}
+message RemovePermissionGrantsRequest {
+  .google.gca.aicode.v1main.PermissionSettingsScope scope = 1;
+  string project_id = 2;
+  .google.gca.aicode.v1main.PermissionGrantList list = 3;
+  repeated string grants = 4;
+}
+message RemovePermissionGrantsResponse {
+  .google.gca.aicode.v1main.PermissionSettings settings = 1;
+}
+message DeleteProjectRequest {
+  string project_id = 1;
+}
+message DeleteProjectResponse {
+}
+message RenewTriggerCredentialsRequest {
+  repeated string trigger_ids = 1;
+}
+message RenewTriggerCredentialsResponse {
+  int32 renewed_count = 1;
+  int32 trigger_count = 2;
+}
+message DeleteConversationRequest {
+  string conversation_id = 1;
+}
+message DeleteConversationResponse {
+}
+message GetUserQuotaSummaryRequest {
+  string execution_identity = 1;
+}
+message GetUserQuotaSummaryResponse {
+  .exa.language_server_pb.RetrieveUserQuotaSummaryResponse summary = 1;
+}
+message RevertCascadeToStepRequest {
+  string conversation_id = 1;
+  int32 step_index = 2;
+  bool conversation_only = 3;
+  string request_id = 4;
+}
+message RevertCascadeToStepResponse {
+}
+message TrajectoryTruncation {
+  int32 num_steps = 1;
+  string request_id = 2;
+}
+message GetCascadeNuxesRequest {
+}
+message GetCascadeNuxesResponse {
+  repeated .exa.codeium_common_pb.CascadeNUXConfig nuxes = 1;
+}
+message GenerateConversationTitleRequest {
+  string prompt = 1;
+  repeated .exa.codeium_common_pb.TextOrScopeItem items = 2;
+  string execution_identity = 3;
+}
+message GenerateConversationTitleResponse {
+  string title = 1;
+}
+message AskSideQuestionRequest {
+  string conversation_id = 1;
+  string question = 2;
+  .exa.codeium_common_pb.Model model = 3;
+}
+message AskSideQuestionResponse {
+  string answer = 1;
+}
+message StartBattleModeRequest {
+  string source_conversation_id = 1; // oneof=source
+  .google.gca.aicode.v1main.BattleModeNewConversation new_source_conversation = 4; // oneof=source
+  repeated .google.gca.aicode.v1main.BattleModeArm arms = 2;
+  int32 fork_step_index = 3; // oneof=_fork_step_index
+}
+message StartBattleModeResponse {
+  repeated string children_conversation_ids = 1;
+  int32 start_step_index = 2;
+  string source_conversation_id = 3;
+}
+message EndBattleModeRequest {
+  string winner_conversation_id = 1;
+  .exa.language_server_pb.MergeStrategy merge_strategy = 2;
+  .exa.cortex_pb.BattleEndType end_type = 3;
+  string source_conversation_id = 4;
+  bool force_stop_running = 5;
+}
+message EndBattleModeResponse {
+  string main_conversation_id = 1;
+  .exa.language_server_pb.EndBattleModeError error = 2;
+  .exa.codeium_common_pb.Model winning_model = 3;
+}
+message EliminateBattleModeArmRequest {
+  string source_conversation_id = 1;
+  string eliminated_conversation_id = 2;
+}
+message EliminateBattleModeArmResponse {
+  .exa.cortex_pb.BattleModeInfo battle_mode_info = 1;
+}
+message BattleModeNewConversation {
+  string workspace_uri = 1;
+  .exa.remote_agent_proxy_pb.Environment environment = 2;
+  .exa.remote_agent_proxy_pb.ConfigOverrides config_overrides = 3;
+}
+message BattleModeArm {
+  string message_text = 1;
+  repeated .exa.codeium_common_pb.TextOrScopeItem items = 2;
+  repeated .exa.codeium_common_pb.Media media = 3;
+  .exa.remote_agent_proxy_pb.ConfigOverrides config_overrides = 4;
+}
+message GetClientStorageItemsRequest {
+}
+message GetClientStorageItemsResponse {
+  message ItemsEntry {
+    string key = 1;
+    string value = 2;
+  }
+  repeated .google.gca.aicode.v1main.GetClientStorageItemsResponse.ItemsEntry items = 1;
+}
+message UpdateClientStorageItemsRequest {
+  message ItemsEntry {
+    string key = 1;
+    string value = 2;
+  }
+  repeated .google.gca.aicode.v1main.UpdateClientStorageItemsRequest.ItemsEntry items = 1;
+  repeated string keys_to_delete = 2;
+}
+message UpdateClientStorageItemsResponse {
+}
+message SandboxHttpHeader {
+  string name = 1;
+  string value = 2;
+}
+message FetchSandboxPortRequest {
+  string conversation_id = 1;
+  int32 port = 2;
+  string method = 3;
+  string path = 4;
+  repeated .google.gca.aicode.v1main.SandboxHttpHeader headers = 5;
+  bytes body = 6;
+  bool user_initiated = 7;
+}
+message FetchSandboxPortResponse {
+  int32 status_code = 1;
+  repeated .google.gca.aicode.v1main.SandboxHttpHeader headers = 2;
+  bytes body = 3;
+  bool truncated = 4;
+}
+message SandboxWebRtcIceServer {
+  repeated string urls = 1;
+  string username = 2;
+  string credential = 3;
+}
+message ConnectSandboxWebRtcRequest {
+  string conversation_id = 1;
+  string sdp_offer = 2;
+}
+message ConnectSandboxWebRtcResponse {
+  string sdp_answer = 1;
+  string dtls_fingerprint = 2;
+  repeated .google.gca.aicode.v1main.SandboxWebRtcIceServer ice_servers = 3;
+}
+message Agent {
+  string agent_id = 1;
+  string display_name = 2;
+  string execution_identity = 3;
+  .google.gca.aicode.v1main.AgentStatus status = 4;
+  string capsule_id = 5;
+  int64 create_time_micros = 6;
+  int64 update_time_micros = 7;
+  .google.gca.aicode.v1main.AgentStatusDetail status_detail = 8;
+  string current_operation_name = 9;
+  .google.gca.aicode.v1main.AgentRole caller_role = 10;
+  .google.gca.aicode.v1main.AgentAccess access = 11;
+}
+message AgentEnvironment {
+  enum Provider {
+    PROVIDER_UNSPECIFIED = 0;
+    CAPSULE = 1;
+  }
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    PENDING = 1;
+    STARTING = 2;
+    ACTIVE = 3;
+    DEGRADED = 4;
+    STOPPING = 5;
+    STOPPED = 6;
+    FAILED = 7;
+  }
+  int32 replica_index = 1;
+  string environment_id = 2;
+  .google.gca.aicode.v1main.AgentEnvironment.State state = 3;
+  .google.protobuf.Timestamp check_in_time = 4;
+  .google.protobuf.Timestamp expire_time = 5;
+  string error_message = 6;
+  .google.gca.aicode.v1main.AgentEnvironment.Provider provider = 7;
+}
+message AgentStatusDetail {
+  string message = 1;
+  .google.rpc.Status error = 2;
+  string failed_phase = 3;
+  string operation_name = 4;
+  int64 status_time_micros = 5;
+}
+message AgentOperationMetadata {
+  string agent_id = 1;
+  string phase = 2;
+  string message = 3;
+  int64 update_time_micros = 4;
+}
+message AgentPrincipal {
+  string user = 1; // oneof=principal
+}
+message AgentGrant {
+  .google.gca.aicode.v1main.AgentPrincipal principal = 1;
+  .google.gca.aicode.v1main.AgentRole role = 2;
+}
+message AgentAccess {
+  repeated .google.gca.aicode.v1main.AgentGrant grants = 1;
+}
+message CreateAgentRequest {
+  string execution_identity = 2;
+  string agent_id = 3;
+  bool adopt_existing = 4;
+  .google.gca.aicode.v1main.AgentConfig agent_config = 5;
+}
+message CreateAgentResponse {
+  .google.gca.aicode.v1main.Agent agent = 1;
+  string operation_name = 2;
+}
+message GetAgentRequest {
+  string agent_id = 1;
+  bool include_access = 2;
+}
+message GetAgentResponse {
+  .google.gca.aicode.v1main.Agent agent = 1;
+  repeated .google.gca.aicode.v1main.AgentEnvironment environments = 20;
+}
+message AgentConfig {
+  string agent_blueprint_id = 1;
+  .google.gca.aicode.v1main.AgentBrainStyle brain_style = 2;
+  .google.gca.aicode.v1main.AgentMemoryMode memory = 3;
+  string model = 4;
+  int32 pool_size = 5;
+  .google.gca.aicode.v1main.AgentChatskiConnector chatski_connector = 6;
+  bool send_session_message = 7; // oneof=_send_session_message
+  string managed_by_piper_path = 8;
+  .google.gca.aicode.v1main.AgentConnectors connectors = 9;
+}
+message AgentChatskiConnector {
+  string handle = 1;
+  string instance_plugin_dir = 2;
+}
+message AgentConnectors {
+  repeated .google.gca.aicode.v1main.AgentConnectorSubscription subscriptions = 2;
+}
+message AgentConnectorSubscription {
+  message FieldsEntry {
+    string key = 1;
+    .exa.remote_agent_proxy_pb.FieldValues value = 2;
+  }
+  string connector_id = 1;
+  string display_name = 2;
+  string prompt = 3;
+  bool paused = 4;
+  string option_id = 5;
+  repeated .google.gca.aicode.v1main.AgentConnectorSubscription.FieldsEntry fields = 6;
+  string static_session_key = 7;
+}
+message AgentConnectorTrigger {
+  string connector_id = 1;
+  string trigger_id = 2;
+  .google.gca.aicode.v1main.AgentConnectorTriggerState state = 3;
+  .google.protobuf.Timestamp last_renew_time = 4;
+  .google.protobuf.Timestamp credential_expire_time = 5;
+  int32 error_code = 6;
+  .google.protobuf.Timestamp update_time = 7;
+}
+message ListAgentTriggersRequest {
+  string agent_id = 1;
+}
+message ListAgentTriggersResponse {
+  repeated .google.gca.aicode.v1main.AgentConnectorTrigger triggers = 1;
+  .google.protobuf.Timestamp last_sync_time = 2;
+}
+message AgentEnvironmentUpdate {
+  .google.rpc.Status status = 1;
+  .google.gca.aicode.v1main.CapsulePoolUpdate capsule_pool = 2; // oneof=environment
+}
+message CapsulePoolUpdate {
+  repeated string updated_fields = 1;
+}
+message SyncAgentConnectorTriggersRequest {
+  string agent_id = 1;
+  string holder = 2;
+}
+message AgentConnectorTriggerSync {
+  enum Action {
+    ACTION_UNSPECIFIED = 0;
+    UNCHANGED = 1;
+    CREATED = 2;
+    UPDATED = 3;
+    DELETED = 4;
+    RENEWED = 5;
+    REACTIVATED = 6;
+    PAUSED = 7;
+    FAILED = 8;
+  }
+  string connector_id = 1;
+  string trigger_id = 2;
+  .google.gca.aicode.v1main.AgentConnectorTriggerSync.Action action = 3;
+  string error_message = 4;
+}
+message SyncAgentConnectorTriggersResponse {
+  bool lease_held_elsewhere = 1;
+  repeated .google.gca.aicode.v1main.AgentConnectorTriggerSync results = 2;
+}
+message GetAgentConfigRequest {
+  string agent_id = 1;
+}
+message GetAgentConfigResponse {
+  .google.gca.aicode.v1main.AgentConfig config = 1;
+  string etag = 2;
+}
+message UpdateAgentConfigRequest {
+  string agent_id = 1;
+  .google.gca.aicode.v1main.AgentConfig config = 2;
+  string etag = 3;
+}
+message UpdateAgentConfigResponse {
+  .google.gca.aicode.v1main.AgentConfig config = 1;
+  string etag = 2;
+  .google.gca.aicode.v1main.AgentEnvironmentUpdate environment_update = 3;
+}
+message ListAgentsRequest {
+}
+message ListAgentsResponse {
+  repeated .google.gca.aicode.v1main.Agent agents = 1;
+}
+message ListAgentConversationsRequest {
+  string agent_id = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+message AgentConversation {
+  string conversation_id = 1;
+  repeated string session_keys = 2;
+  int64 create_time_micros = 3;
+  int64 update_time_micros = 4;
+}
+message ListAgentConversationsResponse {
+  repeated .google.gca.aicode.v1main.AgentConversation conversations = 1;
+  string next_page_token = 2;
+}
+message DeleteAgentRequest {
+  string agent_id = 1;
+}
+message DeleteAgentResponse {
+}
+message DisableAgentRequest {
+  string agent_id = 1;
+}
+message DisableAgentResponse {
+  .google.gca.aicode.v1main.Agent agent = 1;
+}
+message EnableAgentRequest {
+  string agent_id = 1;
+}
+message EnableAgentResponse {
+  .google.gca.aicode.v1main.Agent agent = 1;
+}
+message DeliverAgentEventRequest {
+  string agent_id = 1;
+  string tag = 2;
+  string source = 3;
+  string key = 4;
+  string sender = 5;
+  string message_id = 6;
+  string content = 7;
+  repeated string metadata_tags = 8;
+  .exa.cortex_pb.MessageDeliveryStrategy delivery_strategy = 9;
+  .exa.codeium_common_pb.Model model = 10;
+}
+message DeliverAgentEventResponse {
+  string conversation_id = 1;
+  string session_tag = 2;
+  bool created = 3;
+  string message_id = 4;
+  string error_message = 5;
+}
+message StreamVoiceRequest {
+  .exa.remote_agent_proxy_pb.VoiceClientMessage message = 1;
+}
+message StreamVoiceResponse {
+  .exa.remote_agent_proxy_pb.VoiceServerMessage message = 1;
+}
+message ListVoiceTrajectoriesRequest {
+  string cascade_id = 1;
+}
+message ListVoiceTrajectoriesResponse {
+  repeated .exa.remote_agent_proxy_pb.VoiceTrajectory voice_trajectories = 1;
+}
+message GetVoiceTrajectoryDebugRequest {
+  string cascade_id = 1;
+  string voice_trajectory_id = 2;
+}
+message DeleteVoiceTrajectoriesRequest {
+  string cascade_id = 1;
+}
+message DeleteVoiceTrajectoriesResponse {
+}
+message ReportEnvironmentSidecarsRequest {
+  .exa.remote_agent_proxy_pb.Environment environment = 1;
+  string deployment_id = 2;
+  repeated .exa.cortex_pb.SidecarStatusInfo sidecars = 3;
+}
+message ReportEnvironmentSidecarsResponse {
+  .google.protobuf.Timestamp update_time = 1;
+}
+message ListEnvironmentSidecarsRequest {
+  .exa.remote_agent_proxy_pb.Environment environment = 1;
+}
+message ListEnvironmentSidecarsResponse {
+  repeated .exa.cortex_pb.SidecarStatusInfo sidecars = 1;
+  .google.protobuf.Timestamp update_time = 2;
+}
+message UpdateAgentAccessRequest {
+  string agent_id = 1;
+  repeated .google.gca.aicode.v1main.AgentGrant grants = 2;
+}
+message UpdateAgentAccessResponse {
+  .google.gca.aicode.v1main.Agent agent = 1;
+}
+message ListAgentCoordinationMessagesRequest {
+  string agent_id = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+  string thread_id = 4;
+  bool roots_only = 5;
+  string since_cursor = 6;
+  string corr = 7;
+  string mention_target = 8;
+  .google.gca.aicode.v1main.AgentCoordinationMention.State mention_state = 9;
+}
+message AgentCoordinationMention {
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    PENDING = 1;
+    ACKED = 2;
+    NACKED = 3;
+    FAILED = 4;
+  }
+  string session_key = 1;
+  .google.gca.aicode.v1main.AgentCoordinationMention.State state = 2;
+  string reason = 3;
+  string acked_by = 4;
+  .google.protobuf.Timestamp update_time = 5;
+}
+message AgentCoordinationMessage {
+  string message_id = 1;
+  string session_key = 2;
+  string envelope = 3;
+  string reply_to = 4;
+  string thread_id = 5;
+  string body = 6;
+  .google.protobuf.Timestamp create_time = 7;
+  repeated .google.gca.aicode.v1main.AgentCoordinationMention mentions = 8;
+  .google.gca.aicode.v1main.AgentCoordinationThreadSummary thread = 9;
+  string corr = 10;
+}
+message AgentCoordinationThreadSummary {
+  int64 reply_count = 1;
+  .google.protobuf.Timestamp last_reply_time = 2;
+  repeated string replier_session_keys = 3;
+}
+message ListAgentCoordinationMessagesResponse {
+  repeated .google.gca.aicode.v1main.AgentCoordinationMessage agent_coordination_messages = 1;
+  string next_page_token = 2;
+  string cursor = 3;
+}
+message AppendAgentCoordinationMessageRequest {
+  string agent_id = 1;
+  string sender_session_key = 2;
+  string body = 3;
+  repeated string mentions = 4;
+  string reply_to = 5;
+  string corr = 6;
+  string envelope = 7;
+  string request_id = 8;
+}
+message AgentCoordinationMentionDelivery {
+  string session_key = 1;
+  bool delivered = 2;
+  string conversation_id = 3;
+  bool created = 4;
+  string delivery_error = 5;
+}
+message AppendAgentCoordinationMessageResponse {
+  .google.gca.aicode.v1main.AgentCoordinationMessage message = 1;
+  repeated .google.gca.aicode.v1main.AgentCoordinationMentionDelivery deliveries = 2;
+}
+message AckAgentCoordinationMentionRequest {
+  string agent_id = 1;
+  string message_id = 2;
+  string target_session_key = 3;
+  bool nack = 4;
+  string reason = 5;
+  string acked_by = 6;
+}
+message AckAgentCoordinationMentionResponse {
+  .google.gca.aicode.v1main.AgentCoordinationMention mention = 1;
+}
+message AgentRemoteSession {
+  string session_id = 1;
+  string agent_id = 2;
+  string session_key = 3;
+  string title = 4;
+  .google.protobuf.Timestamp create_time = 5;
+  .google.protobuf.Timestamp last_message_time = 6;
+}
+message AgentRemoteSessionMessage {
+  string message_id = 1;
+  .google.gca.aicode.v1main.AgentRemoteSessionAuthor author = 2;
+  string author_conversation_id = 3;
+  string body = 4;
+  .google.protobuf.Timestamp create_time = 5;
+}
+message AgentRemoteSessionLiveness {
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    RUNNING = 1;
+    IDLE = 2;
+    STALLED = 3;
+    FAILED = 4;
+  }
+  .google.gca.aicode.v1main.AgentRemoteSessionLiveness.State state = 1;
+  .google.protobuf.Timestamp last_activity_time = 2;
+  string conversation_id = 3;
+}
+message CreateAgentRemoteSessionRequest {
+  string agent_id = 1;
+  string title = 2;
+}
+message CreateAgentRemoteSessionResponse {
+  .google.gca.aicode.v1main.AgentRemoteSession session = 1;
+}
+message ListAgentRemoteSessionsRequest {
+  string agent_id = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+message ListAgentRemoteSessionsResponse {
+  repeated .google.gca.aicode.v1main.AgentRemoteSession sessions = 1;
+  string next_page_token = 2;
+}
+message ListAgentRemoteSessionMessagesRequest {
+  string agent_id = 1;
+  string session_id = 2;
+  int32 page_size = 3;
+  string page_token = 4;
+  string since_cursor = 5;
+}
+message ListAgentRemoteSessionMessagesResponse {
+  repeated .google.gca.aicode.v1main.AgentRemoteSessionMessage messages = 1;
+  string next_page_token = 2;
+  string cursor = 3;
+  .google.gca.aicode.v1main.AgentRemoteSessionLiveness liveness = 4;
+}
+message AppendAgentRemoteSessionMessageRequest {
+  string agent_id = 1;
+  string session_id = 2;
+  string body = 3;
+  string request_id = 4;
+  string author_conversation_id = 5;
+}
+message AppendAgentRemoteSessionMessageResponse {
+  .google.gca.aicode.v1main.AgentRemoteSessionMessage message = 1;
+  .google.gca.aicode.v1main.AgentRemoteSessionDeliveryState delivery_state = 2;
+  string delivery_error = 3;
+  string conversation_id = 4;
+}
+message AgentBlueprint {
+  string id = 1;
+  string display_name = 2;
+  string description = 3;
+  .google.gca.aicode.v1main.AgentConfig defaults = 4;
+  repeated .google.gca.aicode.v1main.AgentMemoryMode allowed_memory = 5;
+  .google.gca.aicode.v1main.AgentSessionKey session_key = 6;
+  string extends_path = 7;
+}
+message ListAgentBlueprintsRequest {
+}
+message ListAgentBlueprintsResponse {
+  repeated .google.gca.aicode.v1main.AgentBlueprint blueprints = 1;
+}
+message ListAgentRunsRequest {
+  string agent_id = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+message AgentRun {
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    QUEUED = 1;
+    RUNNING = 2;
+    SUCCEEDED = 3;
+    FAILED = 4;
+    PREEMPTED = 5;
+  }
+  string run_id = 1;
+  string session_key = 2;
+  string conversation_id = 3;
+  .google.gca.aicode.v1main.AgentRun.State state = 4;
+  int64 receive_time_micros = 5;
+  int64 start_time_micros = 6;
+  int64 end_time_micros = 7;
+  string preempting_run_id = 8;
+  int32 error_code = 9;
+}
+message ListAgentRunsResponse {
+  repeated .google.gca.aicode.v1main.AgentRun runs = 1;
+  string next_page_token = 2;
+  repeated .google.gca.aicode.v1main.AgentRunStateCount state_counts = 3;
+  int32 total_slots = 4;
+}
+message AgentRunStateCount {
+  .google.gca.aicode.v1main.AgentRun.State state = 1;
+  int64 count = 2;
+}
+message DeliverPendingAgentRemoteSessionMessagesRequest {
+  string agent_id = 1;
+}
+message AgentRemoteSessionMessageDelivery {
+  string session_id = 1;
+  string message_id = 2;
+  .google.gca.aicode.v1main.AgentRemoteSessionDeliveryState delivery_state = 3;
+  string conversation_id = 4;
+  string delivery_error = 5;
+}
+message DeliverPendingAgentRemoteSessionMessagesResponse {
+  repeated .google.gca.aicode.v1main.AgentRemoteSessionMessageDelivery deliveries = 1;
+}
+message WatchTopic {
+  message CallerConversations {
+  }
+  message CallerProjects {
+  }
+  message AgentConversations {
+    string agent_id = 1;
+  }
+  message AgentCoordination {
+    string agent_id = 1;
+  }
+  message AgentRemoteSessionMessages {
+    string agent_id = 1;
+    string session_id = 2;
+  }
+  .google.gca.aicode.v1main.WatchTopic.CallerConversations caller_conversations = 1; // oneof=target
+  .google.gca.aicode.v1main.WatchTopic.CallerProjects caller_projects = 2; // oneof=target
+  .google.gca.aicode.v1main.WatchTopic.AgentConversations agent_conversations = 3; // oneof=target
+  .google.gca.aicode.v1main.WatchTopic.AgentCoordination agent_coordination = 4; // oneof=target
+  .google.gca.aicode.v1main.WatchTopic.AgentRemoteSessionMessages agent_remote_session_messages = 5; // oneof=target
+}
+message WatchTopicGeneration {
+  .google.gca.aicode.v1main.WatchTopic topic = 1;
+  string generation = 2;
+}
+message WatchTopicsRequest {
+  repeated .google.gca.aicode.v1main.WatchTopicGeneration topics = 1;
+}
+message WatchTopicsResponse {
+  message InitialFrame {
+    repeated .google.gca.aicode.v1main.WatchTopicGeneration baselines = 1;
+    repeated .google.gca.aicode.v1main.WatchTopicGeneration changed_topics = 2;
+  }
+  message Heartbeat {
+  }
+  .google.gca.aicode.v1main.WatchTopicsResponse.InitialFrame initial_frame = 1; // oneof=frame
+  .google.gca.aicode.v1main.WatchTopicGeneration changed_topic = 2; // oneof=frame
+  .google.gca.aicode.v1main.WatchTopicsResponse.Heartbeat heartbeat = 3; // oneof=frame
+}
+message SearchMarketplaceRequest {
+  string query = 1;
+  string page_token = 2;
+  string group_id = 3;
+}
+message SearchMarketplaceResponse {
+  .exa.language_server_pb.SearchMarketplaceResponse response = 1;
+}
+message GetMarketplaceCustomizationRequest {
+  string id = 1;
+  bool include_preview = 2;
+}
+message GetMarketplaceCustomizationResponse {
+  .exa.language_server_pb.GetMarketplaceCustomizationResponse response = 1;
+}
+message GetMarketplaceFeaturedRequest {
+}
+message GetMarketplaceFeaturedResponse {
+  .exa.language_server_pb.GetMarketplaceFeaturedResponse response = 1;
+}
+message InstallCustomizationRequest {
+  string id = 1;
+  string bundle_id = 2;
+}
+message InstallCustomizationResponse {
+  .exa.language_server_pb.InstallCustomizationResponse response = 1;
+}
+message UninstallCustomizationRequest {
+  .google.gca.aicode.v1main.CustomizationKind kind = 1;
+  string customization_id = 2;
+}
+message UninstallCustomizationResponse {
+}
+message SetCustomizationEnabledRequest {
+  .google.gca.aicode.v1main.CustomizationKind kind = 1;
+  string customization_id = 2;
+  bool enabled = 3;
+}
+message SetCustomizationEnabledResponse {
+}
+message ListInstalledPluginsRequest {
+  string plugin_id = 1;
+}
+message ListInstalledPluginsResponse {
+  repeated .exa.language_server_pb.Plugin plugins = 1;
+}
+message InvokeSubserviceRequest {
+  int32 method = 1;
+  bytes payload = 2;
+}
+message InvokeSubserviceResponse {
+  bytes payload = 1;
+}
+message AgentMemoryGroup {
+  string group_id = 1;
+  string description = 2;
+  string prompt = 3;
+  .google.protobuf.Timestamp create_time = 4;
+}
+message AgentMemory {
+  string group_id = 1;
+  string memory_id = 2;
+  string description = 3;
+  string content = 4;
+  repeated string tags = 5;
+  .google.protobuf.Timestamp create_time = 6;
+  .google.protobuf.Timestamp update_time = 7;
+  int64 content_length = 8;
+  string mime_type = 9;
+}
+message ListAgentMemoryGroupsRequest {
+  string agent_id = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+message ListAgentMemoryGroupsResponse {
+  repeated .google.gca.aicode.v1main.AgentMemoryGroup memory_groups = 1;
+  string next_page_token = 2;
+}
+message ListAgentMemoriesRequest {
+  string agent_id = 1;
+  string group_id = 2;
+  int32 page_size = 3;
+  string page_token = 4;
+  bool include_content = 5;
+}
+message ListAgentMemoriesResponse {
+  repeated .google.gca.aicode.v1main.AgentMemory memories = 1;
+  string next_page_token = 2;
+}
+message GetAgentMemoryRequest {
+  string agent_id = 1;
+  string group_id = 2;
+  string memory_id = 3;
+}
+message GetAgentMemoryResponse {
+  .google.gca.aicode.v1main.AgentMemory memory = 1;
+}
+service JetskiRemoteAgentProxyService {
+  rpc StartCascade (.google.gca.aicode.v1main.StartCascadeRequest) returns (.google.gca.aicode.v1main.StartCascadeResponse);
+  rpc SendUserCascadeMessage (.google.gca.aicode.v1main.SendUserCascadeMessageRequest) returns (.google.gca.aicode.v1main.SendUserCascadeMessageResponse);
+  rpc StreamAgentStateUpdates (.google.gca.aicode.v1main.StreamAgentStateUpdatesRequest) returns (stream .google.gca.aicode.v1main.StreamAgentStateUpdatesResponse);
+  rpc GetConversation (.google.gca.aicode.v1main.GetConversationRequest) returns (.google.gca.aicode.v1main.GetConversationResponse);
+  rpc ListConversations (.google.gca.aicode.v1main.ListConversationsRequest) returns (.google.gca.aicode.v1main.ListConversationsResponse);
+  rpc ListWorkspaces (.google.gca.aicode.v1main.ListWorkspacesRequest) returns (.google.gca.aicode.v1main.ListWorkspacesResponse);
+  rpc CreateWorkspace (.google.gca.aicode.v1main.CreateWorkspaceRequest) returns (.google.gca.aicode.v1main.CreateWorkspaceResponse);
+  rpc ListAvailableModels (.google.gca.aicode.v1main.ListAvailableModelsRequest) returns (.google.gca.aicode.v1main.ListAvailableModelsResponse);
+  rpc ListSlashCommands (.google.gca.aicode.v1main.ListSlashCommandsRequest) returns (.google.gca.aicode.v1main.ListSlashCommandsResponse);
+  rpc ReadFile (.google.gca.aicode.v1main.ReadFileRequest) returns (.google.gca.aicode.v1main.ReadFileResponse);
+  rpc GetTurnDiff (.google.gca.aicode.v1main.GetTurnDiffRequest) returns (.google.gca.aicode.v1main.GetTurnDiffResponse);
+  rpc GetCodeActionDiff (.google.gca.aicode.v1main.GetCodeActionDiffRequest) returns (.google.gca.aicode.v1main.GetCodeActionDiffResponse);
+  rpc ListEnvironments (.google.gca.aicode.v1main.ListEnvironmentsRequest) returns (.google.gca.aicode.v1main.ListEnvironmentsResponse);
+  rpc ReadDir (.google.gca.aicode.v1main.ReadDirRequest) returns (.google.gca.aicode.v1main.ReadDirResponse);
+  rpc ListTriggerOptions (.google.gca.aicode.v1main.ListTriggerOptionsRequest) returns (.google.gca.aicode.v1main.ListTriggerOptionsResponse);
+  rpc CreateTrigger (.google.gca.aicode.v1main.CreateTriggerRequest) returns (.google.gca.aicode.v1main.CreateTriggerResponse);
+  rpc UpdateTrigger (.google.gca.aicode.v1main.UpdateTriggerRequest) returns (.google.gca.aicode.v1main.UpdateTriggerResponse);
+  rpc DeleteTrigger (.google.gca.aicode.v1main.DeleteTriggerRequest) returns (.google.gca.aicode.v1main.DeleteTriggerResponse);
+  rpc ListTriggers (.google.gca.aicode.v1main.ListTriggersRequest) returns (.google.gca.aicode.v1main.ListTriggersResponse);
+  rpc ListIdentities (.google.gca.aicode.v1main.ListIdentitiesRequest) returns (.google.gca.aicode.v1main.ListIdentitiesResponse);
+  rpc GetVersionControlState (.google.gca.aicode.v1main.GetVersionControlStateRequest) returns (.google.gca.aicode.v1main.GetVersionControlStateResponse);
+  rpc CancelCascade (.google.gca.aicode.v1main.CancelCascadeRequest) returns (.google.gca.aicode.v1main.CancelCascadeResponse);
+  rpc ListPlugins (.google.gca.aicode.v1main.ListPluginsRequest) returns (.google.gca.aicode.v1main.ListPluginsResponse);
+  rpc EnsureEnvironment (.google.gca.aicode.v1main.EnsureEnvironmentRequest) returns (.google.gca.aicode.v1main.EnsureEnvironmentResponse);
+  rpc CreateProject (.google.gca.aicode.v1main.CreateProjectRequest) returns (.google.gca.aicode.v1main.CreateProjectResponse);
+  rpc UpsertConversationConfig (.google.gca.aicode.v1main.UpsertConversationConfigRequest) returns (.google.gca.aicode.v1main.UpsertConversationConfigResponse);
+  rpc ListResourceProviders (.google.gca.aicode.v1main.ListResourceProvidersRequest) returns (.google.gca.aicode.v1main.ListResourceProvidersResponse);
+  rpc ListAvailableResources (.google.gca.aicode.v1main.ListAvailableResourcesRequest) returns (.google.gca.aicode.v1main.ListAvailableResourcesResponse);
+  rpc UpdateProjectResources (.google.gca.aicode.v1main.UpdateProjectResourcesRequest) returns (.google.gca.aicode.v1main.UpdateProjectResourcesResponse);
+  rpc ListProjectResources (.google.gca.aicode.v1main.ListProjectResourcesRequest) returns (.google.gca.aicode.v1main.ListProjectResourcesResponse);
+  rpc DisconnectPlugin (.google.gca.aicode.v1main.DisconnectPluginRequest) returns (.google.gca.aicode.v1main.DisconnectPluginResponse);
+  rpc ListProjects (.google.gca.aicode.v1main.ListProjectsRequest) returns (.google.gca.aicode.v1main.ListProjectsResponse);
+  rpc UpdateProject (.google.gca.aicode.v1main.UpdateProjectRequest) returns (.google.gca.aicode.v1main.UpdateProjectResponse);
+  rpc DeleteAgentMessage (.google.gca.aicode.v1main.DeleteAgentMessageRequest) returns (.google.gca.aicode.v1main.DeleteAgentMessageResponse);
+  rpc CreateTerminal (.google.gca.aicode.v1main.CreateTerminalRequest) returns (.google.gca.aicode.v1main.CreateTerminalResponse);
+  rpc ListTerminals (.google.gca.aicode.v1main.ListTerminalsRequest) returns (.google.gca.aicode.v1main.ListTerminalsResponse);
+  rpc SendTerminalInput (.google.gca.aicode.v1main.SendTerminalInputRequest) returns (.google.gca.aicode.v1main.SendTerminalInputResponse);
+  rpc StreamTerminalOutput (.google.gca.aicode.v1main.StreamTerminalOutputRequest) returns (stream .google.gca.aicode.v1main.StreamTerminalOutputResponse);
+  rpc CloseTerminal (.google.gca.aicode.v1main.CloseTerminalRequest) returns (.google.gca.aicode.v1main.CloseTerminalResponse);
+  rpc UploadProjectFile (.google.gca.aicode.v1main.UploadProjectFileRequest) returns (.google.gca.aicode.v1main.UploadProjectFileResponse);
+  rpc ReadProjectResource (.google.gca.aicode.v1main.ReadProjectResourceRequest) returns (.google.gca.aicode.v1main.ReadProjectResourceResponse);
+  rpc HandleCascadeUserInteraction (.google.gca.aicode.v1main.HandleCascadeUserInteractionRequest) returns (.google.gca.aicode.v1main.HandleCascadeUserInteractionResponse);
+  rpc DeleteProject (.google.gca.aicode.v1main.DeleteProjectRequest) returns (.google.gca.aicode.v1main.DeleteProjectResponse);
+  rpc GetPermissionSettings (.google.gca.aicode.v1main.GetPermissionSettingsRequest) returns (.google.gca.aicode.v1main.GetPermissionSettingsResponse);
+  rpc SetPermissionPreset (.google.gca.aicode.v1main.SetPermissionPresetRequest) returns (.google.gca.aicode.v1main.SetPermissionPresetResponse);
+  rpc SetArtifactReviewMode (.google.gca.aicode.v1main.SetArtifactReviewModeRequest) returns (.google.gca.aicode.v1main.SetArtifactReviewModeResponse);
+  rpc SetBrowserJsExecutionPolicy (.google.gca.aicode.v1main.SetBrowserJsExecutionPolicyRequest) returns (.google.gca.aicode.v1main.SetBrowserJsExecutionPolicyResponse);
+  rpc AddPermissionGrants (.google.gca.aicode.v1main.AddPermissionGrantsRequest) returns (.google.gca.aicode.v1main.AddPermissionGrantsResponse);
+  rpc RemovePermissionGrants (.google.gca.aicode.v1main.RemovePermissionGrantsRequest) returns (.google.gca.aicode.v1main.RemovePermissionGrantsResponse);
+  rpc RenewTriggerCredentials (.google.gca.aicode.v1main.RenewTriggerCredentialsRequest) returns (.google.gca.aicode.v1main.RenewTriggerCredentialsResponse);
+  rpc InstallPlugin (.google.gca.aicode.v1main.InstallPluginRequest) returns (.google.gca.aicode.v1main.InstallPluginResponse);
+  rpc UninstallPlugin (.google.gca.aicode.v1main.UninstallPluginRequest) returns (.google.gca.aicode.v1main.UninstallPluginResponse);
+  rpc ListPluginInstallations (.google.gca.aicode.v1main.ListPluginInstallationsRequest) returns (.google.gca.aicode.v1main.ListPluginInstallationsResponse);
+  rpc GetMendelFlags (.google.gca.aicode.v1main.GetMendelFlagsRequest) returns (.google.gca.aicode.v1main.GetMendelFlagsResponse);
+  rpc DeleteConversation (.google.gca.aicode.v1main.DeleteConversationRequest) returns (.google.gca.aicode.v1main.DeleteConversationResponse);
+  rpc GetUserQuotaSummary (.google.gca.aicode.v1main.GetUserQuotaSummaryRequest) returns (.google.gca.aicode.v1main.GetUserQuotaSummaryResponse);
+  rpc GetUserAccountSettings (.google.gca.aicode.v1main.GetUserAccountSettingsRequest) returns (.google.gca.aicode.v1main.GetUserAccountSettingsResponse);
+  rpc SetUserAccountSettings (.google.gca.aicode.v1main.SetUserAccountSettingsRequest) returns (.google.gca.aicode.v1main.SetUserAccountSettingsResponse);
+  rpc GetUserProfile (.google.gca.aicode.v1main.GetUserProfileRequest) returns (.google.gca.aicode.v1main.GetUserProfileResponse);
+  rpc RevertCascadeToStep (.google.gca.aicode.v1main.RevertCascadeToStepRequest) returns (.google.gca.aicode.v1main.RevertCascadeToStepResponse);
+  rpc GetCascadeNuxes (.google.gca.aicode.v1main.GetCascadeNuxesRequest) returns (.google.gca.aicode.v1main.GetCascadeNuxesResponse);
+  rpc GenerateConversationTitle (.google.gca.aicode.v1main.GenerateConversationTitleRequest) returns (.google.gca.aicode.v1main.GenerateConversationTitleResponse);
+  rpc AskSideQuestion (.google.gca.aicode.v1main.AskSideQuestionRequest) returns (.google.gca.aicode.v1main.AskSideQuestionResponse);
+  rpc DeleteAllUserData (.google.gca.aicode.v1main.DeleteAllUserDataRequest) returns (.google.gca.aicode.v1main.DeleteAllUserDataResponse);
+  rpc GetUserDataDeletionStatus (.google.gca.aicode.v1main.GetUserDataDeletionStatusRequest) returns (.google.gca.aicode.v1main.GetUserDataDeletionStatusResponse);
+  rpc StartBattleMode (.google.gca.aicode.v1main.StartBattleModeRequest) returns (.google.gca.aicode.v1main.StartBattleModeResponse);
+  rpc EndBattleMode (.google.gca.aicode.v1main.EndBattleModeRequest) returns (.google.gca.aicode.v1main.EndBattleModeResponse);
+  rpc EliminateBattleModeArm (.google.gca.aicode.v1main.EliminateBattleModeArmRequest) returns (.google.gca.aicode.v1main.EliminateBattleModeArmResponse);
+  rpc GetClientStorageItems (.google.gca.aicode.v1main.GetClientStorageItemsRequest) returns (.google.gca.aicode.v1main.GetClientStorageItemsResponse);
+  rpc UpdateClientStorageItems (.google.gca.aicode.v1main.UpdateClientStorageItemsRequest) returns (.google.gca.aicode.v1main.UpdateClientStorageItemsResponse);
+  rpc GeneratePluginAccessToken (.google.gca.aicode.v1main.GeneratePluginAccessTokenRequest) returns (.google.gca.aicode.v1main.GeneratePluginAccessTokenResponse);
+  rpc FetchSandboxPort (.google.gca.aicode.v1main.FetchSandboxPortRequest) returns (.google.gca.aicode.v1main.FetchSandboxPortResponse);
+  rpc SearchFiles (.google.gca.aicode.v1main.SearchFilesRequest) returns (.google.gca.aicode.v1main.SearchFilesResponse);
+  rpc StartLocalPluginSignIn (.google.gca.aicode.v1main.StartLocalPluginSignInRequest) returns (.google.gca.aicode.v1main.StartLocalPluginSignInResponse);
+  rpc CompleteLocalPluginSignIn (.google.gca.aicode.v1main.CompleteLocalPluginSignInRequest) returns (.google.gca.aicode.v1main.CompleteLocalPluginSignInResponse);
+  rpc CreateAgent (.google.gca.aicode.v1main.CreateAgentRequest) returns (.google.gca.aicode.v1main.CreateAgentResponse);
+  rpc GetAgent (.google.gca.aicode.v1main.GetAgentRequest) returns (.google.gca.aicode.v1main.GetAgentResponse);
+  rpc ListAgents (.google.gca.aicode.v1main.ListAgentsRequest) returns (.google.gca.aicode.v1main.ListAgentsResponse);
+  rpc DisableAgent (.google.gca.aicode.v1main.DisableAgentRequest) returns (.google.gca.aicode.v1main.DisableAgentResponse);
+  rpc EnableAgent (.google.gca.aicode.v1main.EnableAgentRequest) returns (.google.gca.aicode.v1main.EnableAgentResponse);
+  rpc GetChangelistStatus (.google.gca.aicode.v1main.GetChangelistStatusRequest) returns (.google.gca.aicode.v1main.GetChangelistStatusResponse);
+  rpc RunTrigger (.google.gca.aicode.v1main.RunTriggerRequest) returns (.google.gca.aicode.v1main.RunTriggerResponse);
+  rpc StreamVoice (stream .google.gca.aicode.v1main.StreamVoiceRequest) returns (stream .google.gca.aicode.v1main.StreamVoiceResponse);
+  rpc ListCustomizations (.google.gca.aicode.v1main.ListCustomizationsRequest) returns (.google.gca.aicode.v1main.ListCustomizationsResponse);
+  rpc GetOperation (.google.longrunning.GetOperationRequest) returns (.google.longrunning.Operation);
+  rpc DeliverAgentEvent (.google.gca.aicode.v1main.DeliverAgentEventRequest) returns (.google.gca.aicode.v1main.DeliverAgentEventResponse);
+  rpc ListVoiceTrajectories (.google.gca.aicode.v1main.ListVoiceTrajectoriesRequest) returns (.google.gca.aicode.v1main.ListVoiceTrajectoriesResponse);
+  rpc GetVoiceTrajectoryDebug (.google.gca.aicode.v1main.GetVoiceTrajectoryDebugRequest) returns (.exa.remote_agent_proxy_pb.VoiceTrajectory);
+  rpc DeleteVoiceTrajectories (.google.gca.aicode.v1main.DeleteVoiceTrajectoriesRequest) returns (.google.gca.aicode.v1main.DeleteVoiceTrajectoriesResponse);
+  rpc SearchGobRepos (.google.gca.aicode.v1main.SearchGobReposRequest) returns (.google.gca.aicode.v1main.SearchGobReposResponse);
+  rpc ReportEnvironmentSidecars (.google.gca.aicode.v1main.ReportEnvironmentSidecarsRequest) returns (.google.gca.aicode.v1main.ReportEnvironmentSidecarsResponse);
+  rpc ListEnvironmentSidecars (.google.gca.aicode.v1main.ListEnvironmentSidecarsRequest) returns (.google.gca.aicode.v1main.ListEnvironmentSidecarsResponse);
+  rpc GetGitHubPullRequests (.google.gca.aicode.v1main.GetGitHubPullRequestsRequest) returns (.google.gca.aicode.v1main.GetGitHubPullRequestsResponse);
+  rpc GetAgentConfig (.google.gca.aicode.v1main.GetAgentConfigRequest) returns (.google.gca.aicode.v1main.GetAgentConfigResponse);
+  rpc UpdateAgentConfig (.google.gca.aicode.v1main.UpdateAgentConfigRequest) returns (.google.gca.aicode.v1main.UpdateAgentConfigResponse);
+  rpc ListAgentConversations (.google.gca.aicode.v1main.ListAgentConversationsRequest) returns (.google.gca.aicode.v1main.ListAgentConversationsResponse);
+  rpc UpdateAgentAccess (.google.gca.aicode.v1main.UpdateAgentAccessRequest) returns (.google.gca.aicode.v1main.UpdateAgentAccessResponse);
+  rpc RunVersionControlAction (.google.gca.aicode.v1main.RunVersionControlActionRequest) returns (.google.gca.aicode.v1main.RunVersionControlActionResponse);
+  rpc ListAgentCoordinationMessages (.google.gca.aicode.v1main.ListAgentCoordinationMessagesRequest) returns (.google.gca.aicode.v1main.ListAgentCoordinationMessagesResponse);
+  rpc DeleteAgent (.google.gca.aicode.v1main.DeleteAgentRequest) returns (.google.gca.aicode.v1main.DeleteAgentResponse);
+  rpc CreateAgentRemoteSession (.google.gca.aicode.v1main.CreateAgentRemoteSessionRequest) returns (.google.gca.aicode.v1main.CreateAgentRemoteSessionResponse);
+  rpc ListAgentRemoteSessions (.google.gca.aicode.v1main.ListAgentRemoteSessionsRequest) returns (.google.gca.aicode.v1main.ListAgentRemoteSessionsResponse);
+  rpc ListAgentRemoteSessionMessages (.google.gca.aicode.v1main.ListAgentRemoteSessionMessagesRequest) returns (.google.gca.aicode.v1main.ListAgentRemoteSessionMessagesResponse);
+  rpc AppendAgentRemoteSessionMessage (.google.gca.aicode.v1main.AppendAgentRemoteSessionMessageRequest) returns (.google.gca.aicode.v1main.AppendAgentRemoteSessionMessageResponse);
+  rpc ListAgentBlueprints (.google.gca.aicode.v1main.ListAgentBlueprintsRequest) returns (.google.gca.aicode.v1main.ListAgentBlueprintsResponse);
+  rpc ListAgentRuns (.google.gca.aicode.v1main.ListAgentRunsRequest) returns (.google.gca.aicode.v1main.ListAgentRunsResponse);
+  rpc DeliverPendingAgentRemoteSessionMessages (.google.gca.aicode.v1main.DeliverPendingAgentRemoteSessionMessagesRequest) returns (.google.gca.aicode.v1main.DeliverPendingAgentRemoteSessionMessagesResponse);
+  rpc AppendAgentCoordinationMessage (.google.gca.aicode.v1main.AppendAgentCoordinationMessageRequest) returns (.google.gca.aicode.v1main.AppendAgentCoordinationMessageResponse);
+  rpc AckAgentCoordinationMention (.google.gca.aicode.v1main.AckAgentCoordinationMentionRequest) returns (.google.gca.aicode.v1main.AckAgentCoordinationMentionResponse);
+  rpc ListAgentTriggers (.google.gca.aicode.v1main.ListAgentTriggersRequest) returns (.google.gca.aicode.v1main.ListAgentTriggersResponse);
+  rpc SyncAgentConnectorTriggers (.google.gca.aicode.v1main.SyncAgentConnectorTriggersRequest) returns (.google.gca.aicode.v1main.SyncAgentConnectorTriggersResponse);
+  rpc WatchTopics (.google.gca.aicode.v1main.WatchTopicsRequest) returns (stream .google.gca.aicode.v1main.WatchTopicsResponse);
+  rpc SearchMarketplace (.google.gca.aicode.v1main.SearchMarketplaceRequest) returns (.google.gca.aicode.v1main.SearchMarketplaceResponse);
+  rpc GetMarketplaceCustomization (.google.gca.aicode.v1main.GetMarketplaceCustomizationRequest) returns (.google.gca.aicode.v1main.GetMarketplaceCustomizationResponse);
+  rpc GetMarketplaceFeatured (.google.gca.aicode.v1main.GetMarketplaceFeaturedRequest) returns (.google.gca.aicode.v1main.GetMarketplaceFeaturedResponse);
+  rpc InstallCustomization (.google.gca.aicode.v1main.InstallCustomizationRequest) returns (.google.gca.aicode.v1main.InstallCustomizationResponse);
+  rpc UninstallCustomization (.google.gca.aicode.v1main.UninstallCustomizationRequest) returns (.google.gca.aicode.v1main.UninstallCustomizationResponse);
+  rpc SetCustomizationEnabled (.google.gca.aicode.v1main.SetCustomizationEnabledRequest) returns (.google.gca.aicode.v1main.SetCustomizationEnabledResponse);
+  rpc ListInstalledPlugins (.google.gca.aicode.v1main.ListInstalledPluginsRequest) returns (.google.gca.aicode.v1main.ListInstalledPluginsResponse);
+  rpc InvokeSubservice (.google.gca.aicode.v1main.InvokeSubserviceRequest) returns (.google.gca.aicode.v1main.InvokeSubserviceResponse);
+  rpc StreamSubservice (.google.gca.aicode.v1main.InvokeSubserviceRequest) returns (stream .google.gca.aicode.v1main.InvokeSubserviceResponse);
+  rpc ConnectSandboxWebRtc (.google.gca.aicode.v1main.ConnectSandboxWebRtcRequest) returns (.google.gca.aicode.v1main.ConnectSandboxWebRtcResponse);
+  rpc ListAgentMemoryGroups (.google.gca.aicode.v1main.ListAgentMemoryGroupsRequest) returns (.google.gca.aicode.v1main.ListAgentMemoryGroupsResponse);
+  rpc ListAgentMemories (.google.gca.aicode.v1main.ListAgentMemoriesRequest) returns (.google.gca.aicode.v1main.ListAgentMemoriesResponse);
+  rpc GetAgentMemory (.google.gca.aicode.v1main.GetAgentMemoryRequest) returns (.google.gca.aicode.v1main.GetAgentMemoryResponse);
+}

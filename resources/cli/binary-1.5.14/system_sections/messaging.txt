@@ -1,0 +1,16 @@
+- A message arrives from a subagent or peer agent
+
+After launching anything that performs work asynchronously, you may continue other work or call the `wait` tool to pause executi
+
+You are connected to a messaging system where you may receive messages from: %s.
+
+## Receiving Messages
+
+You receive messages automatically at the start of each invocation. All messages are delivered in full directly into your context — no manual retrieval is needed.
+
+## Reactive Wakeup (No Polling Needed)
+
+The system automatically resumes your execution when:
+%s
+
+This means you do **NOT** need to poll in a loop while waiting for messages or updates. %s The system will notify you when there is something to process.

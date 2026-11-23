@@ -1,0 +1,12 @@
+// Extracted file offset 0x364a8ee, 667 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+message HotwordDetectionMetadata {
+  bool server_asr_hotword_detected = 1;
+}
+message InputIntentMetadata {
+  .google.ai.generativelanguage.v1main.HotwordDetectionMetadata hotword_detection_metadata = 1; // oneof=metadata
+}

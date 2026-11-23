@@ -1,0 +1,81 @@
+// Extracted file offset 0x36d4e7e, 2626 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package apps_annotations;
+import "net/proto2/proto/descriptor.proto";
+enum SemanticType {
+  ST_UNSPECIFIED = 0;
+  ST_RESERVED_12001 = 12001;
+  ST_RESERVED_12002 = 12002;
+  ST_RESERVED_12003 = 12003;
+  ST_RESERVED_12004 = 12004;
+  ST_RESERVED_12005 = 12005;
+  ST_RESERVED_12006 = 12006;
+  ST_RESERVED_12007 = 12007;
+  ST_RESERVED_12008 = 12008;
+  ST_RESERVED_12009 = 12009;
+  ST_RESERVED_12010 = 12010;
+  ST_RESERVED_12011 = 12011;
+  ST_RESERVED_12012 = 12012;
+  ST_RESERVED_12013 = 12013;
+  ST_RESERVED_12014 = 12014;
+  ST_RESERVED_12015 = 12015;
+  ST_RESERVED_12016 = 12016;
+  ST_RESERVED_12017 = 12017;
+  ST_RESERVED_12018 = 12018;
+  ST_RESERVED_12019 = 12019;
+  ST_RESERVED_12020 = 12020;
+  ST_RESERVED_12021 = 12021;
+  ST_RESERVED_12022 = 12022;
+  ST_RESERVED_12023 = 12023;
+  ST_RESERVED_12024 = 12024;
+  ST_RESERVED_12025 = 12025;
+  ST_RESERVED_12026 = 12026;
+  ST_RESERVED_12027 = 12027;
+  ST_RESERVED_12028 = 12028;
+  ST_RESERVED_12029 = 12029;
+  ST_RESERVED_12030 = 12030;
+  ST_RESERVED_12031 = 12031;
+  ST_RESERVED_12032 = 12032;
+  ST_RESERVED_12033 = 12033;
+  ST_RESERVED_12034 = 12034;
+  ST_RESERVED_12035 = 12035;
+  ST_RESERVED_12036 = 12036;
+  ST_RESERVED_12038 = 12038;
+  ST_PTOKEN = 12037;
+}
+enum FilterScope {
+  FILTER_SCOPE_UNSPECIFIED = 0;
+  WORKSPACE_DATA_CLASS = 1;
+}
+message MessageDetails {
+  .apps_annotations.PolicyTargetEntityInfo policy_target_entity_info = 2;
+}
+message PolicyTargetEntityInfo {
+  enum EucEntityType {
+    EUC_ENTITY_TYPE_UNSPECIFIED = 0;
+    EUC_ENTITY_TYPE_GAIA_ID = 1;
+    EUC_ENTITY_TYPE_CUSTOMER_ID = 2;
+  }
+  enum MatchType {
+    UNSPECIFIED = 0;
+    MATCH_ANY = 1;
+    MATCH_ALL = 2;
+    MATCH_ONE_OF = 3;
+  }
+  message TargetEntityInfo {
+    enum Type {
+      TARGET_ENTITY_TYPE_UNSPECIFIED = 0;
+      GAIA_ID = 1;
+      CUSTOMER_ID = 2;
+      TAKEOUT_ENTITY_ID = 3;
+      VAULT_MATTER_ID = 4;
+    }
+    string path = 1;
+    .apps_annotations.PolicyTargetEntityInfo.TargetEntityInfo.Type type = 2;
+  }
+  repeated .apps_annotations.PolicyTargetEntityInfo.TargetEntityInfo field_proto_paths = 1;
+  repeated .apps_annotations.PolicyTargetEntityInfo.EucEntityType target_euc_ids = 2;
+  string root_proto_path = 3;
+  repeated .apps_annotations.PolicyTargetEntityInfo children = 4;
+  .apps_annotations.PolicyTargetEntityInfo.MatchType match_type = 5;
+}

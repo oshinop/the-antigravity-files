@@ -1,0 +1,7 @@
+// Extracted file offset 0x76b609c, 316 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package pb.enumvalue;
+import "net/proto2/proto/descriptor.proto";
+message JsonEnumValueOptions {
+  string string = 1;
+}

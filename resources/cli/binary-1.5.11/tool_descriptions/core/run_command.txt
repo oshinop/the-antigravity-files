@@ -1,0 +1,5 @@
+Execute a command in the workspace. Operating System: %s. Shell: %s.
+
+Each command runs in a new session (working directory changes and environment variables do not persist across calls).
+
+Commands that do not finish within the specified wait time continue running in the background as tasks; the system will notify you when they finish, so do not poll their status or set timers to check on them. Instead, set %s to be notified if a command is still running after that long.

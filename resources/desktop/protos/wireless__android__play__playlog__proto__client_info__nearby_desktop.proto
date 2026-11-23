@@ -1,0 +1,59 @@
+// Extracted file offset 0x36fdaf2, 3304 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb_generate_object_format.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message NearbyDesktopClientInfo {
+  enum DeviceType {
+    UNKNOWN_DEVICE_TYPE = 0;
+    LAPTOP = 1;
+    TABLET = 2;
+  }
+  message NearbyDesktopDriverInfo {
+    string manufacturer = 1;
+    string device_name = 2;
+    string driver_provider_name = 3;
+    string driver_version = 4;
+    string driver_date = 5;
+  }
+  message NearbyDesktopBluetoothInfo {
+    bool is_extended_advertising_supported = 1;
+    bool is_peripheral_role_supported = 2;
+    bool is_low_energy_supported = 3;
+    bool is_advertisement_offload_supported = 4;
+  }
+  message WindowsDeviceInfo {
+    .wireless_android_play_playlog.NearbyDesktopClientInfo.DeviceType device_type = 1;
+    string device_manufacturer = 2;
+    string device_model = 3;
+    int64 physical_memory = 4;
+    int32 processor_count = 5;
+    int32 logical_processor_count = 6;
+    string os_name = 7;
+    string os_version = 8;
+    string os_architecture = 9;
+    string cpu_manufacturer = 10;
+    string cpu_name = 11;
+    repeated .wireless_android_play_playlog.NearbyDesktopClientInfo.NearbyDesktopDriverInfo bluetooth_driver_infos = 12;
+    repeated .wireless_android_play_playlog.NearbyDesktopClientInfo.NearbyDesktopDriverInfo network_driver_infos = 13;
+    .wireless_android_play_playlog.NearbyDesktopClientInfo.NearbyDesktopBluetoothInfo bluetooth_info = 15;
+  }
+  message MacOSDeviceInfo {
+    .wireless_android_play_playlog.NearbyDesktopClientInfo.DeviceType device_type = 1;
+    string device_manufacturer = 2;
+    string device_model = 3;
+    int64 physical_memory = 4;
+    int32 processor_count = 5;
+    int32 logical_processor_count = 6;
+    string os_name = 7;
+    string os_version = 8;
+    string os_architecture = 9;
+    string cpu_manufacturer = 10;
+    string cpu_name = 11;
+    .wireless_android_play_playlog.NearbyDesktopClientInfo.NearbyDesktopBluetoothInfo bluetooth_info = 12;
+  }
+  .wireless_android_play_playlog.NearbyDesktopClientInfo.WindowsDeviceInfo windows_device_info = 1;
+  .wireless_android_play_playlog.NearbyDesktopClientInfo.MacOSDeviceInfo mac_os_device_info = 2;
+}

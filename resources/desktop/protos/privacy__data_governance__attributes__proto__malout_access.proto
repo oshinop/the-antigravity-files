@@ -1,0 +1,18 @@
+// Extracted file offset 0x368b82c, 1417 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message MalOutAccess {
+  message Rpc {
+    enum MalOutStatus {
+      MALOUT_STATUS_UNDEFINED = 0;
+      NOT_ANNOTATION_COMPATIBLE = 1;
+      NO_ACCESS_IN_SCOPE = 2;
+      PRIVILEGED_ACCESS_IN_SCOPE = 3;
+      ALTERNATE_AUDITING_OR_COMPLIANCE_ESTABLISHED = 4;
+    }
+    .privacy.data_governance.attributes.MalOutAccess.Rpc.MalOutStatus malout_status = 1; // oneof=_malout_status
+  }
+  .privacy.data_governance.attributes.MalOutAccess.Rpc rpc = 1; // oneof=_rpc
+}

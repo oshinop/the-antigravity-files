@@ -1,0 +1,123 @@
+// Extracted file offset 0x37279b4, 4264 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package gdata;
+import "google/api/inclusion.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message Media {
+  enum ReferenceType {
+    PATH = 1;
+    BLOB_REF = 2;
+    INLINE = 3;
+    GET_MEDIA = 4;
+    COMPOSITE_MEDIA = 5;
+    BIGSTORE_REF = 6;
+    DIFF_VERSION_RESPONSE = 7;
+    DIFF_CHECKSUMS_RESPONSE = 8;
+    DIFF_DOWNLOAD_RESPONSE = 9;
+    DIFF_UPLOAD_REQUEST = 10;
+    DIFF_UPLOAD_RESPONSE = 11;
+    COSMO_BINARY_REFERENCE = 12;
+    ARBITRARY_BYTES = 13;
+  }
+  string content_type = 1;
+  uint64 timestamp = 2;
+  string token = 3;
+  int64 length = 4;
+  string filename = 5;
+  .gdata.Media.ReferenceType reference_type = 6;
+  string path = 7;
+  bytes blob_ref = 8;
+  bytes inline = 9;
+  bytes media_id = 10;
+  string hash = 11;
+  string algorithm = 12;
+  repeated .gdata.CompositeMedia composite_media = 13;
+  bytes bigstore_object_ref = 14;
+  .gdata.ObjectId object_id = 15;
+  .gdata.Blobstore2Info blobstore2_info = 16;
+  .gdata.DiffVersionResponse diff_version_response = 17;
+  .gdata.DiffChecksumsResponse diff_checksums_response = 18;
+  .gdata.DiffDownloadResponse diff_download_response = 19;
+  .gdata.DiffUploadRequest diff_upload_request = 20;
+  .gdata.DiffUploadResponse diff_upload_response = 21;
+  .gdata.ContentTypeInfo content_type_info = 22;
+  .gdata.DownloadParameters download_parameters = 23;
+  fixed32 crc32c_hash = 24;
+  bytes md5_hash = 25;
+  bytes sha1_hash = 26;
+  bytes sha256_hash = 30;
+  bytes sha512_hash = 31;
+  bool is_potential_retry = 27; // default='true'
+  bytes cosmo_binary_reference = 28;
+  bool hash_verified = 29;
+}
+message DownloadParameters {
+  bool allow_gzip_compression = 1;
+  bool ignore_range = 2;
+}
+message CompositeMedia {
+  enum ReferenceType {
+    PATH = 1;
+    BLOB_REF = 2;
+    INLINE = 3;
+    BIGSTORE_REF = 4;
+    COSMO_BINARY_REFERENCE = 5;
+  }
+  int64 length = 1;
+  .gdata.CompositeMedia.ReferenceType reference_type = 2;
+  string path = 3;
+  bytes blob_ref = 4;
+  bytes inline = 5;
+  .gdata.ObjectId object_id = 6;
+  .gdata.Blobstore2Info blobstore2_info = 7;
+  bytes cosmo_binary_reference = 8;
+  fixed32 crc32c_hash = 9;
+  bytes md5_hash = 10;
+  bytes sha1_hash = 11;
+}
+message Blobstore2Info {
+  string blob_id = 1;
+  int64 blob_generation = 5;
+  string read_token = 2;
+  bytes upload_metadata_container = 3;
+  bytes download_read_handle = 4;
+  bytes download_external_read_token = 6;
+  bytes upload_fragment_list_creation_info = 7;
+}
+message ObjectId {
+  string bucket_name = 1;
+  string object_name = 2;
+  int64 generation = 7;
+}
+message DiffVersionResponse {
+  string object_version = 1;
+  int64 object_size_bytes = 2;
+}
+message DiffChecksumsResponse {
+  string object_version = 1;
+  int64 object_size_bytes = 2;
+  int64 chunk_size_bytes = 3;
+  .gdata.CompositeMedia checksums_location = 4;
+  .gdata.CompositeMedia object_location = 5;
+}
+message DiffDownloadResponse {
+  .gdata.CompositeMedia object_location = 1;
+}
+message DiffUploadRequest {
+  string object_version = 1;
+  .gdata.CompositeMedia object_info = 2;
+  .gdata.CompositeMedia checksums_info = 3;
+}
+message DiffUploadResponse {
+  string object_version = 1;
+  .gdata.CompositeMedia original_object = 2;
+}
+message ContentTypeInfo {
+  string best_guess = 1;
+  string from_header = 2;
+  string from_file_name = 3;
+  string from_url_path = 4;
+  string from_bytes = 5;
+  string from_fusion_id = 6;
+  bytes fusion_id_detection_metadata = 7;
+}

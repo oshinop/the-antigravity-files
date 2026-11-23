@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 908" width="1200" height="908">
+<rect width="1200" height="908" fill="#ffffff"/>
+<text x="48.0" y="76.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="#202124" text-anchor="start">Two separate reviews before a tool call runs</text>
+<rect x="132.4" y="138.0" width="124.5" height="40.0" rx="20.0" fill="#f1f3f4"/>
+<text x="194.7" y="165.2" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#202124" text-anchor="middle">Tool call</text>
+<path d="M194.7,184.0 L194.7,212.0" fill="none" stroke="#80868b" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="round"/>
+<polygon points="194.7,222.0 188.7,212.0 200.7,212.0" fill="#80868b"/>
+<text x="453.3" y="165.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#d93025" text-anchor="start">DeepMind monitor: set by Google&#x27;s server, no setting turns it off</text>
+<path d="M347.3,326.0 L436.3,326.0" fill="none" stroke="#80868b" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="round"/>
+<polygon points="447.3,326.0 436.3,332.6 436.3,319.4" fill="#80868b"/>
+<text x="397.3" y="312.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#202124" text-anchor="middle">not listed</text>
+<path d="M752.7,326.0 L841.7,326.0" fill="none" stroke="#80868b" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="round"/>
+<polygon points="852.7,326.0 841.7,332.6 841.7,319.4" fill="#80868b"/>
+<text x="802.7" y="312.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#202124" text-anchor="middle">≥ 0.1</text>
+<rect x="48.0" y="228.0" width="293.3" height="196.0" rx="10" fill="#ffffff" stroke="#e8eaed" stroke-width="2"/>
+<text x="68.0" y="264.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#202124" text-anchor="start">Local allow-list</text>
+<text x="68.0" y="294.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#188038" text-anchor="start">On your machine</text>
+<text x="68.0" y="322.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">35 tools, 43 commands, incl.</text>
+<text x="68.0" y="345.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">read_file, cat, printenv</text>
+<rect x="453.3" y="228.0" width="293.3" height="196.0" rx="10" fill="#ffffff" stroke="#d93025" stroke-width="2"/>
+<text x="473.3" y="264.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#202124" text-anchor="start">Step review</text>
+<text x="473.3" y="294.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#1a73e8" text-anchor="start">Gemini 3.5 Flash-Lite</text>
+<text x="473.3" y="322.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">Latest step only, ≤16K</text>
+<text x="473.3" y="345.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">tokens</text>
+<path d="M475.9,398.0 Q487.3,384.7 498.7,398.0 Q487.3,411.3 475.9,398.0 Z" fill="none" stroke="#d93025" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="487.3" cy="398.0" r="3.3249999999999997" fill="#d93025"/>
+<text x="509.3" y="405.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025" text-anchor="start">Sent to Google</text>
+<rect x="858.7" y="228.0" width="293.3" height="196.0" rx="10" fill="#ffffff" stroke="#d93025" stroke-width="2"/>
+<text x="878.7" y="264.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#202124" text-anchor="start">History review</text>
+<text x="878.7" y="294.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#1a73e8" text-anchor="start">Gemini 4 Hydrogen Sonar</text>
+<text x="878.7" y="322.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">≤100K tokens of your</text>
+<text x="878.7" y="345.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">session</text>
+<path d="M881.3,398.0 Q892.7,384.7 904.1,398.0 Q892.7,411.3 881.3,398.0 Z" fill="none" stroke="#d93025" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="892.7" cy="398.0" r="3.3249999999999997" fill="#d93025"/>
+<text x="914.7" y="405.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025" text-anchor="start">Sent to Google</text>
+<path d="M194.7,430.0 L194.7,504.0" fill="none" stroke="#188038" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="round"/>
+<polygon points="194.7,514.0 188.7,504.0 200.7,504.0" fill="#188038"/>
+<text x="182.7" y="478.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="end">listed</text>
+<path d="M600.0,430.0 L600.0,504.0" fill="none" stroke="#188038" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="round"/>
+<polygon points="600.0,514.0 594.0,504.0 606.0,504.0" fill="#188038"/>
+<text x="588.0" y="478.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="end">&lt; 0.1</text>
+<path d="M917.3,430.0 L917.3,504.0" fill="none" stroke="#188038" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="round"/>
+<polygon points="917.3,514.0 911.3,504.0 923.3,504.0" fill="#188038"/>
+<text x="905.3" y="478.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#188038" text-anchor="end">&lt; 0.5</text>
+<path d="M1074.0,430.0 L1074.0,504.0" fill="none" stroke="#d93025" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="round"/>
+<polygon points="1074.0,514.0 1068.0,504.0 1080.0,504.0" fill="#d93025"/>
+<text x="1062.0" y="478.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025" text-anchor="end">≥ 0.5</text>
+<rect x="48.0" y="520.0" width="928.0" height="48.0" rx="24.0" fill="#e6f4ea"/>
+<text x="72.0" y="551.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#188038" text-anchor="start">Runs</text>
+<rect x="996.0" y="520.0" width="156.0" height="48.0" rx="24.0" fill="#fce8e6"/>
+<text x="1074.0" y="551.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#d93025" text-anchor="middle">Blocked</text>
+<path d="M194.7,574.0 L194.7,648.0" fill="none" stroke="#80868b" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="round" stroke-dasharray="7 6"/>
+<polygon points="194.7,658.0 188.7,648.0 200.7,648.0" fill="#80868b"/>
+<text x="210.7" y="622.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#202124" text-anchor="start">Auto mode only, for commands leaving the sandbox</text>
+<rect x="48.0" y="664.0" width="293.3" height="196.0" rx="10" fill="#ffffff" stroke="#d93025" stroke-width="2"/>
+<text x="68.0" y="700.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#202124" text-anchor="start">Reversibility check</text>
+<text x="68.0" y="730.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#1a73e8" text-anchor="start">Gemini 4 Hydrogen,</text>
+<text x="68.0" y="754.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#1a73e8" text-anchor="start">medium thinking</text>
+<text x="68.0" y="782.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">Reads files and the</text>
+<text x="68.0" y="805.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="start">transcript</text>
+<path d="M70.6,834.0 Q82.0,820.7 93.4,834.0 Q82.0,847.3 70.6,834.0 Z" fill="none" stroke="#d93025" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="82.0" cy="834.0" r="3.3249999999999997" fill="#d93025"/>
+<text x="104.0" y="841.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" fill="#d93025" text-anchor="start">Sent to Google</text>
+<path d="M347.3,762.0 C391.3,762.0 403.3,720.0 437.3,720.0" fill="none" stroke="#80868b" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="round"/>
+<path d="M435.3,720.0 L437.3,720.0" fill="none" stroke="#80868b" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="round"/>
+<polygon points="447.3,720.0 437.3,726.0 437.3,714.0" fill="#80868b"/>
+<rect x="453.3" y="696.0" width="422.0" height="48.0" rx="24" fill="#e6f4ea"/>
+<text x="473.3" y="727.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#188038" text-anchor="start">Reversible: runs on the host, no prompt</text>
+<path d="M347.3,762.0 C391.3,762.0 403.3,804.0 437.3,804.0" fill="none" stroke="#80868b" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="round"/>
+<path d="M435.3,804.0 L437.3,804.0" fill="none" stroke="#80868b" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="round"/>
+<polygon points="447.3,804.0 437.3,810.0 437.3,798.0" fill="#80868b"/>
+<rect x="453.3" y="780.0" width="245.4" height="48.0" rx="24" fill="#fef7e0"/>
+<text x="473.3" y="811.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#b06000" text-anchor="start">Irreversible: asks you</text>
+</svg>

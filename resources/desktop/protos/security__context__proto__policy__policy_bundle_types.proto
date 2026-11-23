@@ -1,0 +1,72 @@
+// Extracted file offset 0x36b2943, 2057 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package rpcsp;
+import "apps/security/rpcsecuritypolicy/presubmit/protos/analyzer_config.proto";
+import "google/api/inclusion.proto";
+import "net/proto2/contrib/validator/annotations.proto";
+enum Environment {
+  ENV_UNSPECIFIED = 0;
+  PROD = 1;
+  TEST = 2;
+  FAKE = 3;
+}
+enum Framework {
+  FRAMEWORK_UNSPECIFIED = 0;
+  FRAMEWORK_AF = 1;
+  FRAMEWORK_GOA = 2;
+  FRAMEWORK_SCAFFOLDING = 3;
+  FRAMEWORK_CC_STUBBY = 4;
+  FRAMEWORK_JAVA_GRPC = 13;
+  FRAMEWORK_JAVA_STUBBY = 5;
+  FRAMEWORK_GO_STUBBY = 7;
+  FRAMEWORK_CC_CUSTOM = 6;
+  FRAMEWORK_GO_CUSTOM = 9;
+  FRAMEWORK_CC_PLAQUE = 12;
+  FRAMEWORK_ESF_HTTP = 10;
+  FRAMEWORK_CPE_BACKEND = 11;
+  FRAMEWORK_PRESUBMIT = 8;
+}
+enum CompatibilityMode {
+  COMPATIBILITY_UNSPECIFIED = 0;
+  FAIL_ON_CONFLICT = 1;
+  DEPLOYMENT_CONFIG_IGNORED = 2;
+}
+enum LegacyPolicyMode {
+  LEGACY_POLICY_MODE_UNSPECIFIED = 0;
+  NO_LEGACY_POLICY = 1;
+  IGNORE_LEGACY_POLICY = 2;
+  MUST_MATCH_LIVE_POLICY = 3;
+  ENFORCE_AS_LIVE_POLICY = 4;
+  CUSTOM_STRATEGY = 5;
+}
+message AXTPresubmitConfig {
+  repeated .com.google.apps.security.rpcsecuritypolicy.presubmit.JobInfo job_infos = 1;
+}
+message ComplianceMetadata {
+  enum NoBorgRoleReason {
+    NO_BORG_ROLE_REASON_UNSPECIFIED = 0;
+    NOT_USED_ON_BORG = 1;
+    PENDING_BORG_ROLE = 2;
+    ANY_BORG_ROLE = 3;
+    INSECURE = 4;
+    COMPILER_LIBRARY_INTEGRATION = 5;
+  }
+  message NoBorgRole {
+    .rpcsp.ComplianceMetadata.NoBorgRoleReason reason = 1;
+  }
+  repeated string borg_role = 1;
+  .rpcsp.ComplianceMetadata.NoBorgRole no_borg_role = 3;
+  .rpcsp.AXTPresubmitConfig axt_presubmit_config = 4;
+  bool use_regression_safe_policy_evaluator = 5; // default='true'
+  string tenant_policy_owner = 6;
+}
+message MetricsCollection {
+  message RpcSecurityEventCollectionMode {
+    enum Value {
+      UNSPECIFIED = 0;
+      ON = 1;
+      OFF = 2;
+    }
+  }
+  .rpcsp.MetricsCollection.RpcSecurityEventCollectionMode.Value rpc_security_events = 1;
+}

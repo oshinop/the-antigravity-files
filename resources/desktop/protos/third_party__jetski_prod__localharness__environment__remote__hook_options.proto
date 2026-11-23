@@ -1,0 +1,5 @@
+// Extracted file offset 0x362d481, 353 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package third_party.jetski_prod.localharness.environment.remote;
+message HookOptions {
+}

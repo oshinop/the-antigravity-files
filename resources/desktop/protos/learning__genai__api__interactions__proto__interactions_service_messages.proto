@@ -1,0 +1,120 @@
+// Extracted file offset 0x376dade, 6054 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/field_behavior.proto";
+import "google/api/httpbody.proto";
+import "google/api/inclusion.proto";
+import "google/api/migration.proto";
+import "google/api/resource.proto";
+import "google/api/visibility.proto";
+import "google/cloud/aiplatform/common/proto_field_options.proto";
+import "google/cloud/automl/common/proto_field_options.proto";
+import "learning/genai/api/genai_versioning.proto";
+import "learning/genai/api/interactions/proto/interaction.proto";
+import "learning/genai/api/interactions/proto/interaction_batch.proto";
+import "learning/genai/api/interactions/proto/steps.proto";
+import "learning/genai/api/parsing/genai_json_annotations.proto";
+import "learning/genai/api/webhooks/proto/webhook_messages.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message CreateInteractionHttpRequest {
+  string parent = 1;
+  .google.api.HttpBody http_body = 2;
+}
+message CreateInteractionRequest {
+  bool stream = 1;
+  bool store = 2;
+  .genai.Interaction interaction = 3;
+  bool background = 4;
+  string parent = 5;
+  bool steps_enabled = 6;
+}
+message GetInteractionRequest {
+  string name = 1;
+  bool stream = 2;
+  string last_event_id = 3;
+  bool include_input = 4;
+  bool steps_enabled = 5;
+}
+message GetActorInteractionRequest {
+  string actor_handle = 1;
+}
+message StreamActorInteractionRequest {
+  string actor_handle = 1;
+  bool return_interaction = 2;
+  int64 first_step_index = 3;
+  bool tail = 4;
+}
+message ListActorInteractionStepsRequest {
+  string actor_handle = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+  string order_by = 4;
+}
+message ListActorInteractionStepsResponse {
+  repeated .genai.Step steps = 1;
+  string next_page_token = 2;
+}
+message DeleteInteractionRequest {
+  string name = 1;
+}
+message DeleteInteractionResponse {
+}
+message CancelInteractionRequest {
+  string name = 1;
+  bool steps_enabled = 2;
+}
+message ListInteractionsRequest {
+  string parent = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+message ListInteractionsResponse {
+  repeated .genai.InteractionMetadata interaction_metadatas = 1;
+  string next_page_token = 2;
+}
+message SendInteractionHttpRequest {
+  string name = 1;
+  .google.api.HttpBody http_body = 2;
+  bool stream = 3;
+}
+message CompleteInteractionRequest {
+  string name = 1;
+}
+message StreamActorInteractionResponse {
+  .genai.Interaction interaction = 1; // oneof=response
+  .genai.Step step = 2; // oneof=response
+}
+message ActorInteraction {
+  .genai.Interaction interaction = 1;
+}
+message CreateInteractionBatchHttpRequest {
+  .google.api.HttpBody http_body = 1;
+}
+message CreateInteractionBatchRequest {
+  string model = 1;
+  string display_name = 2;
+  string input_file = 3; // oneof=requests
+  .genai.InteractionBatchRequestItemList inline_requests = 4; // oneof=requests
+  string responses = 5;
+  .genai.WebhookConfig webhook_config = 6;
+}
+message GetInteractionBatchRequest {
+  string name = 1;
+}
+message ListInteractionBatchesRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  string status = 3;
+}
+message ListInteractionBatchesResponse {
+  repeated .genai.InteractionBatch batches = 1;
+  string next_page_token = 2;
+}
+message CancelInteractionBatchRequest {
+  string name = 1;
+}
+message DeleteInteractionBatchRequest {
+  string name = 1;
+}
+message DeleteInteractionBatchResponse {
+}

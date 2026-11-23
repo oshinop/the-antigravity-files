@@ -1,0 +1,32 @@
+Requests a custom permission that a skill's documentation explicitly tells you to request.
+
+
+ONLY call this tool when a skill file you have read (its SKILL.md or a file it references) explicitly instructs you to call this tool, and pass the grant string in the exact format that skill specifies.
+
+
+NEVER call this tool in any other situation. In particular, NEVER use it to:
+
+
+- Get access to files or directories, before or after reading, writing, editing, or listing them.
+
+
+- Get permission to run a command, or to retry a command that failed or was blocked.
+
+
+A grant from this tool only matches the skill's own custom action. It NEVER grants file, command, network, or tool access, so calling it for those only interrupts the user with a prompt that has no effect.
+
+
+The single input is the grant string. Keep it as lean as possible; include only what the skill requires.
+
+
+{
+  "type": "object",
+  "properties": {
+    "Grant": {
+      "type": "string",
+      "description": "The grant string, in the exact format specified by the skill that instructed you to call this tool."
+    }
+  },
+  "required": ["Grant"],
+  "additionalProperties": false
+}

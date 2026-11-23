@@ -1,0 +1,125 @@
+// Extracted file offset 0x37ed93a, 12204 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.cloud.aiplatform.v1beta1;
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/api/field_behavior.proto";
+import "google/api/policy.proto";
+import "google/api/resource.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "google/cloud/aiplatform/common/proto_field_options.proto";
+import "google/cloud/aiplatform/v1beta1/agent.proto";
+import "google/cloud/aiplatform/v1beta1/operation.proto";
+import "google/cloud/automl/common/proto_field_options.proto";
+import "google/longrunning/operations.proto";
+import "google/protobuf/field_mask.proto";
+import "net/proto2/contrib/validator/annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message CreateAgentRequest {
+  string parent = 1;
+  .google.cloud.aiplatform.v1beta1.Agent agent = 2;
+}
+message CreateAgentOperationMetadata {
+  .google.cloud.aiplatform.v1beta1.GenericOperationMetadata generic_metadata = 1;
+}
+message GetAgentRequest {
+  string name = 1;
+}
+message ListAgentsRequest {
+  string parent = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+  string filter = 7;
+  string order_by = 5;
+}
+message ListAgentsResponse {
+  repeated .google.cloud.aiplatform.v1beta1.Agent agents = 1;
+  string next_page_token = 2;
+}
+message SearchAgentsRequest {
+  string parent = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+  string filter = 4;
+  string order_by = 5;
+}
+message SearchAgentsResponse {
+  repeated .google.cloud.aiplatform.v1beta1.Agent agents = 1;
+  string next_page_token = 2;
+}
+message UpdateAgentRequest {
+  .google.cloud.aiplatform.v1beta1.Agent agent = 1;
+  .google.protobuf.FieldMask update_mask = 2;
+}
+message UpdateAgentOperationMetadata {
+  .google.cloud.aiplatform.v1beta1.GenericOperationMetadata generic_metadata = 1;
+}
+message DeleteAgentRequest {
+  string name = 1;
+  bool force = 2;
+}
+message ListAgentMemoriesRequest {
+  string parent = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+  bool show_deleted = 4;
+  string filter = 5;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryView view = 6;
+}
+message ListAgentMemoriesResponse {
+  repeated .google.cloud.aiplatform.v1beta1.AgentMemory agent_memories = 1;
+  string next_page_token = 2;
+}
+message GetAgentMemoryRequest {
+  string name = 1;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryView view = 2;
+}
+message CreateAgentMemoryRequest {
+  string parent = 1;
+  .google.cloud.aiplatform.v1beta1.AgentMemory agent_memory = 2;
+}
+message BatchCreateAgentMemoriesRequest {
+  string parent = 1;
+  repeated .google.cloud.aiplatform.v1beta1.CreateAgentMemoryRequest requests = 2;
+}
+message BatchCreateAgentMemoriesResponse {
+  repeated .google.cloud.aiplatform.v1beta1.AgentMemory agent_memories = 1;
+}
+message UpdateAgentMemoryRequest {
+  .google.cloud.aiplatform.v1beta1.AgentMemory agent_memory = 1;
+  .google.protobuf.FieldMask update_mask = 2;
+}
+message DeleteAgentMemoryRequest {
+  string name = 1;
+  string etag = 2;
+}
+message UndeleteAgentMemoryRequest {
+  string name = 1;
+  string etag = 2;
+}
+message ResetAgentMemoriesRequest {
+  string parent = 1;
+}
+message ResetAgentMemoriesResponse {
+  bool onboarding_started = 1;
+}
+message ListAgentMemoryRevisionsRequest {
+  string parent = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+  .google.cloud.aiplatform.v1beta1.AgentMemoryRevisionView view = 4;
+  bool diff_ignores_yaml_frontmatter = 5;
+}
+message ListAgentMemoryRevisionsResponse {
+  repeated .google.cloud.aiplatform.v1beta1.AgentMemoryRevision agent_memory_revisions = 1;
+  string next_page_token = 2;
+}
+service AgentService {
+  rpc CreateAgent (.google.cloud.aiplatform.v1beta1.CreateAgentRequest) returns (.google.longrunning.Operation);
+  rpc GetAgent (.google.cloud.aiplatform.v1beta1.GetAgentRequest) returns (.google.cloud.aiplatform.v1beta1.Agent);
+  rpc ListAgents (.google.cloud.aiplatform.v1beta1.ListAgentsRequest) returns (.google.cloud.aiplatform.v1beta1.ListAgentsResponse);
+  rpc SearchAgents (.google.cloud.aiplatform.v1beta1.SearchAgentsRequest) returns (.google.cloud.aiplatform.v1beta1.SearchAgentsResponse);
+  rpc UpdateAgent (.google.cloud.aiplatform.v1beta1.UpdateAgentRequest) returns (.google.longrunning.Operation);
+  rpc DeleteAgent (.google.cloud.aiplatform.v1beta1.DeleteAgentRequest) returns (.google.longrunning.Operation);
+}

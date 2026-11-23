@@ -1,0 +1,1 @@
+- A **user-queued message** is ready to be dequeued

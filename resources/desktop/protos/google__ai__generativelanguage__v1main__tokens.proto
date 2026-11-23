@@ -1,0 +1,14 @@
+// Extracted file offset 0x363f1e2, 530 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message HardTokens {
+  repeated int32 tokens = 1;
+}
+message SoftTokens {
+  repeated int32 half_values = 1;
+  string encoder_name = 2;
+  repeated int32 shape = 3;
+}

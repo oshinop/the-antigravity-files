@@ -1,0 +1,164 @@
+// Extracted file offset 0x375cb3b, 5536 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package exa.computer_payload_pb;
+enum ComputerActionType {
+  COMPUTER_ACTION_TYPE_UNSPECIFIED = 0;
+  COMPUTER_ACTION_TYPE_SCREENSHOT = 1;
+  COMPUTER_ACTION_TYPE_CLICK = 2;
+  COMPUTER_ACTION_TYPE_DOUBLE_CLICK = 3;
+  COMPUTER_ACTION_TYPE_RIGHT_CLICK = 4;
+  COMPUTER_ACTION_TYPE_MOVE = 5;
+  COMPUTER_ACTION_TYPE_DRAG = 6;
+  COMPUTER_ACTION_TYPE_TYPE = 7;
+  COMPUTER_ACTION_TYPE_KEY = 8;
+  COMPUTER_ACTION_TYPE_SCROLL = 9;
+  COMPUTER_ACTION_TYPE_WAIT = 10;
+  COMPUTER_ACTION_TYPE_FOCUS_APP = 11;
+  COMPUTER_ACTION_TYPE_BIND_APP = 12;
+  COMPUTER_ACTION_TYPE_AX_SNAPSHOT = 13;
+  COMPUTER_ACTION_TYPE_AX_PRESS = 14;
+  COMPUTER_ACTION_TYPE_AX_SET_VALUE = 15;
+  COMPUTER_ACTION_TYPE_AX_SELECT = 16;
+  COMPUTER_ACTION_TYPE_AX_SCROLL = 17;
+  COMPUTER_ACTION_TYPE_WINDOW_SCREENSHOT = 18;
+}
+enum ComputerPageVerdict {
+  COMPUTER_PAGE_VERDICT_UNSPECIFIED = 0;
+  COMPUTER_PAGE_VERDICT_ALLOWED = 1;
+  COMPUTER_PAGE_VERDICT_NEUTRAL = 2;
+  COMPUTER_PAGE_VERDICT_NEEDS_PERMISSION = 3;
+  COMPUTER_PAGE_VERDICT_UNREADABLE = 5;
+  COMPUTER_PAGE_VERDICT_POLICY_BLOCKED = 6;
+}
+message ComputerGeometry {
+  uint32 display_id = 1;
+  double width_points = 2;
+  double height_points = 3;
+  uint32 width_pixels = 4;
+  uint32 height_pixels = 5;
+  double scale_factor = 6;
+}
+message ComputerGrants {
+  bool accessibility = 1;
+  bool screen_recording = 2;
+}
+message ComputerHello {
+  .exa.computer_payload_pb.ComputerGeometry main_display = 1;
+  .exa.computer_payload_pb.ComputerGrants grants = 2;
+  string os_version = 3;
+  string helper_version = 4;
+  uint32 app_confinement_version = 5;
+  bool concurrent_agents = 6;
+  bool supports_script = 7;
+}
+message ComputerAction {
+  .exa.computer_payload_pb.ComputerActionType type = 1;
+  bool has_point = 2;
+  double x_points = 3;
+  double y_points = 4;
+  double to_x_points = 5;
+  double to_y_points = 6;
+  repeated string modifiers = 7;
+  string text = 8;
+  string keys = 9;
+  int32 scroll_dx = 10;
+  int32 scroll_dy = 11;
+  uint32 wait_ms = 12;
+  string app = 13;
+  string ref = 14;
+  bool confirm = 15;
+  bool include_menubar = 16;
+  uint32 window_id = 17;
+  .exa.computer_payload_pb.ComputerVisualHint visual_hint = 18;
+}
+message ComputerVisualHint {
+  double u = 1;
+  double v = 2;
+}
+message ComputerRequest {
+  uint64 lease_generation = 1;
+  uint32 expected_display_id = 2;
+  double expected_width_points = 3;
+  double expected_height_points = 4;
+  repeated .exa.computer_payload_pb.ComputerAction actions = 5;
+  bool capture_after = 6;
+  uint32 settle_ms = 7;
+  uint32 max_screenshot_long_edge_px = 8;
+  bool read_only = 9;
+  repeated string allowed_bundle_ids = 10;
+  .exa.computer_payload_pb.ComputerUrlPolicy url_policy = 11;
+  bool foreground = 12;
+  bool ax_snapshot_after = 13;
+  string actor_label = 14;
+  repeated string locked_bundle_ids = 15;
+  string script = 16;
+}
+message ComputerRect {
+  double x_points = 1;
+  double y_points = 2;
+  double width_points = 3;
+  double height_points = 4;
+}
+message ComputerUrlPolicy {
+  bool enforce = 1;
+  uint64 epoch = 6;
+  repeated string policy_blocked_domains = 7;
+}
+message ComputerBrowserPage {
+  string bundle_id = 1;
+  string host = 2;
+  string url = 3;
+  .exa.computer_payload_pb.ComputerPageVerdict verdict = 4;
+  bool redacted = 5;
+}
+message ComputerActionResult {
+  uint32 index = 1;
+  bool ok = 2;
+  string error_code = 3;
+  string error = 4;
+  string resolved_bundle_id = 5;
+  string blocked_host = 6;
+  .exa.computer_payload_pb.ComputerRect target_bounds = 7;
+}
+message ComputerResult {
+  bool ok = 1;
+  string error_code = 2;
+  string error = 3;
+  repeated .exa.computer_payload_pb.ComputerActionResult results = 4;
+  uint32 completed_actions = 5;
+  uint32 screenshot_width_px = 6;
+  uint32 screenshot_height_px = 7;
+  .exa.computer_payload_pb.ComputerGeometry geometry = 8;
+  string focused_app_name = 9;
+  string focused_bundle_id = 10;
+  int32 focused_pid = 11;
+  string focused_window_title = 12;
+  repeated .exa.computer_payload_pb.ComputerBrowserPage browser_pages = 13;
+  string ax_snapshot_text = 14;
+  .exa.computer_payload_pb.ComputerWindowGeometry window_geometry = 15;
+  repeated .exa.computer_payload_pb.ComputerCompletedOp completed_ops = 16;
+  uint32 total_completed_ops = 17;
+  string script_value_json = 18;
+  repeated .exa.computer_payload_pb.ComputerNamedScreenshot extra_screenshots = 19;
+}
+message ComputerCompletedOp {
+  uint32 seq = 1;
+  string method = 2;
+  string app = 3;
+  string target = 4;
+  string status = 5;
+}
+message ComputerNamedScreenshot {
+  string name = 1;
+  uint32 blob_index = 2;
+  uint32 width_px = 3;
+  uint32 height_px = 4;
+  string app_id = 5;
+}
+message ComputerWindowGeometry {
+  uint32 window_id = 1;
+  string bundle_id = 2;
+  double width_points = 3;
+  double height_points = 4;
+  double scale_factor = 5;
+}

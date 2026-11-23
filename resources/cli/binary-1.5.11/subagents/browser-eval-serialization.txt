@@ -1,0 +1,1 @@
+ Evaluation runs allow one active browser subagent at a time: wait for it to report back before invoking another, and reuse it with send_message.

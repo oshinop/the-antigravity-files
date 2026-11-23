@@ -1,0 +1,33 @@
+// Extracted file offset 0x3684ca7, 1322 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/policy.proto";
+import "google/api/rename.proto";
+import "google/api/visibility.proto";
+message Backend {
+  repeated .google.api.BackendRule rules = 1;
+  repeated .google.api.RenameRule rename_rules = 2;
+}
+message BackendRule {
+  enum PathTranslation {
+    PATH_TRANSLATION_UNSPECIFIED = 0;
+    CONSTANT_ADDRESS = 1;
+    APPEND_PATH_TO_ADDRESS = 2;
+  }
+  message OverridesByRequestProtocolEntry {
+    string key = 1;
+    .google.api.BackendRule value = 2;
+  }
+  string selector = 1;
+  string address = 2;
+  double deadline = 3;
+  double min_deadline = 4;
+  double operation_deadline = 5;
+  .google.api.BackendRule.PathTranslation path_translation = 6;
+  string jwt_audience = 7; // oneof=authentication
+  bool disable_auth = 8; // oneof=authentication
+  string protocol = 9;
+  repeated .google.api.BackendRule.OverridesByRequestProtocolEntry overrides_by_request_protocol = 10;
+  string load_balancing_policy = 11;
+}

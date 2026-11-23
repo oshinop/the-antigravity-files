@@ -1,0 +1,24 @@
+// Extracted file offset 0x366a9ab, 1025 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package logs.proto.wireless.performance.mobile.desktop;
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "logs/proto/wireless/performance/mobile/annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message TraceRecord {
+  message Span {
+    string name = 1;
+    uint64 id = 2;
+    uint64 parent_id = 3;
+    .google.protobuf.Duration relative_start_time = 4;
+    .google.protobuf.Duration duration = 5;
+    repeated .logs.proto.wireless.performance.mobile.desktop.TraceRecord.Marker markers = 6;
+  }
+  message Marker {
+    string name = 1;
+    .google.protobuf.Duration relative_time = 2;
+  }
+  fixed64 trace_id = 1;
+  .google.protobuf.Timestamp start_time = 2;
+  repeated .logs.proto.wireless.performance.mobile.desktop.TraceRecord.Span spans = 3;
+}

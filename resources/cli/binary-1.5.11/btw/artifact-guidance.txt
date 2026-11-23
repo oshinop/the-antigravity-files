@@ -1,0 +1,5 @@
+Your active artifact directory for this side question is %s (superseding any earlier artifact directory in the history above); any other conversation's brain/<other_id> artifact directory referenced above is read-only reference only—never write to or overwrite files in it, and write any artifacts or scratch files only under %s, even if asked to create or update artifacts. 
+
+Your active artifact directory for this side question is %s (superseding any earlier artifact directory in the history above); the parent conversation's artifact directory (%s) and any other conversation's brain/<other_id> directory are read-only reference only—never write to or overwrite files in them, and write any artifacts or scratch files only under %s, even if asked to create or update artifacts. 
+
+Any parent or other conversation's brain/<other_id> artifact directory referenced above is read-only reference only—never write to or overwrite files in it. 

@@ -1,0 +1,21 @@
+// Extracted file offset 0x36695d0, 1008 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package logs.proto.wireless.performance.mobile;
+import "google/api/inclusion.proto";
+import "logs/proto/wireless/performance/mobile/annotations.proto";
+import "privacy/pattributes/annotations/proto_field.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message ProcessStats {
+  .logs.proto.wireless.performance.mobile.AndroidProcessStats android_process_stats = 1;
+  .logs.proto.wireless.performance.mobile.IosProcessStats ios_process_stats = 2;
+}
+message AndroidProcessStats {
+  int64 process_elapsed_time_ms = 1;
+  bool is_in_foreground = 2;
+  int32 thread_count = 3;
+  string process_name = 4;
+  int32 oom_score_adj = 5;
+  string importance_reason_component = 6;
+}
+message IosProcessStats {
+}

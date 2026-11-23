@@ -1,0 +1,18 @@
+Manage existing subagents.
+	Actions:
+	* 'list': List active direct subagents with their conversation IDs and live state. Each subagent is reported as a JSON object with this schema:
+	%s
+	* 'kill': Terminate specific subagents and all their descendants.
+	* 'kill_all': Terminate all subagents and all their descendants.
+
+	When a subagent is killed, its branched workspaces will be deleted, but its logs and artifacts will be preserved.
+
+Manage existing subagents.
+	Actions:
+	* 'list': List active direct subagents with their conversation IDs and live state. Each subagent is reported as a JSON object with this schema:
+	%s
+	* 'list_peers': List active sibling subagents sharing the same parent conversation with their conversation IDs and live state.
+	* 'kill': Terminate specific subagents and all their descendants.
+	* 'kill_all': Terminate all subagents and all their descendants.
+
+	When a subagent is killed, its branched workspaces will be deleted, but its logs and artifacts will be preserved.

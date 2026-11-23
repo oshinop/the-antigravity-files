@@ -1,0 +1,98 @@
+// Extracted file offset 0x36f0783, 3108 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.iam.v1;
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "google/cloud/audit/audit_log.proto";
+import "google/cloud/audit/authorization_logging_options.proto";
+import "logs/proto/cloud_iam/agent_metadata.proto";
+import "tech/iam/proto/logging.proto";
+message Rule {
+  enum Action {
+    NO_ACTION = 0;
+    ALLOW = 1;
+    ALLOW_WITH_LOG = 4;
+    DENY = 2;
+    DENY_WITH_LOG = 5;
+    LOG = 3;
+  }
+  string description = 1;
+  repeated string permissions = 2;
+  .google.iam.v1.Rule.Action action = 3;
+  repeated string in = 4;
+  repeated string not_in = 5;
+  repeated .google.iam.v1.Condition conditions = 6;
+  repeated .google.iam.v1.LogConfig log_config = 7;
+}
+message Condition {
+  enum Operator {
+    NO_OP = 0;
+    EQUALS = 1;
+    NOT_EQUALS = 2;
+    IN = 3;
+    NOT_IN = 4;
+    DISCHARGED = 5;
+  }
+  .google.iam.v1.AuthContext.Attr iam = 1; // oneof=Subject
+  .google.iam.v1.SystemContext.Attr sys = 2; // oneof=Subject
+  string svc = 3; // oneof=Subject
+  .google.iam.v1.Condition.Operator op = 5;
+  repeated string values = 7;
+}
+message AuthContext {
+  enum Attr {
+    NO_ATTR = 0;
+    AUTHORITY = 1;
+    ATTRIBUTION = 2;
+    SECURITY_REALM = 3;
+    APPROVER = 4;
+    JUSTIFICATION_TYPE = 5;
+    CREDENTIALS_TYPE = 6;
+    CREDS_ASSERTION = 7;
+  }
+}
+message SystemContext {
+  enum Attr {
+    NO_ATTR = 0;
+    REGION = 1;
+    SERVICE = 2;
+    NAME = 3;
+    IP = 4;
+  }
+}
+message LogConfig {
+  message CounterOptions {
+    message CustomField {
+      string name = 1;
+      string value = 2;
+    }
+    string metric = 1;
+    string field = 2;
+    repeated .google.iam.v1.LogConfig.CounterOptions.CustomField custom_fields = 3;
+  }
+  message DataAccessOptions {
+    enum LogMode {
+      LOG_MODE_UNSPECIFIED = 0;
+      LOG_FAIL_CLOSED = 1;
+    }
+    .google.iam.v1.LogConfig.DataAccessOptions.LogMode log_mode = 1;
+    bool is_direct_auth = 2; // oneof=_is_direct_auth
+  }
+  message CloudAuditOptions {
+    enum LogName {
+      UNSPECIFIED_LOG_NAME = 0;
+      ADMIN_ACTIVITY = 1;
+      DATA_ACCESS = 2;
+    }
+    .google.iam.v1.LogConfig.CloudAuditOptions.LogName log_name = 1;
+    .google.cloud.audit.AuthorizationLoggingOptions authorization_logging_options = 3;
+    .google.cloud.audit.AuthorizationInfo.PermissionType permission_type = 4;
+    .logs.proto.cloud_iam.AgentMetadata agent_metadata = 5;
+    .google.cloud.audit.AuthorizationInfo.PrivilegedAccessManagerMetadata pam_authorization_metadata = 6;
+    bool trace_context_logging_enabled = 7;
+  }
+  .google.iam.v1.LogConfig.CounterOptions counter = 1; // oneof=type
+  .google.iam.v1.LogConfig.DataAccessOptions data_access = 2; // oneof=type
+  .google.iam.v1.LogConfig.CloudAuditOptions cloud_audit = 3; // oneof=type
+}

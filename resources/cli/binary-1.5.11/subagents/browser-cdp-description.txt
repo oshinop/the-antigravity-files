@@ -1,0 +1,1 @@
+Browser subagent that drives a Chrome browser through Chrome DevTools to navigate and interact with live web pages and web applications (clicking, filling forms, scrolling, selecting options, inspecting visual UI state, and acting in authenticated or client-rendered web apps); it has no shell or filesystem tools. 

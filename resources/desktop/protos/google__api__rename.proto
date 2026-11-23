@@ -1,0 +1,9 @@
+// Extracted file offset 0x362d320, 353 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.api;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+message RenameRule {
+  string selector = 1;
+  string rename_to = 2;
+}

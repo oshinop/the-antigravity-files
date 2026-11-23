@@ -1,0 +1,718 @@
+// Extracted file offset 0x3a29dda, 50253 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.ai.generativelanguage.v1main;
+import "google/ai/generativelanguage/v1main/execution_mode.proto";
+import "google/ai/generativelanguage/v1main/resolution.proto";
+import "google/ai/generativelanguage/v1main/tool_type.proto";
+import "frameworks/debug/sherlog/proto/annotations.proto";
+import "google/ai/generativelanguage/v1main/captions.proto";
+import "google/ai/generativelanguage/v1main/file_options.proto";
+import "google/ai/generativelanguage/v1main/grounding.proto";
+import "google/ai/generativelanguage/v1main/tool_annotations.proto";
+import "google/ai/generativelanguage/v1main/verbalization_options.proto";
+import "google/api/field_behavior.proto";
+import "google/api/inclusion.proto";
+import "google/api/versioning.proto";
+import "google/api/visibility.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/struct.proto";
+import "google/type/interval.proto";
+import "google/type/latlng.proto";
+import "net/proto2/contrib/validator/annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum Type {
+  TYPE_UNSPECIFIED = 0;
+  STRING = 1;
+  NUMBER = 2;
+  INTEGER = 3;
+  BOOLEAN = 4;
+  ARRAY = 5;
+  OBJECT = 6;
+  NULL = 7;
+}
+enum Modality {
+  MODALITY_UNSPECIFIED = 0;
+  TEXT = 1;
+  IMAGE = 2;
+  VIDEO = 3;
+  AUDIO = 4;
+  DOCUMENT = 5;
+}
+enum BilledTool {
+  BILLED_TOOL_UNSPECIFIED = 0;
+  GOOGLE_SEARCH_RETRIEVAL = 1;
+  BROWSING = 2;
+  GOOGLE_IMAGE_SEARCH_RETRIEVAL = 3;
+}
+message Content {
+  repeated .google.ai.generativelanguage.v1main.Part parts = 1;
+  string role = 2;
+  bool signature_validation_boundary = 3;
+}
+message Notification {
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    UPCOMING_IMAGE = 1;
+    MUTED_AUDIO = 2;
+  }
+  .google.ai.generativelanguage.v1main.Notification.Type type = 1;
+}
+message AudioTranscription {
+  message WordInfo {
+    string word = 1;
+    .google.protobuf.Duration start_offset = 2;
+    .google.protobuf.Duration end_offset = 3;
+  }
+  string text = 1;
+  string speaker_label = 2;
+  repeated .google.ai.generativelanguage.v1main.AudioTranscription.WordInfo words = 3;
+  string language_name = 4;
+  string language_code = 5;
+}
+message AttributionReference {
+  message AttributionScore {
+    float attribution_score = 1;
+    .google.ai.generativelanguage.v1main.AttributionReference.InputPartReference input_part_reference = 3; // oneof=part_reference
+    .google.ai.generativelanguage.v1main.AttributionReference.OutputPartReference output_part_reference = 4; // oneof=part_reference
+    .google.ai.generativelanguage.v1main.AttributionReference.UnknownPartReference unknown_input_part_reference = 5; // oneof=part_reference
+  }
+  message InputPartReference {
+    string id = 1;
+    int32 text_offset_bytes = 2;
+    int32 text_length_bytes = 3;
+    int32 token_index = 4;
+    string field_path = 5;
+  }
+  message OutputPartReference {
+    string id = 4;
+    int32 text_offset_bytes = 1;
+    int32 text_length_bytes = 2;
+    int32 token_index = 3;
+  }
+  message UnknownPartReference {
+    enum Reason {
+      REASON_UNSPECIFIED = 0;
+      UNRESOLVABLE = 1;
+      CHUNK_NOT_FOUND = 2;
+      PART_SOURCE_MISSING = 3;
+      PART_ID_MISSING = 4;
+    }
+    int32 token_index = 1;
+    .google.ai.generativelanguage.v1main.AttributionReference.UnknownPartReference.Reason reason = 2;
+  }
+  repeated .google.ai.generativelanguage.v1main.AttributionReference.AttributionScore attribution_scores = 1;
+  int32 output_token_offset_bytes = 3;
+  int32 output_token_length_bytes = 4;
+  string field_path = 5;
+}
+message FieldPath {
+  message Step {
+    string field_name = 1; // oneof=kind
+    int32 index = 2; // oneof=kind
+  }
+  repeated .google.ai.generativelanguage.v1main.FieldPath.Step steps = 1;
+}
+message RecitationMetadata {
+  .google.ai.generativelanguage.v1main.FieldPath field_path = 1;
+  string recitation_dataset_id = 2;
+}
+message Part {
+  enum MediaProcessing {
+    MEDIA_PROCESSING_UNSPECIFIED = 0;
+    STATIC = 1;
+    AGENTIC = 2;
+    AUTO = 3;
+  }
+  string text = 2; // oneof=data
+  .google.ai.generativelanguage.v1main.Blob inline_data = 3; // oneof=data
+  .google.ai.generativelanguage.v1main.FunctionCall function_call = 4; // oneof=data
+  .google.ai.generativelanguage.v1main.FunctionResponse function_response = 5; // oneof=data
+  .google.ai.generativelanguage.v1main.FileData file_data = 6; // oneof=data
+  .google.protobuf.Struct structured_data = 7; // oneof=data
+  .google.ai.generativelanguage.v1main.ExecutableCode executable_code = 9; // oneof=data
+  .google.ai.generativelanguage.v1main.CodeExecutionResult code_execution_result = 10; // oneof=data
+  .google.ai.generativelanguage.v1main.PreprocessedInputs preprocess_inputs = 15; // oneof=data
+  .google.ai.generativelanguage.v1main.Pivot pivot = 17; // oneof=data
+  .google.ai.generativelanguage.v1main.Notification notification = 18; // oneof=data
+  .google.ai.generativelanguage.v1main.KvBlockInfo kv_block_info = 22; // oneof=data
+  .google.ai.generativelanguage.v1main.GroundingSupport grounding_support = 24; // oneof=data
+  .google.ai.generativelanguage.v1main.FunctionDeclaration function_declaration = 25; // oneof=data
+  .google.ai.generativelanguage.v1main.ToolCall tool_call = 26; // oneof=data
+  .google.ai.generativelanguage.v1main.ToolResponse tool_response = 27; // oneof=data
+  .google.ai.generativelanguage.v1main.DecodedVideo decoded_video = 34; // oneof=data
+  .google.ai.generativelanguage.v1main.CompactionData compaction_data = 37; // oneof=data
+  .google.ai.generativelanguage.v1main.FunctionRemoval function_removal = 48; // oneof=data
+  bool thought = 11;
+  bool raw_thought = 19;
+  bytes thought_signature = 13;
+  .google.protobuf.Struct part_metadata = 8;
+  string recitation_dataset_id = 39;
+  .google.ai.generativelanguage.v1main.AssetMetadata asset_metadata = 35;
+  .google.ai.generativelanguage.v1main.VideoMetadata video_metadata = 14; // oneof=metadata
+  .google.ai.generativelanguage.v1main.DocumentMetadata document_metadata = 45; // oneof=metadata
+  .google.ai.generativelanguage.v1main.SpreadsheetMetadata spreadsheet_metadata = 46; // oneof=metadata
+  .google.ai.generativelanguage.v1main.AudioMetadata audio_metadata = 47; // oneof=metadata
+  .google.ai.generativelanguage.v1main.MediaResolution media_resolution = 20;
+  .google.ai.generativelanguage.v1main.Part.MediaProcessing media_processing = 40;
+  string id = 21; // oneof=_id
+  .google.ai.generativelanguage.v1main.AudioTranscription audio_transcription = 23;
+  .google.ai.generativelanguage.v1main.Captions captions = 38;
+  bool enable_attribution_scoring = 28; // oneof=_enable_attribution_scoring
+  repeated .google.ai.generativelanguage.v1main.AttributionReference attribution_references = 29;
+  .google.protobuf.Duration playback_offset = 30;
+  .google.ai.generativelanguage.v1main.KvBlockInfo kv_group = 31;
+  repeated string prompt_metadata_categories = 32;
+  repeated .google.ai.generativelanguage.v1main.GroundingChunk source_annotations = 33;
+  bytes ptoken = 36;
+  .google.ai.generativelanguage.v1main.MediaGenerationCacheContext media_generation_cache_context = 41;
+  .google.ai.generativelanguage.v1main.SpeechMetadata speech_metadata = 42;
+  .google.ai.generativelanguage.v1main.CacheControl cache_control = 43;
+  repeated .google.ai.generativelanguage.v1main.RecitationMetadata recitation_metadata = 44;
+  .google.ai.generativelanguage.v1main.ImageMetadata image_metadata = 49;
+}
+message CacheControl {
+  bool checkpoint = 1;
+}
+message CompactionData {
+  bytes signature = 1;
+}
+message AssetMetadata {
+  bool consented = 1;
+  string label = 2;
+  string group = 3;
+}
+message MediaGenerationCacheContext {
+  string cache_key = 1;
+}
+message SpeechMetadata {
+  string speaker = 1;
+  string style = 2;
+  .google.ai.generativelanguage.v1main.Blob prosody_reference_audio = 3;
+  float speed = 4; // oneof=_speed
+}
+message ImageMetadata {
+  enum ReferenceType {
+    REFERENCE_TYPE_UNSPECIFIED = 0;
+    BASE_IMAGE = 1;
+    MASK = 2;
+  }
+  .google.ai.generativelanguage.v1main.ImageMetadata.ReferenceType reference_type = 1;
+}
+message FunctionResponsePart {
+  .google.ai.generativelanguage.v1main.FunctionResponseBlob inline_data = 1; // oneof=data
+  .google.ai.generativelanguage.v1main.FunctionResponseFileData file_data = 2; // oneof=data
+  .google.ai.generativelanguage.v1main.FunctionResponsePreprocessedInputs function_response_preprocessed_inputs = 5; // oneof=data
+  .google.ai.generativelanguage.v1main.FunctionResponseKvBlockInfo kv_block_info = 6; // oneof=data
+  .google.ai.generativelanguage.v1main.Part.MediaProcessing media_processing = 4;
+  .google.ai.generativelanguage.v1main.MediaResolution media_resolution = 7;
+  .google.ai.generativelanguage.v1main.VideoMetadata video_metadata = 8; // oneof=metadata
+  .google.ai.generativelanguage.v1main.DocumentMetadata document_metadata = 9; // oneof=metadata
+  .google.ai.generativelanguage.v1main.SpreadsheetMetadata spreadsheet_metadata = 10; // oneof=metadata
+  .google.ai.generativelanguage.v1main.AudioMetadata audio_metadata = 11; // oneof=metadata
+}
+message FunctionCallPart {
+  .google.ai.generativelanguage.v1main.FunctionCallBlob inline_data = 1; // oneof=data
+  .google.ai.generativelanguage.v1main.FunctionCallFileData file_data = 2; // oneof=data
+}
+message Blob {
+  string mime_type = 1;
+  bytes data = 2;
+  bool tool_input_only = 4;
+  .google.ai.generativelanguage.v1main.FileOptions file_options = 5;
+  string display_name = 6;
+}
+message FunctionResponseBlob {
+  string mime_type = 1;
+  bytes data = 2;
+  string display_name = 3;
+  .google.ai.generativelanguage.v1main.FileOptions file_options = 4;
+  .google.ai.generativelanguage.v1main.FunctionResponseKvGroup kv_group = 5;
+}
+message FunctionResponseKvGroup {
+  .google.ai.generativelanguage.v1main.KvBlockInfo kv_block_info = 1;
+  .google.protobuf.Struct metadata_link = 2;
+}
+message FunctionResponseKvBlockInfo {
+  .google.ai.generativelanguage.v1main.KvBlockInfo kv_block_info = 1;
+  .google.protobuf.Struct metadata_link = 2;
+  string display_name = 3;
+}
+message FunctionCallBlob {
+  string mime_type = 1;
+  bytes data = 2;
+  string display_name = 3;
+  .google.ai.generativelanguage.v1main.FileOptions file_options = 4; // oneof=_file_options
+}
+message FileData {
+  string mime_type = 1;
+  string file_uri = 2;
+  bool tool_input_only = 4;
+  .google.ai.generativelanguage.v1main.FileOptions file_options = 5;
+  string display_name = 6;
+}
+message FunctionResponseFileData {
+  string mime_type = 1;
+  string file_uri = 2;
+  string display_name = 3;
+  .google.ai.generativelanguage.v1main.FileOptions file_options = 4;
+}
+message FunctionCallFileData {
+  string mime_type = 1;
+  string file_uri = 2;
+  string display_name = 3;
+  .google.ai.generativelanguage.v1main.FileOptions file_options = 4; // oneof=_file_options
+}
+message FunctionResponsePreprocessedInputs {
+  .google.ai.generativelanguage.v1main.PreprocessedInputs preprocessed_inputs = 1;
+  string display_name = 2;
+  .google.ai.generativelanguage.v1main.FunctionResponseKvGroup kv_group = 3;
+  string mime_type = 4;
+}
+message VideoMetadata {
+  enum ContentLayer {
+    CONTENT_LAYER_UNSPECIFIED = 0;
+    FRAMES = 1;
+    AUDIO = 2;
+    TRANSCRIPT = 3;
+  }
+  .google.protobuf.Duration start_offset = 1;
+  .google.protobuf.Duration end_offset = 2;
+  double fps = 3;
+  int32 max_number_of_frames = 6;
+  repeated .google.ai.generativelanguage.v1main.VideoMetadata.ContentLayer content_layers = 4;
+  repeated .google.ai.generativelanguage.v1main.EditRegion edit_regions = 7;
+}
+message EditRegion {
+  enum Track {
+    TRACK_UNSPECIFIED = 0;
+    TRACK_VISUAL = 1;
+    TRACK_AUDIO = 2;
+  }
+  enum FreezeMode {
+    FREEZE_MODE_UNSPECIFIED = 0;
+    FULL_FREEZE = 1;
+  }
+  message Box {
+    int32 x = 1;
+    int32 y = 2;
+    int32 width = 3;
+    int32 height = 4;
+  }
+  .google.protobuf.Duration edit_start_offset = 1;
+  .google.protobuf.Duration edit_end_offset = 2;
+  .google.ai.generativelanguage.v1main.EditRegion.Track track = 3;
+  .google.ai.generativelanguage.v1main.EditRegion.Box box = 4; // oneof=area
+  .google.ai.generativelanguage.v1main.EditRegion.FreezeMode freeze_mode = 5;
+}
+message DocumentMetadata {
+  enum ContentLayer {
+    CONTENT_LAYER_UNSPECIFIED = 0;
+    PAGE_IMAGE = 1;
+    PAGE_TEXT = 2;
+  }
+  int32 start_page = 1; // oneof=_start_page
+  int32 end_page = 2; // oneof=_end_page
+  repeated .google.ai.generativelanguage.v1main.DocumentMetadata.ContentLayer content_layers = 3;
+}
+message SpreadsheetMetadata {
+  enum ContentLayer {
+    CONTENT_LAYER_UNSPECIFIED = 0;
+    DATA = 1;
+    FORMULAS = 2;
+    VISUAL = 3;
+  }
+  string visible_cells = 1; // oneof=_visible_cells
+  int32 sheet_index = 2; // oneof=_sheet_index
+  repeated .google.ai.generativelanguage.v1main.SpreadsheetMetadata.ContentLayer content_layers = 3;
+}
+message AudioMetadata {
+  .google.protobuf.Duration start_offset = 1;
+  .google.protobuf.Duration end_offset = 2;
+}
+message OutputVideoMetadata {
+  string mime_type = 1; // oneof=_mime_type
+  bool has_audio_track = 2; // oneof=_has_audio_track
+}
+message VideoFrameSequence {
+  message Frame {
+    bytes data = 1;
+    .google.protobuf.Duration timestamp = 2; // oneof=_timestamp
+  }
+  repeated .google.ai.generativelanguage.v1main.VideoFrameSequence.Frame frames = 1;
+  string mime_type = 2; // oneof=_mime_type
+}
+message AudioTrack {
+  bytes data = 1;
+  string mime_type = 2; // oneof=_mime_type
+}
+message ExecutableCode {
+  enum Language {
+    LANGUAGE_UNSPECIFIED = 0;
+    PYTHON = 1;
+    BASH = 2;
+  }
+  string id = 3;
+  .google.ai.generativelanguage.v1main.ExecutableCode.Language language = 1;
+  string code = 2;
+}
+message CodeExecutionResult {
+  enum Outcome {
+    OUTCOME_UNSPECIFIED = 0;
+    OUTCOME_OK = 1;
+    OUTCOME_FAILED = 2;
+    OUTCOME_DEADLINE_EXCEEDED = 3;
+  }
+  string id = 3;
+  .google.ai.generativelanguage.v1main.CodeExecutionResult.Outcome outcome = 1;
+  string output = 2;
+}
+message Tool {
+  message ToolGroup {
+    string group_namespace = 1;
+    string description = 2;
+    repeated .google.ai.generativelanguage.v1main.FunctionDeclaration function_declarations = 3;
+  }
+  message GoogleSearch {
+    message WebSearch {
+      .google.ai.generativelanguage.v1main.ExecutionMode mode = 1;
+    }
+    message ImageSearch {
+      .google.ai.generativelanguage.v1main.ExecutionMode mode = 1;
+      string tool_backend_route_identifier = 2;
+    }
+    message VisualSearch {
+      .google.ai.generativelanguage.v1main.ExecutionMode mode = 1;
+    }
+    message SearchTypes {
+      .google.ai.generativelanguage.v1main.Tool.GoogleSearch.WebSearch web_search = 1;
+      .google.ai.generativelanguage.v1main.Tool.GoogleSearch.ImageSearch image_search = 2;
+      .google.ai.generativelanguage.v1main.Tool.GoogleSearch.VisualSearch visual_search = 3;
+    }
+    .google.ai.generativelanguage.v1main.ExecutionMode mode = 3;
+    .google.ai.generativelanguage.v1main.EnhancedContent enhanced_content = 1;
+    .google.type.Interval time_range_filter = 2;
+    string tool_backend_route_identifier = 4;
+    .google.ai.generativelanguage.v1main.Tool.GoogleSearch.SearchTypes search_types = 6;
+  }
+  message ComputerUse {
+    enum Environment {
+      ENVIRONMENT_UNSPECIFIED = 0;
+      ENVIRONMENT_BROWSER = 1;
+      ENVIRONMENT_MOBILE = 2;
+      ENVIRONMENT_DESKTOP = 3;
+    }
+    enum SafetyPolicy {
+      SAFETY_POLICY_UNSPECIFIED = 0;
+      FINANCIAL_TRANSACTIONS = 1;
+      SENSITIVE_DATA_MODIFICATION = 2;
+      COMMUNICATION_TOOL = 3;
+      ACCOUNT_CREATION = 4;
+      DATA_MODIFICATION = 5;
+      USER_CONSENT_MANAGEMENT = 6;
+      LEGAL_TERMS_AND_AGREEMENTS = 7;
+    }
+    .google.ai.generativelanguage.v1main.Tool.ComputerUse.Environment environment = 3;
+    repeated string excluded_predefined_functions = 5;
+    bool enable_prompt_injection_detection = 6;
+    repeated .google.ai.generativelanguage.v1main.Tool.ComputerUse.SafetyPolicy disabled_safety_policies = 7;
+  }
+  message McpServer {
+    message StreamableHttpTransport {
+      message HeadersEntry {
+        string key = 1;
+        string value = 2;
+      }
+      string uri = 1;
+      repeated .google.ai.generativelanguage.v1main.Tool.McpServer.StreamableHttpTransport.HeadersEntry headers = 2;
+      .google.protobuf.Duration timeout = 3;
+      .google.protobuf.Duration sse_read_timeout = 4;
+      bool terminate_on_close = 5;
+    }
+    string name = 1;
+    .google.ai.generativelanguage.v1main.Tool.McpServer.StreamableHttpTransport streamable_http_transport = 2; // oneof=transport
+    repeated .google.ai.generativelanguage.v1main.AllowedTools allowed_tools = 3;
+    bool defer_loading = 5;
+    string credential = 6;
+  }
+  repeated .google.ai.generativelanguage.v1main.FunctionDeclaration function_declarations = 1;
+  .google.ai.generativelanguage.v1main.Tool.ToolGroup tool_group = 14; // oneof=_tool_group
+  .google.ai.generativelanguage.v1main.GoogleSearchRetrieval google_search_retrieval = 2;
+  .google.ai.generativelanguage.v1main.CodeExecution code_execution = 3;
+  .google.ai.generativelanguage.v1main.Tool.GoogleSearch google_search = 4;
+  .google.ai.generativelanguage.v1main.Tool.ComputerUse computer_use = 6;
+  .google.ai.generativelanguage.v1main.UrlContext url_context = 8;
+  .google.ai.generativelanguage.v1main.FileSearch file_search = 9;
+  repeated .google.ai.generativelanguage.v1main.Tool.McpServer mcp_servers = 10;
+  .google.ai.generativelanguage.v1main.GoogleMaps google_maps = 11;
+  .google.ai.generativelanguage.v1main.ImageSearch image_search = 13;
+  .google.ai.generativelanguage.v1main.Bash bash = 12;
+  .google.ai.generativelanguage.v1main.VideoUnderstanding video_understanding = 15;
+  .google.ai.generativelanguage.v1main.ToolSearch tool_search = 16;
+}
+message ImageSearch {
+  .google.ai.generativelanguage.v1main.ExecutionMode mode = 1;
+}
+message Bash {
+}
+message VideoUnderstanding {
+  .google.ai.generativelanguage.v1main.ExecutionMode mode = 1;
+}
+message ToolSearch {
+  string name = 1;
+  string description = 2;
+  .google.ai.generativelanguage.v1main.Schema parameters = 3; // oneof=_parameters
+  .google.ai.generativelanguage.v1main.ExecutionMode execution = 4;
+}
+message GoogleMaps {
+  bool enable_widget = 1;
+  string tool_backend_route_identifier = 2;
+  bool subtool_enabled = 3;
+  bool search_along_route_enabled = 4;
+  bool migration_review_guardrail_enabled = 5;
+}
+message AllowedTools {
+  repeated string tools = 1;
+}
+message UrlContext {
+  .google.ai.generativelanguage.v1main.ExecutionMode mode = 1;
+  .google.ai.generativelanguage.v1main.FetchOptions fetch_options = 2;
+  string tool_backend_route_identifier = 3;
+}
+message FetchOptions {
+  enum FetchMode {
+    FETCH_MODE_UNSPECIFIED = 0;
+    FETCH_MODE_INDEX_FIRST = 1;
+    FETCH_MODE_LIVE_FIRST = 2;
+    FETCH_MODE_LIVE_ONLY = 3;
+  }
+  .google.ai.generativelanguage.v1main.FetchOptions.FetchMode fetch_mode = 1;
+}
+message FileSearch {
+  repeated string file_search_store_names = 4;
+  repeated string file_ids = 5;
+  int32 top_k = 6; // oneof=_top_k
+  string metadata_filter = 7;
+  string tool_backend_route_identifier = 8;
+}
+message GoogleSearchRetrieval {
+  .google.ai.generativelanguage.v1main.DynamicRetrievalConfig dynamic_retrieval_config = 1;
+}
+message EnhancedContent {
+}
+message DynamicRetrievalConfig {
+  enum Mode {
+    MODE_UNSPECIFIED = 0;
+    MODE_DYNAMIC = 1;
+  }
+  .google.ai.generativelanguage.v1main.DynamicRetrievalConfig.Mode mode = 1;
+  float dynamic_threshold = 2; // oneof=_dynamic_threshold
+}
+message CodeExecution {
+  repeated .google.ai.generativelanguage.v1main.ExecutableCode.Language languages = 1;
+  .google.ai.generativelanguage.v1main.ExecutionMode mode = 2;
+  string tool_backend_route_identifier = 3;
+}
+message ToolConfig {
+  .google.ai.generativelanguage.v1main.FunctionCallingConfig function_calling_config = 1;
+  .google.ai.generativelanguage.v1main.RetrievalConfig retrieval_config = 2;
+  bool include_server_side_tool_invocations = 3;
+  bool skip_tool_context_encryption = 4;
+  .google.protobuf.Any execute_tool_auxiliary_inputs = 14;
+}
+message RetrievalConfig {
+  .google.type.LatLng lat_lng = 1;
+  string language_code = 2;
+  string time_zone = 3; // oneof=_time_zone
+}
+message FunctionCallingConfig {
+  enum Mode {
+    MODE_UNSPECIFIED = 0;
+    AUTO = 1;
+    ANY = 2;
+    NONE = 3;
+    VALIDATED = 4;
+  }
+  .google.ai.generativelanguage.v1main.FunctionCallingConfig.Mode mode = 1;
+  repeated string allowed_function_names = 2;
+  bool all_function_declarations_allowed = 5;
+  bool stream_function_call_arguments = 4;
+}
+message FunctionDeclaration {
+  enum Behavior {
+    UNSPECIFIED = 0;
+    BLOCKING = 1;
+    NON_BLOCKING = 2;
+  }
+  string name = 1;
+  string description = 2;
+  .google.ai.generativelanguage.v1main.Schema parameters = 3; // oneof=_parameters
+  .google.protobuf.Value parameters_json_schema = 6; // oneof=_parameters_json_schema
+  .google.ai.generativelanguage.v1main.Schema response = 4; // oneof=_response
+  .google.protobuf.Value response_json_schema = 7; // oneof=_response_json_schema
+  .google.ai.generativelanguage.v1main.FunctionDeclaration.Behavior behavior = 5;
+  string tool_backend_route_identifier = 8;
+  repeated string prompt_metadata_categories = 10;
+  bool defer_loading = 11;
+  .google.ai.generativelanguage.v1main.ToolAnnotations tool_annotations = 12;
+  string short_description = 13;
+  .google.ai.generativelanguage.v1main.SecurityAnnotations security_annotations = 14;
+}
+message FunctionRemoval {
+  string name = 1; // oneof=target
+  bool all = 2; // oneof=target
+}
+message ToolCall {
+  string id = 3;
+  string tool_name = 4;
+  .google.ai.generativelanguage.v1main.ToolType tool_type = 1;
+  .google.protobuf.Struct args = 2;
+}
+message ToolResponse {
+  string id = 3;
+  .google.ai.generativelanguage.v1main.ToolType tool_type = 1;
+  .google.protobuf.Struct response = 2;
+  repeated .google.ai.generativelanguage.v1main.FunctionResponsePart parts = 4;
+}
+message FunctionCall {
+  message AdditionalArgumentsEntry {
+    string key = 1;
+    .google.protobuf.Any value = 2;
+  }
+  string id = 3;
+  string name = 1;
+  .google.protobuf.Struct args = 2; // oneof=_args
+  repeated .google.ai.generativelanguage.v1main.FunctionCall.AdditionalArgumentsEntry additional_arguments = 4;
+  repeated .google.ai.generativelanguage.v1main.PartialArg partial_args = 5;
+  bool will_continue = 6;
+  .google.ai.generativelanguage.v1main.ToolType type = 7;
+  repeated string prompt_metadata_categories = 10;
+  repeated .google.ai.generativelanguage.v1main.FunctionCallPart parts = 11;
+}
+message PartialArg {
+  string json_path = 1;
+  .google.protobuf.NullValue null_value = 2; // oneof=delta
+  double number_value = 3; // oneof=delta
+  string string_value = 4; // oneof=delta
+  bool bool_value = 5; // oneof=delta
+  bool will_continue = 6;
+}
+message FunctionResponse {
+  enum Scheduling {
+    SCHEDULING_UNSPECIFIED = 0;
+    SILENT = 1;
+    WHEN_IDLE = 2;
+    INTERRUPT = 3;
+  }
+  enum ExecutionOrigin {
+    EXECUTION_ORIGIN_UNSPECIFIED = 0;
+    SERVER_SIDE = 1;
+    CLIENT_SIDE = 2;
+  }
+  string id = 3;
+  string name = 1;
+  .google.protobuf.Struct response = 2;
+  .google.protobuf.Any tool_results = 9;
+  repeated .google.ai.generativelanguage.v1main.FunctionResponsePart parts = 8;
+  bool will_continue = 4;
+  .google.ai.generativelanguage.v1main.FunctionResponse.Scheduling scheduling = 5; // oneof=_scheduling
+  repeated string prompt_metadata_categories = 10;
+  .google.ai.generativelanguage.v1main.FunctionResponse.ExecutionOrigin execution_origin = 11;
+}
+message Schema {
+  message PropertiesEntry {
+    string key = 1;
+    .google.ai.generativelanguage.v1main.Schema value = 2;
+  }
+  .google.ai.generativelanguage.v1main.Type type = 1;
+  string format = 2;
+  string title = 24;
+  string description = 3;
+  bool nullable = 4;
+  repeated string enum = 5;
+  .google.ai.generativelanguage.v1main.Schema items = 6; // oneof=_items
+  int64 max_items = 21;
+  int64 min_items = 22;
+  repeated .google.ai.generativelanguage.v1main.Schema.PropertiesEntry properties = 7;
+  repeated string required = 8;
+  int64 min_properties = 9;
+  int64 max_properties = 10;
+  double minimum = 11; // oneof=_minimum
+  double maximum = 12; // oneof=_maximum
+  int64 min_length = 13;
+  int64 max_length = 14;
+  string pattern = 15;
+  .google.protobuf.Value example = 16;
+  repeated .google.ai.generativelanguage.v1main.Schema one_of = 17;
+  repeated .google.ai.generativelanguage.v1main.Schema any_of = 18;
+  repeated .google.ai.generativelanguage.v1main.Schema all_of = 19;
+  .google.ai.generativelanguage.v1main.Schema not = 20;
+  repeated string property_ordering = 23;
+  .google.protobuf.Value default = 25;
+}
+message GroundingPassage {
+  string id = 1;
+  .google.ai.generativelanguage.v1main.Content content = 2;
+}
+message GroundingPassages {
+  repeated .google.ai.generativelanguage.v1main.GroundingPassage passages = 1;
+}
+message ModalityTokenCount {
+  .google.ai.generativelanguage.v1main.Modality modality = 1;
+  int32 token_count = 2;
+}
+message ModalityMetadata {
+  message ModalityVideoMetadata {
+    .google.protobuf.Duration duration = 1;
+    double fps = 2;
+    bool has_audio = 3;
+    .google.ai.generativelanguage.v1main.ModalityMetadata.ModalityAudioMetadata audio_metadata = 4;
+    int32 width_px = 5; // oneof=_width_px
+    int32 height_px = 6; // oneof=_height_px
+  }
+  message ModalityAudioMetadata {
+    .google.protobuf.Duration duration = 1;
+  }
+  message ModalityDocumentMetadata {
+    int32 page_count = 1;
+    int32 image_count = 2;
+    int32 token_count = 3; // oneof=_token_count
+  }
+  .google.ai.generativelanguage.v1main.ModalityMetadata.ModalityVideoMetadata video_metadata = 1; // oneof=metadata
+  .google.ai.generativelanguage.v1main.ModalityMetadata.ModalityAudioMetadata audio_metadata = 2; // oneof=metadata
+  .google.ai.generativelanguage.v1main.ModalityMetadata.ModalityDocumentMetadata document_metadata = 3; // oneof=metadata
+}
+message PreprocessedInput {
+  bytes data = 1; // oneof=preprocessed_data
+  string guri = 2; // oneof=preprocessed_data
+  string mime_type = 3;
+  .google.ai.generativelanguage.v1main.VerbalizationOptions verbalization_options = 4;
+  .google.ai.generativelanguage.v1main.ModalityMetadata modality_metadata = 5;
+  .google.ai.generativelanguage.v1main.ModalityTokenCount token_count = 6;
+}
+message PreprocessedInputs {
+  repeated .google.ai.generativelanguage.v1main.PreprocessedInput inputs = 1;
+  string display_name = 2;
+}
+message Pivot {
+  enum PivotDecision {
+    PIVOT_DECISION_UNSPECIFIED = 0;
+    FULL_REWRITE = 1;
+    PUNT = 2;
+    SOFT_PUNT = 3;
+  }
+  .google.ai.generativelanguage.v1main.Pivot.PivotDecision decision = 1;
+}
+message KvBlockInfo {
+  string mdb_user_owner = 3;
+  string document_id = 2;
+  bytes kv_block_id = 1;
+  .google.protobuf.Struct metadata = 6;
+  .google.protobuf.Struct metadata_link = 7;
+  bool continued = 4;
+}
+message DecodedVideo {
+  .google.ai.generativelanguage.v1main.VideoFrameSequence video_frame_sequence = 1;
+  .google.ai.generativelanguage.v1main.AudioTrack audio = 2;
+  string display_name = 3;
+}

@@ -1,0 +1,26 @@
+// Extracted file offset 0x3668a07, 1005 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package genai;
+import "google/api/inclusion.proto";
+import "google/api/visibility.proto";
+import "learning/genai/api/genai_versioning.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+enum ThinkingLevel {
+  THINKING_LEVEL_UNSPECIFIED = 0;
+  THINKING_LEVEL_MINIMAL = 3;
+  THINKING_LEVEL_LOW = 1;
+  THINKING_LEVEL_MEDIUM = 4;
+  THINKING_LEVEL_HIGH = 2;
+  THINKING_LEVEL_XHIGH = 5;
+  THINKING_LEVEL_MAX = 6;
+}
+enum ThinkingSummaries {
+  THINKING_SUMMARIES_UNSPECIFIED = 0;
+  THINKING_SUMMARIES_AUTO = 1;
+  THINKING_SUMMARIES_NONE = 2;
+}
+enum PrefixMismatchBehavior {
+  PREFIX_MISMATCH_BEHAVIOR_UNSPECIFIED = 0;
+  PREFIX_MISMATCH_BEHAVIOR_ERROR = 1;
+  PREFIX_MISMATCH_BEHAVIOR_DROP = 2;
+}

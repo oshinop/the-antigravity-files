@@ -1,0 +1,9 @@
+// Extracted file offset 0x3621de4, 264 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package google.type;
+message Expr {
+  string expression = 1;
+  string title = 2;
+  string description = 3;
+  string location = 4;
+}

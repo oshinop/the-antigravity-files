@@ -1,0 +1,123 @@
+// Extracted file offset 0x37f08e6, 12408 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package privacy.data_governance.attributes;
+import "google/api/inclusion.proto";
+import "google/protobuf/duration.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+message DataIntegrity {
+  enum SourceOfTruth {
+    UNDEFINED_SOURCE_OF_TRUTH = 0;
+    SOURCE_OF_TRUTH_YES = 1;
+    SOURCE_OF_TRUTH_NO = 2;
+  }
+  enum BusinessImportance {
+    UNDEFINED_BUSINESS_IMPORTANCE = 0;
+    BUSINESS_IMPORTANCE_CRITICAL = 1;
+    BUSINESS_IMPORTANCE_MINOR = 2;
+  }
+  enum DataIntegrityRing {
+    DATA_INTEGRITY_RING_UNSPECIFIED = 0;
+    DATA_INTEGRITY_RING_MISSION_CRITICAL = 1;
+    DATA_INTEGRITY_RING_HIGH_VALUE = 2;
+    DATA_INTEGRITY_RING_MEDIUM_VALUE = 3;
+    DATA_INTEGRITY_RING_LOW_VALUE = 4;
+    DATA_INTEGRITY_RING_UNPROTECTED = 5;
+    DATA_INTEGRITY_RING_NA = 6;
+  }
+  message RecoveryPointObjective {
+    .privacy.data_governance.attributes.Toolbox.DurationObjective max_age_of_recovery_point = 1;
+  }
+  message RecoveryWindowObjective {
+    .privacy.data_governance.attributes.Toolbox.DurationObjective min_recovery_data_retention = 1;
+  }
+  message RecoveryTimeObjective {
+    .privacy.data_governance.attributes.Toolbox.DurationObjective recovery_time_objective = 1;
+    float max_fraction_of_rto_for_restore = 2;
+  }
+  message RecoveryObjectiveSet {
+    .privacy.data_governance.attributes.Toolbox.RecoveryScenario recovery_scenario = 1;
+    .privacy.data_governance.attributes.DataIntegrity.RecoveryPointObjective rpo = 2;
+    .privacy.data_governance.attributes.DataIntegrity.RecoveryWindowObjective rwo = 3;
+    .privacy.data_governance.attributes.DataIntegrity.RecoveryTimeObjective rto = 4;
+  }
+  int64 contact_team_id = 1;
+  int64 plan_id = 2;
+  .privacy.data_governance.attributes.DataIntegrity.SourceOfTruth source_of_truth = 3;
+  .privacy.data_governance.attributes.DataIntegrity.BusinessImportance business_importance = 4;
+  .privacy.data_governance.attributes.DataIntegrity.DataIntegrityRing data_integrity_ring = 7;
+  repeated .privacy.data_governance.attributes.DataIntegrity.RecoveryObjectiveSet recovery_objective_set = 6;
+  .privacy.data_governance.attributes.Custom custom = 5;
+}
+message Toolbox {
+  enum RecoveryScenario {
+    UNDEFINED_RECOVERY_SCENARIO = 0;
+    RECOVERY_SCENARIO_INFRASTRUCTURE_FAILURE = 1;
+    RECOVERY_SCENARIO_APPLICATION_FAILURE = 2;
+  }
+  enum BackupStatus {
+    BACKUP_STATUS_UNKNOWN = 0;
+    NO_BACKUPS = 1;
+    MANUAL_BACKUPS = 2;
+    AUTOMATIC_BACKUPS = 3;
+  }
+  enum BackupAlertStatus {
+    BACKUPALERTSTATUS_UNKNOWN = 0;
+    NO_ALERTS = 1;
+    ALERTING = 2;
+  }
+  enum RecoveryType {
+    RECOVERY_TYPE_UNKNOWN = 0;
+    NO_RECOVERY_POSSIBLE = 1;
+    REGENERATE = 2;
+    RESTORE = 3;
+  }
+  enum RecoveryTestingStatus {
+    RECOVERY_TESTING_UNKNOWN = 0;
+    NO_RECOVERY_TESTING = 1;
+    MANUAL_RESTORE_TESTING = 2;
+    AUTOMATED_RESTORE_TESTING = 3;
+    AUTOMATED_RESTORE_TESTING_WITH_MONITORING = 4;
+  }
+  message DurationObjective {
+    .google.protobuf.Duration goal = 1; // oneof=_goal
+    .google.protobuf.Duration period = 2; // oneof=_period
+    double error_budget = 3; // oneof=_error_budget
+  }
+}
+message Custom {
+  message Geo {
+    .privacy.data_governance.attributes.Toolbox.BackupStatus backup_status = 1;
+    .google.protobuf.Duration recovery_point_objective = 2;
+    .google.protobuf.Duration full_restore_estimate = 3;
+    .privacy.data_governance.attributes.Toolbox.BackupAlertStatus backup_alert_status = 4;
+    .privacy.data_governance.attributes.Toolbox.RecoveryType recovery_type = 5;
+    .privacy.data_governance.attributes.Toolbox.RecoveryTestingStatus recovery_testing_status = 6;
+  }
+  message Play {
+    enum ReplicationType {
+      UNDEFINED_REPLICATIONTYPE = 0;
+      SINGLY_HOMED = 1;
+      MULTI_ZONE = 2;
+      MULTI_REGION = 3;
+    }
+    .privacy.data_governance.attributes.Toolbox.BackupStatus backup_status = 1;
+    .google.protobuf.Duration recovery_point_objective = 2;
+    .google.protobuf.Duration single_key_restore_estimate = 3;
+    .google.protobuf.Duration full_restore_estimate = 4;
+    .privacy.data_governance.attributes.Toolbox.BackupAlertStatus backup_alert_status = 7;
+    .privacy.data_governance.attributes.Custom.Play.ReplicationType replication_type = 8;
+    repeated .privacy.data_governance.attributes.Toolbox.RecoveryType recovery_type = 9;
+  }
+  message PlatDev {
+    enum Durability {
+      UNDEFINED_DURABILITY = 0;
+      AUTHORITATIVE = 1;
+      DERIVABLE = 2;
+      TRIVIAL = 3;
+    }
+    .privacy.data_governance.attributes.Custom.PlatDev.Durability durability = 1;
+  }
+  .privacy.data_governance.attributes.Custom.Geo geo = 1;
+  .privacy.data_governance.attributes.Custom.Play play = 2;
+  .privacy.data_governance.attributes.Custom.PlatDev platdev = 3;
+}

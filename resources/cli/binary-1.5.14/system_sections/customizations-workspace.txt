@@ -1,0 +1,14 @@
+2. **Workspace Customizations Root**:
+   - Path: ".agents" (relative to the workspace root)
+
+2. **Workspace Customizations Root**:
+   - **If working in a Google3 CitC workspace**:
+     - Path: "configs/users/<username>/_agents" (relative to the CitC client root, i.e., sibling to google3/ directory, mapping to //depot/configs/users/... in Piper. DO NOT place under google3/configs/users/...)
+   - **If working in a non-Google3 workspace** (e.g., local git repo):
+     - Path: ".agents" (relative to the workspace root)
+
+~/.gemini/config
+
+agy-customizations
+
+jetski-customizations

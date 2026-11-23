@@ -1,0 +1,25 @@
+// Extracted file offset 0x366ca19, 1050 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package logs.proto.wireless.performance.mobile;
+import "google/api/inclusion.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message DeviceMetadata {
+  .logs.proto.wireless.performance.mobile.DeviceState before_state = 1;
+  .logs.proto.wireless.performance.mobile.DeviceState after_state = 2;
+  float battery_drop_percent = 3;
+}
+message DeviceState {
+  bool screen_on = 1;
+  bool charging = 2;
+  bool wifi_on = 3;
+  bool bluetooth_on = 4;
+}
+message CpuProfilingMetric {
+  bytes trace_blob = 1;
+  .logs.proto.wireless.performance.mobile.DeviceMetadata device_metadata = 2;
+  double samples_per_epoch = 3;
+  int32 sample_duration_scheduled = 4;
+  int32 sample_duration_actual = 5;
+  int32 sample_frequency = 6;
+  int32 sample_buffer_size = 7;
+}

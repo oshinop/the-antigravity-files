@@ -1,0 +1,9 @@
+// Extracted file offset 0x3655501, 774 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto3";
+package data_residency.mapping.gdm;
+import "google/api/inclusion.proto";
+import "privacy/data_governance/attributes/proto/classification.proto";
+enum GDMDataResidencyLocation {
+  GDM_DATA_RESIDENCY_LOCATION_UNSPECIFIED = 0;
+  US = 1;
+}

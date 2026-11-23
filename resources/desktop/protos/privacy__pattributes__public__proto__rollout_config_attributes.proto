@@ -1,0 +1,13 @@
+// Extracted file offset 0x3654ef8, 772 bytes. Rendering omits custom options; see .textproto.
+syntax = "editions";
+package pgraph.attributes;
+import "google/api/inclusion.proto";
+import "privacy/rollouts/proto/rollout_config.proto";
+message ScopedRolloutConfig {
+  .ptoken.policy_rollouts.PerPolicyRolloutConfig per_policy_rollout_configs = 1;
+  bool allow_enforcement_mode_downgrade = 2;
+}
+message EntityRolloutConfig {
+  repeated .ptoken.policy_rollouts.PerPolicyRolloutConfig per_policy_rollout_configs = 1;
+  .ptoken.policy_rollouts.AttributesDarkLaunchConfig attributes_dark_launch_config = 3;
+}

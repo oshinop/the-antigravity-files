@@ -1,0 +1,17 @@
+// Extracted file offset 0x3668df4, 1005 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package wireless_android_play_playlog;
+import "google/api/inclusion.proto";
+import "java/com/google/apps/jspb/jspb_generate_object_format.proto";
+import "logs/proto/logs_annotations/logs_annotations.proto";
+import "storage/datapol/annotations/proto/semantic_annotations.proto";
+message MacClientInfo {
+  string os_major_version = 1;
+  string os_full_version = 2;
+  string application_build = 3;
+  string country = 4;
+  int64 application_build_cl = 5;
+  int32 clearcut_version = 6;
+  string application_bundle_id = 7;
+  string client_build_variant = 8;
+}

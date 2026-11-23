@@ -1,0 +1,1 @@
+Searches files or directories in memory for lines matching a case-insensitive regular expression without spawning a shell, automatically skipping .git, node_modules, and virtualenvs. Prefer this over running grep or rg.

@@ -1,0 +1,45 @@
+// Extracted file offset 0x36a817d, 1866 bytes. Rendering omits custom options; see .textproto.
+syntax = "proto2";
+package security.context;
+import "google/api/inclusion.proto";
+import "google/iam/v1/policy.proto";
+enum AuthorizationMode {
+  AUTHORIZATION_MODE_UNKNOWN = 0;
+  AUTOMATIC_IAM = 1;
+  MANUAL_IAM = 2;
+  MANUAL_LEGACY = 3;
+  CLOUD_POLICY_ENFORCEMENT = 5;
+  MANUAL = 4;
+}
+message AuthenticationPolicy {
+  .google.iam.v1.Policy creds_policy = 1;
+  .google.iam.v1.Policy impersonation_policy = 2;
+  bool default_anonymous_mode = 4; // default='false'
+  .security.context.AuthenticationMethods authentication_methods = 5;
+}
+message AuthenticationMethods {
+  message CloudUberMintConfig {
+    enum UberMintMode {
+      UNSPECIFIED = 0;
+      ENABLED = 1;
+    }
+    .security.context.AuthenticationMethods.CloudUberMintConfig.UberMintMode mode = 1;
+  }
+  message UberMintConfig {
+    enum UberMintPlatform {
+      PLATFORM_UNSPECIFIED = 0;
+      SANDBOX = 1;
+      CLOUD = 2;
+      DEVICE = 3;
+      LEGACY_GAIA = 5;
+      PROD_ACCOUNT = 6;
+      FITBIT = 7;
+      SANDCASTLE = 8;
+      HOME_FEDERATED_USER = 9;
+    }
+    repeated .security.context.AuthenticationMethods.UberMintConfig.UberMintPlatform platforms = 1;
+  }
+  .security.context.AuthenticationMethods.CloudUberMintConfig cloud_ubermint = 1;
+  .security.context.AuthenticationMethods.UberMintConfig ubermint = 3;
+  bool use_default_methods = 2;
+}

@@ -1,0 +1,9 @@
+recorded on the board as #%d for @%s
+
+You have just started. You are @%s (copy %d of %d in the @%s group; when sharding a directory, list, or stream of @%s posts without per-worker assignments, take items where 0-based index mod %d == %d unless directed otherwise). Your assignment (%s):
+
+%s
+
+You have just started. Your assignment (%s):
+
+%s
