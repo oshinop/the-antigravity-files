@@ -1,4 +1,4 @@
-// Extracted file offset 0x3680f97, 1290 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3680f97, 1290 bytes. Rendering omits custom options.
 syntax = "proto2";
 package pb;
 import "net/proto2/proto/descriptor.proto";
@@ -22,3 +22,4 @@ message JavaFeatures {
   bool use_old_outer_classname_default = 4;
   .pb.JavaFeatures.NestInFileClassFeature.NestInFileClass nest_in_file_class = 5;
 }
+extend .proto2.FeatureSet { .pb.JavaFeatures java = 1001; }

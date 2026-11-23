@@ -13,7 +13,7 @@ The reference library: the material as Google ships or sends it, records of what
 | [Traffic excerpts](cli/traffic/INDEX.md) | Excerpts of captured requests and responses: telemetry, uploads, reviews, injected messages, helpers, compaction |
 | [One session, traced](cli/session-1/README.md) | Timeline of a two-prompt session: the helper outliving the turn, review models checking tool calls, telemetry throughout |
 | [CLI protos](cli/protos/INDEX.md) | 351 protobuf definitions from the `agy` 1.5.14 binary, each compared with the desktop backend's copy |
-| [Desktop protos](desktop/protos/INDEX.md) | 537 protobuf definitions from the Antigravity 2.33.0 desktop backend |
+| [Desktop protos](desktop/protos/INDEX.md) | 550 protobuf definitions from the Antigravity 2.33.0 desktop backend, each compared with `agy`'s copy |
 | [Desktop protocol](desktop/protocol/INDEX.md) | Local RPC between the desktop app and its language server, and the message layouts |
 | [Diagrams](diagrams/INDEX.md) | How swarm, Teamwork, helper delegation, the review chain, telemetry and compaction work |
 | [Sources](sources/INDEX.md) | Google's Terms, FAQ and forum reply, and every public page the article cites |

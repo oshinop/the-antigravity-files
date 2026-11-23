@@ -1,4 +1,4 @@
-// Extracted file offset 0x76aaa74, 857 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36611af, 931 bytes. Rendering omits custom options.
 syntax = "proto2";
 package util;
 import "net/proto2/bridge/proto/message_set.proto";

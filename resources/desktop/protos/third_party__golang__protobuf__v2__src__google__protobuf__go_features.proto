@@ -1,4 +1,4 @@
-// Extracted file offset 0x3677692, 1168 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3677692, 1168 bytes. Rendering omits custom options.
 syntax = "proto2";
 package pb;
 import "net/proto2/proto/descriptor.proto";
@@ -27,3 +27,4 @@ message GoFeatures {
   .pb.GoFeatures.StripEnumPrefix strip_enum_prefix = 3;
   .pb.GoFeatures.OptimizeModeFeature.OptimizeMode optimize_mode = 4;
 }
+extend .proto2.FeatureSet { .pb.GoFeatures go = 1002; }

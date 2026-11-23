@@ -1,4 +1,4 @@
-// Extracted file offset 0x36cb909, 2468 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36cb909, 2468 bytes. Rendering omits custom options.
 syntax = "proto3";
 package deepmind.evergreen.v1;
 import "google/api/inclusion.proto";

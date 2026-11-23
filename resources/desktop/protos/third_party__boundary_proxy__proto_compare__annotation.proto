@@ -1,4 +1,4 @@
-// Extracted file offset 0x76b03d0, 2359 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36e0181, 2763 bytes. Rendering omits custom options.
 syntax = "proto2";
 package proto_compare;
 import "net/proto2/proto/descriptor.proto";
@@ -68,3 +68,14 @@ message RedactionOptions {
   double max_double_value = 10;
   string field_reference = 11;
 }
+extend .proto2.FieldOptions { .proto_compare.FieldDisposition disposition = 484519953; }
+extend .proto2.FieldOptions { .proto_compare.ExcludeReason exclude_reason = 482813086; }
+extend .proto2.FieldOptions { .proto_compare.ComparisonOptions options = 478786899; }
+extend .proto2.FieldOptions { .proto_compare.RedactionOptions redaction = 485077330; }
+extend .proto2.FieldOptions { repeated .proto_compare.RedactionOptions redactions_by_reference = 425736634; }
+extend .proto2.FieldOptions { string comment = 486375988; }
+extend .proto2.FileOptions { string file_vetting_status = 501006184; }
+extend .proto2.FileOptions { repeated .proto_compare.FileUseCase file_use_case = 525000016; }
+extend .proto2.MethodOptions { .proto_compare.TpcType tpc_type = 520991498; }
+extend .proto2.MethodOptions { string method_comment = 522360157; }
+extend .proto2.MethodOptions { bool future_exemplar = 525000015; }

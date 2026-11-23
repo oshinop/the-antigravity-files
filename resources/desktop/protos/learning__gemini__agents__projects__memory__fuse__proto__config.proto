@@ -1,4 +1,4 @@
-// Extracted file offset 0x3713473, 3733 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3713473, 3733 bytes. Rendering omits custom options.
 syntax = "editions";
 package jetski_memory;
 import "devtools/library_club/cltool/zhu/proto_arg_spec.proto";

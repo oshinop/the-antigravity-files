@@ -1,4 +1,4 @@
-// Extracted file offset 0x76b021c, 286 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x362bc24, 341 bytes. Rendering omits custom options.
 syntax = "proto2";
 package datapol.classification;
 import "net/proto2/proto/descriptor.proto";
@@ -7,3 +7,4 @@ message Options {
   string description = 2;
   string default_semantic_context = 3;
 }
+extend .proto2.EnumValueOptions { .datapol.classification.Options options = 268862122; }

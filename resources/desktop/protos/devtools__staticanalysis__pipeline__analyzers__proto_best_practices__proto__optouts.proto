@@ -1,4 +1,4 @@
-// Extracted file offset 0x36da1cc, 2703 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36da1cc, 2703 bytes. Rendering omits custom options.
 syntax = "proto2";
 package proto_best_practices;
 import "logs/proto/logs_annotations/logs_annotations.proto";
@@ -68,3 +68,12 @@ message Category {
 message FindingOptouts {
   repeated .proto_best_practices.Category.Subcategory categories = 1;
 }
+extend .proto2.FileOptions { .proto_best_practices.FindingOptouts file_optouts = 358478963; }
+extend .proto2.FileOptions { bool suppress_all_findings = 358509105; }
+extend .proto2.MessageOptions { .proto_best_practices.FindingOptouts message_optouts = 358478821; }
+extend .proto2.FieldOptions { .proto_best_practices.FindingOptouts field_optouts = 358472119; }
+extend .proto2.EnumOptions { .proto_best_practices.FindingOptouts enum_optouts = 358464019; }
+extend .proto2.EnumValueOptions { .proto_best_practices.FindingOptouts enum_value_optouts = 358463286; }
+extend .proto2.OneofOptions { .proto_best_practices.FindingOptouts oneof_optouts = 525000013; }
+extend .proto2.ServiceOptions { .proto_best_practices.FindingOptouts service_optouts = 358444555; }
+extend .proto2.MethodOptions { .proto_best_practices.FindingOptouts method_optouts = 358439204; }

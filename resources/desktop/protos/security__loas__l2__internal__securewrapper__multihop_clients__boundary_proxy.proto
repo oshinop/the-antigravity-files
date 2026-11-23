@@ -1,4 +1,4 @@
-// Extracted file offset 0x76aae04, 424 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x363e7a8, 522 bytes. Rendering omits custom options.
 syntax = "proto2";
 package boundary_proxy.proto_modifier;
 import "net/proto2/proto/descriptor.proto";
@@ -8,3 +8,4 @@ message AlterationOptions {
   string remove_if_regex_not_matched = 3;
   bool strip_all_except_change_id = 4;
 }
+extend .proto2.FieldOptions { .boundary_proxy.proto_modifier.AlterationOptions alteration = 535801346; }

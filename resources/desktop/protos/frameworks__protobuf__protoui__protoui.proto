@@ -1,4 +1,4 @@
-// Extracted file offset 0x3676464, 1160 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3676464, 1160 bytes. Rendering omits custom options.
 syntax = "proto2";
 package frameworks.protobuf.protoui;
 import "net/proto2/proto/descriptor.proto";
@@ -25,3 +25,6 @@ message OneOfGroupUiOptions {
 message EnumValueUiOptions {
   string displayed_name = 1;
 }
+extend .proto2.FieldOptions { .frameworks.protobuf.protoui.FieldUiOptions field_ui = 325921004; }
+extend .proto2.OneofOptions { .frameworks.protobuf.protoui.OneOfGroupUiOptions oneof_ui = 325921004; }
+extend .proto2.EnumValueOptions { .frameworks.protobuf.protoui.EnumValueUiOptions enum_value_ui = 388265573; }

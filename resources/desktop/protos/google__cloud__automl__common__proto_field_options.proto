@@ -1,4 +1,4 @@
-// Extracted file offset 0x364a134, 657 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x364a134, 657 bytes. Rendering omits custom options.
 syntax = "proto3";
 package google.cloud.automl.common;
 import "net/proto2/proto/descriptor.proto";
@@ -13,3 +13,5 @@ message MethodAnnotations {
     string method_name = 1;
   }
 }
+extend .proto2.FieldOptions { .google.cloud.automl.common.FieldAnnotations.ResourceNameType resource_name_type = 188057776; }
+extend .proto2.MethodOptions { .google.cloud.automl.common.MethodAnnotations.MethodNameOverwrittenRule method_name_overwritten = 262431048; }

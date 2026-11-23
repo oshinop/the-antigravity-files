@@ -1,4 +1,4 @@
-// Extracted file offset 0x76b0e84, 833 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x76b0e84, 833 bytes. Rendering omits custom options.
 syntax = "proto2";
 package pb;
 import "net/proto2/proto/descriptor.proto";
@@ -20,3 +20,4 @@ message CppFeatures {
   bool enum_name_uses_string_view = 3;
   .pb.CppFeatures.RepeatedType repeated_type = 4;
 }
+extend .proto2.FeatureSet { .pb.CppFeatures cpp = 1000; }

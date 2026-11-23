@@ -1,4 +1,4 @@
-// Extracted file offset 0x3732422, 4509 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3732422, 4509 bytes. Rendering omits custom options.
 syntax = "editions";
 package gaos.api;
 import "google/api/http.proto";
@@ -56,3 +56,35 @@ message VendorExtension {
   string key = 1;
   string value = 2;
 }
+extend .proto2.ServiceOptions { .gaos.api.VersioningMap versioning_map = 525000157; }
+extend .proto2.ServiceOptions { string platforms = 525000158; }
+extend .proto2.ServiceOptions { string visibility_exclusion = 525000159; }
+extend .proto2.MethodOptions { .gaos.api.VersioningMap method_versioning_map = 525000158; }
+extend .proto2.MethodOptions { string method_platforms = 525000159; }
+extend .proto2.MethodOptions { .gaos.api.VisibilityMap method_visibility_map = 525000160; }
+extend .proto2.MethodOptions { .gaos.api.HttpRuleMap method_http_map = 525000161; }
+extend .proto2.MethodOptions { .gaos.api.MethodPolicyMap method_policy_map = 525000162; }
+extend .proto2.MethodOptions { repeated .gaos.api.ResponseMapping response_mappings = 525000165; }
+extend .proto2.MethodOptions { string request_schema = 525000166; }
+extend .proto2.MethodOptions { bool is_internal = 525000167; }
+extend .proto2.MethodOptions { string method_visibility_exclusion = 525000169; }
+extend .proto2.MessageOptions { .gaos.api.VersioningMap message_versioning_map = 535801958; }
+extend .proto2.MessageOptions { string message_platforms = 535801959; }
+extend .proto2.MessageOptions { .gaos.api.VisibilityMap message_visibility_map = 535801960; }
+extend .proto2.MessageOptions { .gaos.api.ResourceDescriptorMap message_resource_map = 535801961; }
+extend .proto2.MessageOptions { string schema_name_override = 535801967; }
+extend .proto2.MessageOptions { string message_visibility_exclusion = 535900004; }
+extend .proto2.FieldOptions { .gaos.api.VersioningMap field_versioning_map = 525000211; }
+extend .proto2.FieldOptions { string field_platforms = 525000212; }
+extend .proto2.FieldOptions { .gaos.api.VisibilityMap field_visibility_map = 525000213; }
+extend .proto2.FieldOptions { .gaos.api.ResourceReferenceMap field_resource_reference_map = 525000214; }
+extend .proto2.FieldOptions { string field_visibility_exclusion = 525000226; }
+extend .proto2.FieldOptions { string field_schema_name_override = 525000236; }
+extend .proto2.EnumOptions { .gaos.api.VersioningMap enum_versioning_map = 525000153; }
+extend .proto2.EnumOptions { string enum_platforms = 525000154; }
+extend .proto2.EnumOptions { .gaos.api.VisibilityMap enum_visibility_map = 525000155; }
+extend .proto2.EnumOptions { string enum_visibility_exclusion = 525000156; }
+extend .proto2.EnumValueOptions { .gaos.api.VersioningMap value_versioning_map = 535802946; }
+extend .proto2.EnumValueOptions { string value_platforms = 535802947; }
+extend .proto2.EnumValueOptions { .gaos.api.VisibilityMap value_visibility_map = 535802948; }
+extend .proto2.EnumValueOptions { string value_visibility_exclusion = 535802984; }

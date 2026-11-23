@@ -1,4 +1,4 @@
-// Extracted file offset 0x368008c, 1237 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x368008c, 1237 bytes. Rendering omits custom options.
 syntax = "editions";
 package devtools_cog;
 message CogCommit {

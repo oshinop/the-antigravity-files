@@ -1,4 +1,4 @@
-// Extracted file offset 0x3631ce3, 399 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3631ce3, 399 bytes. Rendering omits custom options.
 syntax = "proto2";
 package sherlog;
 import "net/proto2/proto/descriptor.proto";
@@ -8,3 +8,5 @@ message SanitizationOptions {
     FORCE_REMOVE = 1;
   }
 }
+extend .proto2.FieldOptions { .sherlog.SanitizationOptions.Action field_sanitization = 196542800; }
+extend .proto2.MessageOptions { .sherlog.SanitizationOptions.Action message_sanitization = 196303301; }

@@ -1,4 +1,4 @@
-// Extracted file offset 0x374fb79, 5141 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x374fb79, 5141 bytes. Rendering omits custom options.
 syntax = "proto3";
 package exa.actuator_pb;
 import "google/protobuf/any.proto";

@@ -1,4 +1,4 @@
-// Extracted file offset 0x3686178, 1352 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3686178, 1352 bytes. Rendering omits custom options.
 syntax = "proto2";
 package assistant.api.annotations;
 import "net/proto2/proto/descriptor.proto";
@@ -28,3 +28,7 @@ message VersionLog {
   }
   repeated .assistant.api.annotations.VersionLog.Change change = 1;
 }
+extend .proto2.FieldOptions { repeated .assistant.api.annotations.VersionRange version_range = 134096400; }
+extend .proto2.FieldOptions { .assistant.api.annotations.VersionRangeList version_range_list = 141473177; }
+extend .proto2.MessageOptions { int32 latest_version = 134096400; }
+extend .proto2.MessageOptions { .assistant.api.annotations.VersionLog version_log = 185706300; }

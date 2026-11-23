@@ -1,4 +1,4 @@
-// Extracted file offset 0x36510e8, 741 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36510e8, 741 bytes. Rendering omits custom options.
 syntax = "editions";
 package s2a.proto.v2;
 import "third_party/s2a_proto/s2a/proto/v2/common.proto";

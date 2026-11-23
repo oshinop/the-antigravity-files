@@ -1,4 +1,4 @@
-// Extracted file offset 0x3691f18, 1502 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3691f18, 1502 bytes. Rendering omits custom options.
 syntax = "proto3";
 package google.cloud.aiplatform.common;
 import "net/proto2/proto/descriptor.proto";
@@ -21,3 +21,12 @@ message FieldAnnotations {
     repeated string supported_value = 1;
   }
 }
+extend .proto2.FieldOptions { .google.cloud.aiplatform.common.FieldAnnotations.VpcScOption vpc_sc_option = 331491176; }
+extend .proto2.FieldOptions { .google.cloud.aiplatform.common.FieldAnnotations.AxtOption axt_option = 333626227; }
+extend .proto2.FieldOptions { .google.cloud.aiplatform.common.FieldAnnotations.EncryptionSpecType encryption_spec_type = 337978583; }
+extend .proto2.FieldOptions { bool is_container_image = 427917711; }
+extend .proto2.FieldOptions { string any_java_type = 416377438; }
+extend .proto2.FieldOptions { string int_enum_java_type = 415097036; }
+extend .proto2.FieldOptions { .google.cloud.aiplatform.common.FieldAnnotations.GenAiArtifactType gen_ai_artifact_type = 535801172; }
+extend .proto2.MessageOptions { bool support_vpc_sc = 331491176; }
+extend .proto2.MessageOptions { bool is_axt_compliant = 333626227; }

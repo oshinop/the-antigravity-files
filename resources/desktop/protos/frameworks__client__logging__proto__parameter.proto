@@ -1,4 +1,4 @@
-// Extracted file offset 0x362de42, 318 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x362de42, 318 bytes. Rendering omits custom options.
 syntax = "editions";
 package frameworks.client.logging.proto;
 import "storage/datapol/annotations/proto/semantic_annotations.proto";

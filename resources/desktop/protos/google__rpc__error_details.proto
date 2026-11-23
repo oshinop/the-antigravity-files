@@ -1,4 +1,4 @@
-// Extracted file offset 0x36b09a3, 2012 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36b09a3, 2012 bytes. Rendering omits custom options.
 syntax = "proto3";
 package google.rpc;
 import "google/protobuf/duration.proto";

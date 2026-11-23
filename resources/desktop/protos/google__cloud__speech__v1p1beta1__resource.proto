@@ -1,4 +1,4 @@
-// Extracted file offset 0x371e8c4, 4010 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x371e8c4, 4010 bytes. Rendering omits custom options.
 syntax = "proto3";
 package google.cloud.speech.v1p1beta1;
 import "google/api/field_behavior.proto";

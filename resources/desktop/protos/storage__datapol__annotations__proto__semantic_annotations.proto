@@ -1,4 +1,4 @@
-// Extracted file offset 0x76ab320, 19443 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x38bb163, 20189 bytes. Rendering omits custom options.
 syntax = "proto2";
 package datapol;
 import "storage/datapol/annotations/proto/retention_annotations.proto";
@@ -279,3 +279,17 @@ message AnnotationsDetails {
 message EnumDetails {
   .datapol.AnnotationsDetails annotations = 1;
 }
+extend .proto2.FieldOptions { .datapol.SemanticType semantic_type = 40075780; }
+extend .proto2.FieldOptions { .datapol.Qualifier qualifier = 40270992; }
+extend .proto2.FieldOptions { .datapol.LocationQualifier location_qualifier = 69646961; }
+extend .proto2.FieldOptions { .datapol.FieldDetails field_details = 40093572; }
+extend .proto2.FieldOptions { .datapol.DataFormat data_format = 40221563; }
+extend .proto2.FieldOptions { repeated .datapol.RetentionSpec retention = 40223876; }
+extend .proto2.MessageOptions { .datapol.SemanticType msg_semantic_type = 41149386; }
+extend .proto2.MessageOptions { .datapol.Qualifier msg_qualifier = 41551199; }
+extend .proto2.MessageOptions { .datapol.LocationQualifier msg_location_qualifier = 69646961; }
+extend .proto2.MessageOptions { .datapol.MessageDetails msg_details = 41744383; }
+extend .proto2.MessageOptions { repeated .datapol.RetentionSpec msg_retention = 41909987; }
+extend .proto2.FileOptions { bool file_vetted_for_datapol_annotations = 43601160; }
+extend .proto2.FileOptions { string file_vetting_status = 71304954; }
+extend .proto2.EnumOptions { .datapol.EnumDetails enum_details = 525000035; }

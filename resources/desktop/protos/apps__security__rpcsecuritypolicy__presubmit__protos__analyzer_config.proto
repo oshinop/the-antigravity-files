@@ -1,4 +1,4 @@
-// Extracted file offset 0x370520d, 3468 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x370520d, 3468 bytes. Rendering omits custom options.
 syntax = "proto2";
 package com.google.apps.security.rpcsecuritypolicy.presubmit;
 import "google/api/inclusion.proto";

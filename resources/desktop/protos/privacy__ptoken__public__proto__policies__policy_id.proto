@@ -1,4 +1,4 @@
-// Extracted file offset 0x38d4341, 21646 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x38d4341, 21646 bytes. Rendering omits custom options.
 syntax = "proto2";
 package ptoken;
 import "google/api/inclusion.proto";

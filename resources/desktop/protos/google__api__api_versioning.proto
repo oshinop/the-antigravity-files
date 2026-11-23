@@ -1,4 +1,4 @@
-// Extracted file offset 0x379a977, 7376 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x379a977, 7376 bytes. Rendering omits custom options.
 syntax = "proto3";
 package google.api;
 import "google/api/inclusion.proto";
@@ -190,3 +190,13 @@ message Bundle {
 message BundleInclude {
   string bundle = 1;
 }
+extend .proto2.ServiceOptions { .google.api.ApiVersionsRule api_versions = 525000000; }
+extend .proto2.ServiceOptions { repeated .google.api.BehaviorsRule versioning_behaviors = 525000013; }
+extend .proto2.MethodOptions { .google.api.ApiVersionsRule method_api_versions = 525000004; }
+extend .proto2.MethodOptions { repeated .google.api.BehaviorsRule method_versioning_behaviors = 525000044; }
+extend .proto2.MessageOptions { .google.api.ApiVersionsRule message_api_versions = 525000020; }
+extend .proto2.MessageOptions { repeated .google.api.BehaviorsRule message_versioning_behaviors = 525000038; }
+extend .proto2.FieldOptions { .google.api.ApiVersionsRule field_api_versions = 525000037; }
+extend .proto2.EnumOptions { .google.api.ApiVersionsRule enum_api_versions = 525000018; }
+extend .proto2.EnumOptions { repeated .google.api.BehaviorsRule enum_versioning_behaviors = 525000064; }
+extend .proto2.EnumValueOptions { .google.api.ApiVersionsRule enum_value_api_versions = 525000123; }

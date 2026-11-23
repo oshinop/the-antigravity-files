@@ -1,4 +1,4 @@
-// Extracted file offset 0x39a5fcb, 41228 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x39a5fcb, 41228 bytes. Rendering omits custom options.
 syntax = "proto3";
 package exa.seat_management_pb;
 import "google/protobuf/timestamp.proto";

@@ -1,4 +1,4 @@
-// Extracted file offset 0x365e6ca, 898 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x365e6ca, 898 bytes. Rendering omits custom options.
 syntax = "editions";
 package wireless_android_play_playlog.logger_enum;
 import "java/com/google/protobuf/contrib/j2cl/options/js_enum.proto";

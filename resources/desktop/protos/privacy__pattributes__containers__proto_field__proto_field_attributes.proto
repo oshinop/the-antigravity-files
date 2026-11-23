@@ -1,4 +1,4 @@
-// Extracted file offset 0x362a606, 323 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x362a606, 323 bytes. Rendering omits custom options.
 syntax = "proto2";
 package pattributes;
 import "privacy/pattributes/containers/proto_field/proto_field_upload_justification.proto";

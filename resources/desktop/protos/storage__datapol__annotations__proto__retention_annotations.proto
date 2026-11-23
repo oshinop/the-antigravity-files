@@ -1,4 +1,4 @@
-// Extracted file offset 0x76aafd4, 473 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x363c99a, 500 bytes. Rendering omits custom options.
 syntax = "proto2";
 package datapol;
 enum RetentionTag {

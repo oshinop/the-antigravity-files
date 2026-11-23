@@ -1,4 +1,4 @@
-// Extracted file offset 0x3670869, 1089 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3670869, 1089 bytes. Rendering omits custom options.
 syntax = "proto3";
 package google.api;
 import "net/proto2/proto/descriptor.proto";
@@ -15,3 +15,9 @@ message VisibilityRule {
   string restriction = 2;
   .google.api.VisibilityRule.FailureMode failure_mode = 4;
 }
+extend .proto2.ServiceOptions { .google.api.VisibilityRule api_visibility = 72295727; }
+extend .proto2.MethodOptions { .google.api.VisibilityRule method_visibility = 72295727; }
+extend .proto2.MessageOptions { .google.api.VisibilityRule message_visibility = 72295727; }
+extend .proto2.FieldOptions { .google.api.VisibilityRule field_visibility = 72295727; }
+extend .proto2.EnumOptions { .google.api.VisibilityRule enum_visibility = 72295727; }
+extend .proto2.EnumValueOptions { .google.api.VisibilityRule value_visibility = 72295727; }

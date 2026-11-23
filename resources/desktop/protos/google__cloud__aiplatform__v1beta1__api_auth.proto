@@ -1,4 +1,4 @@
-// Extracted file offset 0x366673a, 978 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x366673a, 978 bytes. Rendering omits custom options.
 syntax = "proto3";
 package google.cloud.aiplatform.v1beta1;
 import "google/api/field_behavior.proto";

@@ -1,4 +1,4 @@
-// Extracted file offset 0x76b5de4, 625 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x76b5de4, 625 bytes. Rendering omits custom options.
 syntax = "editions";
 package pb;
 import "net/proto2/proto/descriptor.proto";
@@ -23,3 +23,4 @@ message InternalFieldOptionsCpp {
 message InternalFieldOptions {
   .pb.InternalFieldOptionsCpp cpp = 1;
 }
+extend .proto2.FieldOptions { .pb.InternalFieldOptions internal_field_options = 535801550; }

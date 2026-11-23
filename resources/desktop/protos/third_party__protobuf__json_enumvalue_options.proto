@@ -1,7 +1,8 @@
-// Extracted file offset 0x76b609c, 316 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x76b609c, 316 bytes. Rendering omits custom options.
 syntax = "editions";
 package pb.enumvalue;
 import "net/proto2/proto/descriptor.proto";
 message JsonEnumValueOptions {
   string string = 1;
 }
+extend .proto2.EnumValueOptions { .pb.enumvalue.JsonEnumValueOptions json = 998; }

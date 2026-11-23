@@ -1,4 +1,4 @@
-// Extracted file offset 0x3656741, 737 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3656741, 737 bytes. Rendering omits custom options.
 syntax = "editions";
 package devtools.jetski.telemetry.proto;
 import "google/protobuf/timestamp.proto";

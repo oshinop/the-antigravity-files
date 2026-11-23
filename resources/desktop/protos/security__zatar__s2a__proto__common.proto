@@ -1,4 +1,4 @@
-// Extracted file offset 0x365707b, 790 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x365707b, 790 bytes. Rendering omits custom options.
 syntax = "editions";
 package s2a.proto;
 import "third_party/golang/protobuf/v2/src/google/protobuf/go_features.proto";

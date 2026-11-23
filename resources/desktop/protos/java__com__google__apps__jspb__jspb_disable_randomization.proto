@@ -1,0 +1,5 @@
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3623c86, 276 bytes. Rendering omits custom options.
+syntax = "proto2";
+package jspb;
+import "net/proto2/proto/descriptor.proto";
+extend .proto2.MessageOptions { bool disable_test_randomization_in_apps_jspb_java = 448127181; }

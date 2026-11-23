@@ -1,4 +1,4 @@
-// Extracted file offset 0x3758b2f, 5461 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3758b2f, 5461 bytes. Rendering omits custom options.
 syntax = "proto2";
 package logs.proto.wireless.performance.mobile;
 import "analytics/config/protoverifier/proto/rules.proto";

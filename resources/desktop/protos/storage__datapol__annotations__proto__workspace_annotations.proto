@@ -1,4 +1,4 @@
-// Extracted file offset 0x36d4e7e, 2626 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36d4e7e, 2626 bytes. Rendering omits custom options.
 syntax = "proto2";
 package apps_annotations;
 import "net/proto2/proto/descriptor.proto";
@@ -79,3 +79,7 @@ message PolicyTargetEntityInfo {
   repeated .apps_annotations.PolicyTargetEntityInfo children = 4;
   .apps_annotations.PolicyTargetEntityInfo.MatchType match_type = 5;
 }
+extend .proto2.FieldOptions { .apps_annotations.SemanticType semantic_type = 484328798; }
+extend .proto2.FieldOptions { repeated string msg_type_name = 535801098; }
+extend .proto2.FieldOptions { string enum_type_name = 535801099; }
+extend .proto2.MessageOptions { .apps_annotations.MessageDetails msg_details = 525000006; }

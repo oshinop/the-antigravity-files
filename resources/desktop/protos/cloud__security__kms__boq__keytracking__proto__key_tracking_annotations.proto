@@ -1,0 +1,5 @@
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3614694, 194 bytes. Rendering omits custom options.
+syntax = "editions";
+package keytracking;
+import "net/proto2/proto/descriptor.proto";
+extend .proto2.FieldOptions { bool used_kms_key = 535801341; }

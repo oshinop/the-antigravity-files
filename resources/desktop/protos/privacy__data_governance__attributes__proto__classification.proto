@@ -1,4 +1,4 @@
-// Extracted file offset 0x398936f, 38014 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x398936f, 38014 bytes. Rendering omits custom options.
 syntax = "proto3";
 package privacy.data_governance.attributes.classification;
 import "google/api/inclusion.proto";
@@ -170,3 +170,22 @@ message Category {
   .privacy.data_governance.attributes.classification.Category.HasCategory smart_home = 17;
   .privacy.data_governance.attributes.classification.Category.ChildrenDataLifecycleType children_data_lifecycle_type = 18; // oneof=_children_data_lifecycle_type
 }
+extend .proto2.EnumValueOptions { string label = 204438976; }
+extend .proto2.EnumValueOptions { string description = 204438977; }
+extend .proto2.EnumValueOptions { string parent = 206747693; }
+extend .proto2.EnumValueOptions { string expected_confidentiality = 307833595; }
+extend .proto2.EnumValueOptions { bool disabled = 308218636; }
+extend .proto2.EnumValueOptions { string go_link = 321358229; }
+extend .proto2.EnumValueOptions { string deprecated_message = 377074388; }
+extend .proto2.EnumValueOptions { bool deprecated_as_an_error = 376796538; }
+extend .proto2.FieldOptions { string field_label = 233938569; }
+extend .proto2.FieldOptions { string field_description = 233938575; }
+extend .proto2.FieldOptions { string field_expected_confidentiality = 307041375; }
+extend .proto2.FieldOptions { bool field_disabled = 308602115; }
+extend .proto2.FieldOptions { string field_go_link = 321231810; }
+extend .proto2.FieldOptions { string field_deprecated_message = 377079205; }
+extend .proto2.FieldOptions { bool field_deprecated_as_an_error = 377276026; }
+extend .proto2.EnumOptions { string enum_description = 306455367; }
+extend .proto2.EnumOptions { string enum_go_link = 321189327; }
+extend .proto2.MessageOptions { string message_description = 306457841; }
+extend .proto2.MessageOptions { string message_go_link = 321173585; }

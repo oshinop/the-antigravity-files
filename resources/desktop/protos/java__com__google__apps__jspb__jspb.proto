@@ -1,4 +1,4 @@
-// Extracted file offset 0x36796cf, 1192 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36796cf, 1192 bytes. Rendering omits custom options.
 syntax = "proto2";
 package jspb;
 import "net/proto2/proto/descriptor.proto";
@@ -8,3 +8,14 @@ enum JsType {
   STRING = 2;
   GBIGINT = 3;
 }
+extend .proto2.FieldOptions { bool ignore = 17702; }
+extend .proto2.FieldOptions { .jspb.JsType jstype = 17703; }
+extend .proto2.FieldOptions { bool use_broken_java_unsigned_serialization_behavior = 17705; }
+extend .proto2.FieldOptions { bool allow_broken_java_unsigned_deserialization_behavior = 17706; }
+extend .proto2.FieldOptions { bool deprecated_use_binary_values_for_any = 448127177; }
+extend .proto2.MessageOptions { string message_id = 17701; }
+extend .proto2.MessageOptions { bool generate_xid = 78050980; }
+extend .proto2.MessageOptions { bool extensions_may_contain_message_id = 448127180; }
+extend .proto2.FileOptions { string js_namespace = 17702; }
+extend .proto2.FileOptions { bool generate_legacy_nullable_accessors = 448127176; }
+extend .proto2.FileOptions { bool generate_binary_format_methods_on_message = 448127179; }

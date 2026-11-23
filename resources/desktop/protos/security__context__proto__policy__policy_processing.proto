@@ -1,4 +1,4 @@
-// Extracted file offset 0x379e318, 7571 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x379e318, 7571 bytes. Rendering omits custom options.
 syntax = "proto2";
 package rpcsp;
 import "google/api/inclusion.proto";
@@ -81,3 +81,4 @@ message PolicyProcessingMetadata {
   string documentation_link = 3;
   .rpcsp.PolicyProcessingMetadata.ExemptionBugApprover exemption_bug_approver = 4;
 }
+extend .proto2.EnumValueOptions { .rpcsp.PolicyProcessingMetadata policy_processing_metadata = 476166315; }

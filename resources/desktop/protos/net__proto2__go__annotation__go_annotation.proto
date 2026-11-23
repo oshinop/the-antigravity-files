@@ -1,0 +1,6 @@
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x361f2b2, 251 bytes. Rendering omits custom options.
+syntax = "proto2";
+package go_annotation;
+import "net/proto2/proto/descriptor.proto";
+extend .proto2.FileOptions { bool track_message_field_use = 288987817; }
+extend .proto2.MessageOptions { bool track_field_use = 37383685; }

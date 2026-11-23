@@ -1,4 +1,4 @@
-// Extracted file offset 0x36b117f, 2017 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36b117f, 2017 bytes. Rendering omits custom options.
 syntax = "editions";
 package logs.proto.wireless.performance.mobile.desktop;
 import "logs/proto/wireless/performance/mobile/desktop/extension_metric.proto";
@@ -58,3 +58,4 @@ message AntigravityExtension {
   repeated string backend_trace_id = 4;
   string installation_id = 5;
 }
+extend .logs.proto.wireless.performance.mobile.desktop.MetricExtension { .logs.proto.wireless.performance.mobile.desktop.AntigravityExtension desktop_antigravity_extension = 2; }

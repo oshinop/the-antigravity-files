@@ -1,4 +1,4 @@
-// Extracted file offset 0x36327e5, 404 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36327e5, 404 bytes. Rendering omits custom options.
 syntax = "proto3";
 package moma.teams.graph.external;
 import "net/proto2/proto/descriptor.proto";
@@ -10,3 +10,4 @@ enum TeamGraphNodeType {
   TYPE_COLLECTION = 4;
   TYPE_ASSET_GROUP = 5;
 }
+extend .proto2.FieldOptions { repeated .moma.teams.graph.external.TeamGraphNodeType tg_node_type = 499752697; }

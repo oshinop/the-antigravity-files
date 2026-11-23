@@ -1,4 +1,4 @@
-// Extracted file offset 0x76aa554, 223 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x361d257, 239 bytes. Rendering omits custom options.
 syntax = "proto3";
 package google.protobuf;
 message Any {

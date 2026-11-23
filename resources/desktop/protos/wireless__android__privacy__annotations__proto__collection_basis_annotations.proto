@@ -1,4 +1,4 @@
-// Extracted file offset 0x3688c50, 1391 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3688c50, 1391 bytes. Rendering omits custom options.
 syntax = "proto2";
 package wireless.android.privacy;
 import "logs/proto/logs_annotations/logs_annotations.proto";
@@ -23,3 +23,5 @@ message FieldAnnotation {
   repeated .wireless.android.privacy.CollectionUseCase use_cases = 2;
   repeated .wireless.android.privacy.EligibleUseCase eligible_uses = 5;
 }
+extend .proto2.FieldOptions { repeated .wireless.android.privacy.FieldAnnotation collection_basis = 238270952; }
+extend .proto2.MessageOptions { repeated .wireless.android.privacy.MessageAnnotation msg_collection_basis = 271193650; }

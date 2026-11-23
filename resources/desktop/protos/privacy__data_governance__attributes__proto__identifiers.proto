@@ -1,4 +1,4 @@
-// Extracted file offset 0x39927ed, 39190 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x39927ed, 39190 bytes. Rendering omits custom options.
 syntax = "proto3";
 package privacy.data_governance.attributes.classification;
 import "google/api/inclusion.proto";
@@ -154,3 +154,9 @@ enum Identifiers {
   ID_YOUTUBE_EXTERNAL_SUB_VIDEO_ENTITY = 154;
   ID_YOUTUBE_SURROGATE_SUB_VIDEO_ENTITY = 155;
 }
+extend .proto2.EnumValueOptions { string warning = 140599355; }
+extend .proto2.EnumValueOptions { string datapol_equivalent = 140605468; }
+extend .proto2.EnumValueOptions { string retention_equivalent = 140826283; }
+extend .proto2.EnumValueOptions { string youtube_equivalent = 140721134; }
+extend .proto2.EnumValueOptions { string photos_equivalent = 140600857; }
+extend .proto2.EnumValueOptions { string cloud_label = 176855935; }

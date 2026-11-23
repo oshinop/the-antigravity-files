@@ -1,4 +1,4 @@
-// Extracted file offset 0x37fff1f, 13187 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x37fff1f, 13187 bytes. Rendering omits custom options.
 syntax = "editions";
 package devtools_jetski_boq_api_proto;
 import "google/api/annotations.proto";

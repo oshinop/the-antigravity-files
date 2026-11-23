@@ -1,4 +1,4 @@
-// Extracted file offset 0x3c12ad6, 187409 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3c12ad6, 187409 bytes. Rendering omits custom options.
 syntax = "proto3";
 package exa.codeium_common_pb;
 import "google/internal/cloud/code/v1internal/credits.proto";

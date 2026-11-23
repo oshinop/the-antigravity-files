@@ -1,0 +1,5 @@
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x361578d, 201 bytes. Rendering omits custom options.
+syntax = "proto3";
+package exa.cortex_pb;
+import "net/proto2/proto/descriptor.proto";
+extend .proto2.FieldOptions { bool internal_only = 535815292; }

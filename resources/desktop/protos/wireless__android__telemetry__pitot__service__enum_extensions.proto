@@ -1,0 +1,7 @@
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3630458, 388 bytes. Rendering omits custom options.
+syntax = "editions";
+package android.telemetry.pitot;
+import "net/proto2/proto/descriptor.proto";
+extend .proto2.EnumValueOptions { string disp = 512045532; }
+extend .proto2.EnumValueOptions { string doc_text = 535802509; }
+extend .proto2.EnumValueOptions { string doc_md = 535802510; }

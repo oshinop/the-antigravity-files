@@ -1,4 +1,4 @@
-// Extracted file offset 0x36ce98d, 2518 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36ce98d, 2518 bytes. Rendering omits custom options.
 syntax = "proto3";
 package exa.plugin_context_pb;
 enum ContractVersion {

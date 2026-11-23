@@ -1,4 +1,4 @@
-// Extracted file offset 0x3642981, 568 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3642981, 568 bytes. Rendering omits custom options.
 syntax = "proto3";
 package jetbox_summaries_pb;
 import "third_party/jetski/jetski_cortex_pb/jetski_cortex.proto";

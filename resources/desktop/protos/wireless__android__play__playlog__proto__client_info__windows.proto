@@ -1,4 +1,4 @@
-// Extracted file offset 0x36caf74, 2453 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36caf74, 2453 bytes. Rendering omits custom options.
 syntax = "proto2";
 package wireless_android_play_playlog;
 import "google/api/inclusion.proto";

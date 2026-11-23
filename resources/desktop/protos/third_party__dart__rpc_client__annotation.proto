@@ -1,0 +1,9 @@
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x363b66a, 486 bytes. Rendering omits custom options.
+syntax = "proto2";
+package third_party.dart.rpc_client;
+import "net/proto2/proto/descriptor.proto";
+extend .proto2.MethodOptions { bool cacheable = 232937735; }
+extend .proto2.MethodOptions { string bucket_type = 255581305; }
+extend .proto2.MethodOptions { repeated string dependent_entity = 232562672; }
+extend .proto2.MethodOptions { repeated string invalidate_entity = 232356889; }
+extend .proto2.FileOptions { string dart_package = 467767332; }

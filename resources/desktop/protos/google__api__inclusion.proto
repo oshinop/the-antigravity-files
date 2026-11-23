@@ -1,4 +1,4 @@
-// Extracted file offset 0x3630f02, 392 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3630f02, 392 bytes. Rendering omits custom options.
 syntax = "proto3";
 package google.api;
 import "google/api/visibility.proto";
@@ -6,3 +6,4 @@ import "net/proto2/proto/descriptor.proto";
 message ApiInclusion {
   repeated string scopes = 1;
 }
+extend .proto2.FileOptions { .google.api.ApiInclusion inclusion = 525000017; }

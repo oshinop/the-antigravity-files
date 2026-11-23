@@ -1,4 +1,4 @@
-// Extracted file offset 0x76b1f4c, 14337 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x387068b, 17665 bytes. Rendering omits custom options.
 syntax = "proto2";
 package proto2;
 enum Edition {

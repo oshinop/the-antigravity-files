@@ -1,4 +1,4 @@
-// Extracted file offset 0x386394c, 17482 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x386394c, 17482 bytes. Rendering omits custom options.
 syntax = "proto3";
 package google.api;
 import "google/api/inclusion.proto";
@@ -360,3 +360,9 @@ message MethodReplacementRule {
   bool supports_subscription = 10;
   string request_parameter_name = 11;
 }
+extend .proto2.MessageOptions { .google.api.MigrationMessageRule message_migration = 182434174; }
+extend .proto2.EnumOptions { .google.api.MigrationEnumRule enum_migration = 214180820; }
+extend .proto2.MethodOptions { .google.api.MigrationRule method_migration = 124888596; }
+extend .proto2.FieldOptions { .google.api.MigrationFieldRule field_migration = 158016499; }
+extend .proto2.EnumValueOptions { .google.api.MigrationEnumValueRule enum_value_migration = 272764843; }
+extend .proto2.ServiceOptions { .google.api.MigrationApiRule api_migration = 351442474; }

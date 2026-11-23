@@ -1,4 +1,4 @@
-// Extracted file offset 0x367c14e, 1221 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x367c14e, 1221 bytes. Rendering omits custom options.
 syntax = "proto2";
 package googlesql;
 import "net/proto2/proto/descriptor.proto";
@@ -37,3 +37,8 @@ message DeprecatedEncoding {
     __FieldFormat_Encoding__switch_must_have_a_default__ = -1;
   }
 }
+extend .proto2.FieldOptions { .googlesql.FieldFormat.Format format = 68711883; }
+extend .proto2.FieldOptions { .googlesql.FieldFormat.Format type = 49796453; }
+extend .proto2.FieldOptions { .googlesql.DeprecatedEncoding.Encoding encoding = 62897319; }
+extend .proto2.FieldOptions { bool use_defaults = 49779519; }
+extend .proto2.MessageOptions { bool use_field_defaults = 49659010; }

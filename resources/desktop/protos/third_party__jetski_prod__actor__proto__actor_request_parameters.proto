@@ -1,4 +1,4 @@
-// Extracted file offset 0x36420b5, 562 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36420b5, 562 bytes. Rendering omits custom options.
 syntax = "editions";
 package agency;
 import "google/api/inclusion.proto";
@@ -6,3 +6,4 @@ import "third_party/jetski_prod/actor/proto/custom_extensions.proto";
 message ActorRequestParameters {
   .agency.CustomExtensions actor_params = 10;
 }
+extend .agency.CustomExtensions { .agency.ActorRequestParameters actor_request_parameters = 109; }

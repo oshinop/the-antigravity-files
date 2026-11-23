@@ -1,4 +1,4 @@
-// Extracted file offset 0x36b8283, 2114 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36b8283, 2114 bytes. Rendering omits custom options.
 syntax = "proto3";
 package google.longrunning;
 import "google/api/annotations.proto";
@@ -52,3 +52,4 @@ service Operations {
   rpc CancelOperation (.google.longrunning.CancelOperationRequest) returns (.google.protobuf.Empty);
   rpc WaitOperation (.google.longrunning.WaitOperationRequest) returns (.google.longrunning.Operation);
 }
+extend .proto2.MethodOptions { .google.longrunning.OperationInfo operation_info = 1049; }

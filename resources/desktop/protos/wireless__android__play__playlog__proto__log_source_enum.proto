@@ -1,4 +1,4 @@
-// Extracted file offset 0x3b49da5, 78806 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3b49da5, 78806 bytes. Rendering omits custom options.
 syntax = "proto2";
 package wireless_android_play_playlog.LogSourceEnum;
 import "devtools/staticanalysis/pipeline/analyzers/proto_best_practices/proto/optouts.proto";
@@ -2975,3 +2975,4 @@ enum LogSource {
   OTTO_WEB = 3194;
   MAPS_NATIVE_PREVIEW = 3195;
 }
+extend .proto2.FileOptions { bool temporary_for_migration_b193694103_generate_enum = 525000034; }

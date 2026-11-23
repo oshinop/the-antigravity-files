@@ -1,0 +1,5 @@
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3623613, 274 bytes. Rendering omits custom options.
+syntax = "proto3";
+package google.api;
+import "net/proto2/proto/descriptor.proto";
+extend .proto2.FieldOptions { string field_type_override = 535801625; }

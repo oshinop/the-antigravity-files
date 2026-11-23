@@ -1,4 +1,4 @@
-// Extracted file offset 0x36c13eb, 2267 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36c13eb, 2267 bytes. Rendering omits custom options.
 syntax = "proto3";
 package google.api;
 import "google/api/inclusion.proto";
@@ -51,3 +51,8 @@ message ResourceContainerRule {
   string selector = 1;
   string type = 2;
 }
+extend .proto2.MessageOptions { .google.api.ResourceDescriptor resource = 1053; }
+extend .proto2.FieldOptions { .google.api.ResourceReference resource_reference = 1055; }
+extend .proto2.FileOptions { repeated .google.api.ResourceDescriptor resource_definition = 1053; }
+extend .proto2.MethodOptions { .google.api.ResourceReference method_resource = 463459046; }
+extend .proto2.FieldOptions { .google.api.ResourceContainerRule resource_container = 135496935; }

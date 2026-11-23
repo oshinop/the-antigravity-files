@@ -1,4 +1,4 @@
-// Extracted file offset 0x378cf87, 6840 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x378cf87, 6840 bytes. Rendering omits custom options.
 syntax = "proto3";
 package google.api;
 import "google/api/inclusion.proto";
@@ -155,3 +155,7 @@ message BatchingDescriptorProto {
   repeated string discriminator_fields = 2;
   string subresponse_field = 3;
 }
+extend .proto2.ServiceOptions { string default_host = 1049; }
+extend .proto2.ServiceOptions { string oauth_scopes = 1050; }
+extend .proto2.ServiceOptions { string api_version = 525000001; }
+extend .proto2.MethodOptions { repeated string method_signature = 1051; }

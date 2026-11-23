@@ -1,4 +1,4 @@
-// Extracted file offset 0x36ca5ea, 2442 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x36ca5ea, 2442 bytes. Rendering omits custom options.
 syntax = "proto3";
 package deepmind.evergreen.v1;
 import "google/api/inclusion.proto";
@@ -48,3 +48,4 @@ message TokenizedChunk {
   .evergreen.v2.Array top_k_tokens = 10;
   .evergreen.v2.Array top_k_scores = 11;
 }
+extend .proto2.MessageOptions { .deepmind.evergreen.v1.EvergreenProtoOptions evergreen_proto_options = 535801057; }

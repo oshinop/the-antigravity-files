@@ -1,4 +1,4 @@
-// Extracted file offset 0x3679227, 1192 bytes. Rendering omits custom options; see .textproto.
+// Extracted from language_server (Antigravity 2.33.0), file offset 0x3679227, 1192 bytes. Rendering omits custom options.
 syntax = "proto3";
 package google.api;
 import "net/proto2/proto/descriptor.proto";
@@ -12,3 +12,10 @@ message VersioningFileInfo {
   string new_api_version = 3;
   .proto2.FileOptions original_file_options = 4;
 }
+extend .proto2.FileOptions { .google.api.VersioningFileInfo versioning_file_info = 244132745; }
+extend .proto2.ServiceOptions { .google.api.VersioningRule api_versioning = 143069646; }
+extend .proto2.MethodOptions { .google.api.VersioningRule method_versioning = 143069646; }
+extend .proto2.MessageOptions { .google.api.VersioningRule message_versioning = 143069646; }
+extend .proto2.FieldOptions { .google.api.VersioningRule field_versioning = 143069646; }
+extend .proto2.EnumOptions { .google.api.VersioningRule enum_versioning = 143069646; }
+extend .proto2.EnumValueOptions { .google.api.VersioningRule value_versioning = 143069646; }
