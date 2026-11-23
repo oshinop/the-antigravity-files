@@ -1,16 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1103" width="1200" height="1103">
-<rect width="1200" height="1103" fill="#ffffff"/>
-<text x="48.0" y="76.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="#202124" text-anchor="start">agy&#x27;s main agent can&#x27;t wait for its helper</text>
-<text x="48.0" y="112.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#5f6368" text-anchor="start">One captured turn: the agent delegates, ends its turn, then kills the helper when the next prompt arrives</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1008" width="1200" height="1008">
+<rect width="1200" height="1008" fill="#ffffff"/>
+<text x="48.0" y="76.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="700" fill="#202124" text-anchor="start">The main agent can end its turn and kill its helper</text>
+<text x="48.0" y="112.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="400" fill="#5f6368" text-anchor="start">One captured turn: the agent delegates, ends its turn, then kills the helper while handling the next prompt</text>
 <rect x="247.2" y="160.0" width="85.7" height="40.0" rx="20.0" fill="#f1f3f4"/>
 <text x="290.0" y="187.6" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#202124" text-anchor="middle">You</text>
 <rect x="539.1" y="160.0" width="161.7" height="40.0" rx="20.0" fill="#e8f0fe"/>
 <text x="620.0" y="187.6" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#1a73e8" text-anchor="middle">Main agent</text>
 <rect x="881.3" y="160.0" width="217.3" height="40.0" rx="20.0" fill="#e8f0fe"/>
 <text x="990.0" y="187.6" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="700" fill="#1a73e8" text-anchor="middle">Research helper</text>
-<line x1="290.0" y1="210.0" x2="290.0" y2="1025.0" stroke="#e8eaed" stroke-width="2" stroke-linecap="butt"/>
-<line x1="620.0" y1="210.0" x2="620.0" y2="1025.0" stroke="#e8eaed" stroke-width="2" stroke-linecap="butt"/>
-<line x1="990.0" y1="210.0" x2="990.0" y2="1025.0" stroke="#e8eaed" stroke-width="2" stroke-linecap="butt"/>
+<line x1="290.0" y1="210.0" x2="290.0" y2="940.0" stroke="#e8eaed" stroke-width="2" stroke-linecap="butt"/>
+<line x1="620.0" y1="210.0" x2="620.0" y2="940.0" stroke="#e8eaed" stroke-width="2" stroke-linecap="butt"/>
+<line x1="990.0" y1="210.0" x2="990.0" y2="940.0" stroke="#e8eaed" stroke-width="2" stroke-linecap="butt"/>
 <rect x="981.0" y="432.0" width="18.0" height="488.0" rx="6" fill="#e8f0fe" stroke="#1a73e8" stroke-width="1.5"/>
 <text x="1014.0" y="682.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="700" fill="#1a73e8" text-anchor="start">Still running</text>
 <text x="48.0" y="306.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="400" fill="#9aa0a6" text-anchor="start">05:11:14</text>
@@ -26,9 +26,6 @@
 <path d="M628.0,468.0 L664.0,468.0 L664.0,492.0 L639.0,492.0" fill="none" stroke="#5f6368" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round"/>
 <polygon points="630.0,492.0 639.0,486.6 639.0,497.4" fill="#5f6368"/>
 <text x="678.0" y="487.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="400" fill="#5f6368" text-anchor="start">returns at once: a conversation ID</text>
-<line x1="620.0" y1="506.0" x2="620.0" y2="630.0" stroke="#d93025" stroke-width="4" stroke-linecap="butt" stroke-dasharray="8 6"/>
-<text x="648.0" y="564.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#d93025" text-anchor="start">A wait tool belongs here</text>
-<text x="648.0" y="590.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#d93025" text-anchor="start">none of the 14 tools blocks on a helper</text>
 <text x="48.0" y="646.0" font-family="'JetBrains Mono', Menlo, monospace" font-size="18" font-weight="400" fill="#9aa0a6" text-anchor="start">05:11:57</text>
 <text x="455.0" y="576.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="400" fill="#1a73e8" text-anchor="middle" font-style="italic">“Checking the workspace</text>
 <text x="455.0" y="601.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="400" fill="#1a73e8" text-anchor="middle" font-style="italic">contents to inspect the project</text>
@@ -49,7 +46,4 @@
 <polygon points="966.0,920.0 955.0,926.6 955.0,913.4" fill="#d93025"/>
 <circle cx="990.0" cy="920.0" r="16" fill="#d93025"/>
 <path d="M984.2,914.2 L995.8,925.8 M995.8,914.2 L984.2,925.8" fill="none" stroke="#fff" stroke-width="2.8444444444444446" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="130.0" y="985.0" width="320.1" height="40.0" rx="20.0" fill="#fce8e6"/>
-<text x="290.0" y="1012.2" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#d93025" text-anchor="middle">The summary never arrived</text>
-<text x="290.0" y="1055.0" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="400" fill="#5f6368" text-anchor="middle">(next prompt sent 1 s after idle)</text>
 </svg>

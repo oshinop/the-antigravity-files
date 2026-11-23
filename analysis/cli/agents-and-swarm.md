@@ -37,13 +37,14 @@ No tool lets the main agent block until a helper answers. After `invoke_subagent
 
 If the user sends another prompt then, the helper keeps running. In a captured session the next prompt (add a function, then run `git diff --stat`) arrived one second after the turn ended. The main agent made the edit; the helper's report, timestamped 14:21:44, was appended to the result of one of those commands; and the final answer carried both the diff summary and the helper's project summary. In headless mode (`agy -p`) the process stays alive until the helper reports, prints the summary, and exits.
 
-Whether a promised answer arrives is still up to the model. The main agent has `manage_subagents` with `kill_all`, nothing in the prompt says to keep a helper whose answer it promised, and a kill is not shown to the user as a lost answer. The sequence diagram shows a turn in which the main agent, busy with the next prompt, killed the helper before it reported (captured with 1.5.11; 1.5.14 has the same `manage_subagents` tool and description).
+Whether a promised answer arrives is still up to the model. The main agent has `manage_subagents` with `kill_all`, nothing in the prompt says to keep a helper whose answer it promised, a kill is not shown to the user as a lost answer, and the review models' rubric lists "killing the agent's own tasks" among routine actions. The sequence diagram shows a turn in which the main agent, busy with the next prompt, killed the helper before it reported (captured with 1.5.11; 1.5.14 has the same `manage_subagents` tool and description).
 
 ![The main agent delegates, ends its turn, and can kill the helper](../../resources/diagrams/waiting.svg)
 
 Evidence:
 - Traffic: [the report arriving during the next prompt](../../resources/cli/traffic/injected-messages.md); [the report arriving while idle in headless mode](../../resources/cli/traffic/research-helper.md)
 - Tool declarations: [main-agent.json](../../resources/cli/tool-declarations/main-agent.json) (no tool waits on a helper); [manage_subagents-42aee0c4.txt](../../resources/cli/binary-1.5.14/tool_descriptions/manage_subagents-42aee0c4.txt) (same as 1.5.11)
+- Prompt text: [monitor-config.textproto](../../resources/cli/binary-1.5.14/safety/monitor-config.textproto) ("Listing or checking status of the agent's own subagents/tasks, waiting/sleeping, killing the agent's own tasks.")
 - Diagram: [waiting.svg](../../resources/diagrams/waiting.svg)
 
 ## A swarm is a coordinator and members talking on one board
